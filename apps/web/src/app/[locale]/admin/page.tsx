@@ -6,7 +6,13 @@ import { useRouter } from "next/navigation";
 import { api, formatUsd } from "@/lib/api";
 import { useAuthStore } from "@/lib/auth-store";
 
-type Tab = "overview" | "products" | "orders" | "appointments" | "settings";
+type Tab =
+  | "overview"
+  | "products"
+  | "orders"
+  | "appointments"
+  | "tickets"
+  | "settings";
 
 export default function AdminPage() {
   const t = useTranslations("admin");
@@ -20,21 +26,24 @@ export default function AdminPage() {
   const [appointments, setAppointments] = useState<
     Array<Record<string, unknown>>
   >([]);
+  const [tickets, setTickets] = useState<Array<Record<string, unknown>>>([]);
   const [settings, setSettings] = useState<Record<string, unknown>>({});
   const [msg, setMsg] = useState("");
 
   async function refresh() {
-    const [dash, prods, ords, appts, sett] = await Promise.all([
+    const [dash, prods, ords, appts, tix, sett] = await Promise.all([
       api.adminDashboard(),
       api.adminProducts(),
       api.adminOrders(),
       api.adminAppointments(),
+      api.adminTickets(),
       api.adminSettings(),
     ]);
     setData(dash);
     setProducts(prods);
     setOrders(ords);
     setAppointments(appts);
+    setTickets(tix);
     setSettings(sett);
   }
 
@@ -141,6 +150,7 @@ export default function AdminPage() {
     ["products", t("products")],
     ["orders", t("orders")],
     ["appointments", t("appointments")],
+    ["tickets", t("tickets")],
     ["settings", t("settings")],
   ];
 
@@ -366,6 +376,46 @@ export default function AdminPage() {
               </div>
             </div>
           ))}
+        </div>
+      ) : null}
+
+      {tab === "tickets" ? (
+        <div className="mt-10 space-y-3">
+          {tickets.map((tk) => {
+            const u = (tk.user as Record<string, string>) || {};
+            const o = (tk.order as Record<string, string>) || {};
+            return (
+              <div
+                key={String(tk.id)}
+                className="flex flex-wrap items-center justify-between gap-3 border border-black/10 px-4 py-3 text-sm"
+              >
+                <div>
+                  <p className="font-medium">
+                    {String(tk.type)} · {String(tk.subject)}
+                  </p>
+                  <p className="text-ink/50">
+                    {u.name} · {u.email}
+                    {o.orderNumber ? ` · #${o.orderNumber}` : ""}
+                  </p>
+                  <p className="mt-1 text-ink/60">{String(tk.message)}</p>
+                </div>
+                <select
+                  className="border border-black/15 bg-white/50 px-2 py-1"
+                  defaultValue={String(tk.status)}
+                  onChange={async (e) => {
+                    await api.adminTicketStatus(String(tk.id), e.target.value);
+                    await refresh();
+                  }}
+                >
+                  {["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"].map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            );
+          })}
         </div>
       ) : null}
 

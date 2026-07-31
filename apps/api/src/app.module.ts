@@ -12,6 +12,8 @@ import { AdminModule } from "./admin/admin.module";
 import { WishlistModule } from "./wishlist/wishlist.module";
 import { AppointmentsModule } from "./appointments/appointments.module";
 import { NotificationsModule } from "./notifications/notifications.module";
+import { AddressesModule } from "./addresses/addresses.module";
+import { SupportModule } from "./support/support.module";
 import { HealthController } from "./health.controller";
 import { SettingsController } from "./settings/settings.controller";
 
@@ -29,6 +31,8 @@ import { SettingsController } from "./settings/settings.controller";
     PaymentsModule,
     AdminModule,
     AppointmentsModule,
+    AddressesModule,
+    SupportModule,
   ],
   controllers: [HealthController, SettingsController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

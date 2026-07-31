@@ -71,6 +71,7 @@ model User {
   reviews      Review[]
   auditLogs    AuditLog[]     @relation("AuditActor")
   appointments Appointment[]
+  supportTickets SupportTicket[]
 }
 
 model Address {
@@ -249,6 +250,7 @@ model Order {
   updatedAt        DateTime        @updatedAt
   items            OrderItem[]
   payments         Payment[]
+  supportTickets   SupportTicket[]
 }
 
 model OrderItem {
@@ -350,4 +352,33 @@ model Appointment {
   updatedAt DateTime          @updatedAt
 
   @@index([date, status])
+}
+
+enum SupportTicketType {
+  RETURN
+  SUPPORT
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model SupportTicket {
+  id        String              @id @default(cuid())
+  userId    String
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderId   String?
+  order     Order?              @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  type      SupportTicketType
+  subject   String
+  message   String
+  status    SupportTicketStatus @default(OPEN)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([userId, status])
+  @@index([status])
 }

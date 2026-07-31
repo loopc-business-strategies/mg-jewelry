@@ -147,6 +147,30 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify({ status }),
     }),
+  order: (id: string) => request<Record<string, unknown>>(`/orders/${id}`),
+  addresses: () => request<Array<Record<string, unknown>>>("/addresses"),
+  createAddress: (body: Record<string, unknown>) =>
+    request("/addresses", { method: "POST", body: JSON.stringify(body) }),
+  updateAddress: (id: string, body: Record<string, unknown>) =>
+    request(`/addresses/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
+  deleteAddress: (id: string) =>
+    request(`/addresses/${id}`, { method: "DELETE" }),
+  wishlist: (locale: string) =>
+    request<Array<Record<string, unknown>>>(`/wishlist?locale=${locale}`),
+  myAppointments: () =>
+    request<Array<Record<string, unknown>>>("/appointments/mine"),
+  myTickets: () => request<Array<Record<string, unknown>>>("/support/mine"),
+  createTicket: (body: Record<string, unknown>) =>
+    request("/support", { method: "POST", body: JSON.stringify(body) }),
+  adminTickets: () => request<Array<Record<string, unknown>>>("/support"),
+  adminTicketStatus: (id: string, status: string) =>
+    request(`/support/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    }),
 };
 
 export function formatUsd(cents: number, locale: string) {

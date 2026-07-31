@@ -71,4 +71,19 @@ export class NotificationsService {
       `${appt.date} ${appt.slot}`;
     await this.notifyTelegram(text);
   }
+
+  async ticketCreated(ticket: {
+    type: string;
+    subject: string;
+    orderNumber?: string;
+    userName: string;
+    userEmail: string;
+  }) {
+    const text =
+      `MG Jewelry — New ${ticket.type} ticket\n` +
+      `${ticket.subject}\n` +
+      `${ticket.userName} <${ticket.userEmail}>\n` +
+      (ticket.orderNumber ? `Order #${ticket.orderNumber}` : "No order linked");
+    await this.notifyTelegram(text);
+  }
 }
