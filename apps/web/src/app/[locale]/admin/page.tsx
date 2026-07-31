@@ -39,7 +39,7 @@ export default function AdminPage() {
           [t("revenue"), formatUsd(Number(data?.revenueMinor || 0), locale)],
         ].map(([label, value]) => (
           <div key={String(label)} className="border border-black/10 bg-white/40 px-5 py-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-ink/45">{label}</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-ink/45">{String(label)}</p>
             <p className="mt-3 font-display text-3xl">{String(value ?? "—")}</p>
           </div>
         ))}
