@@ -15,11 +15,11 @@ const body = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "MG Jewelry | Modern Gold Jewelry",
+    default: "MG Jewelry | Hearts of Namangan",
     template: "%s | MG Jewelry",
   },
   description:
-    "Luxury gold and diamond jewelry crafted in Namangan, Uzbekistan — available worldwide.",
+    "Hearts of Namangan — luxury gold and diamond jewelry crafted in Namangan, Uzbekistan, available worldwide.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
 };
 
