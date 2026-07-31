@@ -36,13 +36,18 @@ function authHeaders() {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const headers: Record<string, string> = {
+    ...authHeaders(),
+    ...(init?.headers as Record<string, string> | undefined),
+  };
+  const isFormData =
+    typeof FormData !== "undefined" && init?.body instanceof FormData;
+  if (!isFormData && !headers["Content-Type"]) {
+    headers["Content-Type"] = "application/json";
+  }
   const res = await fetch(`${API_URL}/api${path}`, {
     ...init,
-    headers: {
-      "Content-Type": "application/json",
-      ...authHeaders(),
-      ...(init?.headers || {}),
-    },
+    headers,
     cache: "no-store",
   });
   if (!res.ok) {
@@ -118,12 +123,53 @@ export const api = {
   adminDashboard: () => request<Record<string, unknown>>("/admin/dashboard"),
   adminProducts: () => request<Array<Record<string, unknown>>>("/admin/products"),
   adminOrders: () => request<Array<Record<string, unknown>>>("/admin/orders"),
+  adminCustomers: () =>
+    request<Array<Record<string, unknown>>>("/admin/customers"),
+  adminUpload: async (file: File) => {
+    const fd = new FormData();
+    fd.append("file", file);
+    return request<{ url: string; provider: string }>("/admin/upload", {
+      method: "POST",
+      body: fd,
+    });
+  },
   adminCreateProduct: (body: Record<string, unknown>) =>
     request("/admin/products", { method: "POST", body: JSON.stringify(body) }),
   adminUpdateProduct: (id: string, body: Record<string, unknown>) =>
     request(`/admin/products/${id}`, {
       method: "PATCH",
       body: JSON.stringify(body),
+    }),
+  adminCategories: () =>
+    request<Array<Record<string, unknown>>>("/admin/categories"),
+  adminCreateCategory: (body: Record<string, unknown>) =>
+    request("/admin/categories", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  adminUpdateCategory: (id: string, body: Record<string, unknown>) =>
+    request(`/admin/categories/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
+  adminCollections: () =>
+    request<Array<Record<string, unknown>>>("/admin/collections"),
+  adminCreateCollection: (body: Record<string, unknown>) =>
+    request("/admin/collections", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  adminUpdateCollection: (id: string, body: Record<string, unknown>) =>
+    request(`/admin/collections/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
+  adminReviews: () =>
+    request<Array<Record<string, unknown>>>("/admin/reviews"),
+  adminUpdateReview: (id: string, published: boolean) =>
+    request(`/admin/reviews/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ published }),
     }),
   adminOrderStatus: (id: string, status: string) =>
     request(`/admin/orders/${id}/status`, {

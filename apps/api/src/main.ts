@@ -1,17 +1,32 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
+import { NestExpressApplication } from "@nestjs/platform-express";
 import helmet from "helmet";
+import { join } from "path";
+import { mkdirSync } from "fs";
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { rawBody: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    rawBody: true,
+  });
 
-  app.use(helmet());
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: { policy: "cross-origin" },
+    }),
+  );
   app.enableCors({
     origin: (process.env.CORS_ORIGINS || "http://localhost:3000").split(","),
     credentials: true,
   });
   app.setGlobalPrefix("api");
+
+  const uploadDir =
+    process.env.UPLOAD_DIR || join(process.cwd(), "uploads");
+  mkdirSync(uploadDir, { recursive: true });
+  app.useStaticAssets(uploadDir, { prefix: "/api/uploads" });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

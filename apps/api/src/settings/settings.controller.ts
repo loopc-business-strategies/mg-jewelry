@@ -7,7 +7,7 @@ export class SettingsController {
 
   @Get("public")
   async publicSettings() {
-    const keys = ["showroom", "brand", "appointmentSlots"];
+    const keys = ["showroom", "brand", "appointmentSlots", "currencies"];
     const rows = await this.prisma.siteSetting.findMany({
       where: { key: { in: keys } },
     });

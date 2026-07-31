@@ -15,17 +15,25 @@ export default async function HomePage({
 
   let products: Awaited<ReturnType<typeof api.products>>["items"] = [];
   let collections: Awaited<ReturnType<typeof api.collections>> = [];
+  let brand: Record<string, string> = {};
   try {
-    const [p, c] = await Promise.all([
+    const [p, c, settings] = await Promise.all([
       api.products(locale, "&pageSize=8"),
       api.collections(locale),
+      api.publicSettings(),
     ]);
     products = p.items;
     collections = c;
+    brand = (settings.brand as Record<string, string>) || {};
   } catch {
     products = [];
     collections = [];
   }
+  const heroImage =
+    brand.heroImageUrl ||
+    "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2000&q=80";
+  const heroTitle = brand.heroHeadline || t("hero.title");
+  const heroSubtitle = brand.heroTagline || t("hero.subtitle");
 
   const bestsellers = products.filter((p) => p.isBestSeller).slice(0, 4);
   const newest = products.filter((p) => p.isNewArrival).slice(0, 4);
@@ -57,8 +65,7 @@ export default async function HomePage({
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2000&q=80)",
+            backgroundImage: `url(${heroImage})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20" />
@@ -68,10 +75,10 @@ export default async function HomePage({
               Namangan · Worldwide
             </p>
             <h1 className="font-display max-w-3xl text-5xl leading-[0.95] text-white md:text-7xl lg:text-8xl">
-              {t("hero.title")}
+              {heroTitle}
             </h1>
             <p className="mt-6 max-w-xl text-base text-white/80 md:text-lg">
-              {t("hero.subtitle")}
+              {heroSubtitle}
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link href={`/${locale}/shop`} className="btn-primary border-white bg-white text-ink">

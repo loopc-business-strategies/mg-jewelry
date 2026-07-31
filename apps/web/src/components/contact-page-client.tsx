@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { api } from "@/lib/api";
 
-const FALLBACK_SHOWROOM = {
+const FALLBACK_SHOWROOM: Record<string, string> = {
   fullName: "Modern Gold Jewelry Manufacturing",
   address: "242, Girvonbulok Street",
   district: "Davlatabad District",
@@ -76,6 +76,30 @@ export function ContactPageClient({
               <p>{showroom.country}</p>
             </div>
           </div>
+          {showroom.phone ? (
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-ink/45">
+                Phone
+              </p>
+              <p className="mt-2">{showroom.phone}</p>
+            </div>
+          ) : null}
+          {showroom.whatsapp ? (
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-ink/45">
+                WhatsApp
+              </p>
+              <p className="mt-2">{showroom.whatsapp}</p>
+            </div>
+          ) : null}
+          {showroom.hours ? (
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-ink/45">
+                Hours
+              </p>
+              <p className="mt-2">{showroom.hours}</p>
+            </div>
+          ) : null}
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-ink/45">
               {t("telegram")}
@@ -88,6 +112,16 @@ export function ContactPageClient({
             </p>
             <p className="mt-2">{showroom.email || "hello@mgjewelry.uz"}</p>
           </div>
+          {showroom.mapUrl ? (
+            <a
+              href={showroom.mapUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block text-sm text-gold underline-offset-4 hover:underline"
+            >
+              Map
+            </a>
+          ) : null}
           <Link
             href={`/${locale}/appointments`}
             className="btn-primary mt-4 inline-flex"

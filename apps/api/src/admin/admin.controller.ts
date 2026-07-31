@@ -6,10 +6,15 @@ import {
   Patch,
   Post,
   Put,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { memoryStorage } from "multer";
 import { Locale } from "@prisma/client";
 import { AdminService } from "./admin.service";
+import { UploadService } from "./upload.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { RolesGuard } from "../auth/roles.guard";
 import { Roles } from "../auth/roles.decorator";
@@ -18,11 +23,26 @@ import { Roles } from "../auth/roles.decorator";
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles("SUPER_ADMIN", "MANAGER", "SALES_EXECUTIVE")
 export class AdminController {
-  constructor(private readonly admin: AdminService) {}
+  constructor(
+    private readonly admin: AdminService,
+    private readonly uploads: UploadService,
+  ) {}
 
   @Get("dashboard")
   dashboard() {
     return this.admin.dashboard();
+  }
+
+  @Post("upload")
+  @UseInterceptors(
+    FileInterceptor("file", {
+      storage: memoryStorage(),
+      limits: { fileSize: 5 * 1024 * 1024 },
+    }),
+  )
+  upload(@UploadedFile() file: Express.Multer.File) {
+    this.uploads.requireConfigured();
+    return this.uploads.uploadImage(file);
   }
 
   @Get("products")
@@ -96,6 +116,87 @@ export class AdminController {
     @Body() body: { shippingMinor: number },
   ) {
     return this.admin.setShippingQuote(id, body.shippingMinor);
+  }
+
+  @Get("categories")
+  categories() {
+    return this.admin.listCategories();
+  }
+
+  @Post("categories")
+  createCategory(
+    @Body()
+    body: {
+      slug: string;
+      sortOrder?: number;
+      name: string;
+      description?: string;
+    },
+  ) {
+    return this.admin.createCategory(body);
+  }
+
+  @Patch("categories/:id")
+  updateCategory(
+    @Param("id") id: string,
+    @Body()
+    body: {
+      slug?: string;
+      sortOrder?: number;
+      name?: string;
+      description?: string | null;
+    },
+  ) {
+    return this.admin.updateCategory(id, body);
+  }
+
+  @Get("collections")
+  collections() {
+    return this.admin.listCollections();
+  }
+
+  @Post("collections")
+  createCollection(
+    @Body()
+    body: {
+      slug: string;
+      sortOrder?: number;
+      featured?: boolean;
+      imageUrl?: string;
+      name: string;
+      description?: string;
+    },
+  ) {
+    return this.admin.createCollection(body);
+  }
+
+  @Patch("collections/:id")
+  updateCollection(
+    @Param("id") id: string,
+    @Body()
+    body: {
+      slug?: string;
+      sortOrder?: number;
+      featured?: boolean;
+      imageUrl?: string | null;
+      name?: string;
+      description?: string | null;
+    },
+  ) {
+    return this.admin.updateCollection(id, body);
+  }
+
+  @Get("reviews")
+  reviews() {
+    return this.admin.listReviews();
+  }
+
+  @Patch("reviews/:id")
+  updateReview(
+    @Param("id") id: string,
+    @Body() body: { published: boolean },
+  ) {
+    return this.admin.updateReview(id, Boolean(body.published));
   }
 
   @Get("settings")

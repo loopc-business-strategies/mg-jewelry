@@ -135,7 +135,14 @@ export class AdminService {
     });
   }
 
-  async updateProduct(id: string, input: Partial<ProductInput> & { published?: boolean }) {
+  async updateProduct(
+    id: string,
+    input: Partial<Omit<ProductInput, "categoryId" | "collectionId">> & {
+      published?: boolean;
+      categoryId?: string | null;
+      collectionId?: string | null;
+    },
+  ) {
     const existing = await this.prisma.product.findUnique({ where: { id } });
     if (!existing) throw new NotFoundException("Product not found");
 
@@ -263,6 +270,206 @@ export class AdminService {
       where: { key },
       create: { key, value: value as Prisma.InputJsonValue },
       update: { value: value as Prisma.InputJsonValue },
+    });
+  }
+
+  listCategories() {
+    return this.prisma.category.findMany({
+      include: { translations: true, _count: { select: { products: true } } },
+      orderBy: { sortOrder: "asc" },
+    });
+  }
+
+  async createCategory(input: {
+    slug: string;
+    sortOrder?: number;
+    name: string;
+    description?: string;
+  }) {
+    const slug = input.slug
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    const locales: Locale[] = ["en", "uz", "ru", "tr"];
+    return this.prisma.category.create({
+      data: {
+        slug,
+        sortOrder: input.sortOrder ?? 0,
+        translations: {
+          create: locales.map((locale) => ({
+            locale,
+            name: input.name,
+            description: input.description,
+          })),
+        },
+      },
+      include: { translations: true },
+    });
+  }
+
+  async updateCategory(
+    id: string,
+    input: {
+      slug?: string;
+      sortOrder?: number;
+      name?: string;
+      description?: string | null;
+    },
+  ) {
+    const existing = await this.prisma.category.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException("Category not found");
+    if (input.name != null || input.description !== undefined) {
+      const locales: Locale[] = ["en", "uz", "ru", "tr"];
+      for (const locale of locales) {
+        await this.prisma.categoryTranslation.upsert({
+          where: { categoryId_locale: { categoryId: id, locale } },
+          create: {
+            categoryId: id,
+            locale,
+            name: input.name || existing.slug,
+            description: input.description ?? null,
+          },
+          update: {
+            ...(input.name != null ? { name: input.name } : {}),
+            ...(input.description !== undefined
+              ? { description: input.description }
+              : {}),
+          },
+        });
+      }
+    }
+    return this.prisma.category.update({
+      where: { id },
+      data: {
+        ...(input.slug != null
+          ? {
+              slug: input.slug
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, ""),
+            }
+          : {}),
+        ...(input.sortOrder != null ? { sortOrder: input.sortOrder } : {}),
+      },
+      include: { translations: true },
+    });
+  }
+
+  listCollections() {
+    return this.prisma.collection.findMany({
+      include: { translations: true, _count: { select: { products: true } } },
+      orderBy: { sortOrder: "asc" },
+    });
+  }
+
+  async createCollection(input: {
+    slug: string;
+    sortOrder?: number;
+    featured?: boolean;
+    imageUrl?: string;
+    name: string;
+    description?: string;
+  }) {
+    const slug = input.slug
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    const locales: Locale[] = ["en", "uz", "ru", "tr"];
+    return this.prisma.collection.create({
+      data: {
+        slug,
+        sortOrder: input.sortOrder ?? 0,
+        featured: input.featured ?? false,
+        imageUrl: input.imageUrl,
+        translations: {
+          create: locales.map((locale) => ({
+            locale,
+            name: input.name,
+            description: input.description,
+          })),
+        },
+      },
+      include: { translations: true },
+    });
+  }
+
+  async updateCollection(
+    id: string,
+    input: {
+      slug?: string;
+      sortOrder?: number;
+      featured?: boolean;
+      imageUrl?: string | null;
+      name?: string;
+      description?: string | null;
+    },
+  ) {
+    const existing = await this.prisma.collection.findUnique({
+      where: { id },
+    });
+    if (!existing) throw new NotFoundException("Collection not found");
+    if (input.name != null || input.description !== undefined) {
+      const locales: Locale[] = ["en", "uz", "ru", "tr"];
+      for (const locale of locales) {
+        await this.prisma.collectionTranslation.upsert({
+          where: { collectionId_locale: { collectionId: id, locale } },
+          create: {
+            collectionId: id,
+            locale,
+            name: input.name || existing.slug,
+            description: input.description ?? null,
+          },
+          update: {
+            ...(input.name != null ? { name: input.name } : {}),
+            ...(input.description !== undefined
+              ? { description: input.description }
+              : {}),
+          },
+        });
+      }
+    }
+    return this.prisma.collection.update({
+      where: { id },
+      data: {
+        ...(input.slug != null
+          ? {
+              slug: input.slug
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, ""),
+            }
+          : {}),
+        ...(input.sortOrder != null ? { sortOrder: input.sortOrder } : {}),
+        ...(input.featured != null ? { featured: input.featured } : {}),
+        ...(input.imageUrl !== undefined ? { imageUrl: input.imageUrl } : {}),
+      },
+      include: { translations: true },
+    });
+  }
+
+  listReviews() {
+    return this.prisma.review.findMany({
+      include: {
+        user: { select: { name: true, email: true } },
+        product: {
+          select: {
+            id: true,
+            sku: true,
+            slug: true,
+            translations: { where: { locale: "en" }, take: 1 },
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  }
+
+  async updateReview(id: string, published: boolean) {
+    const existing = await this.prisma.review.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException("Review not found");
+    return this.prisma.review.update({
+      where: { id },
+      data: { published },
     });
   }
 }
