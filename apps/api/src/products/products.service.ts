@@ -22,6 +22,16 @@ export class ProductsService {
                     },
                   },
                 },
+                {
+                  translations: {
+                    some: {
+                      description: {
+                        contains: filters.q,
+                        mode: "insensitive",
+                      },
+                    },
+                  },
+                },
                 { sku: { contains: filters.q, mode: "insensitive" } },
                 { metal: { contains: filters.q, mode: "insensitive" } },
               ],

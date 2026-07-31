@@ -1,7 +1,9 @@
-import { getTranslations } from "next-intl/server";
+import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export async function SiteFooter() {
   const t = await getTranslations();
+  const locale = await getLocale();
   const year = new Date().getFullYear();
 
   return (
@@ -13,6 +15,14 @@ export async function SiteFooter() {
           <p className="mt-2 max-w-md text-sm text-ink/65">
             {t("tagline")} — {t("footer.showroom")}
           </p>
+          <div className="mt-4 flex flex-wrap gap-4 text-xs uppercase tracking-[0.18em] text-ink/50">
+            <Link href={`/${locale}/privacy`} className="hover:text-ink">
+              {t("footer.privacy")}
+            </Link>
+            <Link href={`/${locale}/offer`} className="hover:text-ink">
+              {t("footer.offer")}
+            </Link>
+          </div>
         </div>
         <p className="text-xs uppercase tracking-[0.22em] text-ink/50">
           © {year} {t("brand")}. {t("footer.rights")}

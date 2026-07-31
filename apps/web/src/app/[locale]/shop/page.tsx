@@ -40,7 +40,27 @@ export default async function ShopPage({
   return (
     <div className="mx-auto max-w-7xl px-5 pb-20 pt-28 md:px-8">
       <h1 className="font-display text-5xl md:text-6xl">{t("title")}</h1>
-      <div className="mt-8 flex flex-wrap gap-3 text-sm">
+
+      <form
+        action={`/${locale}/shop`}
+        method="get"
+        className="mt-8 flex max-w-xl flex-wrap gap-2"
+      >
+        {sp.category ? (
+          <input type="hidden" name="category" value={sp.category} />
+        ) : null}
+        <input
+          name="q"
+          defaultValue={sp.q || ""}
+          placeholder={t("searchPlaceholder")}
+          className="min-w-[14rem] flex-1 border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+        />
+        <button type="submit" className="btn-ghost px-4 py-2 text-sm">
+          {t("search")}
+        </button>
+      </form>
+
+      <div className="mt-6 flex flex-wrap gap-3 text-sm">
         <Link
           href={`/${locale}/shop`}
           className={`border px-3 py-1.5 ${!sp.category ? "border-gold text-ink" : "border-black/15 text-ink/60"}`}
@@ -50,7 +70,7 @@ export default async function ShopPage({
         {categories.map((c) => (
           <Link
             key={c.id}
-            href={`/${locale}/shop?category=${c.slug}`}
+            href={`/${locale}/shop?category=${c.slug}${sp.q ? `&q=${encodeURIComponent(sp.q)}` : ""}`}
             className={`border px-3 py-1.5 ${
               sp.category === c.slug
                 ? "border-gold text-ink"

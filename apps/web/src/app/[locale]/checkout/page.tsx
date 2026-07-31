@@ -18,6 +18,8 @@ export default function CheckoutPage() {
     [],
   );
   const [shippingAddressId, setShippingAddressId] = useState("");
+  const [couponCode, setCouponCode] = useState("");
+  const [couponNote, setCouponNote] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -52,6 +54,7 @@ export default function CheckoutPage() {
         paymentMethod,
         currency,
         ...(needsAddress ? { shippingAddressId } : {}),
+        ...(couponCode.trim() ? { couponCode: couponCode.trim() } : {}),
       });
 
       if (paymentMethod === "SHOWROOM") {
@@ -166,6 +169,53 @@ export default function CheckoutPage() {
             )}
           </fieldset>
         ) : null}
+
+        <fieldset>
+          <legend className="mb-3 text-sm uppercase tracking-[0.2em] text-ink/50">
+            {t("coupon")}
+          </legend>
+          <div className="flex flex-wrap gap-2">
+            <input
+              value={couponCode}
+              onChange={(e) => {
+                setCouponCode(e.target.value.toUpperCase());
+                setCouponNote("");
+              }}
+              placeholder="WELCOME10"
+              className="min-w-[12rem] flex-1 border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+            />
+            <button
+              type="button"
+              className="btn-ghost px-4 py-2 text-sm"
+              onClick={async () => {
+                setError("");
+                setCouponNote("");
+                try {
+                  const cart = await api.cart(locale);
+                  const subtotal =
+                    currency === "UZS"
+                      ? Number(cart.subtotalUzs || 0)
+                      : Number(cart.subtotalUsd || 0);
+                  const applied = await api.validateCoupon(
+                    couponCode,
+                    currency,
+                    subtotal,
+                  );
+                  setCouponNote(
+                    `${t("couponApplied")}: −${applied.discountMinor}`,
+                  );
+                } catch {
+                  setError(t("couponInvalid"));
+                }
+              }}
+            >
+              {t("couponApply")}
+            </button>
+          </div>
+          {couponNote ? (
+            <p className="mt-2 text-sm text-ink/60">{couponNote}</p>
+          ) : null}
+        </fieldset>
 
         <fieldset>
           <legend className="mb-3 text-sm uppercase tracking-[0.2em] text-ink/50">

@@ -19,6 +19,14 @@ export type ApiProduct = {
   media: Array<{ url: string; alt: string | null; isPrimary: boolean }>;
   category: { slug: string; name: string } | null;
   collection: { slug: string; name: string } | null;
+  reviews?: Array<{
+    id: string;
+    rating: number;
+    title: string | null;
+    body: string;
+    user: { name: string };
+    createdAt: string;
+  }>;
 };
 
 function authHeaders() {
@@ -170,6 +178,23 @@ export const api = {
     request(`/support/${id}/status`, {
       method: "PATCH",
       body: JSON.stringify({ status }),
+    }),
+  validateCoupon: (code: string, currency: string, subtotalMinor: number) =>
+    request<{
+      code: string;
+      discountMinor: number;
+      totalMinor: number;
+    }>("/coupons/validate", {
+      method: "POST",
+      body: JSON.stringify({ code, currency, subtotalMinor }),
+    }),
+  submitReview: (
+    productId: string,
+    body: { rating: number; title?: string; body: string },
+  ) =>
+    request(`/products/${productId}/reviews`, {
+      method: "POST",
+      body: JSON.stringify(body),
     }),
 };
 

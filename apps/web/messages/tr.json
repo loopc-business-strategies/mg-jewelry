@@ -32,7 +32,9 @@
     "filters": "Filtreler",
     "sort": "Sırala",
     "all": "Tümü",
-    "empty": "Ürün bulunamadı."
+    "empty": "Ürün bulunamadı.",
+    "search": "Ara",
+    "searchPlaceholder": "Mücevher ara…"
   },
   "product": {
     "addToCart": "Sepete ekle",
@@ -42,8 +44,19 @@
     "making": "İşçilik",
     "availability": "Stok",
     "inStock": "Stokta",
+    "lowStock": "Az kaldı",
+    "outOfStock": "Tükendi",
     "related": "Beğenebilecekleriniz",
-    "specs": "Özellikler"
+    "specs": "Özellikler",
+    "reviews": "Yorumlar",
+    "writeReview": "Yorum yaz",
+    "rating": "Puan",
+    "reviewTitle": "Başlık",
+    "reviewBody": "Yorumunuz",
+    "submitReview": "Gönder",
+    "reviewThanks": "Teşekkürler.",
+    "noReviews": "Henüz yorum yok.",
+    "signInToReview": "Yorum için giriş yapın."
   },
   "cart": {
     "title": "Sepetiniz",
@@ -68,7 +81,11 @@
     "cancel": "Ödeme iptal edildi.",
     "shippingAddress": "Teslimat adresi",
     "noAddresses": "Adres ekleyin:",
-    "addressRequired": "Teslimat için bir adres seçin."
+    "addressRequired": "Teslimat için bir adres seçin.",
+    "coupon": "Kupon",
+    "couponApply": "Uygula",
+    "couponApplied": "Kupon uygulandı",
+    "couponInvalid": "Geçersiz kupon"
   },
   "about": {
     "title": "MG Jewelry hakkında",
@@ -183,6 +200,28 @@
   },
   "footer": {
     "rights": "Tüm hakları saklıdır.",
-    "showroom": "Showroom — 242, Girvonbulok Street · Namangan"
+    "showroom": "Showroom — 242, Girvonbulok Street · Namangan",
+    "privacy": "Gizlilik",
+    "offer": "Genel teklif"
+  },
+  "legal": {
+    "privacyTitle": "Gizlilik politikası",
+    "privacyIntro": "Modern Gold Jewelry Manufacturing (MG Jewelry) gizliliğinize saygı duyar.",
+    "privacyCollect": "Topladığımız veriler",
+    "privacyCollectBody": "Ad, e-posta, telefon, adres, sipariş, randevu ve destek mesajları.",
+    "privacyUse": "Nasıl kullanırız",
+    "privacyUseBody": "Sipariş, randevu, destek ve yasal yükümlülükler için. Verilerinizi satmayız.",
+    "privacyContact": "İletişim",
+    "privacyContactBody": "hello@mgjewelry.uz — 242 Girvonbulok Street, Namangan, Özbekistan.",
+    "offerTitle": "Genel teklif",
+    "offerIntro": "MG Jewelry ile müşteri arasında site üzerinden satış koşulları.",
+    "offerGoods": "Ürünler ve fiyatlar",
+    "offerGoodsBody": "Açıklama ve fiyatlar ürün sayfasındadır. Nihai tutar ödemede onaylanır.",
+    "offerOrders": "Sipariş ve ödeme",
+    "offerOrdersBody": "Ödeme veya showroom teslimi onaylandığında sipariş kabul edilir.",
+    "offerReturns": "İadeler",
+    "offerReturnsBody": "Hesabınızdan talep gönderebilirsiniz.",
+    "offerSeller": "Satıcı",
+    "offerSellerBody": "Modern Gold Jewelry Manufacturing — 242 Girvonbulok Street, Namangan, Özbekistan."
   }
 }

@@ -32,7 +32,9 @@
     "filters": "Filters",
     "sort": "Sort",
     "all": "All",
-    "empty": "No pieces found."
+    "empty": "No pieces found.",
+    "search": "Search",
+    "searchPlaceholder": "Search jewelry…"
   },
   "product": {
     "addToCart": "Add to cart",
@@ -42,8 +44,19 @@
     "making": "Making charges",
     "availability": "Availability",
     "inStock": "In stock",
+    "lowStock": "Low stock",
+    "outOfStock": "Out of stock",
     "related": "You may also like",
-    "specs": "Specifications"
+    "specs": "Specifications",
+    "reviews": "Reviews",
+    "writeReview": "Write a review",
+    "rating": "Rating",
+    "reviewTitle": "Title",
+    "reviewBody": "Your review",
+    "submitReview": "Submit review",
+    "reviewThanks": "Thank you for your review.",
+    "noReviews": "No reviews yet.",
+    "signInToReview": "Sign in to leave a review."
   },
   "cart": {
     "title": "Your cart",
@@ -68,7 +81,11 @@
     "cancel": "Payment cancelled.",
     "shippingAddress": "Shipping address",
     "noAddresses": "Add a delivery address in",
-    "addressRequired": "Select a shipping address for delivery."
+    "addressRequired": "Select a shipping address for delivery.",
+    "coupon": "Coupon code",
+    "couponApply": "Apply",
+    "couponApplied": "Coupon applied",
+    "couponInvalid": "Invalid or expired coupon"
   },
   "about": {
     "title": "About MG Jewelry",
@@ -183,6 +200,28 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "showroom": "Showroom — 242, Girvonbulok Street · Namangan"
+    "showroom": "Showroom — 242, Girvonbulok Street · Namangan",
+    "privacy": "Privacy",
+    "offer": "Public offer"
+  },
+  "legal": {
+    "privacyTitle": "Privacy policy",
+    "privacyIntro": "Modern Gold Jewelry Manufacturing (MG Jewelry) respects your privacy. This policy explains how we handle personal data when you use our website, book appointments, or place orders.",
+    "privacyCollect": "What we collect",
+    "privacyCollectBody": "We may collect your name, email, phone, delivery address, order details, appointment requests, and support messages that you provide.",
+    "privacyUse": "How we use data",
+    "privacyUseBody": "We use your data to fulfil orders, confirm appointments, answer support requests, improve the site, and meet legal obligations. We do not sell your personal data.",
+    "privacyContact": "Contact",
+    "privacyContactBody": "Questions about privacy: hello@mgjewelry.uz — Modern Gold Jewelry Manufacturing, 242 Girvonbulok Street, Davlatabad District, Namangan City, Republic of Uzbekistan.",
+    "offerTitle": "Public offer",
+    "offerIntro": "This public offer sets out the terms of sale between Modern Gold Jewelry Manufacturing (Seller) and the Customer for jewelry and related services ordered via the website.",
+    "offerGoods": "Goods and prices",
+    "offerGoodsBody": "Product descriptions, metals, weights, and prices are shown on the product page. Prices may be displayed in USD and UZS. Final payable amount is confirmed at checkout, including any coupon discount.",
+    "offerOrders": "Orders and payment",
+    "offerOrdersBody": "An order is accepted when payment is confirmed or when showroom pickup is arranged. Fulfillment may be Namangan showroom pickup, local delivery in Uzbekistan, or an international shipping quote.",
+    "offerReturns": "Returns and support",
+    "offerReturnsBody": "Return or support requests can be submitted from your account. Custom or altered pieces may be excluded. Namangan showroom staff will confirm eligibility.",
+    "offerSeller": "Seller details",
+    "offerSellerBody": "Modern Gold Jewelry Manufacturing — 242, Girvonbulok Street, Davlatabad District, Namangan City, Namangan Region, Republic of Uzbekistan. Contact: hello@mgjewelry.uz · Telegram @mgjewelry."
   }
 }

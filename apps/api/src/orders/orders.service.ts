@@ -11,12 +11,14 @@ import {
 } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
 import { NotificationsService } from "../notifications/notifications.service";
+import { CouponsService } from "../coupons/coupons.service";
 
 @Injectable()
 export class OrdersService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly notifications: NotificationsService,
+    private readonly coupons: CouponsService,
   ) {}
 
   async checkout(
@@ -27,6 +29,7 @@ export class OrdersService {
       currency: "USD" | "UZS";
       notes?: string;
       shippingAddressId?: string;
+      couponCode?: string;
     },
   ) {
     const cart = await this.prisma.cart.findUnique({
@@ -59,6 +62,19 @@ export class OrdersService {
       0,
     );
 
+    let discountMinor = 0;
+    let couponNote = "";
+    if (input.couponCode?.trim()) {
+      const applied = await this.coupons.validate(
+        input.couponCode,
+        input.currency,
+        subtotalMinor,
+      );
+      discountMinor = applied.discountMinor;
+      couponNote = `Coupon ${applied.code} (−${discountMinor})`;
+    }
+    const totalMinor = Math.max(0, subtotalMinor - discountMinor);
+
     let status: OrderStatus = OrderStatus.PENDING_PAYMENT;
     if (input.paymentMethod === PaymentMethod.SHOWROOM) {
       status = OrderStatus.AWAITING_PICKUP;
@@ -67,6 +83,7 @@ export class OrdersService {
     }
 
     const orderNumber = `MG-${Date.now().toString(36).toUpperCase()}`;
+    const notes = [input.notes?.trim(), couponNote].filter(Boolean).join(" · ") || null;
 
     const order = await this.prisma.$transaction(async (tx) => {
       const created = await tx.order.create({
@@ -78,8 +95,8 @@ export class OrdersService {
           currency: input.currency,
           subtotalMinor,
           shippingMinor: 0,
-          totalMinor: subtotalMinor,
-          notes: input.notes,
+          totalMinor,
+          notes,
           shippingAddressId: input.shippingAddressId,
           items: {
             create: cart.items.map((item) => {
@@ -101,11 +118,8 @@ export class OrdersService {
           payments: {
             create: {
               method: input.paymentMethod,
-              status:
-                input.paymentMethod === PaymentMethod.SHOWROOM
-                  ? PaymentStatus.PENDING
-                  : PaymentStatus.PENDING,
-              amountMinor: subtotalMinor,
+              status: PaymentStatus.PENDING,
+              amountMinor: totalMinor,
               currency: input.currency,
             },
           },

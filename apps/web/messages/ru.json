@@ -32,7 +32,9 @@
     "filters": "Фильтры",
     "sort": "Сортировка",
     "all": "Все",
-    "empty": "Изделия не найдены."
+    "empty": "Изделия не найдены.",
+    "search": "Поиск",
+    "searchPlaceholder": "Поиск украшений…"
   },
   "product": {
     "addToCart": "В корзину",
@@ -42,8 +44,19 @@
     "making": "Работа",
     "availability": "Наличие",
     "inStock": "В наличии",
+    "lowStock": "Мало",
+    "outOfStock": "Нет в наличии",
     "related": "Вам также понравится",
-    "specs": "Характеристики"
+    "specs": "Характеристики",
+    "reviews": "Отзывы",
+    "writeReview": "Оставить отзыв",
+    "rating": "Оценка",
+    "reviewTitle": "Заголовок",
+    "reviewBody": "Ваш отзыв",
+    "submitReview": "Отправить",
+    "reviewThanks": "Спасибо за отзыв.",
+    "noReviews": "Пока нет отзывов.",
+    "signInToReview": "Войдите, чтобы оставить отзыв."
   },
   "cart": {
     "title": "Корзина",
@@ -68,7 +81,11 @@
     "cancel": "Оплата отменена.",
     "shippingAddress": "Адрес доставки",
     "noAddresses": "Добавьте адрес в",
-    "addressRequired": "Выберите адрес доставки."
+    "addressRequired": "Выберите адрес доставки.",
+    "coupon": "Купон",
+    "couponApply": "Применить",
+    "couponApplied": "Купон применён",
+    "couponInvalid": "Недействительный купон"
   },
   "about": {
     "title": "О MG Jewelry",
@@ -183,6 +200,28 @@
   },
   "footer": {
     "rights": "Все права защищены.",
-    "showroom": "Шоурум — 242, Girvonbulok Street · Наманган"
+    "showroom": "Шоурум — 242, Girvonbulok Street · Наманган",
+    "privacy": "Конфиденциальность",
+    "offer": "Публичная оферта"
+  },
+  "legal": {
+    "privacyTitle": "Политика конфиденциальности",
+    "privacyIntro": "Modern Gold Jewelry Manufacturing (MG Jewelry) уважает вашу конфиденциальность.",
+    "privacyCollect": "Какие данные собираем",
+    "privacyCollectBody": "Имя, email, телефон, адрес, заказы, записи и обращения в поддержку.",
+    "privacyUse": "Как используем",
+    "privacyUseBody": "Для заказов, записей, поддержки и законных обязательств. Данные не продаём.",
+    "privacyContact": "Контакты",
+    "privacyContactBody": "hello@mgjewelry.uz — 242 Girvonbulok Street, Наманган, Узбекистан.",
+    "offerTitle": "Публичная оферта",
+    "offerIntro": "Условия продажи через сайт между MG Jewelry и покупателем.",
+    "offerGoods": "Товары и цены",
+    "offerGoodsBody": "Описания и цены на странице товара. Итоговая сумма подтверждается при оформлении.",
+    "offerOrders": "Заказы и оплата",
+    "offerOrdersBody": "Заказ принимается после оплаты или договорённости о самовывозе.",
+    "offerReturns": "Возвраты",
+    "offerReturnsBody": "Заявку можно отправить из личного кабинета.",
+    "offerSeller": "Продавец",
+    "offerSellerBody": "Modern Gold Jewelry Manufacturing — 242 Girvonbulok Street, Наманган, Узбекистан."
   }
 }

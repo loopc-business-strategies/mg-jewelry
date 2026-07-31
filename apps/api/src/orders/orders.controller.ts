@@ -19,6 +19,7 @@ export class OrdersController {
       currency: "USD" | "UZS";
       notes?: string;
       shippingAddressId?: string;
+      couponCode?: string;
     },
   ) {
     return this.orders.checkout(user.userId, body);

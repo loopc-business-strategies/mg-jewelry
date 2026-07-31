@@ -33,6 +33,26 @@ export default async function HomePage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "JewelryStore",
+            name: "MG Jewelry",
+            alternateName: "Modern Gold Jewelry Manufacturing",
+            description: "Hearts of Namangan — luxury gold jewelry from Namangan, Uzbekistan.",
+            url: process.env.NEXT_PUBLIC_APP_URL || "https://mg-jewelry.vercel.app",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "242, Girvonbulok Street, Davlatabad District",
+              addressLocality: "Namangan City",
+              addressRegion: "Namangan Region",
+              addressCountry: "UZ",
+            },
+          }),
+        }}
+      />
       <section className="relative min-h-[100svh] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
