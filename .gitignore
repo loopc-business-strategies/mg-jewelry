@@ -18,3 +18,4 @@ apps/api/prisma/*.db
 apps/api/prisma/*.db-journal
 *.db
 *.db-journal
+.env*
