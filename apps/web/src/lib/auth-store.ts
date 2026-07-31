@@ -12,16 +12,39 @@ type AuthState = {
   logout: () => void;
 };
 
+function clearSession() {
+  localStorage.removeItem("mg_token");
+  localStorage.removeItem("mg_user");
+}
+
+function readStoredUser(): User | null {
+  const raw = localStorage.getItem("mg_user");
+  if (!raw) return null;
+  try {
+    const user = JSON.parse(raw) as User;
+    if (!user || typeof user !== "object" || !user.role) {
+      clearSession();
+      return null;
+    }
+    return user;
+  } catch {
+    clearSession();
+    return null;
+  }
+}
+
 export const useAuthStore = create<AuthState>((set) => ({
   token: null,
   user: null,
   hydrate: () => {
-    const token = localStorage.getItem("mg_token");
-    const raw = localStorage.getItem("mg_user");
-    set({
-      token,
-      user: raw ? (JSON.parse(raw) as User) : null,
-    });
+    const user = readStoredUser();
+    const token = user ? localStorage.getItem("mg_token") : null;
+    if (!user || !token) {
+      clearSession();
+      set({ token: null, user: null });
+      return;
+    }
+    set({ token, user });
   },
   setAuth: (token, user) => {
     localStorage.setItem("mg_token", token);
@@ -29,8 +52,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ token, user });
   },
   logout: () => {
-    localStorage.removeItem("mg_token");
-    localStorage.removeItem("mg_user");
+    clearSession();
     set({ token: null, user: null });
   },
 }));

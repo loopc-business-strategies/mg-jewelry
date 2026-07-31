@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { api, formatUsd } from "@/lib/api";
 import { useAuthStore } from "@/lib/auth-store";
 
@@ -20,8 +19,7 @@ type Tab =
 export default function AdminPage() {
   const t = useTranslations("admin");
   const locale = useLocale();
-  const router = useRouter();
-  const { hydrate, user } = useAuthStore();
+  const { hydrate } = useAuthStore();
   const [tab, setTab] = useState<Tab>("overview");
   const [data, setData] = useState<Record<string, unknown> | null>(null);
   const [products, setProducts] = useState<Array<Record<string, unknown>>>([]);
@@ -37,41 +35,67 @@ export default function AdminPage() {
   const [returns, setReturns] = useState<Array<Record<string, unknown>>>([]);
   const [settings, setSettings] = useState<Record<string, unknown>>({});
   const [msg, setMsg] = useState("");
+  const [loadError, setLoadError] = useState("");
+  const [ready, setReady] = useState(false);
 
   async function refresh() {
-    const [dash, prods, ords, appts, tix, inqs, cps, rets, sett] =
-      await Promise.all([
-        api.adminDashboard(),
-        api.adminProducts(),
-        api.adminOrders(),
-        api.adminAppointments(),
-        api.adminTickets(),
-        api.adminInquiries(),
-        api.adminCoupons(),
-        api.adminReturns(),
-        api.adminSettings(),
-      ]);
-    setData(dash);
-    setProducts(prods);
-    setOrders(ords);
-    setAppointments(appts);
-    setTickets(tix);
-    setInquiries(inqs);
-    setCoupons(cps);
-    setReturns(rets);
-    setSettings(sett);
+    setLoadError("");
+    const results = await Promise.allSettled([
+      api.adminDashboard(),
+      api.adminProducts(),
+      api.adminOrders(),
+      api.adminAppointments(),
+      api.adminTickets(),
+      api.adminInquiries(),
+      api.adminCoupons(),
+      api.adminReturns(),
+      api.adminSettings(),
+    ]);
+    const value = <T,>(i: number, fallback: T): T =>
+      results[i].status === "fulfilled"
+        ? (results[i] as PromiseFulfilledResult<T>).value
+        : fallback;
+
+    setData(value<Record<string, unknown> | null>(0, null));
+    setProducts(value<Array<Record<string, unknown>>>(1, []));
+    setOrders(value<Array<Record<string, unknown>>>(2, []));
+    setAppointments(value<Array<Record<string, unknown>>>(3, []));
+    setTickets(value<Array<Record<string, unknown>>>(4, []));
+    setInquiries(value<Array<Record<string, unknown>>>(5, []));
+    setCoupons(value<Array<Record<string, unknown>>>(6, []));
+    setReturns(value<Array<Record<string, unknown>>>(7, []));
+    setSettings(value<Record<string, unknown>>(8, {}));
+
+    const failed = results.filter((r) => r.status === "rejected").length;
+    if (failed === results.length) {
+      setLoadError("Could not load admin data. Sign in again or retry.");
+    } else if (failed > 0) {
+      setLoadError(`Some admin panels failed to load (${failed}).`);
+    }
   }
 
   useEffect(() => {
     hydrate();
-    const raw = localStorage.getItem("mg_user");
-    const u = raw ? JSON.parse(raw) : null;
-    if (!localStorage.getItem("mg_token") || !u || u.role === "CUSTOMER") {
-      router.push(`/${locale}/auth`);
+    let u: { role?: string } | null = null;
+    try {
+      const raw = localStorage.getItem("mg_user");
+      u = raw ? (JSON.parse(raw) as { role?: string }) : null;
+    } catch {
+      localStorage.removeItem("mg_token");
+      localStorage.removeItem("mg_user");
+      window.location.assign(`/${locale}/auth`);
       return;
     }
-    refresh().catch(() => setData(null));
-  }, [hydrate, locale, router, user]);
+    if (!localStorage.getItem("mg_token") || !u || u.role === "CUSTOMER") {
+      window.location.assign(`/${locale}/auth`);
+      return;
+    }
+    setReady(true);
+    refresh().catch(() => {
+      setData(null);
+      setLoadError("Could not load admin data. Sign in again or retry.");
+    });
+  }, [hydrate, locale]);
 
   const recent = (data?.recentOrders as Array<Record<string, unknown>>) || [];
   const showroom = (settings.showroom as Record<string, string>) || {};
@@ -193,10 +217,30 @@ export default function AdminPage() {
     ["settings", t("settings")],
   ];
 
+  if (!ready) {
+    return (
+      <div className="mx-auto max-w-6xl px-5 pb-20 pt-28 md:px-8">
+        <p className="text-ink/60">…</p>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-5 pb-20 pt-28 md:px-8">
       <h1 className="font-display text-5xl">{t("title")}</h1>
       <p className="mt-2 text-sm text-ink/55">Namangan showroom operations</p>
+
+      {loadError ? (
+        <div className="mt-4 flex flex-wrap items-center gap-3 border border-black/15 px-4 py-3 text-sm">
+          <p className="text-ink/70">{loadError}</p>
+          <button type="button" className="btn-ghost px-3 py-1" onClick={() => refresh()}>
+            Retry
+          </button>
+          <a href={`/${locale}/auth`} className="btn-ghost px-3 py-1">
+            Sign in again
+          </a>
+        </div>
+      ) : null}
 
       <div className="mt-8 flex flex-wrap gap-2 text-sm">
         {tabs.map(([id, label]) => (
