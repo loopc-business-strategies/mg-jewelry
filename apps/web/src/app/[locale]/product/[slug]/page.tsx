@@ -110,7 +110,11 @@ export default async function ProductPage({
           </div>
 
           <div className="mt-8">
-            <AddToCartButton productId={product.id} locale={locale} />
+            <AddToCartButton
+              productId={product.id}
+              locale={locale}
+              productSlug={product.slug}
+            />
           </div>
         </div>
       </div>

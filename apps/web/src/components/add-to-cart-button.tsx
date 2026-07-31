@@ -9,9 +9,11 @@ import { useAuthStore } from "@/lib/auth-store";
 export function AddToCartButton({
   productId,
   locale,
+  productSlug,
 }: {
   productId: string;
   locale: string;
+  productSlug?: string;
 }) {
   const t = useTranslations("product");
   const router = useRouter();
@@ -58,6 +60,14 @@ export function AddToCartButton({
         <button type="button" className="btn-ghost" onClick={onWish}>
           {t("wishlist")}
         </button>
+        {productSlug ? (
+          <a
+            href={`/${locale}/contact?product=${encodeURIComponent(productSlug)}`}
+            className="btn-ghost"
+          >
+            {t("inquire")}
+          </a>
+        ) : null}
       </div>
       {message ? <p className="text-sm text-ink/60">{message}</p> : null}
     </div>

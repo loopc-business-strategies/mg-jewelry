@@ -56,7 +56,8 @@
     "submitReview": "Submit review",
     "reviewThanks": "Thank you for your review.",
     "noReviews": "No reviews yet.",
-    "signInToReview": "Sign in to leave a review."
+    "signInToReview": "Sign in to leave a review.",
+    "inquire": "Inquire"
   },
   "cart": {
     "title": "Your cart",
@@ -97,7 +98,16 @@
     "city": "242, Girvonbulok Street · Namangan",
     "telegram": "Telegram",
     "email": "Email",
-    "bookCta": "Book appointment"
+    "bookCta": "Book appointment",
+    "inquiryTitle": "Request a quote",
+    "aboutProduct": "About product",
+    "name": "Full name",
+    "emailField": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Send inquiry",
+    "success": "Thank you — we will reply shortly.",
+    "error": "Could not send. Please try again."
   },
   "appointments": {
     "title": "Book an appointment",
@@ -176,6 +186,8 @@
     "customers": "Customers",
     "appointments": "Appointments",
     "tickets": "Tickets",
+    "inquiries": "Inquiries",
+    "coupons": "Coupons",
     "settings": "Settings",
     "revenue": "Paid volume",
     "addProduct": "Add product",
@@ -196,7 +208,16 @@
     "logoUrl": "Logo URL",
     "heroImageUrl": "Hero image URL",
     "saveSettings": "Save settings",
-    "settingsSaved": "Settings saved"
+    "settingsSaved": "Settings saved",
+    "couponCode": "Code",
+    "percentOff": "Percent off",
+    "amountOff": "Amount off (minor)",
+    "currency": "Currency (optional)",
+    "active": "Active",
+    "createCoupon": "Create coupon",
+    "couponCreated": "Coupon created",
+    "deactivate": "Deactivate",
+    "activate": "Activate"
   },
   "footer": {
     "rights": "All rights reserved.",

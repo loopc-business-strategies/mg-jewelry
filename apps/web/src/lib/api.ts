@@ -179,6 +179,32 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify({ status }),
     }),
+  createInquiry: (body: {
+    name: string;
+    email: string;
+    phone?: string;
+    message: string;
+    productSlug?: string;
+  }) =>
+    request("/inquiries", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  adminInquiries: () =>
+    request<Array<Record<string, unknown>>>("/inquiries"),
+  adminInquiryStatus: (id: string, status: string) =>
+    request(`/inquiries/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    }),
+  adminCoupons: () => request<Array<Record<string, unknown>>>("/coupons"),
+  adminCreateCoupon: (body: Record<string, unknown>) =>
+    request("/coupons", { method: "POST", body: JSON.stringify(body) }),
+  adminUpdateCoupon: (id: string, body: Record<string, unknown>) =>
+    request(`/coupons/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
   validateCoupon: (code: string, currency: string, subtotalMinor: number) =>
     request<{
       code: string;

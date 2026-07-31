@@ -88,15 +88,8 @@ export class AppointmentsService {
       type: appt.type,
       date: input.date,
       slot: appt.slot,
+      email: appt.email || undefined,
     });
-
-    if (appt.email) {
-      await this.notifications.notifyEmail(
-        appt.email,
-        "MG Jewelry appointment received",
-        `We received your ${appt.type} request for ${input.date} at ${appt.slot}.`,
-      );
-    }
 
     return appt;
   }

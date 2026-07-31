@@ -56,7 +56,8 @@
     "submitReview": "Yuborish",
     "reviewThanks": "Rahmat!",
     "noReviews": "Hali sharh yo‘q.",
-    "signInToReview": "Sharh uchun kiring."
+    "signInToReview": "Sharh uchun kiring.",
+    "inquire": "So‘rov"
   },
   "cart": {
     "title": "Savat",
@@ -97,7 +98,16 @@
     "city": "242, Girvonbulok Street · Namangan",
     "telegram": "Telegram",
     "email": "Email",
-    "bookCta": "Uchrashuv band qilish"
+    "bookCta": "Uchrashuv band qilish",
+    "inquiryTitle": "Narx so‘rash",
+    "aboutProduct": "Mahsulot",
+    "name": "To‘liq ism",
+    "emailField": "Email",
+    "phone": "Telefon",
+    "message": "Xabar",
+    "submit": "Yuborish",
+    "success": "Rahmat — tez orada javob beramiz.",
+    "error": "Yuborilmadi. Qayta urinib ko‘ring."
   },
   "appointments": {
     "title": "Uchrashuv band qilish",
@@ -176,6 +186,8 @@
     "customers": "Mijozlar",
     "appointments": "Uchrashuvlar",
     "tickets": "Ticketlar",
+    "inquiries": "So‘rovlar",
+    "coupons": "Kuponlar",
     "settings": "Sozlamalar",
     "revenue": "To‘langan hajm",
     "addProduct": "Mahsulot qo‘shish",
@@ -196,7 +208,16 @@
     "logoUrl": "Logo URL",
     "heroImageUrl": "Hero rasm URL",
     "saveSettings": "Sozlamalarni saqlash",
-    "settingsSaved": "Saqlandi"
+    "settingsSaved": "Saqlandi",
+    "couponCode": "Kod",
+    "percentOff": "Foiz chegirma",
+    "amountOff": "Summa chegirma",
+    "currency": "Valyuta (ixtiyoriy)",
+    "active": "Faol",
+    "createCoupon": "Kupon yaratish",
+    "couponCreated": "Kupon yaratildi",
+    "deactivate": "O‘chirish",
+    "activate": "Yoqish"
   },
   "footer": {
     "rights": "Barcha huquqlar himoyalangan.",

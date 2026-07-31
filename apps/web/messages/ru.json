@@ -56,7 +56,8 @@
     "submitReview": "Отправить",
     "reviewThanks": "Спасибо за отзыв.",
     "noReviews": "Пока нет отзывов.",
-    "signInToReview": "Войдите, чтобы оставить отзыв."
+    "signInToReview": "Войдите, чтобы оставить отзыв.",
+    "inquire": "Запрос"
   },
   "cart": {
     "title": "Корзина",
@@ -97,7 +98,16 @@
     "city": "242, Girvonbulok Street · Наманган",
     "telegram": "Telegram",
     "email": "Email",
-    "bookCta": "Записаться на визит"
+    "bookCta": "Записаться на визит",
+    "inquiryTitle": "Запросить цену",
+    "aboutProduct": "О товаре",
+    "name": "Имя",
+    "emailField": "Email",
+    "phone": "Телефон",
+    "message": "Сообщение",
+    "submit": "Отправить",
+    "success": "Спасибо — мы скоро ответим.",
+    "error": "Не удалось отправить. Попробуйте ещё раз."
   },
   "appointments": {
     "title": "Запись на визит",
@@ -176,6 +186,8 @@
     "customers": "Клиенты",
     "appointments": "Записи",
     "tickets": "Тикеты",
+    "inquiries": "Запросы",
+    "coupons": "Купоны",
     "settings": "Настройки",
     "revenue": "Оплаченный объём",
     "addProduct": "Добавить товар",
@@ -196,7 +208,16 @@
     "logoUrl": "URL логотипа",
     "heroImageUrl": "URL hero-изображения",
     "saveSettings": "Сохранить настройки",
-    "settingsSaved": "Сохранено"
+    "settingsSaved": "Сохранено",
+    "couponCode": "Код",
+    "percentOff": "Процент скидки",
+    "amountOff": "Сумма скидки",
+    "currency": "Валюта (опционально)",
+    "active": "Активен",
+    "createCoupon": "Создать купон",
+    "couponCreated": "Купон создан",
+    "deactivate": "Выключить",
+    "activate": "Включить"
   },
   "footer": {
     "rights": "Все права защищены.",

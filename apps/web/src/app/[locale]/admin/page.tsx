@@ -12,6 +12,8 @@ type Tab =
   | "orders"
   | "appointments"
   | "tickets"
+  | "inquiries"
+  | "coupons"
   | "settings";
 
 export default function AdminPage() {
@@ -27,16 +29,22 @@ export default function AdminPage() {
     Array<Record<string, unknown>>
   >([]);
   const [tickets, setTickets] = useState<Array<Record<string, unknown>>>([]);
+  const [inquiries, setInquiries] = useState<Array<Record<string, unknown>>>(
+    [],
+  );
+  const [coupons, setCoupons] = useState<Array<Record<string, unknown>>>([]);
   const [settings, setSettings] = useState<Record<string, unknown>>({});
   const [msg, setMsg] = useState("");
 
   async function refresh() {
-    const [dash, prods, ords, appts, tix, sett] = await Promise.all([
+    const [dash, prods, ords, appts, tix, inqs, cps, sett] = await Promise.all([
       api.adminDashboard(),
       api.adminProducts(),
       api.adminOrders(),
       api.adminAppointments(),
       api.adminTickets(),
+      api.adminInquiries(),
+      api.adminCoupons(),
       api.adminSettings(),
     ]);
     setData(dash);
@@ -44,6 +52,8 @@ export default function AdminPage() {
     setOrders(ords);
     setAppointments(appts);
     setTickets(tix);
+    setInquiries(inqs);
+    setCoupons(cps);
     setSettings(sett);
   }
 
@@ -145,12 +155,35 @@ export default function AdminPage() {
     }
   }
 
+  async function onCreateCoupon(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    try {
+      const percent = fd.get("percentOff");
+      const amount = fd.get("amountOffMinor");
+      await api.adminCreateCoupon({
+        code: String(fd.get("code") || ""),
+        percentOff: percent ? Number(percent) : null,
+        amountOffMinor: amount ? Number(amount) : null,
+        currency: String(fd.get("currency") || "") || null,
+        active: true,
+      });
+      setMsg(t("couponCreated"));
+      e.currentTarget.reset();
+      await refresh();
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
   const tabs: Array<[Tab, string]> = [
     ["overview", t("overview")],
     ["products", t("products")],
     ["orders", t("orders")],
     ["appointments", t("appointments")],
     ["tickets", t("tickets")],
+    ["inquiries", t("inquiries")],
+    ["coupons", t("coupons")],
     ["settings", t("settings")],
   ];
 
@@ -416,6 +449,127 @@ export default function AdminPage() {
               </div>
             );
           })}
+        </div>
+      ) : null}
+
+      {tab === "inquiries" ? (
+        <div className="mt-10 space-y-3">
+          {inquiries.map((iq) => {
+            const product = (iq.product as Record<string, unknown>) || {};
+            const translations =
+              (product.translations as Array<Record<string, string>>) || [];
+            const productName =
+              translations[0]?.name ||
+              String(iq.productSlug || product.slug || "");
+            return (
+              <div
+                key={String(iq.id)}
+                className="flex flex-wrap items-center justify-between gap-3 border border-black/10 px-4 py-3 text-sm"
+              >
+                <div>
+                  <p className="font-medium">
+                    {String(iq.name)} · {String(iq.email)}
+                  </p>
+                  <p className="text-ink/50">
+                    {iq.phone ? String(iq.phone) : ""}
+                    {productName ? ` · ${productName}` : ""}
+                  </p>
+                  <p className="mt-1 text-ink/60">{String(iq.message)}</p>
+                </div>
+                <select
+                  className="border border-black/15 bg-white/50 px-2 py-1"
+                  defaultValue={String(iq.status)}
+                  onChange={async (e) => {
+                    await api.adminInquiryStatus(String(iq.id), e.target.value);
+                    await refresh();
+                  }}
+                >
+                  {["NEW", "IN_PROGRESS", "CLOSED"].map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {tab === "coupons" ? (
+        <div className="mt-10 space-y-8">
+          <form onSubmit={onCreateCoupon} className="max-w-md space-y-3">
+            <h2 className="font-display text-3xl">{t("createCoupon")}</h2>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("couponCode")}</span>
+              <input
+                name="code"
+                required
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("percentOff")}</span>
+              <input
+                name="percentOff"
+                type="number"
+                min={1}
+                max={100}
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("amountOff")}</span>
+              <input
+                name="amountOffMinor"
+                type="number"
+                min={0}
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("currency")}</span>
+              <input
+                name="currency"
+                placeholder="USD / UZS"
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <button type="submit" className="btn-primary">
+              {t("createCoupon")}
+            </button>
+          </form>
+          <div className="space-y-3">
+            {coupons.map((c) => (
+              <div
+                key={String(c.id)}
+                className="flex flex-wrap items-center justify-between gap-3 border border-black/10 px-4 py-3 text-sm"
+              >
+                <div>
+                  <p className="font-medium">{String(c.code)}</p>
+                  <p className="text-ink/50">
+                    {c.percentOff != null
+                      ? `${c.percentOff}%`
+                      : `${c.amountOffMinor} minor`}
+                    {c.currency ? ` · ${String(c.currency)}` : ""}
+                    {` · ${c.active ? t("active") : "off"}`}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="btn-ghost px-3 py-1 text-sm"
+                  onClick={async () => {
+                    await api.adminUpdateCoupon(String(c.id), {
+                      active: !c.active,
+                    });
+                    await refresh();
+                  }}
+                >
+                  {c.active ? t("deactivate") : t("activate")}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       ) : null}
 

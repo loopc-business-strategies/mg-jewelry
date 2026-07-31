@@ -166,6 +166,7 @@ model Product {
   wishlistItems   WishlistItem[]
   orderItems      OrderItem[]
   reviews         Review[]
+  inquiries       Inquiry[]
 }
 
 model ProductTranslation {
@@ -381,4 +382,27 @@ model SupportTicket {
 
   @@index([userId, status])
   @@index([status])
+}
+
+enum InquiryStatus {
+  NEW
+  IN_PROGRESS
+  CLOSED
+}
+
+model Inquiry {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  message     String
+  productId   String?
+  product     Product?      @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productSlug String?
+  status      InquiryStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
 }

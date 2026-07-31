@@ -138,11 +138,18 @@ export class OrdersService {
       return created;
     });
 
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { email: true, name: true },
+    });
+
     await this.notifications.orderCreated({
       orderNumber: order.orderNumber,
       totalMinor: order.totalMinor,
       currency: order.currency,
       status: order.status,
+      customerEmail: user?.email,
+      customerName: user?.name,
     });
 
     return order;

@@ -56,7 +56,8 @@
     "submitReview": "Gönder",
     "reviewThanks": "Teşekkürler.",
     "noReviews": "Henüz yorum yok.",
-    "signInToReview": "Yorum için giriş yapın."
+    "signInToReview": "Yorum için giriş yapın.",
+    "inquire": "Sor"
   },
   "cart": {
     "title": "Sepetiniz",
@@ -97,7 +98,16 @@
     "city": "242, Girvonbulok Street · Namangan",
     "telegram": "Telegram",
     "email": "E-posta",
-    "bookCta": "Randevu al"
+    "bookCta": "Randevu al",
+    "inquiryTitle": "Fiyat sor",
+    "aboutProduct": "Ürün",
+    "name": "Ad soyad",
+    "emailField": "E-posta",
+    "phone": "Telefon",
+    "message": "Mesaj",
+    "submit": "Gönder",
+    "success": "Teşekkürler — kısa sürede yanıtlarız.",
+    "error": "Gönderilemedi. Tekrar deneyin."
   },
   "appointments": {
     "title": "Randevu al",
@@ -176,6 +186,8 @@
     "customers": "Müşteriler",
     "appointments": "Randevular",
     "tickets": "Talepler",
+    "inquiries": "Talepler (lead)",
+    "coupons": "Kuponlar",
     "settings": "Ayarlar",
     "revenue": "Ödenen hacim",
     "addProduct": "Ürün ekle",
@@ -196,7 +208,16 @@
     "logoUrl": "Logo URL",
     "heroImageUrl": "Hero görsel URL",
     "saveSettings": "Ayarları kaydet",
-    "settingsSaved": "Kaydedildi"
+    "settingsSaved": "Kaydedildi",
+    "couponCode": "Kod",
+    "percentOff": "Yüzde indirim",
+    "amountOff": "Tutar indirim",
+    "currency": "Para birimi (ops.)",
+    "active": "Aktif",
+    "createCoupon": "Kupon oluştur",
+    "couponCreated": "Kupon oluşturuldu",
+    "deactivate": "Pasifleştir",
+    "activate": "Aktifleştir"
   },
   "footer": {
     "rights": "Tüm hakları saklıdır.",
