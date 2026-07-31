@@ -13,7 +13,15 @@ Languages: **English · O‘zbek · Russian · Turkish**
 - Payments: Stripe (global) · Payme / Click (Uzbekistan) · Namangan showroom pay
 - Local DB default: SQLite (`file:./dev.db`) — switch to PostgreSQL for production
 
+## Deployed (Railway)
+
+- Web: https://web-production-e5029.up.railway.app/en
+- API: https://api-production-60ae.up.railway.app/api/health
+- GitHub: https://github.com/loopcstrategies-star/mg-jewelry (private)
+- Database: Railway PostgreSQL (local `.env` uses `DATABASE_PUBLIC_URL`)
+
 ## Quick start
+
 
 ```bash
 npm install
