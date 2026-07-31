@@ -15,10 +15,7 @@
     "skipLibCheck": true,
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "paths": {
-      "@mg/shared": ["../../packages/shared/src/index.ts"]
-    }
+    "moduleResolution": "node"
   },
   "include": ["src"]
 }
