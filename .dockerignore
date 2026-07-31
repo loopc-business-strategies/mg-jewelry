@@ -1,11 +1,7 @@
 node_modules
-.next
+**/.next
 .git
 .env
 .env.*
 *.db
-*.md
-apps/web/src
-apps/web/public
-apps/web/messages
-apps/web/.next
+*.db-journal
