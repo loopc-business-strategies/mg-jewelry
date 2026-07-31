@@ -1,0 +1,106 @@
+{
+  "brand": "MG Jewelry",
+  "tagline": "Modern Gold Jewelry",
+  "nav": {
+    "home": "Home",
+    "collections": "Collections",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "account": "Account",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Modern Gold Jewelry",
+    "subtitle": "Crafted in Namangan. Worn worldwide.",
+    "ctaShop": "Explore collection",
+    "ctaVisit": "Visit Namangan showroom"
+  },
+  "home": {
+    "featured": "Featured collections",
+    "bestsellers": "Best sellers",
+    "newArrivals": "New arrivals",
+    "showroomTitle": "Namangan showroom",
+    "showroomText": "Experience the pieces in person at our atelier in Namangan, Uzbekistan — or shop globally online.",
+    "newsletter": "Private previews & atelier notes",
+    "newsletterCta": "Subscribe"
+  },
+  "shop": {
+    "title": "Shop",
+    "filters": "Filters",
+    "sort": "Sort",
+    "all": "All",
+    "empty": "No pieces found."
+  },
+  "product": {
+    "addToCart": "Add to cart",
+    "wishlist": "Wishlist",
+    "weight": "Weight",
+    "purity": "Purity",
+    "making": "Making charges",
+    "availability": "Availability",
+    "inStock": "In stock",
+    "related": "You may also like",
+    "specs": "Specifications"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
+    "continue": "Continue shopping"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "fulfillment": "Fulfillment",
+    "pickup": "Namangan showroom pickup",
+    "local": "Local delivery (Uzbekistan)",
+    "intl": "International (shipping quote)",
+    "payment": "Payment",
+    "stripe": "Card (Stripe — worldwide)",
+    "payme": "Payme (Uzbekistan)",
+    "click": "Click (Uzbekistan)",
+    "showroom": "Pay at showroom",
+    "place": "Place order",
+    "success": "Thank you — your order is confirmed.",
+    "cancel": "Payment cancelled."
+  },
+  "about": {
+    "title": "About MG Jewelry",
+    "body": "Modern Gold Jewelry is a luxury atelier based in Namangan, Uzbekistan. We craft gold, diamond, and bridal pieces for clients across the world — blending Central Asian heritage with contemporary form."
+  },
+  "contact": {
+    "title": "Contact",
+    "showroom": "Showroom",
+    "city": "Namangan, Uzbekistan",
+    "telegram": "Telegram",
+    "email": "Email"
+  },
+  "auth": {
+    "login": "Sign in",
+    "register": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full name",
+    "submitLogin": "Sign in",
+    "submitRegister": "Register"
+  },
+  "account": {
+    "title": "My account",
+    "orders": "Orders",
+    "wishlist": "Wishlist",
+    "logout": "Sign out"
+  },
+  "admin": {
+    "title": "Admin",
+    "products": "Products",
+    "orders": "Orders",
+    "customers": "Customers",
+    "revenue": "Paid volume"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "showroom": "Showroom — Namangan, Uzbekistan"
+  }
+}

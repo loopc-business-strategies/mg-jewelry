@@ -1,0 +1,106 @@
+{
+  "brand": "MG Jewelry",
+  "tagline": "Modern Gold Jewelry",
+  "nav": {
+    "home": "Bosh sahifa",
+    "collections": "Kolleksiyalar",
+    "shop": "Do‘kon",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa",
+    "cart": "Savat",
+    "account": "Kabinet",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Modern Gold Jewelry",
+    "subtitle": "Namanganda yaratilgan. Dunyo bo‘ylab taqiladi.",
+    "ctaShop": "Kolleksiyani ko‘rish",
+    "ctaVisit": "Namangan showroomiga tashrif"
+  },
+  "home": {
+    "featured": "Tanlangan kolleksiyalar",
+    "bestsellers": "Eng ko‘p sotilganlar",
+    "newArrivals": "Yangi kelganlar",
+    "showroomTitle": "Namangan showroom",
+    "showroomText": "Buyumlarni Namangan atelyemizda jonli ko‘ring yoki onlayn buyurtma qiling.",
+    "newsletter": "Maxsus yangiliklar",
+    "newsletterCta": "Obuna bo‘lish"
+  },
+  "shop": {
+    "title": "Do‘kon",
+    "filters": "Filtrlar",
+    "sort": "Saralash",
+    "all": "Hammasi",
+    "empty": "Mahsulot topilmadi."
+  },
+  "product": {
+    "addToCart": "Savatga qo‘shish",
+    "wishlist": "Sevimlilar",
+    "weight": "Og‘irlik",
+    "purity": "Probasi",
+    "making": "Ishlov haqi",
+    "availability": "Mavjudlik",
+    "inStock": "Mavjud",
+    "related": "O‘xshash mahsulotlar",
+    "specs": "Xususiyatlar"
+  },
+  "cart": {
+    "title": "Savat",
+    "empty": "Savat bo‘sh.",
+    "checkout": "To‘lov",
+    "subtotal": "Jami",
+    "continue": "Xaridni davom ettirish"
+  },
+  "checkout": {
+    "title": "To‘lov",
+    "fulfillment": "Yetkazib berish",
+    "pickup": "Namangan showroomdan olish",
+    "local": "Mahalliy yetkazib berish (O‘zbekiston)",
+    "intl": "Xalqaro (yetkazib berish narxi so‘raladi)",
+    "payment": "To‘lov usuli",
+    "stripe": "Karta (Stripe — dunyo)",
+    "payme": "Payme (O‘zbekiston)",
+    "click": "Click (O‘zbekiston)",
+    "showroom": "Showroomda to‘lash",
+    "place": "Buyurtma berish",
+    "success": "Rahmat — buyurtmangiz qabul qilindi.",
+    "cancel": "To‘lov bekor qilindi."
+  },
+  "about": {
+    "title": "MG Jewelry haqida",
+    "body": "Modern Gold Jewelry — Namangan (O‘zbekiston)da joylashgan hashamatli atelie. Biz oltin, olmos va kelinlik bezaklarini dunyo mijozlari uchun yaratamiz."
+  },
+  "contact": {
+    "title": "Aloqa",
+    "showroom": "Showroom",
+    "city": "Namangan, O‘zbekiston",
+    "telegram": "Telegram",
+    "email": "Email"
+  },
+  "auth": {
+    "login": "Kirish",
+    "register": "Ro‘yxatdan o‘tish",
+    "email": "Email",
+    "password": "Parol",
+    "name": "To‘liq ism",
+    "submitLogin": "Kirish",
+    "submitRegister": "Ro‘yxatdan o‘tish"
+  },
+  "account": {
+    "title": "Kabinetim",
+    "orders": "Buyurtmalar",
+    "wishlist": "Sevimlilar",
+    "logout": "Chiqish"
+  },
+  "admin": {
+    "title": "Admin",
+    "products": "Mahsulotlar",
+    "orders": "Buyurtmalar",
+    "customers": "Mijozlar",
+    "revenue": "To‘langan hajm"
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan.",
+    "showroom": "Showroom — Namangan, O‘zbekiston"
+  }
+}

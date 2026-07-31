@@ -1,0 +1,107 @@
+{
+  "brand": "MG Jewelry",
+  "tagline": "Modern Gold Jewelry",
+  "nav": {
+    "home": "Ana sayfa",
+    "collections": "Koleksiyonlar",
+    "shop": "Mağaza",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "cart": "Sepet",
+    "account": "Hesap",
+    "admin": "Yönetim"
+  },
+  "hero": {
+    "title": "Modern Gold Jewelry",
+    "subtitle": "Namangan'da üretildi. Dünyada takılır.",
+    "ctaShop": "Koleksiyonu keşfet",
+    "ctaVisit": "Namangan showroom",
+    "ctaVisitFull": "Namangan showroom'u ziyaret et"
+  },
+  "home": {
+    "featured": "Öne çıkan koleksiyonlar",
+    "bestsellers": "Çok satanlar",
+    "newArrivals": "Yeni gelenler",
+    "showroomTitle": "Namangan showroom",
+    "showroomText": "Parçaları Namangan atölyemizde deneyin veya dünyanın her yerinden online sipariş verin.",
+    "newsletter": "Özel önizlemeler ve atölye notları",
+    "newsletterCta": "Abone ol"
+  },
+  "shop": {
+    "title": "Mağaza",
+    "filters": "Filtreler",
+    "sort": "Sırala",
+    "all": "Tümü",
+    "empty": "Ürün bulunamadı."
+  },
+  "product": {
+    "addToCart": "Sepete ekle",
+    "wishlist": "Favoriler",
+    "weight": "Ağırlık",
+    "purity": "Ayar",
+    "making": "İşçilik",
+    "availability": "Stok",
+    "inStock": "Stokta",
+    "related": "Beğenebilecekleriniz",
+    "specs": "Özellikler"
+  },
+  "cart": {
+    "title": "Sepetiniz",
+    "empty": "Sepetiniz boş.",
+    "checkout": "Ödeme",
+    "subtotal": "Ara toplam",
+    "continue": "Alışverişe devam"
+  },
+  "checkout": {
+    "title": "Ödeme",
+    "fulfillment": "Teslimat",
+    "pickup": "Namangan showroom'dan teslim",
+    "local": "Yerel teslimat (Özbekistan)",
+    "intl": "Uluslararası (kargo teklifi)",
+    "payment": "Ödeme",
+    "stripe": "Kart (Stripe — dünya)",
+    "payme": "Payme (Özbekistan)",
+    "click": "Click (Özbekistan)",
+    "showroom": "Showroom'da öde",
+    "place": "Siparişi ver",
+    "success": "Teşekkürler — siparişiniz onaylandı.",
+    "cancel": "Ödeme iptal edildi."
+  },
+  "about": {
+    "title": "MG Jewelry hakkında",
+    "body": "Modern Gold Jewelry, Namangan / Özbekistan merkezli bir lüks atölyedir. Altın, elmas ve gelinlik parçalarını dünya çapındaki müşteriler için üretiriz."
+  },
+  "contact": {
+    "title": "İletişim",
+    "showroom": "Showroom",
+    "city": "Namangan, Özbekistan",
+    "telegram": "Telegram",
+    "email": "E-posta"
+  },
+  "auth": {
+    "login": "Giriş",
+    "register": "Kayıt ol",
+    "email": "E-posta",
+    "password": "Şifre",
+    "name": "Ad soyad",
+    "submitLogin": "Giriş yap",
+    "submitRegister": "Kayıt ol"
+  },
+  "account": {
+    "title": "Hesabım",
+    "orders": "Siparişler",
+    "wishlist": "Favoriler",
+    "logout": "Çıkış"
+  },
+  "admin": {
+    "title": "Yönetim",
+    "products": "Ürünler",
+    "orders": "Siparişler",
+    "customers": "Müşteriler",
+    "revenue": "Ödenen hacim"
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır.",
+    "showroom": "Showroom — Namangan, Özbekistan"
+  }
+}

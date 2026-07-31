@@ -1,0 +1,106 @@
+{
+  "brand": "MG Jewelry",
+  "tagline": "Modern Gold Jewelry",
+  "nav": {
+    "home": "Главная",
+    "collections": "Коллекции",
+    "shop": "Магазин",
+    "about": "О нас",
+    "contact": "Контакты",
+    "cart": "Корзина",
+    "account": "Кабинет",
+    "admin": "Админ"
+  },
+  "hero": {
+    "title": "Modern Gold Jewelry",
+    "subtitle": "Создано в Намангане. Носят по всему миру.",
+    "ctaShop": "Смотреть коллекцию",
+    "ctaVisit": "Шоурум в Намангане"
+  },
+  "home": {
+    "featured": "Избранные коллекции",
+    "bestsellers": "Бестселлеры",
+    "newArrivals": "Новинки",
+    "showroomTitle": "Шоурум в Намангане",
+    "showroomText": "Примерите изделия в нашем ателье в Намангане или оформите заказ онлайн из любой точки мира.",
+    "newsletter": "Закрытые превью и новости ателье",
+    "newsletterCta": "Подписаться"
+  },
+  "shop": {
+    "title": "Магазин",
+    "filters": "Фильтры",
+    "sort": "Сортировка",
+    "all": "Все",
+    "empty": "Изделия не найдены."
+  },
+  "product": {
+    "addToCart": "В корзину",
+    "wishlist": "Избранное",
+    "weight": "Вес",
+    "purity": "Проба",
+    "making": "Работа",
+    "availability": "Наличие",
+    "inStock": "В наличии",
+    "related": "Вам также понравится",
+    "specs": "Характеристики"
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста.",
+    "checkout": "Оформить",
+    "subtotal": "Итого",
+    "continue": "Продолжить покупки"
+  },
+  "checkout": {
+    "title": "Оформление",
+    "fulfillment": "Получение",
+    "pickup": "Самовывоз — шоурум Наманган",
+    "local": "Доставка по Узбекистану",
+    "intl": "Международная (запрос стоимости)",
+    "payment": "Оплата",
+    "stripe": "Карта (Stripe — мир)",
+    "payme": "Payme (Узбекистан)",
+    "click": "Click (Узбекистан)",
+    "showroom": "Оплата в шоуруме",
+    "place": "Оформить заказ",
+    "success": "Спасибо — заказ подтверждён.",
+    "cancel": "Оплата отменена."
+  },
+  "about": {
+    "title": "О MG Jewelry",
+    "body": "Modern Gold Jewelry — люксовое ателье в Намангане, Узбекистан. Мы создаём золотые, бриллиантовые и свадебные изделия для клиентов по всему миру."
+  },
+  "contact": {
+    "title": "Контакты",
+    "showroom": "Шоурум",
+    "city": "Наманган, Узбекистан",
+    "telegram": "Telegram",
+    "email": "Email"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Имя",
+    "submitLogin": "Войти",
+    "submitRegister": "Зарегистрироваться"
+  },
+  "account": {
+    "title": "Мой кабинет",
+    "orders": "Заказы",
+    "wishlist": "Избранное",
+    "logout": "Выйти"
+  },
+  "admin": {
+    "title": "Админ",
+    "products": "Товары",
+    "orders": "Заказы",
+    "customers": "Клиенты",
+    "revenue": "Оплаченный объём"
+  },
+  "footer": {
+    "rights": "Все права защищены.",
+    "showroom": "Шоурум — Наманган, Узбекистан"
+  }
+}

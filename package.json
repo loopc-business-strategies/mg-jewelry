@@ -1,0 +1,22 @@
+{
+  "name": "mg-jewelry",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:web": "npm run dev -w @mg/web",
+    "dev:api": "npm run start:dev -w @mg/api",
+    "build": "npm run build -w @mg/shared && npm run build --workspaces --if-present",
+    "postinstall": "npm run build -w @mg/shared",
+    "lint": "npm run lint --workspaces --if-present",
+    "db:generate": "npm run prisma:generate -w @mg/api",
+    "db:migrate": "npm run prisma:migrate -w @mg/api",
+    "db:seed": "npm run prisma:seed -w @mg/api"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

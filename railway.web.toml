@@ -1,0 +1,9 @@
+# Railway config for Web service (set railwayConfigFile to this path on the web service)
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npm run build -w @mg/shared && npm run build -w @mg/web"
+
+[deploy]
+startCommand = "npm run start -w @mg/web"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

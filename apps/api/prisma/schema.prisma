@@ -1,0 +1,321 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  MANAGER
+  SALES_EXECUTIVE
+  CUSTOMER
+}
+
+enum Locale {
+  en
+  uz
+  ru
+  tr
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  AWAITING_PICKUP
+  PENDING_SHIPPING_QUOTE
+  PROCESSING
+  SHIPPED
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  STRIPE
+  PAYME
+  CLICK
+  SHOWROOM
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum FulfillmentType {
+  SHOWROOM_PICKUP
+  LOCAL_DELIVERY
+  INTERNATIONAL_QUOTE
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  passwordHash String?
+  name         String
+  phone        String?
+  role         Role           @default(CUSTOMER)
+  image        String?
+  locale       Locale         @default(en)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  addresses    Address[]
+  cart         Cart?
+  wishlist     WishlistItem[]
+  orders       Order[]
+  reviews      Review[]
+  auditLogs    AuditLog[]     @relation("AuditActor")
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label      String   @default("Home")
+  fullName   String
+  phone      String
+  line1      String
+  line2      String?
+  city       String
+  region     String?
+  country    String
+  postalCode String?
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  orders     Order[]
+}
+
+model Category {
+  id        String               @id @default(cuid())
+  slug      String               @unique
+  sortOrder Int                  @default(0)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  translations CategoryTranslation[]
+  products  Product[]
+}
+
+model CategoryTranslation {
+  id          String   @id @default(cuid())
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  locale      Locale
+  name        String
+  description String?
+
+  @@unique([categoryId, locale])
+}
+
+model Collection {
+  id        String                   @id @default(cuid())
+  slug      String                   @unique
+  featured  Boolean                  @default(false)
+  sortOrder Int                      @default(0)
+  imageUrl  String?
+  createdAt DateTime                 @default(now())
+  updatedAt DateTime                 @updatedAt
+  translations CollectionTranslation[]
+  products  Product[]
+}
+
+model CollectionTranslation {
+  id           String     @id @default(cuid())
+  collectionId String
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  locale       Locale
+  name         String
+  description  String?
+
+  @@unique([collectionId, locale])
+}
+
+model Product {
+  id              String              @id @default(cuid())
+  slug            String              @unique
+  sku             String              @unique
+  metal           String
+  purity          String?
+  weightGrams     Decimal             @db.Decimal(10, 3)
+  makingChargePct Decimal             @default(0) @db.Decimal(5, 2)
+  priceUsdCents   Int
+  /// Whole UZS soms (not tiyin).
+  priceUzs        Int
+  categoryId      String?
+  category        Category?           @relation(fields: [categoryId], references: [id])
+  collectionId    String?
+  collection      Collection?         @relation(fields: [collectionId], references: [id])
+  isFeatured      Boolean             @default(false)
+  isBestSeller    Boolean             @default(false)
+  isNewArrival    Boolean             @default(false)
+  shipsInternational Boolean          @default(true)
+  published       Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  translations    ProductTranslation[]
+  media           ProductMedia[]
+  inventory       InventoryItem?
+  cartItems       CartItem[]
+  wishlistItems   WishlistItem[]
+  orderItems      OrderItem[]
+  reviews         Review[]
+}
+
+model ProductTranslation {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  locale      Locale
+  name        String
+  description String
+  materialNote String?
+
+  @@unique([productId, locale])
+}
+
+model ProductMedia {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  type      String  @default("image")
+  alt       String?
+  sortOrder Int     @default(0)
+  isPrimary Boolean @default(false)
+}
+
+model InventoryItem {
+  id        String  @id @default(cuid())
+  productId String  @unique
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int     @default(0)
+  reserved  Int     @default(0)
+  lowStockAt Int    @default(2)
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime   @updatedAt
+  createdAt DateTime   @default(now())
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     @default(1)
+
+  @@unique([cartId, productId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id               String          @id @default(cuid())
+  orderNumber      String          @unique
+  userId           String
+  user             User            @relation(fields: [userId], references: [id])
+  status           OrderStatus     @default(PENDING_PAYMENT)
+  fulfillmentType  FulfillmentType @default(SHOWROOM_PICKUP)
+  currency         String          @default("USD")
+  subtotalMinor    Int
+  shippingMinor    Int             @default(0)
+  totalMinor       Int
+  shippingAddressId String?
+  shippingAddress  Address?        @relation(fields: [shippingAddressId], references: [id])
+  notes            String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  items            OrderItem[]
+  payments         Payment[]
+}
+
+model OrderItem {
+  id              String  @id @default(cuid())
+  orderId         String
+  order           Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product @relation(fields: [productId], references: [id])
+  productName     String
+  quantity        Int
+  unitPriceMinor  Int
+  lineTotalMinor  Int
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  orderId         String
+  order           Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  method          PaymentMethod
+  status          PaymentStatus @default(PENDING)
+  amountMinor     Int
+  currency        String
+  providerRef     String?
+  rawPayload      Json?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating    Int
+  title     String?
+  body      String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@unique([productId, userId])
+}
+
+model Coupon {
+  id             String    @id @default(cuid())
+  code           String    @unique
+  percentOff     Int?
+  amountOffMinor Int?
+  currency       String?
+  active         Boolean   @default(true)
+  startsAt       DateTime?
+  endsAt         DateTime?
+  createdAt      DateTime  @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation("AuditActor", fields: [actorId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  meta      Json?
+  createdAt DateTime @default(now())
+}
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+}
