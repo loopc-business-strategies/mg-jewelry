@@ -38,7 +38,7 @@ export default function CheckoutPage() {
             : "click";
 
       const pay = await api.pay(method, order.id);
-      if ("url" in pay && pay.url) {
+      if (pay.url) {
         if (pay.mode === "mock" || !process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
           await api.pay("mock", order.id);
           router.push(`/${locale}/checkout/success?orderId=${order.id}&mock=1`);

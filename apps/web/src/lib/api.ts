@@ -94,9 +94,13 @@ export const api = {
       method: "POST",
       body: JSON.stringify(body),
     }),
-  pay: (method: "stripe" | "payme" | "click" | "mock", orderId: string) => {
+  pay: async (
+    method: "stripe" | "payme" | "click" | "mock",
+    orderId: string,
+  ): Promise<{ url?: string; mode?: string }> => {
     if (method === "mock") {
-      return request(`/payments/mock/confirm/${orderId}`, { method: "POST" });
+      await request(`/payments/mock/confirm/${orderId}`, { method: "POST" });
+      return { mode: "mock" };
     }
     return request<{ url: string; mode: string }>(`/payments/${method}/${orderId}`, {
       method: "POST",
