@@ -74,7 +74,7 @@
   "contact": {
     "title": "Контакты",
     "showroom": "Шоурум",
-    "city": "Наманган, Узбекистан",
+    "city": "242, Girvonbulok Street · Наманган",
     "telegram": "Telegram",
     "email": "Email",
     "bookCta": "Записаться на визит"
@@ -142,6 +142,6 @@
   },
   "footer": {
     "rights": "Все права защищены.",
-    "showroom": "Шоурум — Наманган, Узбекистан"
+    "showroom": "Шоурум — 242, Girvonbulok Street · Наманган"
   }
 }

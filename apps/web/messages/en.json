@@ -74,7 +74,7 @@
   "contact": {
     "title": "Contact",
     "showroom": "Showroom",
-    "city": "Namangan, Uzbekistan",
+    "city": "242, Girvonbulok Street · Namangan",
     "telegram": "Telegram",
     "email": "Email",
     "bookCta": "Book appointment"
@@ -142,6 +142,6 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "showroom": "Showroom — Namangan, Uzbekistan"
+    "showroom": "Showroom — 242, Girvonbulok Street · Namangan"
   }
 }

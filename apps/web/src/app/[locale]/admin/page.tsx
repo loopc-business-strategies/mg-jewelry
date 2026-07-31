@@ -112,10 +112,14 @@ export default function AdminPage() {
       await api.adminSaveSetting("showroom", {
         ...showroom,
         brand: String(fd.get("brand") || "MG Jewelry"),
-        fullName: String(fd.get("fullName") || "Modern Gold Jewelry"),
-        address: String(fd.get("address") || ""),
-        city: String(fd.get("city") || "Namangan"),
-        country: String(fd.get("country") || "Uzbekistan"),
+        fullName: String(
+          fd.get("fullName") || "Modern Gold Jewelry Manufacturing",
+        ),
+        address: String(fd.get("address") || "242, Girvonbulok Street"),
+        district: String(fd.get("district") || "Davlatabad District"),
+        city: String(fd.get("city") || "Namangan City"),
+        region: String(fd.get("region") || "Namangan Region"),
+        country: String(fd.get("country") || "Republic of Uzbekistan"),
         telegram: String(fd.get("telegram") || ""),
         instagram: String(fd.get("instagram") || ""),
         email: String(fd.get("email") || ""),
@@ -371,10 +375,28 @@ export default function AdminPage() {
           {(
             [
               ["brand", "Brand", showroom.brand || "MG Jewelry"],
-              ["fullName", "Full name", showroom.fullName || "Modern Gold Jewelry"],
-              ["address", t("address"), showroom.address || ""],
-              ["city", "City", showroom.city || "Namangan"],
-              ["country", "Country", showroom.country || "Uzbekistan"],
+              [
+                "fullName",
+                "Full name",
+                showroom.fullName || "Modern Gold Jewelry Manufacturing",
+              ],
+              [
+                "address",
+                t("address"),
+                showroom.address || "242, Girvonbulok Street",
+              ],
+              [
+                "district",
+                "District",
+                showroom.district || "Davlatabad District",
+              ],
+              ["city", "City", showroom.city || "Namangan City"],
+              ["region", "Region", showroom.region || "Namangan Region"],
+              [
+                "country",
+                "Country",
+                showroom.country || "Republic of Uzbekistan",
+              ],
               ["telegram", "Telegram", showroom.telegram || ""],
               ["instagram", "Instagram", showroom.instagram || ""],
               ["email", "Email", showroom.email || ""],

@@ -1,6 +1,19 @@
 const { PrismaClient } = require("@prisma/client");
 const p = new PrismaClient();
 
+const SHOWROOM = {
+  brand: "MG Jewelry",
+  fullName: "Modern Gold Jewelry Manufacturing",
+  address: "242, Girvonbulok Street",
+  district: "Davlatabad District",
+  city: "Namangan City",
+  region: "Namangan Region",
+  country: "Republic of Uzbekistan",
+  telegram: "@mgjewelry",
+  instagram: "@mgjewelry",
+  email: "hello@mgjewelry.uz",
+};
+
 async function main() {
   await p.siteSetting.upsert({
     where: { key: "brand" },
@@ -24,26 +37,22 @@ async function main() {
     },
     update: {},
   });
-  const show = await p.siteSetting.findUnique({ where: { key: "showroom" } });
-  if (show) {
-    const v = /** @type {Record<string, unknown>} */ (show.value || {});
-    await p.siteSetting.update({
-      where: { key: "showroom" },
-      data: {
-        value: {
-          brand: "MG Jewelry",
-          fullName: "Modern Gold Jewelry",
-          city: "Namangan",
-          country: "Uzbekistan",
-          address: "Namangan, Uzbekistan",
-          telegram: "@mgjewelry",
-          instagram: "@mgjewelry",
-          email: "hello@mgjewelry.uz",
-          ...v,
-        },
+
+  const existing = await p.siteSetting.findUnique({ where: { key: "showroom" } });
+  const prev = /** @type {Record<string, unknown>} */ (existing?.value || {});
+  await p.siteSetting.upsert({
+    where: { key: "showroom" },
+    create: { key: "showroom", value: SHOWROOM },
+    update: {
+      value: {
+        ...prev,
+        ...SHOWROOM,
+        telegram: prev.telegram || SHOWROOM.telegram,
+        instagram: prev.instagram || SHOWROOM.instagram,
+        email: prev.email || SHOWROOM.email,
       },
-    });
-  }
+    },
+  });
   console.log("settings ok");
 }
 

@@ -76,9 +76,11 @@ export function formatMoney(
 }
 
 export const SHOWROOM = {
-  city: "Namangan",
-  country: "Uzbekistan",
-  address: "Namangan, Uzbekistan",
   brand: "MG Jewelry",
-  fullName: "Modern Gold Jewelry",
+  fullName: "Modern Gold Jewelry Manufacturing",
+  address: "242, Girvonbulok Street",
+  district: "Davlatabad District",
+  city: "Namangan City",
+  region: "Namangan Region",
+  country: "Republic of Uzbekistan",
 } as const;

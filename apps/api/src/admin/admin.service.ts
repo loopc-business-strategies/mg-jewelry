@@ -63,8 +63,10 @@ export class AdminService {
       revenueMinor: revenue._sum.totalMinor || 0,
       recentOrders,
       showroom: {
-        city: process.env.SHOWROOM_CITY || "Namangan",
-        address: process.env.SHOWROOM_ADDRESS || "Namangan, Uzbekistan",
+        city: process.env.SHOWROOM_CITY || "Namangan City",
+        address:
+          process.env.SHOWROOM_ADDRESS ||
+          "242, Girvonbulok Street, Davlatabad District, Namangan City, Namangan Region, Republic of Uzbekistan",
       },
     };
   }
