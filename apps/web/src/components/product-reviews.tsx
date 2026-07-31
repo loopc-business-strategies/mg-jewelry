@@ -40,12 +40,12 @@ export function ProductReviews({
       });
       setReviews((prev) => [
         {
-          id: String(review.id),
-          rating: Number(review.rating),
-          title: (review.title as string | null) || null,
-          body: String(review.body),
-          user: { name: String((review.user as { name?: string })?.name || "") },
-          createdAt: String(review.createdAt || new Date().toISOString()),
+          id: review.id,
+          rating: review.rating,
+          title: review.title,
+          body: review.body,
+          user: { name: review.user.name },
+          createdAt: review.createdAt,
         },
         ...prev,
       ]);

@@ -192,7 +192,14 @@ export const api = {
     productId: string,
     body: { rating: number; title?: string; body: string },
   ) =>
-    request(`/products/${productId}/reviews`, {
+    request<{
+      id: string;
+      rating: number;
+      title: string | null;
+      body: string;
+      user: { name: string };
+      createdAt: string;
+    }>(`/products/${productId}/reviews`, {
       method: "POST",
       body: JSON.stringify(body),
     }),
