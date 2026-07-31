@@ -7,6 +7,7 @@
     "shop": "Shop",
     "about": "About",
     "contact": "Contact",
+    "book": "Book",
     "cart": "Cart",
     "account": "Account",
     "admin": "Admin"
@@ -15,7 +16,7 @@
     "title": "Modern Gold Jewelry",
     "subtitle": "Crafted in Namangan. Worn worldwide.",
     "ctaShop": "Explore collection",
-    "ctaVisit": "Visit Namangan showroom"
+    "ctaVisit": "Book a visit"
   },
   "home": {
     "featured": "Featured collections",
@@ -75,7 +76,25 @@
     "showroom": "Showroom",
     "city": "Namangan, Uzbekistan",
     "telegram": "Telegram",
-    "email": "Email"
+    "email": "Email",
+    "bookCta": "Book appointment"
+  },
+  "appointments": {
+    "title": "Book an appointment",
+    "subtitle": "Visit our Namangan showroom or join a private video consultation.",
+    "type": "Appointment type",
+    "storeVisit": "Namangan showroom visit",
+    "video": "Video consultation",
+    "name": "Full name",
+    "phone": "Phone",
+    "email": "Email (optional)",
+    "date": "Date",
+    "slot": "Time",
+    "notes": "Notes",
+    "submit": "Request appointment",
+    "success": "Request received — we will confirm shortly.",
+    "error": "Could not book. Please try another slot.",
+    "noSlots": "No slots available"
   },
   "auth": {
     "login": "Sign in",
@@ -94,10 +113,32 @@
   },
   "admin": {
     "title": "Admin",
+    "overview": "Overview",
     "products": "Products",
     "orders": "Orders",
     "customers": "Customers",
-    "revenue": "Paid volume"
+    "appointments": "Appointments",
+    "settings": "Settings",
+    "revenue": "Paid volume",
+    "addProduct": "Add product",
+    "productName": "Name",
+    "metal": "Metal",
+    "purity": "Purity",
+    "weight": "Weight (g)",
+    "quantity": "Stock qty",
+    "imageUrl": "Image URL",
+    "description": "Description",
+    "saveProduct": "Save product",
+    "productCreated": "Product created",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "address": "Showroom address",
+    "logoUrl": "Logo URL",
+    "heroImageUrl": "Hero image URL",
+    "saveSettings": "Save settings",
+    "settingsSaved": "Settings saved"
   },
   "footer": {
     "rights": "All rights reserved.",

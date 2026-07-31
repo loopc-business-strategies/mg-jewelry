@@ -1,17 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { api, formatUsd } from "@/lib/api";
 import { useAuthStore } from "@/lib/auth-store";
+
+type Tab = "overview" | "products" | "orders" | "appointments" | "settings";
 
 export default function AdminPage() {
   const t = useTranslations("admin");
   const locale = useLocale();
   const router = useRouter();
   const { hydrate, user } = useAuthStore();
+  const [tab, setTab] = useState<Tab>("overview");
   const [data, setData] = useState<Record<string, unknown> | null>(null);
+  const [products, setProducts] = useState<Array<Record<string, unknown>>>([]);
+  const [orders, setOrders] = useState<Array<Record<string, unknown>>>([]);
+  const [appointments, setAppointments] = useState<
+    Array<Record<string, unknown>>
+  >([]);
+  const [settings, setSettings] = useState<Record<string, unknown>>({});
+  const [msg, setMsg] = useState("");
+
+  async function refresh() {
+    const [dash, prods, ords, appts, sett] = await Promise.all([
+      api.adminDashboard(),
+      api.adminProducts(),
+      api.adminOrders(),
+      api.adminAppointments(),
+      api.adminSettings(),
+    ]);
+    setData(dash);
+    setProducts(prods);
+    setOrders(ords);
+    setAppointments(appts);
+    setSettings(sett);
+  }
 
   useEffect(() => {
     hydrate();
@@ -21,41 +46,356 @@ export default function AdminPage() {
       router.push(`/${locale}/auth`);
       return;
     }
-    api.adminDashboard().then(setData).catch(() => setData(null));
+    refresh().catch(() => setData(null));
   }, [hydrate, locale, router, user]);
 
   const recent = (data?.recentOrders as Array<Record<string, unknown>>) || [];
+  const showroom = (settings.showroom as Record<string, string>) || {};
+  const brand = (settings.brand as Record<string, string>) || {};
+
+  async function onCreateProduct(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get("name") || "");
+    const slug = String(fd.get("slug") || name)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    try {
+      await api.adminCreateProduct({
+        slug,
+        sku: String(fd.get("sku") || ""),
+        metal: String(fd.get("metal") || "Gold"),
+        purity: String(fd.get("purity") || "585"),
+        weightGrams: Number(fd.get("weightGrams") || 1),
+        priceUsdCents: Math.round(Number(fd.get("priceUsd") || 0) * 100),
+        priceUzs: Number(fd.get("priceUzs") || 0),
+        quantity: Number(fd.get("quantity") || 1),
+        imageUrl: String(fd.get("imageUrl") || "") || undefined,
+        published: true,
+        isNewArrival: true,
+        translations: [
+          {
+            locale: "en",
+            name,
+            description: String(fd.get("description") || name),
+          },
+          {
+            locale: "uz",
+            name,
+            description: String(fd.get("description") || name),
+          },
+          {
+            locale: "ru",
+            name,
+            description: String(fd.get("description") || name),
+          },
+          {
+            locale: "tr",
+            name,
+            description: String(fd.get("description") || name),
+          },
+        ],
+      });
+      setMsg(t("productCreated"));
+      e.currentTarget.reset();
+      await refresh();
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
+  async function onSaveBrand(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    try {
+      await api.adminSaveSetting("showroom", {
+        ...showroom,
+        brand: String(fd.get("brand") || "MG Jewelry"),
+        fullName: String(fd.get("fullName") || "Modern Gold Jewelry"),
+        address: String(fd.get("address") || ""),
+        city: String(fd.get("city") || "Namangan"),
+        country: String(fd.get("country") || "Uzbekistan"),
+        telegram: String(fd.get("telegram") || ""),
+        instagram: String(fd.get("instagram") || ""),
+        email: String(fd.get("email") || ""),
+      });
+      await api.adminSaveSetting("brand", {
+        ...brand,
+        logoUrl: String(fd.get("logoUrl") || ""),
+        heroImageUrl: String(fd.get("heroImageUrl") || ""),
+      });
+      setMsg(t("settingsSaved"));
+      await refresh();
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
+  const tabs: Array<[Tab, string]> = [
+    ["overview", t("overview")],
+    ["products", t("products")],
+    ["orders", t("orders")],
+    ["appointments", t("appointments")],
+    ["settings", t("settings")],
+  ];
 
   return (
     <div className="mx-auto max-w-6xl px-5 pb-20 pt-28 md:px-8">
       <h1 className="font-display text-5xl">{t("title")}</h1>
       <p className="mt-2 text-sm text-ink/55">Namangan showroom operations</p>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [t("products"), data?.products],
-          [t("orders"), data?.orders],
-          [t("customers"), data?.customers],
-          [t("revenue"), formatUsd(Number(data?.revenueMinor || 0), locale)],
-        ].map(([label, value]) => (
-          <div key={String(label)} className="border border-black/10 bg-white/40 px-5 py-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-ink/45">{String(label)}</p>
-            <p className="mt-3 font-display text-3xl">{String(value ?? "—")}</p>
-          </div>
+      <div className="mt-8 flex flex-wrap gap-2 text-sm">
+        {tabs.map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            onClick={() => setTab(id)}
+            className={`border px-3 py-1.5 ${
+              tab === id ? "border-gold" : "border-black/15 text-ink/60"
+            }`}
+          >
+            {label}
+          </button>
         ))}
       </div>
 
-      <h2 className="mt-12 text-sm uppercase tracking-[0.25em] text-ink/50">
-        {t("orders")}
-      </h2>
-      <div className="mt-4 space-y-3">
-        {recent.map((order) => (
-          <div key={String(order.id)} className="flex justify-between border border-black/10 px-4 py-3 text-sm">
-            <span>{String(order.orderNumber)}</span>
-            <span className="text-ink/55">{String(order.status)}</span>
+      {msg ? <p className="mt-4 text-sm text-ink/65">{msg}</p> : null}
+
+      {tab === "overview" ? (
+        <>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              [t("products"), data?.products],
+              [t("orders"), data?.orders],
+              [t("customers"), data?.customers],
+              [t("appointments"), data?.pendingAppointments],
+              [t("revenue"), formatUsd(Number(data?.revenueMinor || 0), locale)],
+            ].map(([label, value]) => (
+              <div
+                key={String(label)}
+                className="border border-black/10 bg-white/40 px-5 py-6"
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-ink/45">
+                  {String(label)}
+                </p>
+                <p className="mt-3 font-display text-3xl">
+                  {String(value ?? "—")}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+          <h2 className="mt-12 text-sm uppercase tracking-[0.25em] text-ink/50">
+            {t("orders")}
+          </h2>
+          <div className="mt-4 space-y-3">
+            {recent.map((order) => (
+              <div
+                key={String(order.id)}
+                className="flex justify-between border border-black/10 px-4 py-3 text-sm"
+              >
+                <span>{String(order.orderNumber)}</span>
+                <span className="text-ink/55">{String(order.status)}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : null}
+
+      {tab === "products" ? (
+        <div className="mt-10 grid gap-10 lg:grid-cols-2">
+          <form onSubmit={onCreateProduct} className="space-y-3">
+            <h2 className="font-display text-3xl">{t("addProduct")}</h2>
+            {(
+              [
+                ["name", t("productName")],
+                ["sku", "SKU"],
+                ["metal", t("metal")],
+                ["purity", t("purity")],
+                ["weightGrams", t("weight")],
+                ["priceUsd", "USD"],
+                ["priceUzs", "UZS"],
+                ["quantity", t("quantity")],
+                ["imageUrl", t("imageUrl")],
+              ] as const
+            ).map(([name, label]) => (
+              <label key={name} className="block text-sm">
+                <span className="text-ink/55">{label}</span>
+                <input
+                  name={name}
+                  required={!["imageUrl", "purity"].includes(name)}
+                  className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+                />
+              </label>
+            ))}
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("description")}</span>
+              <textarea
+                name="description"
+                rows={3}
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <button type="submit" className="btn-primary">
+              {t("saveProduct")}
+            </button>
+          </form>
+
+          <div className="space-y-3">
+            <h2 className="font-display text-3xl">{t("products")}</h2>
+            {products.map((p) => {
+              const tr = (p.translations as Array<{ locale: string; name: string }>) || [];
+              const name =
+                tr.find((x) => x.locale === "en")?.name || String(p.sku);
+              return (
+                <div
+                  key={String(p.id)}
+                  className="border border-black/10 px-4 py-3 text-sm"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-medium">{name}</p>
+                      <p className="text-ink/50">
+                        {String(p.sku)} · stock{" "}
+                        {String(
+                          (p.inventory as { quantity?: number } | null)
+                            ?.quantity ?? 0,
+                        )}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn-ghost px-3 py-1 text-xs"
+                      onClick={async () => {
+                        await api.adminUpdateProduct(String(p.id), {
+                          published: !p.published,
+                        });
+                        await refresh();
+                      }}
+                    >
+                      {p.published ? t("unpublish") : t("publish")}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+
+      {tab === "orders" ? (
+        <div className="mt-10 space-y-3">
+          {orders.map((order) => (
+            <div
+              key={String(order.id)}
+              className="flex flex-wrap items-center justify-between gap-3 border border-black/10 px-4 py-3 text-sm"
+            >
+              <div>
+                <p className="font-medium">{String(order.orderNumber)}</p>
+                <p className="text-ink/50">{String(order.status)}</p>
+              </div>
+              <select
+                className="border border-black/15 bg-white/50 px-2 py-1"
+                defaultValue={String(order.status)}
+                onChange={async (e) => {
+                  await api.adminOrderStatus(String(order.id), e.target.value);
+                  await refresh();
+                }}
+              >
+                {[
+                  "PENDING_PAYMENT",
+                  "PAID",
+                  "AWAITING_PICKUP",
+                  "PENDING_SHIPPING_QUOTE",
+                  "PROCESSING",
+                  "SHIPPED",
+                  "COMPLETED",
+                  "CANCELLED",
+                ].map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      {tab === "appointments" ? (
+        <div className="mt-10 space-y-3">
+          {appointments.map((a) => (
+            <div
+              key={String(a.id)}
+              className="flex flex-wrap items-center justify-between gap-3 border border-black/10 px-4 py-3 text-sm"
+            >
+              <div>
+                <p className="font-medium">
+                  {String(a.name)} · {String(a.phone)}
+                </p>
+                <p className="text-ink/50">
+                  {String(a.type)} · {String(a.date).slice(0, 10)} {String(a.slot)} ·{" "}
+                  {String(a.status)}
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  className="btn-ghost px-3 py-1 text-xs"
+                  onClick={async () => {
+                    await api.adminAppointmentStatus(String(a.id), "CONFIRMED");
+                    await refresh();
+                  }}
+                >
+                  {t("confirm")}
+                </button>
+                <button
+                  type="button"
+                  className="btn-ghost px-3 py-1 text-xs"
+                  onClick={async () => {
+                    await api.adminAppointmentStatus(String(a.id), "CANCELLED");
+                    await refresh();
+                  }}
+                >
+                  {t("cancel")}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      {tab === "settings" ? (
+        <form onSubmit={onSaveBrand} className="mt-10 max-w-xl space-y-3">
+          <h2 className="font-display text-3xl">{t("settings")}</h2>
+          {(
+            [
+              ["brand", "Brand", showroom.brand || "MG Jewelry"],
+              ["fullName", "Full name", showroom.fullName || "Modern Gold Jewelry"],
+              ["address", t("address"), showroom.address || ""],
+              ["city", "City", showroom.city || "Namangan"],
+              ["country", "Country", showroom.country || "Uzbekistan"],
+              ["telegram", "Telegram", showroom.telegram || ""],
+              ["instagram", "Instagram", showroom.instagram || ""],
+              ["email", "Email", showroom.email || ""],
+              ["logoUrl", t("logoUrl"), brand.logoUrl || ""],
+              ["heroImageUrl", t("heroImageUrl"), brand.heroImageUrl || ""],
+            ] as const
+          ).map(([name, label, value]) => (
+            <label key={name} className="block text-sm">
+              <span className="text-ink/55">{label}</span>
+              <input
+                name={name}
+                defaultValue={value}
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+          ))}
+          <button type="submit" className="btn-primary">
+            {t("saveSettings")}
+          </button>
+        </form>
+      ) : null}
     </div>
   );
 }

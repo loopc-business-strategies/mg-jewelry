@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export default async function ContactPage({
@@ -33,6 +34,9 @@ export default async function ContactPage({
             </p>
             <p className="mt-2">hello@mgjewelry.uz</p>
           </div>
+          <Link href={`/${locale}/appointments`} className="btn-primary mt-4 inline-flex">
+            {t("bookCta")}
+          </Link>
         </div>
         <div
           className="min-h-[280px] bg-cover bg-center"

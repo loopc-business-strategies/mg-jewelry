@@ -110,6 +110,43 @@ export const api = {
   adminDashboard: () => request<Record<string, unknown>>("/admin/dashboard"),
   adminProducts: () => request<Array<Record<string, unknown>>>("/admin/products"),
   adminOrders: () => request<Array<Record<string, unknown>>>("/admin/orders"),
+  adminCreateProduct: (body: Record<string, unknown>) =>
+    request("/admin/products", { method: "POST", body: JSON.stringify(body) }),
+  adminUpdateProduct: (id: string, body: Record<string, unknown>) =>
+    request(`/admin/products/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
+  adminOrderStatus: (id: string, status: string) =>
+    request(`/admin/orders/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    }),
+  adminInventory: (productId: string, quantity: number) =>
+    request(`/admin/inventory/${productId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ quantity }),
+    }),
+  adminSettings: () => request<Record<string, unknown>>("/admin/settings"),
+  adminSaveSetting: (key: string, value: unknown) =>
+    request(`/admin/settings/${key}`, {
+      method: "PUT",
+      body: JSON.stringify({ value }),
+    }),
+  publicSettings: () => request<Record<string, unknown>>("/settings/public"),
+  appointmentSlots: (date?: string) =>
+    request<string[]>(
+      date ? `/appointments/slots?date=${date}` : "/appointments/slots",
+    ),
+  createAppointment: (body: Record<string, unknown>) =>
+    request("/appointments", { method: "POST", body: JSON.stringify(body) }),
+  adminAppointments: () =>
+    request<Array<Record<string, unknown>>>("/appointments"),
+  adminAppointmentStatus: (id: string, status: string) =>
+    request(`/appointments/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    }),
 };
 
 export function formatUsd(cents: number, locale: string) {

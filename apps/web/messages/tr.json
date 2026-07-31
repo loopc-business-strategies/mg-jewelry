@@ -7,6 +7,7 @@
     "shop": "Mağaza",
     "about": "Hakkımızda",
     "contact": "İletişim",
+    "book": "Randevu",
     "cart": "Sepet",
     "account": "Hesap",
     "admin": "Yönetim"
@@ -15,8 +16,7 @@
     "title": "Modern Gold Jewelry",
     "subtitle": "Namangan'da üretildi. Dünyada takılır.",
     "ctaShop": "Koleksiyonu keşfet",
-    "ctaVisit": "Namangan showroom",
-    "ctaVisitFull": "Namangan showroom'u ziyaret et"
+    "ctaVisit": "Randevu al"
   },
   "home": {
     "featured": "Öne çıkan koleksiyonlar",
@@ -76,7 +76,25 @@
     "showroom": "Showroom",
     "city": "Namangan, Özbekistan",
     "telegram": "Telegram",
-    "email": "E-posta"
+    "email": "E-posta",
+    "bookCta": "Randevu al"
+  },
+  "appointments": {
+    "title": "Randevu al",
+    "subtitle": "Namangan showroom ziyareti veya görüntülü danışmanlık.",
+    "type": "Randevu türü",
+    "storeVisit": "Namangan showroom",
+    "video": "Görüntülü danışmanlık",
+    "name": "Ad soyad",
+    "phone": "Telefon",
+    "email": "E-posta (isteğe bağlı)",
+    "date": "Tarih",
+    "slot": "Saat",
+    "notes": "Not",
+    "submit": "Talep gönder",
+    "success": "Talebiniz alındı — kısa sürede onaylanır.",
+    "error": "Randevu alınamadı. Başka bir saat seçin.",
+    "noSlots": "Uygun saat yok"
   },
   "auth": {
     "login": "Giriş",
@@ -95,10 +113,32 @@
   },
   "admin": {
     "title": "Yönetim",
+    "overview": "Özet",
     "products": "Ürünler",
     "orders": "Siparişler",
     "customers": "Müşteriler",
-    "revenue": "Ödenen hacim"
+    "appointments": "Randevular",
+    "settings": "Ayarlar",
+    "revenue": "Ödenen hacim",
+    "addProduct": "Ürün ekle",
+    "productName": "Ad",
+    "metal": "Metal",
+    "purity": "Ayar",
+    "weight": "Ağırlık (g)",
+    "quantity": "Stok",
+    "imageUrl": "Görsel URL",
+    "description": "Açıklama",
+    "saveProduct": "Kaydet",
+    "productCreated": "Ürün oluşturuldu",
+    "publish": "Yayınla",
+    "unpublish": "Gizle",
+    "confirm": "Onayla",
+    "cancel": "İptal",
+    "address": "Showroom adresi",
+    "logoUrl": "Logo URL",
+    "heroImageUrl": "Hero görsel URL",
+    "saveSettings": "Ayarları kaydet",
+    "settingsSaved": "Kaydedildi"
   },
   "footer": {
     "rights": "Tüm hakları saklıdır.",

@@ -58,7 +58,7 @@ export default async function HomePage({
                 {t("hero.ctaShop")}
               </Link>
               <Link
-                href={`/${locale}/contact`}
+                href={`/${locale}/appointments`}
                 className="btn-ghost border-white/40 text-white hover:border-gold hover:bg-white/5"
               >
                 {t("hero.ctaVisit")}
@@ -130,7 +130,7 @@ export default async function HomePage({
           <div>
             <h2 className="font-display text-4xl md:text-5xl">{t("home.showroomTitle")}</h2>
             <p className="mt-5 text-ink/70">{t("home.showroomText")}</p>
-            <Link href={`/${locale}/contact`} className="btn-primary mt-8">
+            <Link href={`/${locale}/appointments`} className="btn-primary mt-8">
               {t("hero.ctaVisit")}
             </Link>
           </div>

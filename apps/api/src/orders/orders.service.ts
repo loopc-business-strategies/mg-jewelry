@@ -10,10 +10,14 @@ import {
   PaymentStatus,
 } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
+import { NotificationsService } from "../notifications/notifications.service";
 
 @Injectable()
 export class OrdersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notifications: NotificationsService,
+  ) {}
 
   async checkout(
     userId: string,
@@ -118,6 +122,13 @@ export class OrdersService {
 
       await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
       return created;
+    });
+
+    await this.notifications.orderCreated({
+      orderNumber: order.orderNumber,
+      totalMinor: order.totalMinor,
+      currency: order.currency,
+      status: order.status,
     });
 
     return order;

@@ -396,11 +396,27 @@ async function main() {
           country: "Uzbekistan",
           address: "Namangan, Uzbekistan",
           telegram: "@mgjewelry",
+          instagram: "@mgjewelry",
+          email: "hello@mgjewelry.uz",
+        },
+      },
+      {
+        key: "brand",
+        value: {
+          logoUrl: "",
+          heroImageUrl:
+            "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2000&q=80",
         },
       },
       {
         key: "currencies",
         value: { base: ["USD", "UZS"], display: ["USD", "UZS"] },
+      },
+      {
+        key: "appointmentSlots",
+        value: {
+          slots: ["10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"],
+        },
       },
     ],
   });

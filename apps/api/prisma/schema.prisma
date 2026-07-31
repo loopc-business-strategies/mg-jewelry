@@ -70,6 +70,7 @@ model User {
   orders       Order[]
   reviews      Review[]
   auditLogs    AuditLog[]     @relation("AuditActor")
+  appointments Appointment[]
 }
 
 model Address {
@@ -318,4 +319,35 @@ model SiteSetting {
   id    String @id @default(cuid())
   key   String @unique
   value Json
+}
+
+enum AppointmentType {
+  STORE_VISIT
+  VIDEO_CONSULTATION
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Appointment {
+  id        String            @id @default(cuid())
+  userId    String?
+  user      User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name      String
+  phone     String
+  email     String?
+  type      AppointmentType
+  date      DateTime          @db.Date
+  slot      String
+  status    AppointmentStatus @default(PENDING)
+  notes     String?
+  locale    Locale            @default(en)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([date, status])
 }

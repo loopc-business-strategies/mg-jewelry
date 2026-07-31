@@ -7,6 +7,7 @@
     "shop": "Магазин",
     "about": "О нас",
     "contact": "Контакты",
+    "book": "Запись",
     "cart": "Корзина",
     "account": "Кабинет",
     "admin": "Админ"
@@ -15,7 +16,7 @@
     "title": "Modern Gold Jewelry",
     "subtitle": "Создано в Намангане. Носят по всему миру.",
     "ctaShop": "Смотреть коллекцию",
-    "ctaVisit": "Шоурум в Намангане"
+    "ctaVisit": "Записаться"
   },
   "home": {
     "featured": "Избранные коллекции",
@@ -75,7 +76,25 @@
     "showroom": "Шоурум",
     "city": "Наманган, Узбекистан",
     "telegram": "Telegram",
-    "email": "Email"
+    "email": "Email",
+    "bookCta": "Записаться на визит"
+  },
+  "appointments": {
+    "title": "Запись на визит",
+    "subtitle": "Приезжайте в шоурум в Намангане или онлайн-консультация.",
+    "type": "Тип встречи",
+    "storeVisit": "Шоурум в Намангане",
+    "video": "Видеоконсультация",
+    "name": "Имя",
+    "phone": "Телефон",
+    "email": "Email (необязательно)",
+    "date": "Дата",
+    "slot": "Время",
+    "notes": "Комментарий",
+    "submit": "Отправить запрос",
+    "success": "Заявка получена — скоро подтвердим.",
+    "error": "Не удалось записаться. Выберите другое время.",
+    "noSlots": "Нет свободных слотов"
   },
   "auth": {
     "login": "Войти",
@@ -94,10 +113,32 @@
   },
   "admin": {
     "title": "Админ",
+    "overview": "Обзор",
     "products": "Товары",
     "orders": "Заказы",
     "customers": "Клиенты",
-    "revenue": "Оплаченный объём"
+    "appointments": "Записи",
+    "settings": "Настройки",
+    "revenue": "Оплаченный объём",
+    "addProduct": "Добавить товар",
+    "productName": "Название",
+    "metal": "Металл",
+    "purity": "Проба",
+    "weight": "Вес (г)",
+    "quantity": "Остаток",
+    "imageUrl": "URL изображения",
+    "description": "Описание",
+    "saveProduct": "Сохранить",
+    "productCreated": "Товар создан",
+    "publish": "Опубликовать",
+    "unpublish": "Скрыть",
+    "confirm": "Подтвердить",
+    "cancel": "Отменить",
+    "address": "Адрес шоурума",
+    "logoUrl": "URL логотипа",
+    "heroImageUrl": "URL hero-изображения",
+    "saveSettings": "Сохранить настройки",
+    "settingsSaved": "Сохранено"
   },
   "footer": {
     "rights": "Все права защищены.",

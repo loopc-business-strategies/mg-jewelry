@@ -7,6 +7,7 @@
     "shop": "Do‘kon",
     "about": "Biz haqimizda",
     "contact": "Aloqa",
+    "book": "Band qilish",
     "cart": "Savat",
     "account": "Kabinet",
     "admin": "Admin"
@@ -15,7 +16,7 @@
     "title": "Modern Gold Jewelry",
     "subtitle": "Namanganda yaratilgan. Dunyo bo‘ylab taqiladi.",
     "ctaShop": "Kolleksiyani ko‘rish",
-    "ctaVisit": "Namangan showroomiga tashrif"
+    "ctaVisit": "Uchrashuv band qilish"
   },
   "home": {
     "featured": "Tanlangan kolleksiyalar",
@@ -75,7 +76,25 @@
     "showroom": "Showroom",
     "city": "Namangan, O‘zbekiston",
     "telegram": "Telegram",
-    "email": "Email"
+    "email": "Email",
+    "bookCta": "Uchrashuv band qilish"
+  },
+  "appointments": {
+    "title": "Uchrashuv band qilish",
+    "subtitle": "Namangan showroomiga tashrif yoki video konsultatsiya.",
+    "type": "Uchrashuv turi",
+    "storeVisit": "Namangan showroom",
+    "video": "Video konsultatsiya",
+    "name": "To‘liq ism",
+    "phone": "Telefon",
+    "email": "Email (ixtiyoriy)",
+    "date": "Sana",
+    "slot": "Vaqt",
+    "notes": "Izoh",
+    "submit": "So‘rov yuborish",
+    "success": "So‘rov qabul qilindi — tez orada tasdiqlaymiz.",
+    "error": "Band qilib bo‘lmadi. Boshqa vaqtni tanlang.",
+    "noSlots": "Bo‘sh vaqt yo‘q"
   },
   "auth": {
     "login": "Kirish",
@@ -94,10 +113,32 @@
   },
   "admin": {
     "title": "Admin",
+    "overview": "Umumiy",
     "products": "Mahsulotlar",
     "orders": "Buyurtmalar",
     "customers": "Mijozlar",
-    "revenue": "To‘langan hajm"
+    "appointments": "Uchrashuvlar",
+    "settings": "Sozlamalar",
+    "revenue": "To‘langan hajm",
+    "addProduct": "Mahsulot qo‘shish",
+    "productName": "Nomi",
+    "metal": "Metall",
+    "purity": "Proba",
+    "weight": "Og‘irlik (g)",
+    "quantity": "Ombor",
+    "imageUrl": "Rasm URL",
+    "description": "Tavsif",
+    "saveProduct": "Saqlash",
+    "productCreated": "Mahsulot yaratildi",
+    "publish": "Nashr",
+    "unpublish": "Yashirish",
+    "confirm": "Tasdiqlash",
+    "cancel": "Bekor qilish",
+    "address": "Showroom manzili",
+    "logoUrl": "Logo URL",
+    "heroImageUrl": "Hero rasm URL",
+    "saveSettings": "Sozlamalarni saqlash",
+    "settingsSaved": "Saqlandi"
   },
   "footer": {
     "rights": "Barcha huquqlar himoyalangan.",
