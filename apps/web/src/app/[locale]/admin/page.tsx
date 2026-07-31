@@ -14,6 +14,7 @@ type Tab =
   | "tickets"
   | "inquiries"
   | "coupons"
+  | "returns"
   | "settings";
 
 export default function AdminPage() {
@@ -33,20 +34,23 @@ export default function AdminPage() {
     [],
   );
   const [coupons, setCoupons] = useState<Array<Record<string, unknown>>>([]);
+  const [returns, setReturns] = useState<Array<Record<string, unknown>>>([]);
   const [settings, setSettings] = useState<Record<string, unknown>>({});
   const [msg, setMsg] = useState("");
 
   async function refresh() {
-    const [dash, prods, ords, appts, tix, inqs, cps, sett] = await Promise.all([
-      api.adminDashboard(),
-      api.adminProducts(),
-      api.adminOrders(),
-      api.adminAppointments(),
-      api.adminTickets(),
-      api.adminInquiries(),
-      api.adminCoupons(),
-      api.adminSettings(),
-    ]);
+    const [dash, prods, ords, appts, tix, inqs, cps, rets, sett] =
+      await Promise.all([
+        api.adminDashboard(),
+        api.adminProducts(),
+        api.adminOrders(),
+        api.adminAppointments(),
+        api.adminTickets(),
+        api.adminInquiries(),
+        api.adminCoupons(),
+        api.adminReturns(),
+        api.adminSettings(),
+      ]);
     setData(dash);
     setProducts(prods);
     setOrders(ords);
@@ -54,6 +58,7 @@ export default function AdminPage() {
     setTickets(tix);
     setInquiries(inqs);
     setCoupons(cps);
+    setReturns(rets);
     setSettings(sett);
   }
 
@@ -184,6 +189,7 @@ export default function AdminPage() {
     ["tickets", t("tickets")],
     ["inquiries", t("inquiries")],
     ["coupons", t("coupons")],
+    ["returns", t("returns")],
     ["settings", t("settings")],
   ];
 
@@ -339,7 +345,44 @@ export default function AdminPage() {
             >
               <div>
                 <p className="font-medium">{String(order.orderNumber)}</p>
-                <p className="text-ink/50">{String(order.status)}</p>
+                <p className="text-ink/50">
+                  {String(order.status)} · {String(order.fulfillmentType)} ·{" "}
+                  {String(order.currency)} {String(order.totalMinor)}
+                </p>
+                {String(order.status) === "PENDING_SHIPPING_QUOTE" ? (
+                  <form
+                    className="mt-2 flex flex-wrap items-end gap-2"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      const fd = new FormData(e.currentTarget);
+                      try {
+                        await api.adminShippingQuote(
+                          String(order.id),
+                          Number(fd.get("shippingMinor") || 0),
+                        );
+                        setMsg(t("quoteSent"));
+                        await refresh();
+                      } catch (err) {
+                        setMsg(err instanceof Error ? err.message : "Error");
+                      }
+                    }}
+                  >
+                    <label className="text-xs">
+                      <span className="text-ink/55">{t("shippingMinor")}</span>
+                      <input
+                        name="shippingMinor"
+                        type="number"
+                        min={0}
+                        required
+                        defaultValue={String(order.shippingMinor || 0)}
+                        className="mt-1 block w-36 border border-black/15 bg-white/50 px-2 py-1"
+                      />
+                    </label>
+                    <button type="submit" className="btn-ghost px-3 py-1">
+                      {t("sendQuote")}
+                    </button>
+                  </form>
+                ) : null}
               </div>
               <select
                 className="border border-black/15 bg-white/50 px-2 py-1"
@@ -490,6 +533,82 @@ export default function AdminPage() {
                     </option>
                   ))}
                 </select>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {tab === "returns" ? (
+        <div className="mt-10 space-y-3">
+          {returns.map((r) => {
+            const u = (r.user as Record<string, string>) || {};
+            const o = (r.order as Record<string, string>) || {};
+            return (
+              <div
+                key={String(r.id)}
+                className="space-y-2 border border-black/10 px-4 py-3 text-sm"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="font-medium">
+                      {String(r.rmaNumber)} · {o.orderNumber}
+                    </p>
+                    <p className="text-ink/50">
+                      {u.name} · {u.email}
+                    </p>
+                    <p className="mt-1">
+                      {String(r.reason)} — {String(r.message)}
+                    </p>
+                  </div>
+                  <select
+                    className="border border-black/15 bg-white/50 px-2 py-1"
+                    defaultValue={String(r.status)}
+                    onChange={async (e) => {
+                      await api.adminUpdateReturn(String(r.id), {
+                        status: e.target.value,
+                        adminNotes: String(r.adminNotes || "") || undefined,
+                      });
+                      await refresh();
+                    }}
+                  >
+                    {[
+                      "REQUESTED",
+                      "APPROVED",
+                      "REJECTED",
+                      "RECEIVED",
+                      "REFUNDED",
+                      "CLOSED",
+                    ].map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <form
+                  className="flex flex-wrap gap-2"
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const fd = new FormData(e.currentTarget);
+                    await api.adminUpdateReturn(String(r.id), {
+                      status: String(r.status),
+                      adminNotes: String(fd.get("adminNotes") || ""),
+                    });
+                    setMsg(t("saveReturn"));
+                    await refresh();
+                  }}
+                >
+                  <input
+                    name="adminNotes"
+                    defaultValue={String(r.adminNotes || "")}
+                    placeholder={t("adminNotes")}
+                    className="min-w-[16rem] flex-1 border border-black/15 bg-white/50 px-2 py-1"
+                  />
+                  <button type="submit" className="btn-ghost px-3 py-1">
+                    {t("saveReturn")}
+                  </button>
+                </form>
               </div>
             );
           })}

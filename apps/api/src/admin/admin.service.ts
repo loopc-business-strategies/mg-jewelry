@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Locale, Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
+import { OrdersService } from "../orders/orders.service";
 
 type ProductInput = {
   slug: string;
@@ -30,7 +31,10 @@ type ProductInput = {
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly orders: OrdersService,
+  ) {}
 
   async dashboard() {
     const [products, orders, customers, appointments, revenue] =
@@ -243,6 +247,10 @@ export class AdminService {
       where: { id: orderId },
       data: { status: status as never },
     });
+  }
+
+  setShippingQuote(orderId: string, shippingMinor: number) {
+    return this.orders.setShippingQuote(orderId, shippingMinor);
   }
 
   async getSettings() {

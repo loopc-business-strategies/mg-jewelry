@@ -72,6 +72,7 @@ model User {
   auditLogs    AuditLog[]     @relation("AuditActor")
   appointments Appointment[]
   supportTickets SupportTicket[]
+  returnRequests ReturnRequest[]
 }
 
 model Address {
@@ -252,6 +253,7 @@ model Order {
   items            OrderItem[]
   payments         Payment[]
   supportTickets   SupportTicket[]
+  returnRequests   ReturnRequest[]
 }
 
 model OrderItem {
@@ -379,6 +381,33 @@ model SupportTicket {
   status    SupportTicketStatus @default(OPEN)
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
+
+  @@index([userId, status])
+  @@index([status])
+}
+
+enum ReturnRequestStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+  RECEIVED
+  REFUNDED
+  CLOSED
+}
+
+model ReturnRequest {
+  id         String              @id @default(cuid())
+  rmaNumber  String              @unique
+  userId     String
+  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderId    String
+  order      Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  reason     String
+  message    String
+  status     ReturnRequestStatus @default(REQUESTED)
+  adminNotes String?
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
 
   @@index([userId, status])
   @@index([status])

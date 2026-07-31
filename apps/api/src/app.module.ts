@@ -17,6 +17,7 @@ import { SupportModule } from "./support/support.module";
 import { CouponsModule } from "./coupons/coupons.module";
 import { ReviewsModule } from "./reviews/reviews.module";
 import { InquiriesModule } from "./inquiries/inquiries.module";
+import { ReturnsModule } from "./returns/returns.module";
 import { HealthController } from "./health.controller";
 import { SettingsController } from "./settings/settings.controller";
 
@@ -39,6 +40,7 @@ import { SettingsController } from "./settings/settings.controller";
     CouponsModule,
     ReviewsModule,
     InquiriesModule,
+    ReturnsModule,
   ],
   controllers: [HealthController, SettingsController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

@@ -7,7 +7,13 @@ import { useRouter } from "next/navigation";
 import { api, formatUsd, formatUzs } from "@/lib/api";
 import { useAuthStore } from "@/lib/auth-store";
 
-type Tab = "orders" | "addresses" | "wishlist" | "appointments" | "tickets";
+type Tab =
+  | "orders"
+  | "addresses"
+  | "wishlist"
+  | "appointments"
+  | "tickets"
+  | "returns";
 
 export default function AccountPage() {
   const t = useTranslations("account");
@@ -24,21 +30,24 @@ export default function AccountPage() {
     Array<Record<string, unknown>>
   >([]);
   const [tickets, setTickets] = useState<Array<Record<string, unknown>>>([]);
+  const [returns, setReturns] = useState<Array<Record<string, unknown>>>([]);
   const [msg, setMsg] = useState("");
 
   async function refresh() {
-    const [o, a, w, ap, tk] = await Promise.all([
+    const [o, a, w, ap, tk, re] = await Promise.all([
       api.orders().catch(() => []),
       api.addresses().catch(() => []),
       api.wishlist(locale).catch(() => []),
       api.myAppointments().catch(() => []),
       api.myTickets().catch(() => []),
+      api.myReturns().catch(() => []),
     ]);
     setOrders(o);
     setAddresses(a);
     setWishlist(w);
     setAppointments(ap);
     setTickets(tk);
+    setReturns(re);
   }
 
   useEffect(() => {
@@ -93,12 +102,31 @@ export default function AccountPage() {
     }
   }
 
+  async function onCreateReturn(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    try {
+      await api.createReturn({
+        orderId: String(fd.get("orderId") || ""),
+        reason: String(fd.get("reason") || ""),
+        message: String(fd.get("message") || ""),
+      });
+      setMsg(t("returnSent"));
+      e.currentTarget.reset();
+      await refresh();
+      setTab("returns");
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
   const tabs: Array<[Tab, string]> = [
     ["orders", t("orders")],
     ["addresses", t("addresses")],
     ["wishlist", t("wishlist")],
     ["appointments", t("appointments")],
     ["tickets", t("tickets")],
+    ["returns", t("returns")],
   ];
 
   return (
@@ -346,6 +374,74 @@ export default function AccountPage() {
                 <p className="text-ink/55">{String(tk.message)}</p>
               </div>
             ))}
+          </div>
+        </div>
+      ) : null}
+
+      {tab === "returns" ? (
+        <div className="mt-8 grid gap-10 md:grid-cols-2">
+          <form onSubmit={onCreateReturn} className="space-y-3">
+            <h2 className="font-display text-3xl">{t("newReturn")}</h2>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("selectOrder")}</span>
+              <select
+                name="orderId"
+                required
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              >
+                {orders.map((o) => (
+                  <option key={String(o.id)} value={String(o.id)}>
+                    {String(o.orderNumber)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("returnReason")}</span>
+              <input
+                name="reason"
+                required
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <label className="block text-sm">
+              <span className="text-ink/55">{t("message")}</span>
+              <textarea
+                name="message"
+                required
+                rows={4}
+                className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+              />
+            </label>
+            <button type="submit" className="btn-primary">
+              {t("sendReturn")}
+            </button>
+          </form>
+          <div className="space-y-3">
+            {!returns.length ? (
+              <p className="text-sm text-ink/55">{t("noReturns")}</p>
+            ) : (
+              returns.map((r) => {
+                const o = (r.order as Record<string, string>) || {};
+                return (
+                  <div
+                    key={String(r.id)}
+                    className="border border-black/10 px-4 py-3 text-sm"
+                  >
+                    <p className="font-medium">
+                      {String(r.rmaNumber)} · {String(r.status)}
+                    </p>
+                    <p className="text-ink/55">
+                      {o.orderNumber} · {String(r.reason)}
+                    </p>
+                    <p className="mt-1 text-ink/60">{String(r.message)}</p>
+                    {r.adminNotes ? (
+                      <p className="mt-1 text-ink/50">{String(r.adminNotes)}</p>
+                    ) : null}
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       ) : null}

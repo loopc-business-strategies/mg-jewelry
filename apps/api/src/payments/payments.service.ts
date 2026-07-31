@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
-import { PaymentMethod } from "@prisma/client";
+import { OrderStatus, PaymentMethod } from "@prisma/client";
 import Stripe from "stripe";
 import { createHash } from "crypto";
 import { PrismaService } from "../prisma/prisma.service";
@@ -113,6 +113,11 @@ export class PaymentsService {
       where: { id: orderId, userId },
     });
     if (!order) throw new NotFoundException("Order not found");
+    if (order.status !== OrderStatus.PENDING_PAYMENT) {
+      throw new BadRequestException(
+        "Order is not ready for payment (accept shipping quote first if needed)",
+      );
+    }
     return this.orders.markPaid(orderId, `mock_${Date.now()}`, { mock: true });
   }
 

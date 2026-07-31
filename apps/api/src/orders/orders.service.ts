@@ -76,10 +76,10 @@ export class OrdersService {
     const totalMinor = Math.max(0, subtotalMinor - discountMinor);
 
     let status: OrderStatus = OrderStatus.PENDING_PAYMENT;
-    if (input.paymentMethod === PaymentMethod.SHOWROOM) {
-      status = OrderStatus.AWAITING_PICKUP;
-    } else if (input.fulfillmentType === FulfillmentType.INTERNATIONAL_QUOTE) {
+    if (input.fulfillmentType === FulfillmentType.INTERNATIONAL_QUOTE) {
       status = OrderStatus.PENDING_SHIPPING_QUOTE;
+    } else if (input.paymentMethod === PaymentMethod.SHOWROOM) {
+      status = OrderStatus.AWAITING_PICKUP;
     }
 
     const orderNumber = `MG-${Date.now().toString(36).toUpperCase()}`;
@@ -193,6 +193,91 @@ export class OrdersService {
         },
       },
       include: { payments: true },
+    });
+  }
+
+  async setShippingQuote(orderId: string, shippingMinor: number) {
+    const shipping = Math.max(0, Math.round(Number(shippingMinor) || 0));
+    const order = await this.prisma.order.findUnique({
+      where: { id: orderId },
+      include: { user: { select: { email: true, name: true } }, payments: true },
+    });
+    if (!order) throw new NotFoundException("Order not found");
+    if (order.status !== OrderStatus.PENDING_SHIPPING_QUOTE) {
+      throw new BadRequestException("Order is not awaiting a shipping quote");
+    }
+    if (order.fulfillmentType !== FulfillmentType.INTERNATIONAL_QUOTE) {
+      throw new BadRequestException("Order is not an international quote order");
+    }
+
+    const goodsMinor = order.totalMinor - order.shippingMinor;
+    const totalMinor = goodsMinor + shipping;
+
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const next = await tx.order.update({
+        where: { id: orderId },
+        data: { shippingMinor: shipping, totalMinor },
+        include: { payments: true, user: { select: { email: true, name: true } } },
+      });
+      await tx.payment.updateMany({
+        where: { orderId, status: PaymentStatus.PENDING },
+        data: { amountMinor: totalMinor },
+      });
+      return next;
+    });
+
+    await this.notifications.shippingQuoteReady({
+      orderNumber: updated.orderNumber,
+      shippingMinor: shipping,
+      totalMinor,
+      currency: updated.currency,
+      customerEmail: updated.user.email,
+      customerName: updated.user.name,
+    });
+
+    return updated;
+  }
+
+  async acceptShippingQuote(userId: string, orderId: string) {
+    const order = await this.prisma.order.findFirst({
+      where: { id: orderId, userId },
+    });
+    if (!order) throw new NotFoundException("Order not found");
+    if (order.status !== OrderStatus.PENDING_SHIPPING_QUOTE) {
+      throw new BadRequestException("Order is not awaiting a shipping quote");
+    }
+    if (order.shippingMinor <= 0) {
+      throw new BadRequestException("Shipping quote has not been set yet");
+    }
+    return this.prisma.order.update({
+      where: { id: orderId },
+      data: { status: OrderStatus.PENDING_PAYMENT },
+      include: { items: true, payments: true, shippingAddress: true },
+    });
+  }
+
+  async declineShippingQuote(userId: string, orderId: string) {
+    const order = await this.prisma.order.findFirst({
+      where: { id: orderId, userId },
+      include: { items: true },
+    });
+    if (!order) throw new NotFoundException("Order not found");
+    if (order.status !== OrderStatus.PENDING_SHIPPING_QUOTE) {
+      throw new BadRequestException("Order is not awaiting a shipping quote");
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      for (const item of order.items) {
+        await tx.inventoryItem.update({
+          where: { productId: item.productId },
+          data: { reserved: { decrement: item.quantity } },
+        });
+      }
+      return tx.order.update({
+        where: { id: orderId },
+        data: { status: OrderStatus.CANCELLED },
+        include: { items: true, payments: true, shippingAddress: true },
+      });
     });
   }
 }

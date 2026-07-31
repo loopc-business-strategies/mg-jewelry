@@ -57,6 +57,13 @@ export default function CheckoutPage() {
         ...(couponCode.trim() ? { couponCode: couponCode.trim() } : {}),
       });
 
+      if (fulfillmentType === "INTERNATIONAL_QUOTE") {
+        router.push(
+          `/${locale}/account/orders/${order.id}?quote=1`,
+        );
+        return;
+      }
+
       if (paymentMethod === "SHOWROOM") {
         router.push(`/${locale}/checkout/success?orderId=${order.id}`);
         return;

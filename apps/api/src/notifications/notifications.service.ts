@@ -125,4 +125,65 @@ export class NotificationsService {
       inquiry.message.slice(0, 400);
     await this.notifyTelegram(text);
   }
+
+  async shippingQuoteReady(quote: {
+    orderNumber: string;
+    shippingMinor: number;
+    totalMinor: number;
+    currency: string;
+    customerEmail?: string;
+    customerName?: string;
+  }) {
+    const text =
+      `MG Jewelry — Shipping quote sent\n` +
+      `#${quote.orderNumber}\n` +
+      `Shipping: ${quote.currency} ${quote.shippingMinor}\n` +
+      `Total: ${quote.currency} ${quote.totalMinor}`;
+    await this.notifyTelegram(text);
+    if (quote.customerEmail) {
+      await this.notifyEmail(
+        quote.customerEmail,
+        `MG Jewelry — Shipping quote for ${quote.orderNumber}`,
+        `Hello ${quote.customerName || "there"},\n\nWe prepared a shipping quote for order ${quote.orderNumber}.\nShipping: ${quote.currency} ${quote.shippingMinor}\nNew total: ${quote.currency} ${quote.totalMinor}\n\nPlease sign in to your account to accept or decline the quote.\n\nModern Gold Jewelry Manufacturing — Hearts of Namangan`,
+      );
+    }
+  }
+
+  async returnRequested(ret: {
+    rmaNumber: string;
+    orderNumber: string;
+    userName: string;
+    userEmail: string;
+    reason: string;
+  }) {
+    const text =
+      `MG Jewelry — Return request\n` +
+      `${ret.rmaNumber}\n` +
+      `Order #${ret.orderNumber}\n` +
+      `${ret.userName} <${ret.userEmail}>\n` +
+      ret.reason;
+    await this.notifyTelegram(text);
+    await this.notifyEmail(
+      ret.userEmail,
+      `MG Jewelry — Return request ${ret.rmaNumber}`,
+      `Hello ${ret.userName},\n\nWe received your return request ${ret.rmaNumber} for order ${ret.orderNumber}.\nReason: ${ret.reason}\n\nOur team will review and reply with next steps.\n\nModern Gold Jewelry Manufacturing — Hearts of Namangan`,
+    );
+  }
+
+  async returnUpdated(ret: {
+    rmaNumber: string;
+    status: string;
+    userEmail: string;
+    userName: string;
+    adminNotes?: string;
+  }) {
+    await this.notifyTelegram(
+      `MG Jewelry — Return ${ret.rmaNumber} → ${ret.status}`,
+    );
+    await this.notifyEmail(
+      ret.userEmail,
+      `MG Jewelry — Return ${ret.rmaNumber} updated`,
+      `Hello ${ret.userName},\n\nYour return ${ret.rmaNumber} is now ${ret.status}.\n${ret.adminNotes ? `\nNotes from our team:\n${ret.adminNotes}\n` : ""}\nModern Gold Jewelry Manufacturing — Hearts of Namangan`,
+    );
+  }
 }

@@ -130,6 +130,31 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify({ status }),
     }),
+  adminShippingQuote: (id: string, shippingMinor: number) =>
+    request(`/admin/orders/${id}/shipping-quote`, {
+      method: "PATCH",
+      body: JSON.stringify({ shippingMinor }),
+    }),
+  acceptShippingQuote: (id: string) =>
+    request(`/orders/${id}/shipping-quote/accept`, { method: "POST" }),
+  declineShippingQuote: (id: string) =>
+    request(`/orders/${id}/shipping-quote/decline`, { method: "POST" }),
+  myReturns: () => request<Array<Record<string, unknown>>>("/returns/mine"),
+  createReturn: (body: {
+    orderId: string;
+    reason: string;
+    message: string;
+  }) =>
+    request("/returns", { method: "POST", body: JSON.stringify(body) }),
+  adminReturns: () => request<Array<Record<string, unknown>>>("/returns"),
+  adminUpdateReturn: (
+    id: string,
+    body: { status: string; adminNotes?: string },
+  ) =>
+    request(`/returns/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    }),
   adminInventory: (productId: string, quantity: number) =>
     request(`/admin/inventory/${productId}`, {
       method: "PATCH",

@@ -34,4 +34,20 @@ export class OrdersController {
   byId(@CurrentUser() user: { userId: string }, @Param("id") id: string) {
     return this.orders.byId(user.userId, id);
   }
+
+  @Post(":id/shipping-quote/accept")
+  acceptQuote(
+    @CurrentUser() user: { userId: string },
+    @Param("id") id: string,
+  ) {
+    return this.orders.acceptShippingQuote(user.userId, id);
+  }
+
+  @Post(":id/shipping-quote/decline")
+  declineQuote(
+    @CurrentUser() user: { userId: string },
+    @Param("id") id: string,
+  ) {
+    return this.orders.declineShippingQuote(user.userId, id);
+  }
 }

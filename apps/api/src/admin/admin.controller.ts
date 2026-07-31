@@ -90,6 +90,14 @@ export class AdminController {
     return this.admin.updateOrderStatus(id, body.status);
   }
 
+  @Patch("orders/:id/shipping-quote")
+  shippingQuote(
+    @Param("id") id: string,
+    @Body() body: { shippingMinor: number },
+  ) {
+    return this.admin.setShippingQuote(id, body.shippingMinor);
+  }
+
   @Get("settings")
   settings() {
     return this.admin.getSettings();

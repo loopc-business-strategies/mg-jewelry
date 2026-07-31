@@ -13,16 +13,21 @@ export default function OrderDetailPage() {
   const params = useParams<{ id: string }>();
   const [order, setOrder] = useState<Record<string, unknown> | null>(null);
   const [ticketMsg, setTicketMsg] = useState("");
+  const [quoteMsg, setQuoteMsg] = useState("");
+  const [returnMsg, setReturnMsg] = useState("");
+  const [paying, setPaying] = useState(false);
+
+  async function load() {
+    const o = await api.order(params.id);
+    setOrder(o);
+  }
 
   useEffect(() => {
     if (!localStorage.getItem("mg_token")) {
       router.push(`/${locale}/auth`);
       return;
     }
-    api
-      .order(params.id)
-      .then(setOrder)
-      .catch(() => setOrder(null));
+    load().catch(() => setOrder(null));
   }, [locale, params.id, router]);
 
   async function onTicket(e: FormEvent<HTMLFormElement>) {
@@ -42,6 +47,55 @@ export default function OrderDetailPage() {
     }
   }
 
+  async function onReturn(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    try {
+      await api.createReturn({
+        orderId: params.id,
+        reason: String(fd.get("reason") || ""),
+        message: String(fd.get("message") || ""),
+      });
+      setReturnMsg(t("returnSent"));
+      e.currentTarget.reset();
+    } catch (err) {
+      setReturnMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
+  async function acceptQuote() {
+    try {
+      await api.acceptShippingQuote(params.id);
+      setQuoteMsg(t("quoteAccepted"));
+      await load();
+    } catch (err) {
+      setQuoteMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
+  async function declineQuote() {
+    try {
+      await api.declineShippingQuote(params.id);
+      setQuoteMsg(t("quoteDeclined"));
+      await load();
+    } catch (err) {
+      setQuoteMsg(err instanceof Error ? err.message : "Error");
+    }
+  }
+
+  async function payMock() {
+    setPaying(true);
+    try {
+      await api.pay("mock", params.id);
+      setQuoteMsg(t("paidMock"));
+      await load();
+    } catch (err) {
+      setQuoteMsg(err instanceof Error ? err.message : "Error");
+    } finally {
+      setPaying(false);
+    }
+  }
+
   if (!order) {
     return (
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8">
@@ -57,6 +111,11 @@ export default function OrderDetailPage() {
     order.currency === "UZS"
       ? (n: number) => formatUzs(n, locale)
       : (n: number) => formatUsd(n, locale);
+  const status = String(order.status);
+  const shippingMinor = Number(order.shippingMinor || 0);
+  const awaitingQuote = status === "PENDING_SHIPPING_QUOTE";
+  const quoteReady = awaitingQuote && shippingMinor > 0;
+  const canPay = status === "PENDING_PAYMENT";
 
   return (
     <div className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8">
@@ -73,6 +132,44 @@ export default function OrderDetailPage() {
         </button>
       </div>
 
+      {awaitingQuote || canPay || quoteMsg ? (
+        <div className="mt-6 border border-gold/40 bg-white/50 px-4 py-4 text-sm print:hidden">
+          {awaitingQuote && !quoteReady ? (
+            <p>{t("quotePending")}</p>
+          ) : null}
+          {quoteReady ? (
+            <div className="space-y-3">
+              <p>
+                {t("quoteReady")}: {money(shippingMinor)} · {t("total")}{" "}
+                {money(Number(order.totalMinor))}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <button type="button" className="btn-primary" onClick={acceptQuote}>
+                  {t("acceptQuote")}
+                </button>
+                <button type="button" className="btn-ghost" onClick={declineQuote}>
+                  {t("declineQuote")}
+                </button>
+              </div>
+            </div>
+          ) : null}
+          {canPay ? (
+            <div className="mt-2 space-y-3">
+              <p>{t("readyToPay")}</p>
+              <button
+                type="button"
+                className="btn-primary"
+                disabled={paying}
+                onClick={payMock}
+              >
+                {paying ? "…" : t("payNow")}
+              </button>
+            </div>
+          ) : null}
+          {quoteMsg ? <p className="mt-2 text-ink/60">{quoteMsg}</p> : null}
+        </div>
+      ) : null}
+
       <article className="mt-8 border border-black/10 bg-white/60 px-6 py-8 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-black/10 pb-6">
           <div>
@@ -85,7 +182,7 @@ export default function OrderDetailPage() {
           <div className="text-right text-sm">
             <p className="font-medium">{t("invoice")}</p>
             <p className="text-ink/60">{String(order.orderNumber)}</p>
-            <p className="text-ink/55">{String(order.status)}</p>
+            <p className="text-ink/55">{status}</p>
           </div>
         </div>
 
@@ -113,7 +210,7 @@ export default function OrderDetailPage() {
           </div>
           <div className="flex justify-between">
             <span className="text-ink/55">{t("shipping")}</span>
-            <span>{money(Number(order.shippingMinor || 0))}</span>
+            <span>{money(shippingMinor)}</span>
           </div>
           <div className="flex justify-between border-t border-black/10 pt-3 text-base font-medium">
             <span>{t("total")}</span>
@@ -161,6 +258,34 @@ export default function OrderDetailPage() {
           Uzbekistan
         </p>
       </article>
+
+      <form
+        onSubmit={onReturn}
+        className="mt-12 space-y-3 border-t border-black/10 pt-10 print:hidden"
+      >
+        <h2 className="font-display text-3xl">{t("requestReturn")}</h2>
+        <label className="block text-sm">
+          <span className="text-ink/55">{t("returnReason")}</span>
+          <input
+            name="reason"
+            required
+            className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+          />
+        </label>
+        <label className="block text-sm">
+          <span className="text-ink/55">{t("message")}</span>
+          <textarea
+            name="message"
+            required
+            rows={3}
+            className="mt-1 w-full border border-black/15 bg-white/50 px-3 py-2 outline-none focus:border-gold"
+          />
+        </label>
+        {returnMsg ? <p className="text-sm text-ink/65">{returnMsg}</p> : null}
+        <button type="submit" className="btn-primary">
+          {t("sendReturn")}
+        </button>
+      </form>
 
       <form
         onSubmit={onTicket}
