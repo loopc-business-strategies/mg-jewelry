@@ -625,11 +625,24 @@ export default function AdminPage() {
                     <div>
                       <p className="font-medium">{name}</p>
                       <p className="text-ink/50">
-                        {String(p.sku)} · stock{" "}
+                        {String(p.sku)} · available{" "}
                         {String(
-                          (p.inventory as { quantity?: number } | null)
-                            ?.quantity ?? 0,
+                          typeof p.available === "number"
+                            ? p.available
+                            : Math.max(
+                                0,
+                                ((p.inventory as { quantity?: number } | null)
+                                  ?.quantity ?? 0) -
+                                  ((p.inventory as { reserved?: number } | null)
+                                    ?.reserved ?? 0),
+                              ),
                         )}
+                        {((p.inventory as { reserved?: number } | null)
+                          ?.reserved ?? 0) > 0
+                          ? ` · reserved ${String(
+                              (p.inventory as { reserved?: number }).reserved,
+                            )}`
+                          : ""}
                         {p.published ? "" : " · draft"}
                       </p>
                     </div>

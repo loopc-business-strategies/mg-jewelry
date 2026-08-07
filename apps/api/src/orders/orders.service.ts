@@ -45,15 +45,6 @@ export class OrdersService {
     });
     if (!cart?.items.length) throw new BadRequestException("Cart is empty");
 
-    for (const item of cart.items) {
-      const stock =
-        (item.product.inventory?.quantity || 0) -
-        (item.product.inventory?.reserved || 0);
-      if (stock < item.quantity) {
-        throw new BadRequestException(`Insufficient stock for ${item.product.sku}`);
-      }
-    }
-
     const useUsd = input.currency === "USD";
     const subtotalMinor = cart.items.reduce(
       (sum, item) =>
@@ -129,10 +120,18 @@ export class OrdersService {
       });
 
       for (const item of cart.items) {
-        await tx.inventoryItem.update({
-          where: { productId: item.productId },
-          data: { reserved: { increment: item.quantity } },
-        });
+        // Conditional reserve: fail the race if available stock is insufficient.
+        const reserved = await tx.$executeRaw`
+          UPDATE "InventoryItem"
+          SET reserved = reserved + ${item.quantity}
+          WHERE "productId" = ${item.productId}
+            AND quantity - reserved >= ${item.quantity}
+        `;
+        if (Number(reserved) === 0) {
+          throw new BadRequestException(
+            `Insufficient stock for ${item.product.sku}`,
+          );
+        }
       }
 
       await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
@@ -308,7 +307,8 @@ export class OrdersService {
         }
       }
       if (
-        nextStatus === OrderStatus.COMPLETED &&
+        (nextStatus === OrderStatus.PAID ||
+          nextStatus === OrderStatus.COMPLETED) &&
         reservedOnlyStates.has(previousStatus)
       ) {
         await this.finalizeSale(tx, order.items);

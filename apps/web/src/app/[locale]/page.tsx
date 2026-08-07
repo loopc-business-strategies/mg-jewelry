@@ -1,8 +1,26 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ProductCard } from "@/components/product-card";
 import { HeroMotion } from "@/components/hero-motion";
 import { api } from "@/lib/api";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "hero" });
+  return {
+    title: "MG Jewelry",
+    description: t("subtitle"),
+    openGraph: {
+      title: "MG Jewelry",
+      description: t("subtitle"),
+    },
+  };
+}
 
 export default async function HomePage({
   params,

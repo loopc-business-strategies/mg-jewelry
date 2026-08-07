@@ -82,7 +82,9 @@
     "reviewThanks": "Спасибо за отзыв.",
     "noReviews": "Пока нет отзывов.",
     "signInToReview": "Войдите, чтобы оставить отзыв.",
-    "inquire": "Запрос"
+    "inquire": "Запрос",
+    "added": "Добавлено в корзину",
+    "wishlistUpdated": "Список желаний обновлён"
   },
   "cart": {
     "title": "Корзина",
@@ -90,9 +92,17 @@
     "checkout": "Оформить",
     "subtotal": "Итого",
     "continue": "Продолжить покупки",
-    "signIn": "Sign in to buy",
-    "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
-    "remove": "Remove"
+    "signIn": "Войдите для оформления",
+    "signInPrompt": "Войдите, чтобы просмотреть корзину и оформить заказ.",
+    "signInToCheckout": "Войдите для оформления — корзина сохранится в аккаунте.",
+    "remove": "Удалить"
+  },
+  "checkoutStatus": {
+    "confirmed": "Заказ подтверждён",
+    "pending": "Оплата ещё не подтверждена",
+    "pendingBody": "Мы ещё не подтвердили оплату этого заказа. Если вы только что оплатили, подождите и обновите страницу или откройте заказ в аккаунте.",
+    "signInToView": "Войдите, чтобы увидеть подтверждение заказа.",
+    "viewOrder": "К заказу"
   },
   "checkout": {
     "title": "Оформление",

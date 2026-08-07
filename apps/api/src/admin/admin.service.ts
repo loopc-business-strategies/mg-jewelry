@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { Locale, Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
 import { OrdersService } from "../orders/orders.service";
@@ -75,8 +79,8 @@ export class AdminService {
     };
   }
 
-  listProducts() {
-    return this.prisma.product.findMany({
+  async listProducts() {
+    const products = await this.prisma.product.findMany({
       include: {
         translations: true,
         inventory: true,
@@ -85,6 +89,14 @@ export class AdminService {
         media: true,
       },
       orderBy: { updatedAt: "desc" },
+    });
+    return products.map((p) => {
+      const qty = p.inventory?.quantity ?? 0;
+      const reserved = p.inventory?.reserved ?? 0;
+      return {
+        ...p,
+        available: Math.max(0, qty - reserved),
+      };
     });
   }
 
@@ -201,6 +213,14 @@ export class AdminService {
     }
 
     if (input.quantity != null) {
+      const existingInv = await this.prisma.inventoryItem.findUnique({
+        where: { productId: id },
+      });
+      if (existingInv && input.quantity < existingInv.reserved) {
+        throw new BadRequestException(
+          `Quantity cannot be less than reserved (${existingInv.reserved})`,
+        );
+      }
       await this.prisma.inventoryItem.upsert({
         where: { productId: id },
         create: { productId: id, quantity: input.quantity },
@@ -242,6 +262,14 @@ export class AdminService {
   }
 
   async updateInventory(productId: string, quantity: number) {
+    const existing = await this.prisma.inventoryItem.findUnique({
+      where: { productId },
+    });
+    if (existing && quantity < existing.reserved) {
+      throw new BadRequestException(
+        `Quantity cannot be less than reserved (${existing.reserved})`,
+      );
+    }
     return this.prisma.inventoryItem.upsert({
       where: { productId },
       create: { productId, quantity },

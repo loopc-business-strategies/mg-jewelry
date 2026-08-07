@@ -17,6 +17,11 @@ export class CartService {
     });
   }
 
+  private availableStock(inv: { quantity: number; reserved: number } | null) {
+    if (!inv) return 0;
+    return Math.max(0, inv.quantity - inv.reserved);
+  }
+
   async get(userId: string, locale = "en") {
     const cart = await this.ensureCart(userId);
     const full = await this.prisma.cart.findUnique({
@@ -51,11 +56,7 @@ export class CartService {
             priceUsdCents: item.product.priceUsdCents,
             priceUzs: item.product.priceUzs,
             image: item.product.media[0]?.url || null,
-            stock: Math.max(
-              0,
-              (item.product.inventory?.quantity || 0) -
-                (item.product.inventory?.reserved || 0),
-            ),
+            stock: this.availableStock(item.product.inventory),
           },
         };
       }) || [];
@@ -81,6 +82,15 @@ export class CartService {
     if (!product?.published) throw new NotFoundException("Product not found");
 
     const cart = await this.ensureCart(userId);
+    const existing = await this.prisma.cartItem.findUnique({
+      where: { cartId_productId: { cartId: cart.id, productId } },
+    });
+    const nextQty = (existing?.quantity || 0) + quantity;
+    const available = this.availableStock(product.inventory);
+    if (nextQty > available) {
+      throw new BadRequestException("Insufficient stock");
+    }
+
     await this.prisma.cartItem.upsert({
       where: { cartId_productId: { cartId: cart.id, productId } },
       create: { cartId: cart.id, productId, quantity },
@@ -96,6 +106,15 @@ export class CartService {
         where: { cartId: cart.id, productId },
       });
     } else {
+      const product = await this.prisma.product.findUnique({
+        where: { id: productId },
+        include: { inventory: true },
+      });
+      if (!product) throw new NotFoundException("Product not found");
+      const available = this.availableStock(product.inventory);
+      if (quantity > available) {
+        throw new BadRequestException("Insufficient stock");
+      }
       await this.prisma.cartItem.update({
         where: { cartId_productId: { cartId: cart.id, productId } },
         data: { quantity },

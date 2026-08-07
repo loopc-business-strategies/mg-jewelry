@@ -1,7 +1,22 @@
 import { Suspense } from "react";
-import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { api } from "@/lib/api";
 import { ContactPageClient } from "@/components/contact-page-client";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contact" });
+  return {
+    title: t("title"),
+    description: "Contact MG Jewelry showroom in Namangan, Uzbekistan.",
+    openGraph: { title: t("title") },
+  };
+}
 
 const FALLBACK_SHOWROOM = {
   fullName: "Modern Gold Jewelry Manufacturing",

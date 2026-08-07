@@ -1,8 +1,32 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { api, formatUsd, formatUzs } from "@/lib/api";
 import { AddToCartButton } from "@/components/add-to-cart-button";
 import { ProductReviews } from "@/components/product-reviews";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  try {
+    const product = await api.product(slug, locale);
+    const image = product.media[0]?.url;
+    return {
+      title: product.name,
+      description: product.description?.slice(0, 160) || product.name,
+      openGraph: {
+        title: product.name,
+        description: product.description?.slice(0, 160) || product.name,
+        images: image ? [{ url: image }] : undefined,
+      },
+    };
+  } catch {
+    return { title: "Product" };
+  }
+}
 
 export default async function ProductPage({
   params,
@@ -114,6 +138,9 @@ export default async function ProductPage({
               productId={product.id}
               locale={locale}
               productSlug={product.slug}
+              productName={product.name}
+              priceUsdCents={product.priceUsdCents}
+              image={image || null}
             />
           </div>
         </div>

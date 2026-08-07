@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { api } from "@/lib/api";
+import { guestCart } from "@/lib/guest-cart";
 import { useAuthStore } from "@/lib/auth-store";
 
 export default function AuthPage() {
@@ -25,9 +26,22 @@ export default function AuthPage() {
         ? await api.register(opts.registerName, email, password)
         : await api.login(email, password);
       setAuth(res.accessToken, { ...res.user, email });
+      const pending = guestCart.get();
+      if (pending.length && res.user.role === "CUSTOMER") {
+        for (const item of pending) {
+          try {
+            await api.addToCart(item.productId, item.quantity);
+          } catch {
+            // skip lines that fail (e.g. out of stock)
+          }
+        }
+        guestCart.clear();
+      }
       const dest =
         res.user.role === "CUSTOMER"
-          ? `/${locale}/account`
+          ? pending.length
+            ? `/${locale}/cart`
+            : `/${locale}/account`
           : `/${locale}/admin`;
       window.location.assign(dest);
     } catch (err) {

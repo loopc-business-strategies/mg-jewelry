@@ -82,7 +82,9 @@
     "reviewThanks": "Teşekkürler.",
     "noReviews": "Henüz yorum yok.",
     "signInToReview": "Yorum için giriş yapın.",
-    "inquire": "Sor"
+    "inquire": "Sor",
+    "added": "Sepete eklendi",
+    "wishlistUpdated": "İstek listesi güncellendi"
   },
   "cart": {
     "title": "Sepetiniz",
@@ -90,9 +92,17 @@
     "checkout": "Ödeme",
     "subtotal": "Ara toplam",
     "continue": "Alışverişe devam",
-    "signIn": "Sign in to buy",
-    "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
-    "remove": "Remove"
+    "signIn": "Ödeme için giriş yapın",
+    "signInPrompt": "Sepeti görmek ve ödeme yapmak için giriş yapın.",
+    "signInToCheckout": "Ödeme için giriş yapın — sepetiniz hesabınıza kaydedilir.",
+    "remove": "Kaldır"
+  },
+  "checkoutStatus": {
+    "confirmed": "Sipariş onaylandı",
+    "pending": "Ödeme henüz onaylanmadı",
+    "pendingBody": "Bu sipariş için ödeme onaylanmadı. Az önce ödediyseniz bekleyip yenileyin veya hesabınızdaki siparişi açın.",
+    "signInToView": "Sipariş onayını görmek için giriş yapın.",
+    "viewOrder": "Siparişi gör"
   },
   "checkout": {
     "title": "Ödeme",

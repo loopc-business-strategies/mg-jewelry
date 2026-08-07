@@ -4,16 +4,23 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { api } from "@/lib/api";
+import { guestCart } from "@/lib/guest-cart";
 import { useAuthStore } from "@/lib/auth-store";
 
 export function AddToCartButton({
   productId,
   locale,
   productSlug,
+  productName,
+  priceUsdCents,
+  image,
 }: {
   productId: string;
   locale: string;
   productSlug?: string;
+  productName?: string;
+  priceUsdCents?: number;
+  image?: string | null;
 }) {
   const t = useTranslations("product");
   const router = useRouter();
@@ -24,15 +31,24 @@ export function AddToCartButton({
   async function onAdd() {
     hydrate();
     const current = localStorage.getItem("mg_token");
-    if (!current && !token) {
-      router.push(`/${locale}/auth`);
-      return;
-    }
     setLoading(true);
     setMessage("");
     try {
+      if (!current && !token) {
+        guestCart.add({
+          productId,
+          slug: productSlug || productId,
+          name: productName || productSlug || "Product",
+          priceUsdCents: priceUsdCents ?? 0,
+          image: image ?? null,
+        });
+        setMessage(t("added"));
+        router.push(`/${locale}/cart`);
+        return;
+      }
       await api.addToCart(productId, 1);
-      setMessage("Added");
+      window.dispatchEvent(new Event("mg-cart-changed"));
+      setMessage(t("added"));
       router.push(`/${locale}/cart`);
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "Error");
@@ -48,13 +64,18 @@ export function AddToCartButton({
       return;
     }
     await api.wishlistToggle(productId);
-    setMessage("Wishlist updated");
+    setMessage(t("wishlistUpdated"));
   }
 
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap gap-3">
-        <button type="button" className="btn-primary" onClick={onAdd} disabled={loading}>
+        <button
+          type="button"
+          className="btn-primary"
+          onClick={onAdd}
+          disabled={loading}
+        >
           {loading ? "..." : t("addToCart")}
         </button>
         <button type="button" className="btn-ghost" onClick={onWish}>

@@ -11,7 +11,8 @@ Languages: **English · O‘zbek · Russian · Turkish**
 - `apps/api` — NestJS, Prisma, JWT auth, RBAC
 - `packages/shared` — Zod schemas, roles, locales, money helpers
 - Database: **PostgreSQL** (Railway in production; `docker-compose` locally)
-- Payments: Stripe · Payme · Click · showroom pay (mock pay only when `ALLOW_MOCK_PAYMENTS=1`)
+- Payments: Stripe · Payme · Click · showroom pay (mock pay when `ALLOW_MOCK_PAYMENTS=1`, or by default outside production)
+- Redis: not used (ignore `REDIS_URL` in `.env.example`)
 
 ## Live URLs
 
@@ -50,11 +51,17 @@ npm run dev:web
 ## Production checklist
 
 1. Set a strong `JWT_SECRET` (required in production — no default).
-2. Keep `ALLOW_MOCK_PAYMENTS` unset or `0` unless running a controlled demo.
+2. Mock payments: set `ALLOW_MOCK_PAYMENTS=1` only for controlled demos; in production leave unset/`0`. Outside production, mock pay may default on when unset.
 3. Configure Stripe (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`) and/or Payme/Click secrets.
-4. Optional: Cloudinary, Resend (`RESEND_API_KEY`), Telegram bot.
+4. Optional: Cloudinary (`REQUIRE_CLOUDINARY=1` to fail uploads without Cloudinary), Resend (`RESEND_API_KEY`), Telegram bot. Health exposes `alertsConfigured` when Telegram or Resend is set.
 5. Set `NEXT_PUBLIC_SHOW_DEMO_LOGIN=0` (or unset) to hide demo login buttons.
-6. Deploy web to Vercel; API + Postgres on Railway.
+6. Deploy web to Vercel; API + Postgres on Railway. `REDIS_URL` is unused.
+
+### API tests
+
+```bash
+npm test -w @mg/api
+```
 
 ## Features
 

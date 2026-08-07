@@ -82,7 +82,9 @@
     "reviewThanks": "Rahmat!",
     "noReviews": "Hali sharh yo‘q.",
     "signInToReview": "Sharh uchun kiring.",
-    "inquire": "So‘rov"
+    "inquire": "So‘rov",
+    "added": "Savatga qo‘shildi",
+    "wishlistUpdated": "Istaklar ro‘yxati yangilandi"
   },
   "cart": {
     "title": "Savat",
@@ -90,9 +92,17 @@
     "checkout": "To‘lov",
     "subtotal": "Jami",
     "continue": "Xaridni davom ettirish",
-    "signIn": "Sign in to buy",
-    "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
-    "remove": "Remove"
+    "signIn": "To‘lov uchun kiring",
+    "signInPrompt": "Savatni ko‘rish va to‘lov uchun kiring.",
+    "signInToCheckout": "To‘lov uchun kiring — savat hisobingizga saqlanadi.",
+    "remove": "Olib tashlash"
+  },
+  "checkoutStatus": {
+    "confirmed": "Buyurtma tasdiqlandi",
+    "pending": "To‘lov hali tasdiqlanmagan",
+    "pendingBody": "Bu buyurtma uchun to‘lov tasdiqlanmadi. Agar to‘lagan bo‘lsangiz, biroz kuting yoki hisobingizdagi buyurtmani oching.",
+    "signInToView": "Buyurtma tasdiqini ko‘rish uchun kiring.",
+    "viewOrder": "Buyurtmani ko‘rish"
   },
   "checkout": {
     "title": "To‘lov",

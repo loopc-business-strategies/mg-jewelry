@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Menu, ShoppingBag, User, X } from "lucide-react";
 import { useAuthStore } from "@/lib/auth-store";
 import { api } from "@/lib/api";
+import { guestCart } from "@/lib/guest-cart";
 
 const locales = [
   { code: "en", label: "EN" },
@@ -44,7 +45,7 @@ export function SiteHeader() {
   useEffect(() => {
     function refreshCount() {
       if (!localStorage.getItem("mg_token")) {
-        setCartCount(0);
+        setCartCount(guestCart.count());
         return;
       }
       api
@@ -53,7 +54,7 @@ export function SiteHeader() {
           const items = (data.items as Array<{ quantity: number }>) || [];
           setCartCount(items.reduce((n, i) => n + (i.quantity || 0), 0));
         })
-        .catch(() => setCartCount(0));
+        .catch(() => setCartCount(guestCart.count()));
     }
     refreshCount();
     window.addEventListener("mg-cart-changed", refreshCount);

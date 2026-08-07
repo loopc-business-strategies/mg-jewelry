@@ -82,7 +82,9 @@
     "reviewThanks": "Thank you for your review.",
     "noReviews": "No reviews yet.",
     "signInToReview": "Sign in to leave a review.",
-    "inquire": "Inquire"
+    "inquire": "Inquire",
+    "added": "Added to cart",
+    "wishlistUpdated": "Wishlist updated"
   },
   "cart": {
     "title": "Your cart",
@@ -90,9 +92,17 @@
     "checkout": "Checkout",
     "subtotal": "Subtotal",
     "continue": "Continue shopping",
-    "signIn": "Sign in to buy",
+    "signIn": "Sign in to checkout",
     "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
+    "signInToCheckout": "Sign in to checkout — your cart will be saved to your account.",
     "remove": "Remove"
+  },
+  "checkoutStatus": {
+    "confirmed": "Order confirmed",
+    "pending": "Payment not confirmed yet",
+    "pendingBody": "We have not confirmed payment for this order. If you just paid, wait a moment and refresh, or open the order in your account.",
+    "signInToView": "Sign in to view your order confirmation.",
+    "viewOrder": "View order"
   },
   "checkout": {
     "title": "Checkout",

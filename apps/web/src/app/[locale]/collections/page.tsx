@@ -1,6 +1,22 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { api } from "@/lib/api";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  return {
+    title: t("collections"),
+    description:
+      "Browse MG Jewelry collections — gold and diamond pieces from Namangan.",
+    openGraph: { title: t("collections") },
+  };
+}
 
 export default async function CollectionsPage({
   params,
