@@ -4,6 +4,7 @@
   "nav": {
     "home": "Home",
     "collections": "Collections",
+    "ecommerce": "Ecommerce",
     "shop": "Shop",
     "about": "About",
     "contact": "Contact",
@@ -11,6 +12,20 @@
     "cart": "Cart",
     "account": "Account",
     "admin": "Admin"
+  },
+  "ecommerce": {
+    "eyebrow": "Trade · Wholesale",
+    "title": "Ecommerce for partners",
+    "intro": "Wholesale and trade channels for retailers, distributors, and showroom partners — from Namangan to worldwide markets.",
+    "wholesaleTitle": "Wholesale & bulk",
+    "wholesaleBody": "Request volume pricing and curated assortments for boutiques, jewelers, and resellers.",
+    "showroomTitle": "Showroom trade visits",
+    "showroomBody": "Book a private visit at our Namangan atelier to review pieces and discuss partnership terms.",
+    "exportTitle": "Export & international",
+    "exportBody": "Inquire about export orders, shipping quotes, and long-term supply for overseas partners.",
+    "ctaInquire": "Send wholesale inquiry",
+    "ctaBook": "Book a trade visit",
+    "ctaShop": "Browse retail shop"
   },
   "hero": {
     "title": "Modern Gold Jewelry",

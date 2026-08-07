@@ -4,6 +4,7 @@
   "nav": {
     "home": "Ana sayfa",
     "collections": "Koleksiyonlar",
+    "ecommerce": "Ecommerce",
     "shop": "Mağaza",
     "about": "Hakkımızda",
     "contact": "İletişim",
@@ -11,6 +12,20 @@
     "cart": "Sepet",
     "account": "Hesap",
     "admin": "Yönetim"
+  },
+  "ecommerce": {
+    "eyebrow": "Ticaret · Toptan",
+    "title": "İş ortakları için ecommerce",
+    "intro": "Perakendeciler, distribütörler ve showroom ortakları için toptan ve ticaret kanalları — Namangan’dan dünya pazarlarına.",
+    "wholesaleTitle": "Toptan ve toplu sipariş",
+    "wholesaleBody": "Butikler, kuyumcular ve yeniden satıcılar için hacim fiyatları ve seçilmiş koleksiyon talep edin.",
+    "showroomTitle": "Showroom ticaret ziyaretleri",
+    "showroomBody": "Ürünleri incelemek ve ortaklık koşullarını görüşmek için Namangan atölyemize özel ziyaret randevusu alın.",
+    "exportTitle": "İhracat ve uluslararası",
+    "exportBody": "İhracat siparişleri, kargo teklifleri ve yurtdışı ortaklar için uzun vadeli tedarik hakkında bilgi alın.",
+    "ctaInquire": "Toptan talep gönder",
+    "ctaBook": "Ticaret ziyareti ayarla",
+    "ctaShop": "Perakende mağaza"
   },
   "hero": {
     "title": "Modern Gold Jewelry",

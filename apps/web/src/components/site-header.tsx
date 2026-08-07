@@ -31,6 +31,7 @@ export function SiteHeader() {
   const links = [
     { href: `/${locale}`, label: t("nav.home") },
     { href: `/${locale}/collections`, label: t("nav.collections") },
+    { href: `/${locale}/ecommerce`, label: t("nav.ecommerce") },
     { href: `/${locale}/shop`, label: t("nav.shop") },
     { href: `/${locale}/appointments`, label: t("nav.book") },
     { href: `/${locale}/about`, label: t("nav.about") },

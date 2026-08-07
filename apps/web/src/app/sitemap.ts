@@ -5,6 +5,7 @@ const paths = [
   "",
   "/shop",
   "/collections",
+  "/ecommerce",
   "/about",
   "/contact",
   "/appointments",

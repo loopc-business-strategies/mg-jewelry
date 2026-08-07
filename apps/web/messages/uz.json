@@ -4,6 +4,7 @@
   "nav": {
     "home": "Bosh sahifa",
     "collections": "Kolleksiyalar",
+    "ecommerce": "Ecommerce",
     "shop": "Do‘kon",
     "about": "Biz haqimizda",
     "contact": "Aloqa",
@@ -11,6 +12,20 @@
     "cart": "Savat",
     "account": "Kabinet",
     "admin": "Admin"
+  },
+  "ecommerce": {
+    "eyebrow": "Savdo · Ulgurji",
+    "title": "Hamkorlar uchun ecommerce",
+    "intro": "Chakana sotuvchilar, distribyutorlar va showroom hamkorlari uchun ulgurji va savdo kanallari — Namangandan jahon bozorlarigacha.",
+    "wholesaleTitle": "Ulgurji va katta buyurtma",
+    "wholesaleBody": "Butiklar, zargarlar va qayta sotuvchilar uchun hajmli narxlar va tanlangan assortiment so‘rang.",
+    "showroomTitle": "Showroom savdo tashrifi",
+    "showroomBody": "Mahsulotlarni ko‘rish va hamkorlik shartlarini muhokama qilish uchun Namangan atelyemizga shaxsiy tashrif band qiling.",
+    "exportTitle": "Eksport va xalqaro",
+    "exportBody": "Eksport buyurtmalari, yetkazib berish narxi va xorijiy hamkorlar uchun uzoq muddatli ta’minot haqida so‘rang.",
+    "ctaInquire": "Ulgurji so‘rov yuborish",
+    "ctaBook": "Savdo tashrifini band qilish",
+    "ctaShop": "Chakana do‘kon"
   },
   "hero": {
     "title": "Modern Gold Jewelry",
