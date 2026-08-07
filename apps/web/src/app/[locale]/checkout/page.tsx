@@ -22,6 +22,14 @@ export default function CheckoutPage() {
   const [couponNote, setCouponNote] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [cartItems, setCartItems] = useState<
+    Array<{
+      quantity: number;
+      product: { name: string; priceUsdCents: number; priceUzs: number };
+    }>
+  >([]);
+  const [subtotalUsd, setSubtotalUsd] = useState(0);
+  const [subtotalUzs, setSubtotalUzs] = useState(0);
 
   const needsAddress =
     fulfillmentType === "LOCAL_DELIVERY" ||
@@ -37,7 +45,26 @@ export default function CheckoutPage() {
         if (def) setShippingAddressId(String(def.id));
       })
       .catch(() => setAddresses([]));
-  }, []);
+    api
+      .cart(locale)
+      .then((data) => {
+        setCartItems(
+          (data.items as Array<{
+            quantity: number;
+            product: {
+              name: string;
+              priceUsdCents: number;
+              priceUzs: number;
+            };
+          }>) || [],
+        );
+        setSubtotalUsd(Number(data.subtotalUsd || 0));
+        setSubtotalUzs(Number(data.subtotalUzs || 0));
+      })
+      .catch(() => {
+        setCartItems([]);
+      });
+  }, [locale]);
 
   async function placeOrder() {
     setLoading(true);
@@ -76,18 +103,21 @@ export default function CheckoutPage() {
             ? "payme"
             : "click";
 
-      const pay = await api.pay(method, order.id);
-      if (pay.url) {
-        if (
-          pay.mode === "mock" ||
-          !process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-        ) {
-          await api.pay("mock", order.id);
+      const pay = await api.pay(method, order.id, locale);
+      if (pay.mode === "mock") {
+        try {
+          await api.pay("mock", order.id, locale);
           router.push(
             `/${locale}/checkout/success?orderId=${order.id}&mock=1`,
           );
-          return;
+        } catch {
+          setError(
+            "Demo/mock payments are disabled. Configure Stripe, Payme, or Click.",
+          );
         }
+        return;
+      }
+      if (pay.url) {
         window.location.href = pay.url;
         return;
       }
@@ -104,6 +134,35 @@ export default function CheckoutPage() {
       <h1 className="font-display text-5xl">{t("title")}</h1>
 
       <div className="mt-10 space-y-8">
+        {cartItems.length ? (
+          <div className="border border-black/10 px-4 py-4 text-sm">
+            <p className="text-xs uppercase tracking-[0.2em] text-ink/50">
+              {t("summary")}
+            </p>
+            <ul className="mt-3 space-y-2">
+              {cartItems.map((item, i) => (
+                <li key={i} className="flex justify-between gap-3">
+                  <span>
+                    {item.product.name} × {item.quantity}
+                  </span>
+                  <span className="text-ink/60">
+                    {currency === "UZS"
+                      ? item.product.priceUzs * item.quantity
+                      : (item.product.priceUsdCents * item.quantity) / 100}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 flex justify-between border-t border-black/10 pt-3 font-medium">
+              <span>{t("subtotal")}</span>
+              <span>
+                {currency === "UZS" ? subtotalUzs : subtotalUsd / 100}{" "}
+                {currency}
+              </span>
+            </p>
+          </div>
+        ) : null}
+
         <fieldset>
           <legend className="mb-3 text-sm uppercase tracking-[0.2em] text-ink/50">
             {t("fulfillment")}
@@ -226,7 +285,7 @@ export default function CheckoutPage() {
 
         <fieldset>
           <legend className="mb-3 text-sm uppercase tracking-[0.2em] text-ink/50">
-            Currency
+            {t("currency")}
           </legend>
           <div className="flex gap-3">
             {(["USD", "UZS"] as const).map((c) => (

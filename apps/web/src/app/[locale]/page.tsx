@@ -163,6 +163,20 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+
+      <section className="border-t border-black/10 bg-white/30 px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="font-display text-3xl md:text-4xl">
+            {t("home.newsletter")}
+          </h2>
+          <p className="mt-3 text-sm text-ink/60">
+            Private atelier notes — contact us to join the list.
+          </p>
+          <Link href={`/${locale}/contact`} className="btn-primary mt-8">
+            {t("home.newsletterCta")}
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

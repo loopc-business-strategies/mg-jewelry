@@ -110,15 +110,26 @@ export const api = {
   pay: async (
     method: "stripe" | "payme" | "click" | "mock",
     orderId: string,
+    locale = "en",
   ): Promise<{ url?: string; mode?: string }> => {
     if (method === "mock") {
       await request(`/payments/mock/confirm/${orderId}`, { method: "POST" });
       return { mode: "mock" };
     }
-    return request<{ url: string; mode: string }>(`/payments/${method}/${orderId}`, {
-      method: "POST",
-    });
+    const q =
+      method === "stripe" || method === "click"
+        ? `?locale=${encodeURIComponent(locale)}`
+        : "";
+    return request<{ url: string; mode: string }>(
+      `/payments/${method}/${orderId}${q}`,
+      { method: "POST" },
+    );
   },
+  cartUpdate: (productId: string, quantity: number) =>
+    request<Record<string, unknown>>("/cart/items", {
+      method: "PATCH",
+      body: JSON.stringify({ productId, quantity }),
+    }),
   orders: () => request<Array<Record<string, unknown>>>("/orders"),
   adminDashboard: () => request<Record<string, unknown>>("/admin/dashboard"),
   adminProducts: () => request<Array<Record<string, unknown>>>("/admin/products"),
@@ -256,6 +267,10 @@ export const api = {
     phone?: string;
     message: string;
     productSlug?: string;
+    kind?: string;
+    company?: string;
+    volume?: string;
+    country?: string;
   }) =>
     request("/inquiries", {
       method: "POST",

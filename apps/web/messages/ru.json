@@ -4,7 +4,7 @@
   "nav": {
     "home": "Главная",
     "collections": "Коллекции",
-    "ecommerce": "Ecommerce",
+    "ecommerce": "Опт",
     "shop": "Магазин",
     "about": "О нас",
     "contact": "Контакты",
@@ -15,7 +15,7 @@
   },
   "ecommerce": {
     "eyebrow": "Торговля · Опт",
-    "title": "Ecommerce для партнёров",
+    "title": "Опт для партнёров",
     "intro": "Оптовые и торговые каналы для ритейлеров, дистрибьюторов и партнёров шоурума — из Намангана на мировые рынки.",
     "wholesaleTitle": "Опт и крупные заказы",
     "wholesaleBody": "Запросите объёмные цены и подобранный ассортимент для бутиков, ювелиров и реселлеров.",
@@ -23,6 +23,16 @@
     "showroomBody": "Запишитесь на частный визит в наш ателье в Намангане, чтобы рассмотреть изделия и обсудить условия партнёрства.",
     "exportTitle": "Экспорт и международные поставки",
     "exportBody": "Узнайте об экспортных заказах, стоимости доставки и долгосрочных поставках для зарубежных партнёров.",
+    "inquiryTitle": "Wholesale inquiry",
+    "name": "Your name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "volume": "Estimated volume / MOQ interest",
+    "message": "Tell us what you need",
+    "inquirySuccess": "Thank you — we received your wholesale inquiry.",
+    "inquiryError": "Could not send inquiry. Please try again.",
     "ctaInquire": "Отправить оптовый запрос",
     "ctaBook": "Записаться на визит",
     "ctaShop": "Розничный магазин"
@@ -79,7 +89,10 @@
     "empty": "Корзина пуста.",
     "checkout": "Оформить",
     "subtotal": "Итого",
-    "continue": "Продолжить покупки"
+    "continue": "Продолжить покупки",
+    "signIn": "Sign in to buy",
+    "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
+    "remove": "Remove"
   },
   "checkout": {
     "title": "Оформление",
@@ -101,7 +114,10 @@
     "coupon": "Купон",
     "couponApply": "Применить",
     "couponApplied": "Купон применён",
-    "couponInvalid": "Недействительный купон"
+    "couponInvalid": "Недействительный купон",
+    "currency": "Currency",
+    "summary": "Order summary",
+    "subtotal": "Subtotal"
   },
   "about": {
     "title": "О MG Jewelry",
@@ -302,7 +318,9 @@
     "rights": "Все права защищены.",
     "showroom": "Шоурум — 242, Girvonbulok Street · Наманган",
     "privacy": "Конфиденциальность",
-    "offer": "Публичная оферта"
+    "offer": "Публичная оферта",
+    "explore": "Explore",
+    "trust": "Trust & contact"
   },
   "legal": {
     "privacyTitle": "Политика конфиденциальности",

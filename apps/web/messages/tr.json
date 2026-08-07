@@ -4,7 +4,7 @@
   "nav": {
     "home": "Ana sayfa",
     "collections": "Koleksiyonlar",
-    "ecommerce": "Ecommerce",
+    "ecommerce": "Toptan",
     "shop": "Mağaza",
     "about": "Hakkımızda",
     "contact": "İletişim",
@@ -15,7 +15,7 @@
   },
   "ecommerce": {
     "eyebrow": "Ticaret · Toptan",
-    "title": "İş ortakları için ecommerce",
+    "title": "İş ortakları için toptan",
     "intro": "Perakendeciler, distribütörler ve showroom ortakları için toptan ve ticaret kanalları — Namangan’dan dünya pazarlarına.",
     "wholesaleTitle": "Toptan ve toplu sipariş",
     "wholesaleBody": "Butikler, kuyumcular ve yeniden satıcılar için hacim fiyatları ve seçilmiş koleksiyon talep edin.",
@@ -23,6 +23,16 @@
     "showroomBody": "Ürünleri incelemek ve ortaklık koşullarını görüşmek için Namangan atölyemize özel ziyaret randevusu alın.",
     "exportTitle": "İhracat ve uluslararası",
     "exportBody": "İhracat siparişleri, kargo teklifleri ve yurtdışı ortaklar için uzun vadeli tedarik hakkında bilgi alın.",
+    "inquiryTitle": "Wholesale inquiry",
+    "name": "Your name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "volume": "Estimated volume / MOQ interest",
+    "message": "Tell us what you need",
+    "inquirySuccess": "Thank you — we received your wholesale inquiry.",
+    "inquiryError": "Could not send inquiry. Please try again.",
     "ctaInquire": "Toptan talep gönder",
     "ctaBook": "Ticaret ziyareti ayarla",
     "ctaShop": "Perakende mağaza"
@@ -79,7 +89,10 @@
     "empty": "Sepetiniz boş.",
     "checkout": "Ödeme",
     "subtotal": "Ara toplam",
-    "continue": "Alışverişe devam"
+    "continue": "Alışverişe devam",
+    "signIn": "Sign in to buy",
+    "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
+    "remove": "Remove"
   },
   "checkout": {
     "title": "Ödeme",
@@ -101,7 +114,10 @@
     "coupon": "Kupon",
     "couponApply": "Uygula",
     "couponApplied": "Kupon uygulandı",
-    "couponInvalid": "Geçersiz kupon"
+    "couponInvalid": "Geçersiz kupon",
+    "currency": "Currency",
+    "summary": "Order summary",
+    "subtotal": "Subtotal"
   },
   "about": {
     "title": "MG Jewelry hakkında",
@@ -302,7 +318,9 @@
     "rights": "Tüm hakları saklıdır.",
     "showroom": "Showroom — 242, Girvonbulok Street · Namangan",
     "privacy": "Gizlilik",
-    "offer": "Genel teklif"
+    "offer": "Genel teklif",
+    "explore": "Explore",
+    "trust": "Trust & contact"
   },
   "legal": {
     "privacyTitle": "Gizlilik politikası",

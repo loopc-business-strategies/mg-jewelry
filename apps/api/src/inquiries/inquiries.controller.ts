@@ -26,6 +26,10 @@ export class InquiriesController {
       phone?: string;
       message: string;
       productSlug?: string;
+      kind?: string;
+      company?: string;
+      volume?: string;
+      country?: string;
     },
   ) {
     return this.inquiries.create(body);

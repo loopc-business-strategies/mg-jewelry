@@ -250,10 +250,17 @@ export class AdminService {
   }
 
   async updateOrderStatus(orderId: string, status: string) {
-    return this.prisma.order.update({
+    const existing = await this.prisma.order.findUnique({
+      where: { id: orderId },
+    });
+    if (!existing) throw new NotFoundException("Order not found");
+    const previous = existing.status;
+    const updated = await this.prisma.order.update({
       where: { id: orderId },
       data: { status: status as never },
     });
+    await this.orders.applyStatusInventory(orderId, status, previous);
+    return updated;
   }
 
   setShippingQuote(orderId: string, shippingMinor: number) {

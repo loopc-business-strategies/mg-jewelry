@@ -8,6 +8,7 @@ import {
   OrderStatus,
   PaymentMethod,
   PaymentStatus,
+  Prisma,
 } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
 import { NotificationsService } from "../notifications/notifications.service";
@@ -176,23 +177,142 @@ export class OrdersService {
     return order;
   }
 
-  async markPaid(orderId: string, providerRef: string, raw?: unknown) {
-    return this.prisma.order.update({
+  async findByIdInternal(orderId: string) {
+    return this.prisma.order.findUnique({
       where: { id: orderId },
-      data: {
-        status: OrderStatus.PAID,
-        payments: {
-          updateMany: {
-            where: { orderId },
-            data: {
-              status: PaymentStatus.SUCCEEDED,
-              providerRef,
-              rawPayload: raw as object | undefined,
+      include: { items: true },
+    });
+  }
+
+  /** Convert reserved stock into sold quantity. */
+  private async finalizeSale(
+    tx: Prisma.TransactionClient,
+    items: Array<{ productId: string; quantity: number }>,
+  ) {
+    for (const item of items) {
+      const inv = await tx.inventoryItem.findUnique({
+        where: { productId: item.productId },
+      });
+      if (!inv) continue;
+      const release = Math.min(inv.reserved, item.quantity);
+      await tx.inventoryItem.update({
+        where: { productId: item.productId },
+        data: {
+          reserved: { decrement: release },
+          quantity: { decrement: Math.min(inv.quantity, item.quantity) },
+        },
+      });
+    }
+  }
+
+  private async releaseReservation(
+    tx: Prisma.TransactionClient,
+    items: Array<{ productId: string; quantity: number }>,
+  ) {
+    for (const item of items) {
+      const inv = await tx.inventoryItem.findUnique({
+        where: { productId: item.productId },
+      });
+      if (!inv) continue;
+      const release = Math.min(inv.reserved, item.quantity);
+      if (release > 0) {
+        await tx.inventoryItem.update({
+          where: { productId: item.productId },
+          data: { reserved: { decrement: release } },
+        });
+      }
+    }
+  }
+
+  private async restockSold(
+    tx: Prisma.TransactionClient,
+    items: Array<{ productId: string; quantity: number }>,
+  ) {
+    for (const item of items) {
+      await tx.inventoryItem.update({
+        where: { productId: item.productId },
+        data: { quantity: { increment: item.quantity } },
+      });
+    }
+  }
+
+  async markPaid(orderId: string, providerRef: string, raw?: unknown) {
+    const existing = await this.prisma.order.findUnique({
+      where: { id: orderId },
+      include: { items: true, payments: true },
+    });
+    if (!existing) throw new NotFoundException("Order not found");
+    if (existing.status === OrderStatus.PAID || existing.status === OrderStatus.COMPLETED) {
+      return existing;
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      if (
+        existing.status === OrderStatus.PENDING_PAYMENT ||
+        existing.status === OrderStatus.AWAITING_PICKUP
+      ) {
+        await this.finalizeSale(tx, existing.items);
+      }
+      return tx.order.update({
+        where: { id: orderId },
+        data: {
+          status: OrderStatus.PAID,
+          payments: {
+            updateMany: {
+              where: { orderId },
+              data: {
+                status: PaymentStatus.SUCCEEDED,
+                providerRef,
+                rawPayload: raw as object | undefined,
+              },
             },
           },
         },
-      },
-      include: { payments: true },
+        include: { payments: true, items: true },
+      });
+    });
+  }
+
+  async applyStatusInventory(
+    orderId: string,
+    nextStatus: string,
+    previousStatus: string,
+  ) {
+    const order = await this.prisma.order.findUnique({
+      where: { id: orderId },
+      include: { items: true },
+    });
+    if (!order) return;
+
+    const soldStates = new Set<string>([
+      OrderStatus.PAID,
+      OrderStatus.PROCESSING,
+      OrderStatus.SHIPPED,
+      OrderStatus.COMPLETED,
+    ]);
+    const reservedOnlyStates = new Set<string>([
+      OrderStatus.PENDING_PAYMENT,
+      OrderStatus.AWAITING_PICKUP,
+      OrderStatus.PENDING_SHIPPING_QUOTE,
+    ]);
+
+    await this.prisma.$transaction(async (tx) => {
+      if (
+        nextStatus === OrderStatus.CANCELLED ||
+        nextStatus === OrderStatus.REFUNDED
+      ) {
+        if (soldStates.has(previousStatus)) {
+          await this.restockSold(tx, order.items);
+        } else if (reservedOnlyStates.has(previousStatus)) {
+          await this.releaseReservation(tx, order.items);
+        }
+      }
+      if (
+        nextStatus === OrderStatus.COMPLETED &&
+        reservedOnlyStates.has(previousStatus)
+      ) {
+        await this.finalizeSale(tx, order.items);
+      }
     });
   }
 

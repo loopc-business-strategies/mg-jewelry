@@ -20,6 +20,10 @@ export class InquiriesService {
     phone?: string;
     message: string;
     productSlug?: string;
+    kind?: string;
+    company?: string;
+    volume?: string;
+    country?: string;
   }) {
     const name = input.name?.trim();
     const email = input.email?.trim().toLowerCase();
@@ -38,12 +42,22 @@ export class InquiriesService {
       productId = product?.id || null;
     }
 
+    const metaLines = [
+      input.kind ? `Kind: ${input.kind.trim()}` : "",
+      input.company ? `Company: ${input.company.trim()}` : "",
+      input.volume ? `Volume: ${input.volume.trim()}` : "",
+      input.country ? `Country: ${input.country.trim()}` : "",
+    ].filter(Boolean);
+    const fullMessage = metaLines.length
+      ? `${metaLines.join("\n")}\n\n${message}`
+      : message;
+
     const inquiry = await this.prisma.inquiry.create({
       data: {
         name,
         email,
         phone: input.phone?.trim() || null,
-        message,
+        message: fullMessage,
         productId,
         productSlug,
       },

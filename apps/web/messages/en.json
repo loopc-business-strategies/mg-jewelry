@@ -4,7 +4,7 @@
   "nav": {
     "home": "Home",
     "collections": "Collections",
-    "ecommerce": "Ecommerce",
+    "ecommerce": "Wholesale",
     "shop": "Shop",
     "about": "About",
     "contact": "Contact",
@@ -15,7 +15,7 @@
   },
   "ecommerce": {
     "eyebrow": "Trade · Wholesale",
-    "title": "Ecommerce for partners",
+    "title": "Wholesale for partners",
     "intro": "Wholesale and trade channels for retailers, distributors, and showroom partners — from Namangan to worldwide markets.",
     "wholesaleTitle": "Wholesale & bulk",
     "wholesaleBody": "Request volume pricing and curated assortments for boutiques, jewelers, and resellers.",
@@ -23,6 +23,16 @@
     "showroomBody": "Book a private visit at our Namangan atelier to review pieces and discuss partnership terms.",
     "exportTitle": "Export & international",
     "exportBody": "Inquire about export orders, shipping quotes, and long-term supply for overseas partners.",
+    "inquiryTitle": "Wholesale inquiry",
+    "name": "Your name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "volume": "Estimated volume / MOQ interest",
+    "message": "Tell us what you need",
+    "inquirySuccess": "Thank you — we received your wholesale inquiry.",
+    "inquiryError": "Could not send inquiry. Please try again.",
     "ctaInquire": "Send wholesale inquiry",
     "ctaBook": "Book a trade visit",
     "ctaShop": "Browse retail shop"
@@ -79,7 +89,10 @@
     "empty": "Your cart is empty.",
     "checkout": "Checkout",
     "subtotal": "Subtotal",
-    "continue": "Continue shopping"
+    "continue": "Continue shopping",
+    "signIn": "Sign in to buy",
+    "signInPrompt": "Sign in to view your cart and checkout. Guest browsing is welcome — purchase requires an account.",
+    "remove": "Remove"
   },
   "checkout": {
     "title": "Checkout",
@@ -101,7 +114,10 @@
     "coupon": "Coupon code",
     "couponApply": "Apply",
     "couponApplied": "Coupon applied",
-    "couponInvalid": "Invalid or expired coupon"
+    "couponInvalid": "Invalid or expired coupon",
+    "currency": "Currency",
+    "summary": "Order summary",
+    "subtotal": "Subtotal"
   },
   "about": {
     "title": "About MG Jewelry",
@@ -302,7 +318,9 @@
     "rights": "All rights reserved.",
     "showroom": "Showroom — 242, Girvonbulok Street · Namangan",
     "privacy": "Privacy",
-    "offer": "Public offer"
+    "offer": "Public offer",
+    "explore": "Explore",
+    "trust": "Trust & contact"
   },
   "legal": {
     "privacyTitle": "Privacy policy",

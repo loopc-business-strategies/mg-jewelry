@@ -119,32 +119,34 @@ export default function AuthPage() {
         </button>
       </form>
 
-      {mode === "login" ? (
-        <div className="mt-6 flex flex-wrap gap-2">
-          <button
-            type="button"
-            className="btn-ghost px-4 py-2 text-sm"
-            disabled={loading}
-            onClick={() => demoLogin("admin")}
-          >
-            Demo Admin
-          </button>
-          <button
-            type="button"
-            className="btn-ghost px-4 py-2 text-sm"
-            disabled={loading}
-            onClick={() => demoLogin("customer")}
-          >
-            Demo Customer
-          </button>
-        </div>
+      {mode === "login" &&
+      process.env.NEXT_PUBLIC_SHOW_DEMO_LOGIN === "1" ? (
+        <>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="btn-ghost px-4 py-2 text-sm"
+              disabled={loading}
+              onClick={() => demoLogin("admin")}
+            >
+              Demo Admin
+            </button>
+            <button
+              type="button"
+              className="btn-ghost px-4 py-2 text-sm"
+              disabled={loading}
+              onClick={() => demoLogin("customer")}
+            >
+              Demo Customer
+            </button>
+          </div>
+          <p className="mt-6 text-xs text-ink/45">
+            Demo admin: admin@mgjewelry.uz / Admin123!
+            <br />
+            Demo customer: customer@example.com / Customer123!
+          </p>
+        </>
       ) : null}
-
-      <p className="mt-6 text-xs text-ink/45">
-        Demo admin: admin@mgjewelry.uz / Admin123!
-        <br />
-        Demo customer: customer@example.com / Customer123!
-      </p>
     </div>
   );
 }

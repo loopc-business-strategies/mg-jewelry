@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, ShoppingBag, User, X } from "lucide-react";
 import { useAuthStore } from "@/lib/auth-store";
+import { api } from "@/lib/api";
 
 const locales = [
   { code: "en", label: "EN" },
@@ -16,9 +18,20 @@ const locales = [
 export function SiteHeader() {
   const t = useTranslations();
   const locale = useLocale();
-  const { user, hydrate } = useAuthStore();
+  const pathname = usePathname();
+  const { user, hydrate, token } = useAuthStore();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  function localeHref(code: string) {
+    const parts = pathname.split("/");
+    if (parts.length > 1) {
+      parts[1] = code;
+      return parts.join("/") || `/${code}`;
+    }
+    return `/${code}`;
+  }
 
   useEffect(() => {
     hydrate();
@@ -27,6 +40,25 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [hydrate]);
+
+  useEffect(() => {
+    function refreshCount() {
+      if (!localStorage.getItem("mg_token")) {
+        setCartCount(0);
+        return;
+      }
+      api
+        .cart(locale)
+        .then((data) => {
+          const items = (data.items as Array<{ quantity: number }>) || [];
+          setCartCount(items.reduce((n, i) => n + (i.quantity || 0), 0));
+        })
+        .catch(() => setCartCount(0));
+    }
+    refreshCount();
+    window.addEventListener("mg-cart-changed", refreshCount);
+    return () => window.removeEventListener("mg-cart-changed", refreshCount);
+  }, [locale, token]);
 
   const links = [
     { href: `/${locale}`, label: t("nav.home") },
@@ -56,7 +88,7 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm tracking-wide md:flex">
+        <nav className="hidden items-center gap-6 text-sm tracking-wide lg:flex xl:gap-8">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -73,7 +105,7 @@ export function SiteHeader() {
             {locales.map((l) => (
               <Link
                 key={l.code}
-                href={`/${l.code}`}
+                href={localeHref(l.code)}
                 className={`px-1.5 py-1 ${
                   locale === l.code ? "text-gold" : "text-ink/50 hover:text-ink"
                 }`}
@@ -82,8 +114,17 @@ export function SiteHeader() {
               </Link>
             ))}
           </div>
-          <Link href={`/${locale}/cart`} aria-label={t("nav.cart")}>
+          <Link
+            href={`/${locale}/cart`}
+            aria-label={t("nav.cart")}
+            className="relative"
+          >
             <ShoppingBag className="h-5 w-5" />
+            {cartCount > 0 ? (
+              <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center bg-ink px-1 text-[10px] text-white">
+                {cartCount}
+              </span>
+            ) : null}
           </Link>
           <Link
             href={user ? `/${locale}/account` : `/${locale}/auth`}
@@ -93,7 +134,7 @@ export function SiteHeader() {
           </Link>
           <button
             type="button"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -103,16 +144,24 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-black/10 bg-[#f7f3eb] px-5 py-4 md:hidden">
+        <div className="border-t border-black/10 bg-[#f7f3eb] px-5 py-4 lg:hidden">
           <div className="flex flex-col gap-3 text-sm">
             {links.map((link) => (
-              <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+              >
                 {link.label}
               </Link>
             ))}
             <div className="flex gap-3 pt-2 text-xs tracking-wider">
               {locales.map((l) => (
-                <Link key={l.code} href={`/${l.code}`} onClick={() => setOpen(false)}>
+                <Link
+                  key={l.code}
+                  href={localeHref(l.code)}
+                  onClick={() => setOpen(false)}
+                >
                   {l.label}
                 </Link>
               ))}

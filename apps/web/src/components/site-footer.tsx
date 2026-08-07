@@ -1,32 +1,71 @@
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
+import { api } from "@/lib/api";
 
 export async function SiteFooter() {
   const t = await getTranslations();
   const locale = await getLocale();
   const year = new Date().getFullYear();
+  let showroom: Record<string, string> = {};
+  try {
+    const settings = await api.publicSettings();
+    showroom = (settings.showroom as Record<string, string>) || {};
+  } catch {
+    showroom = {};
+  }
 
   return (
     <footer className="mt-24 border-t border-black/10">
       <div className="gold-line" />
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-12 md:flex-row md:items-end md:justify-between md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-3 md:px-8">
         <div>
           <div className="font-display text-3xl tracking-[0.2em]">MG</div>
           <p className="mt-2 max-w-md text-sm text-ink/65">
             {t("tagline")} — {t("footer.showroom")}
           </p>
-          <div className="mt-4 flex flex-wrap gap-4 text-xs uppercase tracking-[0.18em] text-ink/50">
+          <p className="mt-4 text-xs uppercase tracking-[0.22em] text-ink/50">
+            © {year} {t("brand")}. {t("footer.rights")}
+          </p>
+        </div>
+        <div className="text-sm text-ink/65">
+          <p className="text-xs uppercase tracking-[0.18em] text-ink/45">
+            {t("footer.explore")}
+          </p>
+          <div className="mt-3 flex flex-col gap-2">
+            <Link href={`/${locale}/shop`} className="hover:text-ink">
+              {t("nav.shop")}
+            </Link>
+            <Link href={`/${locale}/ecommerce`} className="hover:text-ink">
+              {t("nav.ecommerce")}
+            </Link>
+            <Link href={`/${locale}/contact`} className="hover:text-ink">
+              {t("nav.contact")}
+            </Link>
+            <Link href={`/${locale}/appointments`} className="hover:text-ink">
+              {t("nav.book")}
+            </Link>
+          </div>
+        </div>
+        <div className="text-sm text-ink/65">
+          <p className="text-xs uppercase tracking-[0.18em] text-ink/45">
+            {t("footer.trust")}
+          </p>
+          <div className="mt-3 flex flex-col gap-2">
             <Link href={`/${locale}/privacy`} className="hover:text-ink">
               {t("footer.privacy")}
             </Link>
             <Link href={`/${locale}/offer`} className="hover:text-ink">
               {t("footer.offer")}
             </Link>
+            {showroom.telegram ? (
+              <span>Telegram {showroom.telegram}</span>
+            ) : null}
+            {showroom.whatsapp ? (
+              <span>WhatsApp {showroom.whatsapp}</span>
+            ) : null}
+            {showroom.email ? <span>{showroom.email}</span> : null}
           </div>
         </div>
-        <p className="text-xs uppercase tracking-[0.22em] text-ink/50">
-          © {year} {t("brand")}. {t("footer.rights")}
-        </p>
       </div>
     </footer>
   );

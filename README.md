@@ -5,23 +5,22 @@ Showroom: **Namangan, Uzbekistan** · Audience: **worldwide**
 
 Languages: **English · O‘zbek · Russian · Turkish**
 
-## Stack (Phase 1)
+## Stack
 
-- `apps/web` — Next.js App Router, Tailwind, Framer Motion-ready, next-intl
+- `apps/web` — Next.js App Router, Tailwind, next-intl, Zustand
 - `apps/api` — NestJS, Prisma, JWT auth, RBAC
 - `packages/shared` — Zod schemas, roles, locales, money helpers
-- Payments: Stripe (global) · Payme / Click (Uzbekistan) · Namangan showroom pay
-- Local DB default: SQLite (`file:./dev.db`) — switch to PostgreSQL for production
+- Database: **PostgreSQL** (Railway in production; `docker-compose` locally)
+- Payments: Stripe · Payme · Click · showroom pay (mock pay only when `ALLOW_MOCK_PAYMENTS=1`)
 
-## Deployed (Railway)
+## Live URLs
 
-- Web: https://web-production-e5029.up.railway.app/en
+- Web (Vercel): https://mg-jewelry.vercel.app
+- Web (Railway): https://web-production-e5029.up.railway.app/en
 - API: https://api-production-60ae.up.railway.app/api/health
 - GitHub: https://github.com/loopcstrategies-star/mg-jewelry (private)
-- Database: Railway PostgreSQL (local `.env` uses `DATABASE_PUBLIC_URL`)
 
 ## Quick start
-
 
 ```bash
 npm install
@@ -29,36 +28,36 @@ copy .env.example .env
 
 cd apps/api
 npx prisma generate
-npx prisma db push
+npx prisma migrate deploy
 npm run prisma:seed
 cd ../..
 
-# terminal 1
 npm run dev:api
-
-# terminal 2
 npm run dev:web
 ```
 
 - Web: http://localhost:3000/en  
 - API: http://localhost:4000/api/health  
-- Locales: `/en` `/uz` `/ru` `/tr`  
+- Locales: `/en` `/uz` `/ru` `/tr`
 
-
-### Demo accounts
+### Demo accounts (local / when `NEXT_PUBLIC_SHOW_DEMO_LOGIN=1`)
 
 | Role | Email | Password |
 |------|-------|----------|
 | Super Admin | admin@mgjewelry.uz | Admin123! |
 | Customer | customer@example.com | Customer123! |
 
-## Production notes
+## Production checklist
 
-1. Set `DATABASE_URL` to PostgreSQL and change Prisma `provider` to `postgresql`.
-2. Configure Stripe, Payme, Click, Cloudinary, Sanity keys from `.env.example`.
-3. Deploy `apps/web` to Vercel, `apps/api` + Postgres + Redis to Railway.
-4. Point DNS through Cloudflare.
+1. Set a strong `JWT_SECRET` (required in production — no default).
+2. Keep `ALLOW_MOCK_PAYMENTS` unset or `0` unless running a controlled demo.
+3. Configure Stripe (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`) and/or Payme/Click secrets.
+4. Optional: Cloudinary, Resend (`RESEND_API_KEY`), Telegram bot.
+5. Set `NEXT_PUBLIC_SHOW_DEMO_LOGIN=0` (or unset) to hide demo login buttons.
+6. Deploy web to Vercel; API + Postgres on Railway.
 
-## Phase 2+ (later)
+## Features
 
-Appointments, full AI suite, Algolia, Uzum, international shipping rate tables, WhatsApp, rewards.
+- Multilingual storefront (shop, collections, wholesale page, appointments, account)
+- Admin CMS: products, catalog, orders, customers, coupons, reviews, settings, uploads
+- International shipping quotes, returns/RMA, inquiries, support tickets

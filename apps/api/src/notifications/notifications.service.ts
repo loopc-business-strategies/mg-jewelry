@@ -37,10 +37,39 @@ export class NotificationsService {
     }
   }
 
-  /** Email stub — logs until SMTP/Resend is configured */
+  /** Sends via Resend when RESEND_API_KEY is set; otherwise logs a stub. */
   async notifyEmail(to: string, subject: string, body: string) {
-    this.logger.log(`[email-stub] to=${to} subject=${subject} body=${body}`);
-    return { sent: false, reason: "email_stub" };
+    const key = process.env.RESEND_API_KEY;
+    const from =
+      process.env.EMAIL_FROM || "MG Jewelry <onboarding@resend.dev>";
+    if (!key) {
+      this.logger.log(`[email-stub] to=${to} subject=${subject} body=${body}`);
+      return { sent: false, reason: "email_stub" };
+    }
+    try {
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${key}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          subject,
+          text: body,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.text();
+        this.logger.warn(`Resend failed: ${res.status} ${err}`);
+        return { sent: false, reason: "resend_error" };
+      }
+      return { sent: true };
+    } catch (e) {
+      this.logger.warn(`Email error: ${e instanceof Error ? e.message : e}`);
+      return { sent: false, reason: "network_error" };
+    }
   }
 
   async orderCreated(order: {
