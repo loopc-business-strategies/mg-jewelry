@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { api } from "@/lib/api";
+import { BrandMark } from "@/components/brand-mark";
 
 export async function SiteFooter() {
   const t = await getTranslations();
   const locale = await getLocale();
   const year = new Date().getFullYear();
   let showroom: Record<string, string> = {};
+  let logoUrl = "";
   try {
     const settings = await api.publicSettings();
     showroom = (settings.showroom as Record<string, string>) || {};
+    const brand = (settings.brand as Record<string, string>) || {};
+    logoUrl = brand.logoUrl || "";
   } catch {
     showroom = {};
   }
@@ -19,7 +23,7 @@ export async function SiteFooter() {
       <div className="gold-line" />
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-3 md:px-8">
         <div>
-          <div className="font-display text-3xl tracking-[0.2em]">MG</div>
+          <BrandMark size="footer" src={logoUrl} />
           <p className="mt-2 max-w-md text-sm text-ink/65">
             {t("tagline")} — {t("footer.showroom")}
           </p>

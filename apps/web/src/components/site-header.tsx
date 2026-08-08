@@ -8,6 +8,7 @@ import { Menu, ShoppingBag, User, X } from "lucide-react";
 import { useAuthStore } from "@/lib/auth-store";
 import { api } from "@/lib/api";
 import { guestCart } from "@/lib/guest-cart";
+import { BrandMark } from "@/components/brand-mark";
 
 const locales = [
   { code: "en", label: "EN" },
@@ -24,6 +25,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [logoUrl, setLogoUrl] = useState("");
 
   function localeHref(code: string) {
     const parts = pathname.split("/");
@@ -41,6 +43,16 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [hydrate]);
+
+  useEffect(() => {
+    api
+      .publicSettings()
+      .then((settings) => {
+        const brand = (settings.brand as Record<string, string>) || {};
+        setLogoUrl(brand.logoUrl || "");
+      })
+      .catch(() => setLogoUrl(""));
+  }, []);
 
   useEffect(() => {
     function refreshCount() {
@@ -80,11 +92,12 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-        <Link href={`/${locale}`} className="group">
-          <div className="font-display text-2xl tracking-[0.18em] text-ink md:text-3xl">
-            MG
-          </div>
-          <div className="text-[10px] uppercase tracking-[0.35em] text-ink/60 group-hover:text-gold">
+        <Link
+          href={`/${locale}`}
+          className="group flex min-w-0 max-w-[40%] flex-col items-start gap-0.5 sm:max-w-none sm:gap-1"
+        >
+          <BrandMark size="header" spin src={logoUrl} />
+          <div className="truncate text-[9px] uppercase tracking-[0.28em] text-ink/60 group-hover:text-gold sm:text-[10px] sm:tracking-[0.35em]">
             {t("brand")}
           </div>
         </Link>
