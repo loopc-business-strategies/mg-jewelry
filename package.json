@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "mg-jewelry",
   "private": true,
   "workspaces": [
@@ -17,12 +17,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "overrides": {
-    "glob": "10.5.0"
-  },
-  "supportedArchitectures": {
-    "os": ["current", "linux"],
-    "cpu": ["current", "x64"]
   }
 }
