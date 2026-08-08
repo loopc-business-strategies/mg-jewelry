@@ -25,7 +25,6 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const [logoUrl, setLogoUrl] = useState("");
 
   function localeHref(code: string) {
     const parts = pathname.split("/");
@@ -38,21 +37,19 @@ export function SiteHeader() {
 
   useEffect(() => {
     hydrate();
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 12);
+        ticking = false;
+      });
+    };
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [hydrate]);
-
-  useEffect(() => {
-    api
-      .publicSettings()
-      .then((settings) => {
-        const brand = (settings.brand as Record<string, string>) || {};
-        setLogoUrl(brand.logoUrl || "");
-      })
-      .catch(() => setLogoUrl(""));
-  }, []);
 
   useEffect(() => {
     function refreshCount() {
@@ -69,8 +66,13 @@ export function SiteHeader() {
         .catch(() => setCartCount(guestCart.count()));
     }
     refreshCount();
+    const onFocus = () => refreshCount();
     window.addEventListener("mg-cart-changed", refreshCount);
-    return () => window.removeEventListener("mg-cart-changed", refreshCount);
+    window.addEventListener("focus", onFocus);
+    return () => {
+      window.removeEventListener("mg-cart-changed", refreshCount);
+      window.removeEventListener("focus", onFocus);
+    };
   }, [locale, token]);
 
   const links = [
@@ -96,7 +98,7 @@ export function SiteHeader() {
           href={`/${locale}`}
           className="group flex min-w-0 max-w-[40%] flex-col items-start gap-0.5 sm:max-w-none sm:gap-1"
         >
-          <BrandMark size="header" spin src={logoUrl} />
+          <BrandMark size="header" spin />
           <div className="truncate text-[9px] uppercase tracking-[0.28em] text-ink/60 group-hover:text-gold sm:text-[10px] sm:tracking-[0.35em]">
             {t("brand")}
           </div>

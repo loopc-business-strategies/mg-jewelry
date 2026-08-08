@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ProductCard } from "@/components/product-card";
 import { HeroMotion } from "@/components/hero-motion";
 import { api } from "@/lib/api";
+import { getPublicSettings } from "@/lib/cached-settings";
 
 export async function generateMetadata({
   params,
@@ -38,7 +39,7 @@ export default async function HomePage({
     const [p, c, settings] = await Promise.all([
       api.products(locale, "&pageSize=8"),
       api.collections(locale),
-      api.publicSettings(),
+      getPublicSettings(),
     ]);
     products = p.items;
     collections = c;

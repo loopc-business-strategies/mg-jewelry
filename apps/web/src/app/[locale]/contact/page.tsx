@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { api } from "@/lib/api";
 import { ContactPageClient } from "@/components/contact-page-client";
+import { getPublicSettings } from "@/lib/cached-settings";
 
 export async function generateMetadata({
   params,
@@ -37,14 +37,9 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  let showroom: Record<string, string> = FALLBACK_SHOWROOM;
-  try {
-    const settings = await api.publicSettings();
-    const s = (settings.showroom as Record<string, string>) || {};
-    showroom = { ...FALLBACK_SHOWROOM, ...s };
-  } catch {
-    // use fallback
-  }
+  const settings = await getPublicSettings();
+  const s = (settings.showroom as Record<string, string>) || {};
+  const showroom: Record<string, string> = { ...FALLBACK_SHOWROOM, ...s };
 
   return (
     <Suspense fallback={<div className="px-5 pb-20 pt-28">…</div>}>

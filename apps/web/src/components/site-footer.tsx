@@ -1,22 +1,16 @@
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
-import { api } from "@/lib/api";
 import { BrandMark } from "@/components/brand-mark";
+import { getPublicSettings } from "@/lib/cached-settings";
 
 export async function SiteFooter() {
   const t = await getTranslations();
   const locale = await getLocale();
   const year = new Date().getFullYear();
-  let showroom: Record<string, string> = {};
-  let logoUrl = "";
-  try {
-    const settings = await api.publicSettings();
-    showroom = (settings.showroom as Record<string, string>) || {};
-    const brand = (settings.brand as Record<string, string>) || {};
-    logoUrl = brand.logoUrl || "";
-  } catch {
-    showroom = {};
-  }
+  const settings = await getPublicSettings();
+  const showroom = (settings.showroom as Record<string, string>) || {};
+  const brand = (settings.brand as Record<string, string>) || {};
+  const logoUrl = brand.logoUrl || "";
 
   return (
     <footer className="mt-24 border-t border-black/10">

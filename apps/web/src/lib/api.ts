@@ -35,7 +35,13 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+type RequestMode = "public" | "private";
+
+async function request<T>(
+  path: string,
+  init?: RequestInit,
+  mode: RequestMode = "private",
+): Promise<T> {
   const headers: Record<string, string> = {
     ...authHeaders(),
     ...(init?.headers as Record<string, string> | undefined),
@@ -45,10 +51,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   if (!isFormData && !headers["Content-Type"]) {
     headers["Content-Type"] = "application/json";
   }
+  const method = (init?.method || "GET").toUpperCase();
+  const isPublicGet = mode === "public" && method === "GET";
   const res = await fetch(`${API_URL}/api${path}`, {
     ...init,
     headers,
-    cache: "no-store",
+    ...(isPublicGet
+      ? { next: { revalidate: 60 } }
+      : { cache: "no-store" as RequestCache }),
   });
   if (!res.ok) {
     const text = await res.text();
@@ -57,15 +67,19 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+function publicGet<T>(path: string) {
+  return request<T>(path, undefined, "public");
+}
+
 export const api = {
   products: (locale: string, query = "") =>
-    request<{ items: ApiProduct[]; total: number }>(
+    publicGet<{ items: ApiProduct[]; total: number }>(
       `/products?locale=${locale}${query}`,
     ),
   product: (slug: string, locale: string) =>
-    request<ApiProduct>(`/products/${slug}?locale=${locale}`),
+    publicGet<ApiProduct>(`/products/${slug}?locale=${locale}`),
   collections: (locale: string) =>
-    request<
+    publicGet<
       Array<{
         id: string;
         slug: string;
@@ -76,7 +90,7 @@ export const api = {
       }>
     >(`/collections?locale=${locale}`),
   categories: (locale: string) =>
-    request<Array<{ id: string; slug: string; name: string }>>(
+    publicGet<Array<{ id: string; slug: string; name: string }>>(
       `/categories?locale=${locale}`,
     ),
   login: (email: string, password: string) =>
@@ -223,9 +237,9 @@ export const api = {
       method: "PUT",
       body: JSON.stringify({ value }),
     }),
-  publicSettings: () => request<Record<string, unknown>>("/settings/public"),
+  publicSettings: () => publicGet<Record<string, unknown>>("/settings/public"),
   appointmentSlots: (date?: string) =>
-    request<string[]>(
+    publicGet<string[]>(
       date ? `/appointments/slots?date=${date}` : "/appointments/slots",
     ),
   createAppointment: (body: Record<string, unknown>) =>

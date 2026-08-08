@@ -71,7 +71,7 @@ a {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  animation: brand-mark-spin 8s linear infinite;
+  animation: brand-mark-spin 8s linear 2;
 }
 
 .brand-mark-face {
@@ -98,12 +98,9 @@ a {
   filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.45));
 }
 
-.brand-mark-glow-static img {
-  filter: drop-shadow(0 2px 12px rgba(212, 175, 55, 0.5));
-}
-
+.brand-mark-glow-static img,
 .brand-mark-glow .brand-mark-face img {
-  animation: brand-mark-glow 3.6s ease-in-out infinite;
+  filter: drop-shadow(0 2px 12px rgba(212, 175, 55, 0.5));
 }
 
 @keyframes brand-mark-spin {
@@ -115,22 +112,8 @@ a {
   }
 }
 
-@keyframes brand-mark-glow {
-  0%,
-  100% {
-    filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.35));
-  }
-  50% {
-    filter: drop-shadow(0 4px 16px rgba(232, 212, 139, 0.6));
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .brand-mark-inner {
-    animation: none;
-  }
-
-  .brand-mark-glow .brand-mark-face img {
     animation: none;
   }
 }
