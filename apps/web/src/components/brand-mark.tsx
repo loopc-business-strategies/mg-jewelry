@@ -1,5 +1,7 @@
 "use client";
 
+// Brand mark asset: /brand/logo-mark.png
+
 import Image from "next/image";
 
 const DEFAULT_LOGO = "/brand/logo-mark.png";
