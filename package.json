@@ -20,5 +20,9 @@
   },
   "overrides": {
     "glob": "10.5.0"
+  },
+  "supportedArchitectures": {
+    "os": ["current", "linux"],
+    "cpu": ["current", "x64"]
   }
 }
