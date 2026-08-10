@@ -177,7 +177,7 @@ export default function OrderDetailPage() {
             <p className="mt-1 text-sm text-ink/60">
               Modern Gold Jewelry Manufacturing
             </p>
-            <p className="text-xs text-ink/45">Hearts of Namangan</p>
+            <p className="text-xs text-ink/45">from the Hearts of Namangan</p>
           </div>
           <div className="text-right text-sm">
             <p className="font-medium">{t("invoice")}</p>

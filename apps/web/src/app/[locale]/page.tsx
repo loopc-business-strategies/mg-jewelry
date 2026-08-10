@@ -68,7 +68,7 @@ export default async function HomePage({
             "@type": "JewelryStore",
             name: "MG Jewelry",
             alternateName: "Modern Gold Jewelry Manufacturing",
-            description: "Hearts of Namangan — luxury gold jewelry from Namangan, Uzbekistan.",
+            description: "from the Hearts of Namangan — luxury gold jewelry from Namangan, Uzbekistan.",
             url: process.env.NEXT_PUBLIC_APP_URL || "https://mg-jewelry.vercel.app",
             address: {
               "@type": "PostalAddress",

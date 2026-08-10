@@ -83,7 +83,7 @@ export class InquiriesService {
     await this.notifications.notifyEmail(
       inquiry.email,
       "MG Jewelry — We received your inquiry",
-      `Hello ${inquiry.name},\n\nThank you for contacting Modern Gold Jewelry Manufacturing (Hearts of Namangan).\nWe received your request${productName ? ` about ${productName}` : ""} and will reply shortly.\n\nShowroom: 242 Girvonbulok Street, Namangan, Uzbekistan\nTelegram: @mgjewelry`,
+      `Hello ${inquiry.name},\n\nThank you for contacting Modern Gold Jewelry Manufacturing (from the Hearts of Namangan).\nWe received your request${productName ? ` about ${productName}` : ""} and will reply shortly.\n\nShowroom: 242 Girvonbulok Street, Namangan, Uzbekistan\nTelegram: @mgjewelry`,
     );
 
     return inquiry;

@@ -17,7 +17,7 @@ export async function getHomeBanners(): Promise<SanityBanner[]> {
     return [
       {
         title: "Modern Gold Jewelry",
-        subtitle: "Hearts of Namangan",
+        subtitle: "from the Hearts of Namangan",
         imageUrl:
           "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2000&q=80",
         ctaHref: "/shop",
