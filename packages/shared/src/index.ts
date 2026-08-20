@@ -53,6 +53,8 @@ export const productFilterSchema = z.object({
   purity: z.string().optional(),
   minPriceUsd: z.coerce.number().optional(),
   maxPriceUsd: z.coerce.number().optional(),
+  minWeight: z.coerce.number().optional(),
+  maxWeight: z.coerce.number().optional(),
   sort: z
     .enum(["newest", "price_asc", "price_desc", "popular"])
     .default("newest"),

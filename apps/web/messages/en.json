@@ -11,7 +11,8 @@
     "book": "Book",
     "cart": "Cart",
     "account": "Account",
-    "admin": "Admin"
+    "admin": "Admin",
+    "trending": "Trending"
   },
   "ecommerce": {
     "eyebrow": "Trade · Wholesale",
@@ -50,7 +51,24 @@
     "showroomTitle": "Namangan showroom",
     "showroomText": "Experience the pieces in person at our atelier in Namangan, Uzbekistan — or shop globally online.",
     "newsletter": "Private previews & atelier notes",
-    "newsletterCta": "Subscribe"
+    "newsletterCta": "Subscribe",
+    "badgeNew": "New",
+    "badgeBestseller": "Bestseller"
+  },
+  "ticker": {
+    "shipping": "Worldwide shipping",
+    "showroom": "Namangan showroom",
+    "appointments": "Private appointments"
+  },
+  "trust": {
+    "shippingTitle": "Worldwide shipping",
+    "shippingBody": "Secure delivery from Namangan to your door.",
+    "showroomTitle": "Showroom visits",
+    "showroomBody": "See pieces in person at our Namangan atelier.",
+    "consultTitle": "Video consultation",
+    "consultBody": "Private remote viewing with our team.",
+    "returnsTitle": "Considered returns",
+    "returnsBody": "Contact us for returns and aftercare."
   },
   "shop": {
     "title": "Shop",
@@ -59,7 +77,23 @@
     "all": "All",
     "empty": "No pieces found.",
     "search": "Search",
-    "searchPlaceholder": "Search jewelry…"
+    "searchPlaceholder": "Search jewelry…",
+    "clearAll": "Clear all",
+    "productType": "Product type",
+    "collections": "Collections",
+    "material": "Material",
+    "price": "Price",
+    "weight": "Weight",
+    "more": "More",
+    "showLess": "Show less",
+    "sortFeatured": "Featured",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: low to high",
+    "sortPriceDesc": "Price: high to low",
+    "priceUnder": "Under $500",
+    "priceMid": "$500 – $1,500",
+    "priceHigh": "$1,500 – $3,000",
+    "priceTop": "$3,000+"
   },
   "product": {
     "addToCart": "Add to cart",

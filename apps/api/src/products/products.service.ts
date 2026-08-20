@@ -51,6 +51,12 @@ export class ProductsService {
         filters.maxPriceUsd != null
           ? { priceUsdCents: { lte: Math.round(filters.maxPriceUsd * 100) } }
           : {},
+        filters.minWeight != null
+          ? { weightGrams: { gte: filters.minWeight } }
+          : {},
+        filters.maxWeight != null
+          ? { weightGrams: { lte: filters.maxWeight } }
+          : {},
       ],
     };
 

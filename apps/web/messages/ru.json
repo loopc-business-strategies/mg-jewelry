@@ -11,7 +11,8 @@
     "book": "Запись",
     "cart": "Корзина",
     "account": "Кабинет",
-    "admin": "Админ"
+    "admin": "Админ",
+    "trending": "Тренды"
   },
   "ecommerce": {
     "eyebrow": "Торговля · Опт",
@@ -50,7 +51,24 @@
     "showroomTitle": "Шоурум в Намангане",
     "showroomText": "Примерите изделия в нашем ателье в Намангане или оформите заказ онлайн из любой точки мира.",
     "newsletter": "Закрытые превью и новости ателье",
-    "newsletterCta": "Подписаться"
+    "newsletterCta": "Подписаться",
+    "badgeNew": "Новинка",
+    "badgeBestseller": "Бестселлер"
+  },
+  "ticker": {
+    "shipping": "Доставка по миру",
+    "showroom": "Шоурум в Намангане",
+    "appointments": "Частные визиты"
+  },
+  "trust": {
+    "shippingTitle": "Доставка по миру",
+    "shippingBody": "Надёжная доставка из Намангана до вашей двери.",
+    "showroomTitle": "Визит в шоурум",
+    "showroomBody": "Посмотрите изделия в нашем ателье в Намангане.",
+    "consultTitle": "Видеоконсультация",
+    "consultBody": "Частный онлайн-просмотр с нашей командой.",
+    "returnsTitle": "Возвраты",
+    "returnsBody": "Свяжитесь с нами по возвратам и уходу."
   },
   "shop": {
     "title": "Магазин",
@@ -59,7 +77,23 @@
     "all": "Все",
     "empty": "Изделия не найдены.",
     "search": "Поиск",
-    "searchPlaceholder": "Поиск украшений…"
+    "searchPlaceholder": "Поиск украшений…",
+    "clearAll": "Сбросить все",
+    "productType": "Тип изделия",
+    "collections": "Коллекции",
+    "material": "Материал",
+    "price": "Цена",
+    "weight": "Вес",
+    "more": "Ещё",
+    "showLess": "Свернуть",
+    "sortFeatured": "Избранное",
+    "sortNewest": "Новинки",
+    "sortPriceAsc": "Цена: по возрастанию",
+    "sortPriceDesc": "Цена: по убыванию",
+    "priceUnder": "До $500",
+    "priceMid": "$500 – $1,500",
+    "priceHigh": "$1,500 – $3,000",
+    "priceTop": "$3,000+"
   },
   "product": {
     "addToCart": "В корзину",

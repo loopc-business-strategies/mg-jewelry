@@ -11,7 +11,8 @@
     "book": "Randevu",
     "cart": "Sepet",
     "account": "Hesap",
-    "admin": "Yönetim"
+    "admin": "Yönetim",
+    "trending": "Trend"
   },
   "ecommerce": {
     "eyebrow": "Ticaret · Toptan",
@@ -50,7 +51,24 @@
     "showroomTitle": "Namangan showroom",
     "showroomText": "Parçaları Namangan atölyemizde deneyin veya dünyanın her yerinden online sipariş verin.",
     "newsletter": "Özel önizlemeler ve atölye notları",
-    "newsletterCta": "Abone ol"
+    "newsletterCta": "Abone ol",
+    "badgeNew": "Yeni",
+    "badgeBestseller": "Çok satan"
+  },
+  "ticker": {
+    "shipping": "Dünya çapında kargo",
+    "showroom": "Namangan showroom",
+    "appointments": "Özel randevular"
+  },
+  "trust": {
+    "shippingTitle": "Dünya çapında kargo",
+    "shippingBody": "Namangan’dan kapınıza güvenli teslimat.",
+    "showroomTitle": "Showroom ziyareti",
+    "showroomBody": "Parçaları Namangan atölyemizde görün.",
+    "consultTitle": "Görüntülü danışmanlık",
+    "consultBody": "Ekibimizle özel uzaktan inceleme.",
+    "returnsTitle": "İadeler",
+    "returnsBody": "İade ve bakım için bize yazın."
   },
   "shop": {
     "title": "Mağaza",
@@ -59,7 +77,23 @@
     "all": "Tümü",
     "empty": "Ürün bulunamadı.",
     "search": "Ara",
-    "searchPlaceholder": "Mücevher ara…"
+    "searchPlaceholder": "Mücevher ara…",
+    "clearAll": "Tümünü temizle",
+    "productType": "Ürün tipi",
+    "collections": "Koleksiyonlar",
+    "material": "Materyal",
+    "price": "Fiyat",
+    "weight": "Ağırlık",
+    "more": "Daha fazla",
+    "showLess": "Daha az",
+    "sortFeatured": "Öne çıkan",
+    "sortNewest": "En yeni",
+    "sortPriceAsc": "Fiyat: artan",
+    "sortPriceDesc": "Fiyat: azalan",
+    "priceUnder": "$500 altı",
+    "priceMid": "$500 – $1,500",
+    "priceHigh": "$1,500 – $3,000",
+    "priceTop": "$3,000+"
   },
   "product": {
     "addToCart": "Sepete ekle",

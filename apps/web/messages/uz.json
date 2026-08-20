@@ -11,7 +11,8 @@
     "book": "Band qilish",
     "cart": "Savat",
     "account": "Kabinet",
-    "admin": "Admin"
+    "admin": "Admin",
+    "trending": "Trend"
   },
   "ecommerce": {
     "eyebrow": "Savdo · Ulgurji",
@@ -50,7 +51,24 @@
     "showroomTitle": "Namangan showroom",
     "showroomText": "Buyumlarni Namangan atelyemizda jonli ko‘ring yoki onlayn buyurtma qiling.",
     "newsletter": "Maxsus yangiliklar",
-    "newsletterCta": "Obuna bo‘lish"
+    "newsletterCta": "Obuna bo‘lish",
+    "badgeNew": "Yangi",
+    "badgeBestseller": "Bestseller"
+  },
+  "ticker": {
+    "shipping": "Dunyo bo‘ylab yetkazib berish",
+    "showroom": "Namangan showroom",
+    "appointments": "Shaxsiy uchrashuvlar"
+  },
+  "trust": {
+    "shippingTitle": "Dunyo bo‘ylab yetkazib berish",
+    "shippingBody": "Namangandan eshigingizgacha xavfsiz yetkazib berish.",
+    "showroomTitle": "Showroom tashrifi",
+    "showroomBody": "Buyumlarni Namangan atelyemizda jonli ko‘ring.",
+    "consultTitle": "Video konsultatsiya",
+    "consultBody": "Jamoamiz bilan shaxsiy masofaviy ko‘rish.",
+    "returnsTitle": "Qaytarish",
+    "returnsBody": "Qaytarish va parvarish uchun biz bilan bog‘laning."
   },
   "shop": {
     "title": "Do‘kon",
@@ -59,7 +77,23 @@
     "all": "Hammasi",
     "empty": "Mahsulot topilmadi.",
     "search": "Qidiruv",
-    "searchPlaceholder": "Zargarlik qidirish…"
+    "searchPlaceholder": "Zargarlik qidirish…",
+    "clearAll": "Tozalash",
+    "productType": "Mahsulot turi",
+    "collections": "Kolleksiyalar",
+    "material": "Material",
+    "price": "Narx",
+    "weight": "Og‘irlik",
+    "more": "Yana",
+    "showLess": "Yopish",
+    "sortFeatured": "Tanlangan",
+    "sortNewest": "Eng yangi",
+    "sortPriceAsc": "Narx: arzon",
+    "sortPriceDesc": "Narx: qimmat",
+    "priceUnder": "$500 gacha",
+    "priceMid": "$500 – $1,500",
+    "priceHigh": "$1,500 – $3,000",
+    "priceTop": "$3,000+"
   },
   "product": {
     "addToCart": "Savatga qo‘shish",

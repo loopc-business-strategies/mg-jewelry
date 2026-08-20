@@ -134,7 +134,8 @@ a {
   background: var(--color-gold);
   border-color: var(--color-gold);
   color: var(--color-ink);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.38);
 }
 
 .btn-ghost {
@@ -154,6 +155,7 @@ a {
 }
 
 .product-media {
+  position: relative;
   overflow: hidden;
   background: #1a1a1a;
 }
@@ -162,9 +164,102 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s ease;
+  transition: transform 0.7s ease, opacity 0.5s ease;
 }
 
-.product-media:hover img {
+.product-media:hover img.product-media-primary {
   transform: scale(1.04);
+}
+
+.product-media img.product-media-alt {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.group:hover .product-media img.product-media-alt {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.ken-burns {
+  animation: ken-burns 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.promo-ticker-track,
+.collection-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 36s linear infinite;
+}
+
+.collection-marquee-track {
+  animation-duration: 48s;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.product-rail {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.product-rail > * {
+  flex: 0 0 74%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .product-rail > * {
+    flex-basis: 46%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-rail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  .product-rail > * {
+    flex: unset;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns,
+  .promo-ticker-track,
+  .collection-marquee-track {
+    animation: none;
+  }
+
+  .btn-primary:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }

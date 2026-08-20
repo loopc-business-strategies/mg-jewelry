@@ -9,6 +9,8 @@ import { useAuthStore } from "@/lib/auth-store";
 import { api } from "@/lib/api";
 import { guestCart } from "@/lib/guest-cart";
 import { BrandMark } from "@/components/brand-mark";
+import { PromoTicker } from "@/components/promo-ticker";
+import { MegaNav } from "@/components/mega-nav";
 
 const locales = [
   { code: "en", label: "EN" },
@@ -25,6 +27,11 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+
+  const [categories, setCategories] = useState<Array<{ slug: string; name: string }>>([]);
+
+  const onHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const light = onHome && !scrolled && !open;
 
   function localeHref(code: string) {
     const parts = pathname.split("/");
@@ -75,6 +82,10 @@ export function SiteHeader() {
     };
   }, [locale, token]);
 
+  useEffect(() => {
+    api.categories(locale).then(setCategories).catch(() => setCategories([]));
+  }, [locale]);
+
   const links = [
     { href: `/${locale}`, label: t("nav.home") },
     { href: `/${locale}/collections`, label: t("nav.collections") },
@@ -85,56 +96,64 @@ export function SiteHeader() {
     { href: `/${locale}/contact`, label: t("nav.contact") },
   ];
 
+  const muted = light ? "text-white/70 hover:text-white" : "text-ink/75 hover:text-ink";
+  const brandLabel = light
+    ? "text-white/70 group-hover:text-gold-soft"
+    : "text-ink/60 group-hover:text-gold";
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-black/10 bg-[#f7f3eb]/90 backdrop-blur-md"
-          : "bg-transparent"
+        scrolled || !onHome || open
+          ? "border-b border-gold/25 bg-[#f7f3eb]/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+      <PromoTicker light={light} />
+      <div
+        className={`mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8 ${
+          scrolled ? "py-2.5" : "py-4"
+        }`}
+      >
         <Link
           href={`/${locale}`}
           className="group flex min-w-0 max-w-[40%] flex-col items-start gap-0.5 sm:max-w-none sm:gap-1"
         >
           <BrandMark size="header" spin />
-          <div className="truncate text-[9px] uppercase tracking-[0.28em] text-ink/60 group-hover:text-gold sm:text-[10px] sm:tracking-[0.35em]">
+          <div
+            className={`truncate text-[9px] uppercase tracking-[0.28em] sm:text-[10px] sm:tracking-[0.35em] ${brandLabel}`}
+          >
             {t("brand")}
           </div>
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm tracking-wide lg:flex xl:gap-8">
           {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-ink/75 transition hover:text-ink"
-            >
+            <Link key={link.href} href={link.href} className={`transition ${muted}`}>
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className={`flex items-center gap-3 ${light ? "text-white" : "text-ink"}`}>
           <div className="hidden items-center gap-1 text-xs tracking-wider sm:flex">
             {locales.map((l) => (
               <Link
                 key={l.code}
                 href={localeHref(l.code)}
                 className={`px-1.5 py-1 ${
-                  locale === l.code ? "text-gold" : "text-ink/50 hover:text-ink"
+                  locale === l.code
+                    ? "text-gold"
+                    : light
+                      ? "text-white/50 hover:text-white"
+                      : "text-ink/50 hover:text-ink"
                 }`}
               >
                 {l.label}
               </Link>
             ))}
           </div>
-          <Link
-            href={`/${locale}/cart`}
-            aria-label={t("nav.cart")}
-            className="relative"
-          >
+          <Link href={`/${locale}/cart`} aria-label={t("nav.cart")} className="relative">
             <ShoppingBag className="h-5 w-5" />
             {cartCount > 0 ? (
               <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center bg-ink px-1 text-[10px] text-white">
@@ -159,16 +178,23 @@ export function SiteHeader() {
         </div>
       </div>
 
+      <MegaNav light={light} />
+
       {open && (
         <div className="border-t border-black/10 bg-[#f7f3eb] px-5 py-4 lg:hidden">
           <div className="flex flex-col gap-3 text-sm">
             {links.map((link) => (
+              <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+                {link.label}
+              </Link>
+            ))}
+            {categories.map((c) => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={c.slug}
+                href={`/${locale}/shop?category=${c.slug}`}
                 onClick={() => setOpen(false)}
               >
-                {link.label}
+                {c.name}
               </Link>
             ))}
             <div className="flex gap-3 pt-2 text-xs tracking-wider">
