@@ -25,7 +25,7 @@ export default async function AboutPage({
   const t = await getTranslations("about");
 
   return (
-    <div className="mx-auto max-w-4xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-4xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl md:text-6xl">{t("title")}</h1>
       <p className="mt-8 text-lg leading-relaxed text-ink/75">{t("body")}</p>
       <div

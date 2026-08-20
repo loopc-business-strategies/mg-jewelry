@@ -98,7 +98,7 @@ export default function OrderDetailPage() {
 
   if (!order) {
     return (
-      <div className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8">
+      <div className="mx-auto max-w-3xl px-5 pb-20 pt-8 md:px-8">
         <p className="text-ink/60">…</p>
       </div>
     );
@@ -118,7 +118,7 @@ export default function OrderDetailPage() {
   const canPay = status === "PENDING_PAYMENT";
 
   return (
-    <div className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-3xl px-5 pb-20 pt-8 md:px-8">
       <div className="flex flex-wrap items-start justify-between gap-4 print:hidden">
         <Link href={`/${locale}/account`} className="text-sm text-ink/55">
           ← {t("title")}

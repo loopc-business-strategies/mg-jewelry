@@ -73,7 +73,7 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-md px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl">
         {mode === "login" ? t("login") : t("register")}
       </h1>

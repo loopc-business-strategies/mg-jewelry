@@ -352,7 +352,7 @@ export default function AdminPage() {
 
   if (!ready) {
     return (
-      <div className="mx-auto max-w-6xl px-5 pb-20 pt-28 md:px-8">
+      <div className="mx-auto max-w-6xl px-5 pb-20 pt-8 md:px-8">
         <p className="text-ink/60">…</p>
       </div>
     );
@@ -491,7 +491,7 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-6xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl">{t("title")}</h1>
       <p className="mt-2 text-sm text-ink/55">Namangan showroom operations</p>
 

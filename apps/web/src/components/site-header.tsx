@@ -96,7 +96,14 @@ export function SiteHeader() {
     { href: `/${locale}/contact`, label: t("nav.contact") },
   ];
 
-  const muted = light ? "text-white/70 hover:text-white" : "text-ink/75 hover:text-ink";
+  const extraLinks = [
+    { href: `/${locale}`, label: t("nav.home") },
+    { href: `/${locale}/ecommerce`, label: t("nav.ecommerce") },
+    { href: `/${locale}/appointments`, label: t("nav.book") },
+    { href: `/${locale}/about`, label: t("nav.about") },
+    { href: `/${locale}/contact`, label: t("nav.contact") },
+  ];
+
   const brandLabel = light
     ? "text-white/70 group-hover:text-gold-soft"
     : "text-ink/60 group-hover:text-gold";
@@ -111,13 +118,13 @@ export function SiteHeader() {
     >
       <PromoTicker light={light} />
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8 ${
-          scrolled ? "py-2.5" : "py-4"
+        className={`relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 md:px-8 ${
+          scrolled ? "py-2.5" : "py-3"
         }`}
       >
         <Link
           href={`/${locale}`}
-          className="group flex min-w-0 max-w-[40%] flex-col items-start gap-0.5 sm:max-w-none sm:gap-1"
+          className="group flex min-w-0 max-w-[40%] shrink-0 flex-col items-start gap-0.5 sm:max-w-none sm:gap-1"
         >
           <BrandMark size="header" spin />
           <div
@@ -127,15 +134,9 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm tracking-wide lg:flex xl:gap-8">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className={`transition ${muted}`}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <MegaNav light={light} extraLinks={extraLinks} />
 
-        <div className={`flex items-center gap-3 ${light ? "text-white" : "text-ink"}`}>
+        <div className={`flex shrink-0 items-center gap-3 ${light ? "text-white" : "text-ink"}`}>
           <div className="hidden items-center gap-1 text-xs tracking-wider sm:flex">
             {locales.map((l) => (
               <Link
@@ -177,8 +178,6 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
-
-      <MegaNav light={light} />
 
       {open && (
         <div className="border-t border-black/10 bg-[#f7f3eb] px-5 py-4 lg:hidden">

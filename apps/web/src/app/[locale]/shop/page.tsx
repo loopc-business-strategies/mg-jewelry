@@ -117,7 +117,7 @@ export default async function ShopPage({
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-20 pt-40 md:px-8">
+    <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl md:text-6xl">{t("title")}</h1>
 
       <form action={`/${locale}/shop`} method="get" className="mt-8 max-w-xl">

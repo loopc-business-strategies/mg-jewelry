@@ -78,7 +78,7 @@ export default function CartPage() {
 
   if (!ready) {
     return (
-      <div className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8">
+      <div className="mx-auto max-w-3xl px-5 pb-20 pt-8 md:px-8">
         <p className="text-ink/60">…</p>
       </div>
     );
@@ -113,7 +113,7 @@ export default function CartPage() {
       }));
 
   return (
-    <div className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-3xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl">{t("title")}</h1>
       {error ? <p className="mt-4 text-sm text-red-700">{error}</p> : null}
       {!rows.length ? (

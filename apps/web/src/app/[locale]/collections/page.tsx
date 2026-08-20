@@ -35,7 +35,7 @@ export default async function CollectionsPage({
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl md:text-6xl">{t("collections")}</h1>
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {collections.map((collection) => (

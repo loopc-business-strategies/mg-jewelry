@@ -251,7 +251,7 @@ export function ShopFilters({
         <SortSelect locale={locale} query={query} />
       </div>
 
-      <aside className="hidden lg:block lg:w-64 lg:shrink-0 lg:self-start lg:sticky lg:top-36">
+      <aside className="hidden lg:block lg:w-64 lg:shrink-0 lg:self-start lg:sticky lg:top-28">
         {body}
       </aside>
 

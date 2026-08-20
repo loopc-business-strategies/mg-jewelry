@@ -65,7 +65,7 @@ export default function AppointmentsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-2xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl md:text-6xl">{t("title")}</h1>
       <p className="mt-4 text-ink/70">{t("subtitle")}</p>
 

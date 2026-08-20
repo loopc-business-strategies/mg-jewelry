@@ -81,7 +81,7 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-28 md:grid-cols-2 md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-8 md:grid-cols-2 md:px-8">
         <div className="product-media aspect-square md:sticky md:top-28 md:self-start">
           {image ? (
             // eslint-disable-next-line @next/next/no-img-element

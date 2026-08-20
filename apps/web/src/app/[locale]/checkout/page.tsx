@@ -130,7 +130,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-2xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl">{t("title")}</h1>
 
       <div className="mt-10 space-y-8">

@@ -45,7 +45,7 @@ export default function EcommercePage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-5xl px-5 pb-20 pt-8 md:px-8">
       <p className="text-xs uppercase tracking-[0.35em] text-ink/45">
         {t("eyebrow")}
       </p>

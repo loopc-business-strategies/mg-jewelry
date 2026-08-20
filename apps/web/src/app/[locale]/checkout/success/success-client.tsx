@@ -48,7 +48,7 @@ export function SuccessClient() {
 
   if (state === "loading") {
     return (
-      <div className="mx-auto max-w-2xl px-5 pb-20 pt-28 md:px-8">
+      <div className="mx-auto max-w-2xl px-5 pb-20 pt-8 md:px-8">
         <p className="text-ink/60">…</p>
       </div>
     );
@@ -56,7 +56,7 @@ export function SuccessClient() {
 
   if (state === "needAuth") {
     return (
-      <div className="mx-auto max-w-2xl px-5 pb-20 pt-28 md:px-8">
+      <div className="mx-auto max-w-2xl px-5 pb-20 pt-8 md:px-8">
         <h1 className="font-display text-5xl">{t("pending")}</h1>
         <p className="mt-4 text-ink/65">{t("signInToView")}</p>
         <Link href={`/${locale}/auth`} className="btn-primary mt-8">
@@ -68,7 +68,7 @@ export function SuccessClient() {
 
   if (state === "confirmed") {
     return (
-      <div className="mx-auto max-w-2xl px-5 pb-20 pt-28 md:px-8">
+      <div className="mx-auto max-w-2xl px-5 pb-20 pt-8 md:px-8">
         <h1 className="font-display text-5xl">{t("confirmed")}</h1>
         <p className="mt-4 text-ink/60">{tCheckout("success")}</p>
         {orderNumber ? (
@@ -82,7 +82,7 @@ export function SuccessClient() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-5 pb-20 pt-28 md:px-8">
+    <div className="mx-auto max-w-2xl px-5 pb-20 pt-8 md:px-8">
       <h1 className="font-display text-5xl">{t("pending")}</h1>
       <p className="mt-4 text-ink/65">{t("pendingBody")}</p>
       {orderId ? (

@@ -16,7 +16,13 @@ type Collection = {
 
 type OpenKey = "collections" | "shop" | "trending" | string | null;
 
-export function MegaNav({ light }: { light?: boolean }) {
+export function MegaNav({
+  light,
+  extraLinks = [],
+}: {
+  light?: boolean;
+  extraLinks?: Array<{ href: string; label: string }>;
+}) {
   const locale = useLocale();
   const t = useTranslations();
   const [open, setOpen] = useState<OpenKey>(null);
@@ -121,32 +127,35 @@ export function MegaNav({ light }: { light?: boolean }) {
   const links = panelLinks();
 
   return (
-    <div
-      className="relative hidden lg:block"
-      onMouseLeave={() => setOpen(null)}
-    >
-      <div
-        className={`flex items-center justify-center gap-6 px-5 py-2.5 text-[13px] tracking-wide xl:gap-8 ${
-          light ? "border-t border-white/15" : "border-t border-black/10 bg-ink text-white"
-        }`}
-      >
+    <div className="relative hidden min-w-0 flex-1 lg:block" onMouseLeave={() => setOpen(null)}>
+      <div className="flex items-center justify-center gap-4 overflow-x-auto text-[13px] tracking-wide xl:gap-6">
         {tabs.map((tab) => (
           <Link
             key={String(tab.key)}
             href={tab.href}
             onMouseEnter={() => setOpen(tab.key)}
             onFocus={() => setOpen(tab.key)}
-            className={`relative pb-1 transition ${
-              light ? tabClass : "text-white/80 hover:text-white"
-            } ${open === tab.key ? "text-gold after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-gold" : ""}`}
+            className={`relative shrink-0 pb-0.5 whitespace-nowrap transition ${tabClass} ${
+              open === tab.key ? "text-gold after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-gold" : ""
+            }`}
           >
             {tab.label}
+          </Link>
+        ))}
+        {extraLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`hidden shrink-0 whitespace-nowrap transition xl:inline ${tabClass}`}
+            onMouseEnter={() => setOpen(null)}
+          >
+            {link.label}
           </Link>
         ))}
       </div>
 
       {open ? (
-        <div className="absolute inset-x-0 top-full z-50 border-b border-black/10 bg-[#fbf8f1] shadow-lg">
+        <div className="absolute top-full left-1/2 z-50 w-screen -translate-x-1/2 border-b border-black/10 bg-[#fbf8f1] shadow-lg">
           <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 md:grid-cols-[1fr_22rem] md:px-8">
             <div>
               <p className="mb-4 text-xs uppercase tracking-[0.22em] text-gold">{heading}</p>
@@ -161,11 +170,7 @@ export function MegaNav({ light }: { light?: boolean }) {
                     >
                       {item.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={item.image}
-                          alt=""
-                          className="h-10 w-10 shrink-0 object-cover"
-                        />
+                        <img src={item.image} alt="" className="h-10 w-10 shrink-0 object-cover" />
                       ) : (
                         <span className="h-10 w-10 shrink-0 bg-paper-deep" />
                       )}

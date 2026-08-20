@@ -42,7 +42,7 @@ export default async function ContactPage({
   const showroom: Record<string, string> = { ...FALLBACK_SHOWROOM, ...s };
 
   return (
-    <Suspense fallback={<div className="px-5 pb-20 pt-28">…</div>}>
+    <Suspense fallback={<div className="px-5 pb-20 pt-8">…</div>}>
       <ContactPageClient showroom={showroom} />
     </Suspense>
   );
