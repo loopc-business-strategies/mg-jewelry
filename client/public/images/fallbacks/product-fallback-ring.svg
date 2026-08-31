@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Premium ring jewelry">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAF7F2"/>
+      <stop offset="100%" stop-color="#F5E6C8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C872"/>
+      <stop offset="100%" stop-color="#C9A962"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="210" r="72" fill="none" stroke="url(#gold)" stroke-width="14"/>
+  <circle cx="200" cy="178" r="18" fill="#E8B4B8" opacity="0.9"/>
+  <text x="200" y="340" text-anchor="middle" fill="#8B7355" font-family="Georgia, serif" font-size="18">Premium Ring</text>
+</svg>

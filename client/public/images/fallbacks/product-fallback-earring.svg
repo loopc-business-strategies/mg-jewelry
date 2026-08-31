@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Premium earring jewelry">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C872"/>
+      <stop offset="100%" stop-color="#C9A962"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="155" cy="120" r="8" fill="url(#gold)"/>
+  <circle cx="245" cy="120" r="8" fill="url(#gold)"/>
+  <ellipse cx="155" cy="200" rx="22" ry="28" fill="url(#gold)"/>
+  <ellipse cx="245" cy="200" rx="22" ry="28" fill="url(#gold)"/>
+  <circle cx="155" cy="195" r="8" fill="#fff" opacity="0.8"/>
+  <circle cx="245" cy="195" r="8" fill="#fff" opacity="0.8"/>
+  <text x="200" y="340" text-anchor="middle" fill="#8B7355" font-family="Georgia, serif" font-size="18">Premium Earrings</text>
+</svg>

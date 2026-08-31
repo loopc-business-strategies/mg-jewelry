@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { X, ShoppingBag } from 'lucide-react';
-import { getProductImage } from '../utils/imageConfig';
+import ProductImage from './ProductImage';
 import PriceDisplay from './PriceDisplay';
 import WishlistButton from './WishlistButton';
 import { useCart } from '../context/CartContext';
@@ -32,9 +32,7 @@ export default function QuickViewModal({ product, onClose }) {
           <X size={20} />
         </button>
         <div className="grid md:grid-cols-2 gap-6 p-6">
-          <div className="aspect-square bg-cream rounded-xl overflow-hidden">
-            <img src={getProductImage(product)} alt={product.name} className="w-full h-full object-cover" />
-          </div>
+          <ProductImage product={product} containerClassName="aspect-square overflow-hidden bg-cream rounded-xl" />
           <div className="flex flex-col">
             <h2 className="font-display text-2xl mb-2">{product.name}</h2>
             <p className="text-sm text-muted mb-4 line-clamp-2">{product.shortDescription}</p>

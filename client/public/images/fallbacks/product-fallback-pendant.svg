@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Premium pendant jewelry">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAF7F2"/>
+      <stop offset="100%" stop-color="#F3E5F5"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C872"/>
+      <stop offset="100%" stop-color="#C9A962"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <line x1="200" y1="100" x2="200" y2="170" stroke="url(#gold)" stroke-width="4"/>
+  <path d="M160 220 L200 170 L240 220 L200 280 Z" fill="url(#gold)"/>
+  <circle cx="200" cy="225" r="10" fill="#fff" opacity="0.7"/>
+  <text x="200" y="340" text-anchor="middle" fill="#8B7355" font-family="Georgia, serif" font-size="18">Premium Pendant</text>
+</svg>

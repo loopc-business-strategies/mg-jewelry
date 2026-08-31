@@ -146,7 +146,7 @@ export default function WholesalePage() {
           <h2 className="font-display text-3xl mb-6">Dedicated Wholesale Support</h2>
           <div className="flex flex-wrap justify-center gap-8 text-sm">
             <span className="flex items-center gap-2"><Phone size={16} className="text-gold" /> {brand.phone}</span>
-            <span className="flex items-center gap-2"><Mail size={16} className="text-gold" /> wholesale@aurumgrove.com</span>
+            <Link to="/contact?type=quote" className="flex items-center gap-2 text-gold-dark hover:underline"><Mail size={16} className="text-gold" /> Request a quote via contact form</Link>
             <span className="flex items-center gap-2"><MessageCircle size={16} className="text-gold" /> WhatsApp</span>
           </div>
           <p className="text-muted mt-4">{brand.businessHours}</p>

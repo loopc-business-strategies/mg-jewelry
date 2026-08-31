@@ -118,7 +118,7 @@ export default function WholesaleDashboardPage() {
             {tab === 'support' && (
               <div className="text-sm space-y-2">
                 <p>Phone: +91 98765 43210</p>
-                <p>Email: wholesale@aurumgrove.com</p>
+                <p><Link to="/contact?type=quote" className="text-gold-dark hover:underline">Submit a business enquiry via our contact form</Link></p>
                 <p>Hours: Mon – Sat, 10 AM – 8 PM</p>
               </div>
             )}

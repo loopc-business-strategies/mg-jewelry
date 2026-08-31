@@ -14,6 +14,9 @@ import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 import ProfilePage from '../pages/ProfilePage';
 import WishlistPage from '../pages/WishlistPage';
 import SearchPage from '../pages/SearchPage';
+import ManufacturingPage from '../pages/ManufacturingPage';
+import MarketsPage from '../pages/MarketsPage';
+import CustomJewelryPage from '../pages/CustomJewelryPage';
 import AboutPage from '../pages/AboutPage';
 import ContactPage from '../pages/ContactPage';
 import BlogPage from '../pages/BlogPage';
@@ -52,6 +55,9 @@ export default function AppRouter() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="about" element={<AboutPage />} />
+        <Route path="manufacturing" element={<ManufacturingPage />} />
+        <Route path="markets" element={<MarketsPage />} />
+        <Route path="custom-jewelry" element={<CustomJewelryPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog/:slug" element={<BlogPostPage />} />

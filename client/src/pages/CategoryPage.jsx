@@ -56,7 +56,7 @@ export default function CategoryPage() {
     <>
       <SEOHead
         title={category?.seoTitle || title}
-        description={category?.seoDescription || `Shop premium ${title} at Aurum Grove.`}
+        description={category?.seoDescription || `Shop premium ${title} from Modern Gold Jewelry — international jewelry manufacturer.`}
         path={`/shop/${slug}`}
       />
 

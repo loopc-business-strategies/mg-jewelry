@@ -23,10 +23,10 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen flex bg-gray-50">
-      <aside className="w-64 bg-charcoal text-white shrink-0">
-        <div className="p-6 border-b border-gray-700">
-          <p className="font-display text-xl text-gold">{brand.name}</p>
-          <p className="text-xs text-gray-400 mt-1">Admin Panel</p>
+      <aside className="w-64 bg-gradient-to-b from-champagne to-cream border-r border-gold/20 shrink-0">
+        <div className="p-6 border-b border-gold/20">
+          <p className="font-display text-xl text-gradient-gold">{brand.name}</p>
+          <p className="text-xs text-muted mt-1">Admin Panel</p>
         </div>
         <nav className="p-4 space-y-1">
           {links.map(({ to, icon: Icon, label, end }) => (
@@ -36,7 +36,7 @@ export default function AdminLayout() {
               end={end}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
-                  isActive ? 'bg-gold text-white' : 'text-gray-300 hover:bg-gray-800'
+                  isActive ? 'bg-gold text-white' : 'text-charcoal hover:bg-white/60'
                 }`
               }
             >

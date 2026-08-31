@@ -14,7 +14,7 @@ export default function LegalPage({ title, content }) {
 
 export function PrivacyPage() {
   return <LegalPage title="Privacy Policy" content={<>
-    <p>At Aurum Grove, we respect your privacy and are committed to protecting your personal data.</p>
+    <p>At Modern Gold Jewelry, we respect your privacy and are committed to protecting your personal data.</p>
     <p>We collect information you provide when creating an account, placing orders, or contacting us. This includes name, email, phone, and shipping address.</p>
     <p>We use this information to process orders, provide customer support, and improve our services. We do not sell your personal data to third parties.</p>
     <p>Payment card details are never stored on our servers. All transactions are processed through secure payment gateways.</p>
@@ -23,7 +23,7 @@ export function PrivacyPage() {
 
 export function TermsPage() {
   return <LegalPage title="Terms & Conditions" content={<>
-    <p>By using the Aurum Grove website, you agree to these terms and conditions.</p>
+    <p>By using the Modern Gold Jewelry website, you agree to these terms and conditions.</p>
     <p>All products are subject to availability. Prices are listed in Indian Rupees (INR) and include applicable taxes unless stated otherwise.</p>
     <p>We reserve the right to modify product prices and availability without prior notice.</p>
   </>} />;

@@ -1,5 +1,5 @@
 {
-  "name": "aurum-grove",
+  "name": "modern-gold-jewelry",
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",

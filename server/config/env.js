@@ -14,6 +14,6 @@ module.exports = {
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
   corsOrigins: parseOrigins(),
   wholesalePriceVisibility: process.env.WHOLESALE_PRICE_VISIBILITY || 'approved_only',
-  adminEmail: process.env.ADMIN_EMAIL || 'admin@aurumgrove.com',
+  adminEmail: process.env.ADMIN_EMAIL || 'admin@moderngoldjewelry.com',
   adminPassword: process.env.ADMIN_PASSWORD || 'changeme',
 };

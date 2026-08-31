@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aurumgrove.com/sitemap.xml
+Sitemap: https://mg-jewelry.vercel.app/sitemap.xml

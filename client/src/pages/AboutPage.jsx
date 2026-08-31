@@ -1,64 +1,88 @@
-import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
-import { brand } from '../utils/brandConfig';
+import { brand, trustIndicators, manufacturingSteps } from '../utils/brandConfig';
 import { aboutHero } from '../utils/imageConfig';
-import { Award, Shield, Heart } from 'lucide-react';
+import MarketsSection from '../components/sections/MarketsSection';
+import { Link } from 'react-router-dom';
 
 export default function AboutPage() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: brand.name,
+    name: brand.legalName,
+    alternateName: brand.name,
     description: brand.tagline,
-    url: 'https://aurumgrove.com',
+    url: brand.siteUrl,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '242 Girvonbulok Street',
+      addressLocality: 'Namangan Davlatabad',
+      addressRegion: 'Namangan',
+      addressCountry: 'UZ',
+    },
   };
 
   return (
     <>
-      <SEOHead title="About Us" description={`Learn about ${brand.name} — our story, craftsmanship, and commitment to quality.`} path="/about" schema={schema} />
+      <SEOHead title="About Us" description={`${brand.legalName} — jewelry manufacturing from Namangan, Uzbekistan, serving international markets.`} path="/about" schema={schema} />
 
       <div className="relative h-64 md:h-80 overflow-hidden">
-        <img src={aboutHero} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h1 className="font-display text-4xl md:text-5xl text-white">Our Story</h1>
+        <img src={aboutHero} alt="Modern Gold Jewelry manufacturing facility" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-pearl/80 to-cream/40 flex items-center justify-center">
+          <h1 className="font-display text-4xl md:text-5xl text-charcoal">Crafted in Uzbekistan. Connected to the World.</h1>
         </div>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-16 space-y-12">
         <section id="story">
-          <h2 className="font-display text-3xl mb-4">Brand Story</h2>
+          <h2 className="font-display text-3xl mb-4">Our Story</h2>
+          <p className="text-muted leading-relaxed mb-4">
+            {brand.legalName} is a jewelry manufacturing company based in Namangan, Uzbekistan, focused on creating quality jewelry products for international markets.
+          </p>
           <p className="text-muted leading-relaxed">
-            {brand.name} was born from a passion for timeless Indian craftsmanship. We believe every piece of jewellery tells a story — of love, celebration, and heritage. Our artisans blend traditional techniques with contemporary design to create pieces that transcend generations.
+            We combine skilled craftsmanship, modern production capabilities and rigorous quality control to serve wholesalers, retailers, jewelry brands and international business partners across Central Asia, Russia, the UK, Singapore, Malaysia, Hong Kong, the United States and Dubai.
           </p>
         </section>
 
         <section>
           <h2 className="font-display text-3xl mb-4">Mission & Vision</h2>
           <p className="text-muted leading-relaxed mb-4">
-            <strong>Mission:</strong> To make premium, certified jewellery accessible to every Indian household while preserving the art of fine craftsmanship.
+            <strong>Mission:</strong> To deliver precision-crafted jewelry manufacturing that empowers international partners with reliable quality, flexible production and professional service.
           </p>
           <p className="text-muted leading-relaxed">
-            <strong>Vision:</strong> To become India's most trusted premium jewellery brand, known for authenticity, elegance, and exceptional customer experience.
+            <strong>Vision:</strong> To be a trusted international jewelry manufacturer connecting Uzbekistan craftsmanship with global jewelry markets.
           </p>
         </section>
 
         <section>
-          <h2 className="font-display text-3xl mb-6">Why Customers Trust Us</h2>
+          <h2 className="font-display text-3xl mb-6">What We Offer</h2>
+          <ul className="grid md:grid-cols-2 gap-3">
+            {['Manufacturing expertise', 'Skilled craftsmanship', 'Modern production', 'Quality control', 'Custom manufacturing', 'Wholesale partnerships', 'International business', 'Reliable production'].map((item) => (
+              <li key={item} className="flex items-center gap-2 text-muted text-sm">
+                <span className="w-2 h-2 rounded-full bg-gold shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="font-display text-3xl mb-6">Why Partners Trust Us</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: Award, title: 'Craftsmanship', desc: 'Handcrafted by master artisans with decades of experience.' },
-              { icon: Shield, title: 'Certification', desc: 'BIS hallmarked gold and IGI/GIA certified diamonds.' },
-              { icon: Heart, title: 'Quality', desc: 'Rigorous quality checks at every stage of production.' },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="text-center p-6 bg-cream rounded-xl">
-                <Icon size={32} className="text-gold mx-auto mb-3" />
-                <h3 className="font-display text-xl mb-2">{title}</h3>
+            {trustIndicators.slice(0, 3).map(({ title, desc }) => (
+              <div key={title} className="text-center p-6 bg-cream rounded-xl border border-gold/10">
+                <h3 className="font-display text-xl mb-2 text-charcoal">{title}</h3>
                 <p className="text-sm text-muted">{desc}</p>
               </div>
             ))}
           </div>
         </section>
+
+        <div className="text-center">
+          <Link to="/manufacturing" className="text-gold-dark font-medium hover:underline">Explore our manufacturing process →</Link>
+        </div>
       </div>
+
+      <MarketsSection compact />
     </>
   );
 }
