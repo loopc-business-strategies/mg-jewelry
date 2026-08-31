@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { resolveProductImage, getCategoryFallback, getProductAlt } from '../utils/imageConfig';
+import { useState, useCallback, useMemo } from 'react';
+import { getCategoryFallback, getProductAlt, getProductImages } from '../utils/imageConfig';
 
 const DEFAULT_FALLBACK = getCategoryFallback();
 
@@ -11,30 +11,47 @@ export default function ProductImage({
   loading = 'lazy',
   sizes,
 }) {
-  const primary = resolveProductImage(product, index);
   const categoryFallback = getCategoryFallback(product?.category, product?.subcategory);
-  const [src, setSrc] = useState(primary);
+  const catalogImages = getProductImages(product?.category, product?.subcategory);
+
+  const candidates = useMemo(() => {
+    const urls = [];
+    const add = (url) => {
+      if (url && typeof url === 'string' && url.trim() && !urls.includes(url.trim())) {
+        urls.push(url.trim());
+      }
+    };
+
+    if (product?.images?.length) {
+      product.images.forEach(add);
+    } else {
+      add(catalogImages[index]);
+      add(catalogImages[0]);
+    }
+
+    if (index > 0) add(product?.images?.[index]);
+    catalogImages.forEach(add);
+    add(categoryFallback);
+    add(DEFAULT_FALLBACK);
+
+    return urls;
+  }, [product, index, catalogImages, categoryFallback]);
+
+  const startIndex = Math.min(index, Math.max(candidates.length - 1, 0));
+  const [candidateIndex, setCandidateIndex] = useState(startIndex);
   const [loaded, setLoaded] = useState(false);
-  const [stage, setStage] = useState(0);
+  const src = candidates[candidateIndex] || DEFAULT_FALLBACK;
 
   const handleError = useCallback(() => {
-    setStage((prev) => {
-      if (prev === 0 && categoryFallback !== src) {
-        setSrc(categoryFallback);
-        return 1;
-      }
-      if (prev <= 1 && DEFAULT_FALLBACK !== src) {
-        setSrc(DEFAULT_FALLBACK);
-        return 2;
-      }
-      return prev;
-    });
-  }, [categoryFallback, src]);
+    setLoaded(false);
+    setCandidateIndex((prev) => (prev < candidates.length - 1 ? prev + 1 : prev));
+  }, [candidates.length]);
 
   return (
     <div className={`relative ${containerClassName}`}>
       {!loaded && <div className="absolute inset-0 skeleton" aria-hidden="true" />}
       <img
+        key={src}
         src={src}
         alt={getProductAlt(product, index)}
         className={`w-full h-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}

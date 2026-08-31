@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../services/api';
+import SafeImage from '../components/SafeImage';
 import SEOHead from '../components/SEOHead';
 
 export default function BlogPostPage() {
@@ -21,7 +22,7 @@ export default function BlogPostPage() {
         <span className="text-xs text-gold uppercase tracking-wider">{blog.category}</span>
         <h1 className="font-display text-4xl mt-2 mb-4">{blog.title}</h1>
         <p className="text-sm text-muted mb-8">By {blog.author}</p>
-        {blog.image && <img src={blog.image} alt={blog.title} className="w-full rounded-xl mb-8" />}
+        {blog.image && <SafeImage src={blog.image} alt={blog.title} category="rings" className="w-full rounded-xl mb-8" />}
         <div className="prose text-muted leading-relaxed">{blog.content}</div>
       </article>
     </>

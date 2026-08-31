@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { formatPrice } from '../../utils/formatPrice';
 import toast from 'react-hot-toast';
+import { getProductImages } from '../../utils/imageConfig';
 
 const emptyForm = {
   name: '', sku: '', category: 'rings', subcategory: '', description: '',
@@ -40,7 +41,7 @@ export default function AdminProducts() {
         moq: Number(form.moq),
         stock: Number(form.stock),
         discount: Math.round(((form.mrp - form.price) / form.mrp) * 100),
-        images: ['https://images.unsplash.com/photo-1515562141207-7a88fb7071ee?w=800&q=80'],
+        images: getProductImages(form.category, form.subcategory),
         shortDescription: form.description?.slice(0, 80),
       };
       await api.post('/admin/products', payload);

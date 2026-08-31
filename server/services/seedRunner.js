@@ -1,29 +1,29 @@
-const path = require('path');
-if (!process.env.RAILWAY_ENVIRONMENT && !process.env.MONGODB_URI) {
-  require('dotenv').config({ path: path.join(__dirname, '../../.env') });
-}
+const { getProductImages, getCategoryImage } = require('../config/productImages');
+const { adminEmail, adminPassword } = require('../config/env');
+const { DEFAULT_TIERS } = require('./bulkPricing');
 const User = require('../models/User');
 const Category = require('../models/Category');
 const Product = require('../models/Product');
 const Settings = require('../models/Settings');
 const Blog = require('../models/Blog');
-const { adminEmail, adminPassword } = require('../config/env');
-const { DEFAULT_TIERS } = require('./bulkPricing');
 
-const img = (id) => `https://images.unsplash.com/photo-${id}?w=800&q=80&auto=format&fit=crop`;
+const path = require('path');
+if (!process.env.RAILWAY_ENVIRONMENT && !process.env.MONGODB_URI) {
+  require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+}
 
 const categoriesData = [
-  { name: 'Rings', slug: 'rings', image: img('1515562141207-7a88fb7071ee'), subcategories: [{ name: 'Diamond Rings', slug: 'diamond-rings' }, { name: 'Gold Rings', slug: 'gold-rings' }, { name: 'Solitaire Rings', slug: 'solitaire-rings' }, { name: 'Engagement Rings', slug: 'engagement-rings' }, { name: 'Wedding Rings', slug: 'wedding-rings' }], seoContent: 'Premium rings manufactured by Modern Gold Jewelry for international markets.' },
-  { name: 'Earrings', slug: 'earrings', image: img('1535632066922-ab7c3ab60908'), subcategories: [{ name: 'Stud Earrings', slug: 'stud-earrings' }, { name: 'Hoop Earrings', slug: 'hoop-earrings' }, { name: 'Drop Earrings', slug: 'drop-earrings' }], seoContent: 'Elegant earrings crafted with precision in Uzbekistan.' },
-  { name: 'Necklaces', slug: 'necklaces', image: img('1599643478518-a784e069c662'), subcategories: [{ name: 'Gold Necklaces', slug: 'gold-necklaces' }, { name: 'Layered Necklaces', slug: 'layered-necklaces' }], seoContent: 'Refined necklaces for global jewelry partners.' },
-  { name: 'Bracelets', slug: 'bracelets', image: img('1611591431799-11f2980a0c7f'), subcategories: [{ name: 'Gold Bracelets', slug: 'gold-bracelets' }, { name: 'Diamond Bracelets', slug: 'diamond-bracelets' }, { name: 'Tennis Bracelets', slug: 'tennis-bracelets' }], seoContent: 'Premium bracelets in gold and diamond.' },
-  { name: 'Pendants', slug: 'pendants', image: img('1605100804763-247f67b3557e'), subcategories: [{ name: 'Gold Pendants', slug: 'gold-pendants' }, { name: 'Diamond Pendants', slug: 'diamond-pendants' }], seoContent: 'Beautiful pendants for international collections.' },
-  { name: 'Gold Jewelry', slug: 'gold-jewelry', image: img('1605100804763-247f67b3557e'), subcategories: [{ name: 'Gold Chains', slug: 'gold-chains' }, { name: 'Gold Sets', slug: 'gold-sets' }], seoContent: 'Fine gold jewelry manufacturing from Uzbekistan.' },
-  { name: 'Diamond Jewelry', slug: 'diamond-jewelry', image: img('1515562141207-7a88fb7071ee'), subcategories: [{ name: 'Diamond Rings', slug: 'diamond-rings' }, { name: 'Diamond Sets', slug: 'diamond-sets' }], seoContent: 'Diamond jewelry crafted to international standards.' },
-  { name: 'Custom Jewelry', slug: 'custom-jewelry', image: img('1617032210318-096e6c314904'), subcategories: [{ name: 'Private Label', slug: 'private-label' }, { name: 'Bespoke Designs', slug: 'bespoke-designs' }], seoContent: 'Custom and private-label jewelry manufacturing.' },
-  { name: 'Bridal Jewelry', slug: 'bridal-jewelry', image: img('1602751584552-8ba73aad10e2'), subcategories: [{ name: 'Bridal Sets', slug: 'bridal-sets' }, { name: 'Wedding Bands', slug: 'wedding-bands' }], seoContent: 'Bridal jewelry collections for international markets.' },
-  { name: 'Fashion Jewelry', slug: 'fashion-jewelry', image: img('1535632066922-ab7c3ab60908'), subcategories: [{ name: 'Contemporary', slug: 'contemporary' }, { name: 'Statement Pieces', slug: 'statement-pieces' }], seoContent: 'Fashion-forward jewelry for modern retailers.' },
-  { name: 'Wholesale Collections', slug: 'wholesale-collections', image: img('1617032210318-096e6c314904'), subcategories: [{ name: 'Bulk Orders', slug: 'bulk-orders' }, { name: 'Partner Collections', slug: 'partner-collections' }], seoContent: 'Wholesale jewelry collections for business partners.' },
+  { name: 'Rings', slug: 'rings', subcategories: [{ name: 'Diamond Rings', slug: 'diamond-rings' }, { name: 'Gold Rings', slug: 'gold-rings' }, { name: 'Solitaire Rings', slug: 'solitaire-rings' }, { name: 'Engagement Rings', slug: 'engagement-rings' }, { name: 'Wedding Rings', slug: 'wedding-rings' }], seoContent: 'Premium rings manufactured by Modern Gold Jewelry for international markets.' },
+  { name: 'Earrings', slug: 'earrings', subcategories: [{ name: 'Stud Earrings', slug: 'stud-earrings' }, { name: 'Hoop Earrings', slug: 'hoop-earrings' }, { name: 'Drop Earrings', slug: 'drop-earrings' }], seoContent: 'Elegant earrings crafted with precision in Uzbekistan.' },
+  { name: 'Necklaces', slug: 'necklaces', subcategories: [{ name: 'Gold Necklaces', slug: 'gold-necklaces' }, { name: 'Layered Necklaces', slug: 'layered-necklaces' }], seoContent: 'Refined necklaces for global jewelry partners.' },
+  { name: 'Bracelets', slug: 'bracelets', subcategories: [{ name: 'Gold Bracelets', slug: 'gold-bracelets' }, { name: 'Diamond Bracelets', slug: 'diamond-bracelets' }, { name: 'Tennis Bracelets', slug: 'tennis-bracelets' }], seoContent: 'Premium bracelets in gold and diamond.' },
+  { name: 'Pendants', slug: 'pendants', subcategories: [{ name: 'Gold Pendants', slug: 'gold-pendants' }, { name: 'Diamond Pendants', slug: 'diamond-pendants' }], seoContent: 'Beautiful pendants for international collections.' },
+  { name: 'Gold Jewelry', slug: 'gold-jewelry', subcategories: [{ name: 'Gold Chains', slug: 'gold-chains' }, { name: 'Gold Sets', slug: 'gold-sets' }], seoContent: 'Fine gold jewelry manufacturing from Uzbekistan.' },
+  { name: 'Diamond Jewelry', slug: 'diamond-jewelry', subcategories: [{ name: 'Diamond Rings', slug: 'diamond-rings' }, { name: 'Diamond Sets', slug: 'diamond-sets' }], seoContent: 'Diamond jewelry crafted to international standards.' },
+  { name: 'Custom Jewelry', slug: 'custom-jewelry', subcategories: [{ name: 'Private Label', slug: 'private-label' }, { name: 'Bespoke Designs', slug: 'bespoke-designs' }], seoContent: 'Custom and private-label jewelry manufacturing.' },
+  { name: 'Bridal Jewelry', slug: 'bridal-jewelry', subcategories: [{ name: 'Bridal Sets', slug: 'bridal-sets' }, { name: 'Wedding Bands', slug: 'wedding-bands' }], seoContent: 'Bridal jewelry collections for international markets.' },
+  { name: 'Fashion Jewelry', slug: 'fashion-jewelry', subcategories: [{ name: 'Contemporary', slug: 'contemporary' }, { name: 'Statement Pieces', slug: 'statement-pieces' }], seoContent: 'Fashion-forward jewelry for modern retailers.' },
+  { name: 'Wholesale Collections', slug: 'wholesale-collections', subcategories: [{ name: 'Bulk Orders', slug: 'bulk-orders' }, { name: 'Partner Collections', slug: 'partner-collections' }], seoContent: 'Wholesale jewelry collections for business partners.' },
 ];
 
 const productNames = [
@@ -61,19 +61,18 @@ const productNames = [
   ['Designer Fashion Ring', 'fashion-jewelry', 'contemporary', 22999, 26999, 'Gold', '18K', 'women', false, true, false],
 ];
 
-const imageIds = ['1515562141207-7a88fb7071ee', '1535632066922-ab7c3ab60908', '1599643478518-a784e069c662', '1611591431799-11f2980a0c7f', '1605100804763-247f67b3557e'];
-
 async function seedRunner() {
   await User.create({ name: 'Admin', email: adminEmail, phone: '0000000000', password: adminPassword, role: 'admin' });
   await Category.insertMany(categoriesData.map((c, i) => ({
     ...c,
+    image: getCategoryImage(c.slug),
     order: i,
     seoTitle: `${c.name} | Modern Gold Jewelry Manufacturer`,
     seoDescription: c.seoContent,
   })));
 
   const products = productNames.map(([name, category, subcategory, price, mrp, metal, purity, gender, featured, newArrival, bestSeller], i) => {
-    const imgId = imageIds[i % imageIds.length];
+    const images = getProductImages(category, subcategory);
     return {
       name, category, subcategory, price, mrp,
       sku: `MGJ-${String(i + 1).padStart(4, '0')}`,
@@ -83,7 +82,7 @@ async function seedRunner() {
       metal, purity, gender, featured, newArrival, bestSeller,
       shortDescription: `Premium ${metal} ${category.replace(/-/g, ' ')} — manufactured by Modern Gold Jewelry.`,
       description: `The ${name} is precision-crafted at our Namangan facility for international jewelry partners and discerning customers worldwide.`,
-      images: [img(imgId), img(imageIds[(i + 1) % imageIds.length])],
+      images,
       sizes: category === 'rings' ? ['6', '7', '8', '9'] : ['Standard'],
       diamondDetails: name.toLowerCase().includes('diamond') ? { hasDiamond: true, carat: 0.25, clarity: 'VS', color: 'FG', cut: 'Excellent' } : { hasDiamond: false },
       rating: 4 + Math.random(), reviewCount: Math.floor(Math.random() * 50) + 5,
@@ -96,9 +95,9 @@ async function seedRunner() {
   await Product.insertMany(products);
   await Settings.create({ key: 'global', bulkPricingTiers: DEFAULT_TIERS });
   await Blog.insertMany([
-    { title: 'How to Choose the Perfect Engagement Ring', slug: 'choose-perfect-engagement-ring', excerpt: 'A guide to selecting an engagement ring for your collection.', content: 'Choosing an engagement ring is one of the most meaningful decisions for jewelry retailers and partners. Modern Gold Jewelry offers precision-crafted solitaire and diamond rings manufactured in Uzbekistan for international markets.', category: 'Buying Guide', author: 'Modern Gold Jewelry', image: img('1515562141207-7a88fb7071ee') },
-    { title: 'Gold Jewelry Care Tips', slug: 'gold-jewellery-care-tips', excerpt: 'Keep your gold jewelry shining for years.', content: 'Proper care ensures gold jewelry retains its lustre. Share these tips with your customers to maintain the premium quality of Modern Gold Jewelry pieces.', category: 'Jewellery Care', author: 'Modern Gold Jewelry', image: img('1605100804763-247f67b3557e') },
-    { title: 'International Jewelry Manufacturing Trends', slug: 'international-jewelry-trends', excerpt: 'Trends shaping global jewelry manufacturing.', content: 'From minimalist designs to statement bridal collections, international jewelry markets continue to evolve. Modern Gold Jewelry stays at the forefront of manufacturing excellence.', category: 'Fashion Trends', author: 'Modern Gold Jewelry', image: img('1602751584552-8ba73aad10e2') },
+    { title: 'How to Choose the Perfect Engagement Ring', slug: 'choose-perfect-engagement-ring', excerpt: 'A guide to selecting an engagement ring for your collection.', content: 'Choosing an engagement ring is one of the most meaningful decisions for jewelry retailers and partners. Modern Gold Jewelry offers precision-crafted solitaire and diamond rings manufactured in Uzbekistan for international markets.', category: 'Buying Guide', author: 'Modern Gold Jewelry', image: getCategoryImage('rings') },
+    { title: 'Gold Jewelry Care Tips', slug: 'gold-jewellery-care-tips', excerpt: 'Keep your gold jewelry shining for years.', content: 'Proper care ensures gold jewelry retains its lustre. Share these tips with your customers to maintain the premium quality of Modern Gold Jewelry pieces.', category: 'Jewellery Care', author: 'Modern Gold Jewelry', image: getCategoryImage('gold-jewelry') },
+    { title: 'International Jewelry Manufacturing Trends', slug: 'international-jewelry-trends', excerpt: 'Trends shaping global jewelry manufacturing.', content: 'From minimalist designs to statement bridal collections, international jewelry markets continue to evolve. Modern Gold Jewelry stays at the forefront of manufacturing excellence.', category: 'Fashion Trends', author: 'Modern Gold Jewelry', image: getCategoryImage('bridal-jewelry') },
   ]);
   console.log('Auto-seed completed');
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
+import SafeImage from '../components/SafeImage';
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -19,7 +20,7 @@ export default function BlogPage() {
           {blogs.map((blog) => (
             <Link key={blog._id} to={`/blog/${blog.slug}`} className="group">
               <div className="aspect-[16/10] rounded-xl overflow-hidden bg-cream mb-4">
-                {blog.image && <img src={blog.image} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />}
+                {blog.image && <SafeImage src={blog.image} alt={blog.title} category="rings" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />}
               </div>
               <span className="text-xs text-gold uppercase tracking-wider">{blog.category}</span>
               <h2 className="font-display text-xl mt-1 group-hover:text-gold transition-colors">{blog.title}</h2>

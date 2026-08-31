@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import api from '../services/api';
 import { formatPrice } from '../utils/formatPrice';
+import SafeImage from './SafeImage';
 
 export default function SearchBar({ onClose }) {
   const [query, setQuery] = useState('');
@@ -49,7 +50,7 @@ export default function SearchBar({ onClose }) {
               className="w-full flex items-center gap-3 px-4 py-3 hover:bg-cream transition-colors text-left"
               onClick={() => { navigate(`/product/${s._id}`); onClose?.(); }}
             >
-              {s.image && <img src={s.image} alt="" className="w-10 h-10 rounded object-cover" />}
+              {s.image && <SafeImage src={s.image} alt="" category={s.category} className="w-10 h-10 rounded object-cover" />}
               <div>
                 <p className="text-sm font-medium">{s.name}</p>
                 <p className="text-xs text-muted">{s.category} · {formatPrice(s.price)}</p>

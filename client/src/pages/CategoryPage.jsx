@@ -9,6 +9,7 @@ import ProductGrid from '../components/ProductGrid';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import QuickViewModal from '../components/QuickViewModal';
 import Pagination from '../components/Pagination';
+import SafeImage from '../components/SafeImage';
 import { SlidersHorizontal } from 'lucide-react';
 
 export default function CategoryPage() {
@@ -62,7 +63,7 @@ export default function CategoryPage() {
 
       {category?.image && (
         <div className="relative h-48 md:h-64 overflow-hidden">
-          <img src={category.image} alt={title} className="w-full h-full object-cover" />
+          <SafeImage src={category.image} alt={title} category={slug} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <h1 className="font-display text-4xl md:text-5xl text-white">{title}</h1>
           </div>
