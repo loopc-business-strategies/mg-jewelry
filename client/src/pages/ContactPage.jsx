@@ -1,35 +1,57 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
-import { brand } from '../utils/brandConfig';
+import { brand, getProductServiceAction } from '../utils/brandConfig';
 import { MapPin } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+function buildFormDefaults(type, productQuery) {
+  const action = getProductServiceAction(type);
+  if (action && productQuery) {
+    return {
+      subject: action.subject,
+      message: action.messageTemplate(productQuery),
+    };
+  }
+  if (action) {
+    return { subject: action.subject, message: '' };
+  }
+  if (productQuery) {
+    return {
+      subject: `Enquiry: ${productQuery}`,
+      message: `I would like to request a quote for: ${productQuery}`,
+    };
+  }
+  return { subject: '', message: '' };
+}
+
 export default function ContactPage() {
   const [params] = useSearchParams();
-  const isQuote = params.get('type') === 'quote';
+  const type = params.get('type') || '';
   const productQuery = params.get('product') || '';
+  const serviceAction = getProductServiceAction(type);
+
+  const defaults = useMemo(
+    () => buildFormDefaults(type, productQuery),
+    [type, productQuery],
+  );
 
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: isQuote ? 'Quote Request' : productQuery ? `Enquiry: ${productQuery}` : '',
-    message: productQuery ? `I would like to request a quote for: ${productQuery}` : '',
+    subject: defaults.subject,
+    message: defaults.message,
   });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isQuote) setForm((f) => ({ ...f, subject: 'Quote Request' }));
-    if (productQuery) {
-      setForm((f) => ({
-        ...f,
-        subject: `Enquiry: ${productQuery}`,
-        message: `I would like to request a quote for: ${productQuery}`,
-      }));
-    }
-  }, [isQuote, productQuery]);
+    setForm((f) => ({ ...f, ...defaults }));
+  }, [defaults]);
+
+  const pageTitle = serviceAction?.pageTitle || 'Contact Us';
+  const submitLabel = serviceAction?.submitLabel || 'Send Message';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,17 +70,19 @@ export default function ContactPage() {
   return (
     <>
       <SEOHead
-        title={isQuote ? 'Request a Quote' : 'Contact Us'}
+        title={pageTitle}
         description={`Contact ${brand.legalName} for wholesale orders, custom manufacturing and international partnerships.`}
         path="/contact"
       />
 
       <div className="max-w-7xl mx-auto px-4 py-16">
         <h1 className="font-display text-4xl text-center mb-2">
-          {isQuote ? 'Request a Quote' : 'Contact Us'}
+          {pageTitle}
         </h1>
         <p className="text-center text-muted mb-12 max-w-xl mx-auto">
-          Reach out to discuss wholesale orders, custom jewelry manufacturing or international partnerships.
+          {serviceAction
+            ? `Tell us about your interest${productQuery ? ` in ${productQuery}` : ''} and our team will get back to you shortly.`
+            : 'Reach out to discuss wholesale orders, custom jewelry manufacturing or international partnerships.'}
         </p>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -80,7 +104,7 @@ export default function ContactPage() {
               <textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full border border-gold/20 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold bg-pearl/50" />
             </div>
             <button type="submit" disabled={loading} className="w-full bg-gold text-white px-8 py-3 rounded-full text-sm font-medium disabled:opacity-50 hover:bg-gold-dark transition-colors">
-              {loading ? 'Sending...' : isQuote ? 'Submit Quote Request' : 'Send Message'}
+              {loading ? 'Sending...' : submitLabel}
             </button>
           </form>
 
