@@ -1,18 +1,46 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, Heart, User, ShoppingBag, Menu, X } from 'lucide-react';
-import { brand, navLinks } from '../utils/brandConfig';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
+import {
+  brand,
+  navLinks,
+  wholesaleNavLinks,
+  manufacturingNavLinks,
+  ecommerceMenu,
+  isNavLinkActive,
+} from '../utils/brandConfig';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import MegaMenu from './MegaMenu';
+import EcommerceMegaMenu from './EcommerceMegaMenu';
+import ManufacturingDropdown from './ManufacturingDropdown';
 import SearchBar from './SearchBar';
+
+function MobileAccordion({ title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="border-b border-gold/10">
+      <button
+        type="button"
+        className="flex items-center justify-between w-full py-3 text-sm font-medium text-left"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        {title}
+        <ChevronDown size={16} className={`text-muted transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && <div className="pb-3 pl-3">{children}</div>}
+    </div>
+  );
+}
 
 export default function Header() {
   const [sticky, setSticky] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
+  const { pathname } = useLocation();
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
   const { user } = useAuth();
@@ -22,6 +50,29 @@ export default function Header() {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    setOpenMenu(null);
+    setMobileOpen(false);
+  }, [pathname]);
+
+  const navClass = (link) => {
+    const active = isNavLinkActive(pathname, link);
+    return `text-xs xl:text-sm font-medium tracking-wide uppercase whitespace-nowrap transition-colors inline-flex items-center gap-1 ${
+      active ? 'text-gold border-b border-gold/40 pb-0.5' : 'text-charcoal hover:text-gold'
+    }`;
+  };
+
+  const renderDropdown = (menu) => {
+    if (openMenu !== menu) return null;
+    const close = () => setOpenMenu(null);
+    if (menu === 'collections') return <MegaMenu onClose={close} />;
+    if (menu === 'manufacturing') return <ManufacturingDropdown onClose={close} />;
+    if (menu === 'ecommerce') return <EcommerceMegaMenu onClose={close} />;
+    return null;
+  };
+
+  const directMobileLinks = navLinks.filter((link) => !link.menu);
 
   return (
     <>
@@ -43,18 +94,16 @@ export default function Header() {
             <nav className="hidden lg:flex items-center gap-5 xl:gap-6 flex-1 justify-center">
               {navLinks.map((link) => (
                 <div
-                  key={link.path}
+                  key={link.label}
                   className="relative"
-                  onMouseEnter={() => link.megaMenu && setMegaOpen(true)}
-                  onMouseLeave={() => link.megaMenu && setMegaOpen(false)}
+                  onMouseEnter={() => link.menu && setOpenMenu(link.menu)}
+                  onMouseLeave={() => link.menu && setOpenMenu(null)}
                 >
-                  <Link
-                    to={link.path}
-                    className="text-xs xl:text-sm font-medium text-charcoal hover:text-gold transition-colors tracking-wide uppercase whitespace-nowrap"
-                  >
+                  <Link to={link.path} className={navClass(link)}>
                     {link.label}
+                    {link.menu && <ChevronDown size={12} className="opacity-60" />}
                   </Link>
-                  {link.megaMenu && megaOpen && <MegaMenu onClose={() => setMegaOpen(false)} />}
+                  {link.menu && renderDropdown(link.menu)}
                 </div>
               ))}
             </nav>
@@ -100,17 +149,80 @@ export default function Header() {
 
         {mobileOpen && (
           <div className="lg:hidden border-t border-gold/10 bg-pearl animate-fade-in max-h-[70vh] overflow-y-auto">
-            <nav className="flex flex-col p-4 gap-1">
-              {navLinks.map((link) => (
+            <nav className="flex flex-col p-4 gap-0">
+              {directMobileLinks.map((link) => (
                 <Link
-                  key={link.path}
+                  key={link.label}
                   to={link.path}
-                  className="text-sm font-medium py-3 border-b border-gold/10"
+                  className={`text-sm font-medium py-3 border-b border-gold/10 ${
+                    isNavLinkActive(pathname, link) ? 'text-gold' : ''
+                  }`}
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
+
+              <Link
+                to="/shop"
+                className={`text-sm font-medium py-3 border-b border-gold/10 ${
+                  isNavLinkActive(pathname, { menu: 'collections', path: '/shop' }) ? 'text-gold' : ''
+                }`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Collections
+              </Link>
+
+              <MobileAccordion title="Manufacturing">
+                <div className="space-y-1">
+                  {manufacturingNavLinks.map((link) => (
+                    <Link
+                      key={link.label}
+                      to={link.path}
+                      className="block text-sm text-muted hover:text-gold py-2"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </MobileAccordion>
+
+              <MobileAccordion title="Ecommerce">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-gold-dark mb-2">{ecommerceMenu.retail.title}</p>
+                    <div className="space-y-1">
+                      {ecommerceMenu.retail.links.map((link) => (
+                        <Link
+                          key={link.label + link.path}
+                          to={link.path}
+                          className="block text-sm text-muted hover:text-gold py-1.5"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-burgundy mb-2">{ecommerceMenu.wholesale.title}</p>
+                    <div className="space-y-1">
+                      {wholesaleNavLinks.map((link) => (
+                        <Link
+                          key={link.label}
+                          to={link.path}
+                          className="block text-sm text-muted hover:text-gold py-1.5"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {link.label === 'Become a Wholesale Partner' ? 'Become a Partner' : link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </MobileAccordion>
+
               <Link to="/contact?type=quote" className="mt-3 bg-gold text-white text-center py-3 rounded-full text-sm font-medium" onClick={() => setMobileOpen(false)}>
                 Request a Quote
               </Link>

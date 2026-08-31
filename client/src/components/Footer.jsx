@@ -13,6 +13,8 @@ const footerLinks = {
     path: `/shop/${slug}`,
   })),
   business: [
+    { label: 'Shop Retail', path: '/shop' },
+    { label: 'Wholesale Shop', path: '/wholesale/shop' },
     { label: 'Wholesale', path: '/wholesale' },
     { label: 'Custom Jewelry', path: '/custom-jewelry' },
     { label: 'Partner With Us', path: '/wholesale/register' },

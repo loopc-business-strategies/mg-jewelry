@@ -1,6 +1,6 @@
 import SEOHead from '../components/SEOHead';
 import ManufacturingSection from '../components/sections/ManufacturingSection';
-import { brand, manufacturingSteps } from '../utils/brandConfig';
+import { brand, manufacturingSteps, trustIndicators } from '../utils/brandConfig';
 import { manufacturingHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +24,21 @@ export default function ManufacturingPage() {
         </div>
       </section>
       <ManufacturingSection />
-      <section className="py-16 px-4 max-w-4xl mx-auto">
+      <section id="quality" className="py-16 px-4 max-w-7xl mx-auto bg-ivory/50">
+        <h2 className="font-display text-3xl text-center text-charcoal mb-4">Quality & Craftsmanship</h2>
+        <p className="text-center text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+          Every piece reflects our commitment to precision manufacturing, rigorous quality control and professional craftsmanship.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {trustIndicators.slice(0, 3).map((item) => (
+            <div key={item.title} className="bg-white rounded-xl p-6 border border-gold/10">
+              <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
+              <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section id="process" className="py-16 px-4 max-w-4xl mx-auto">
         <div className="space-y-8">
           {manufacturingSteps.map((step) => (
             <div key={step.step} className="flex gap-6 items-start border-b border-gold/10 pb-8">

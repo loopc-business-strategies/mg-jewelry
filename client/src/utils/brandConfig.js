@@ -14,14 +14,122 @@ export const brand = {
   location: 'Namangan, Uzbekistan',
 };
 
+export const collectionCategories = [
+  'rings',
+  'earrings',
+  'necklaces',
+  'bracelets',
+  'pendants',
+  'gold-jewelry',
+  'diamond-jewelry',
+  'bridal-jewelry',
+  'fashion-jewelry',
+  'wholesale-collections',
+];
+
+const slugToLabel = (slug) =>
+  slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+const retailCategorySlugs = collectionCategories.filter((slug) => slug !== 'wholesale-collections');
+
 export const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
-  { label: 'Collections', path: '/shop', megaMenu: true },
-  { label: 'Manufacturing', path: '/manufacturing' },
-  { label: 'Custom Jewelry', path: '/custom-jewelry' },
+  { label: 'Collections', path: '/shop', menu: 'collections' },
+  { label: 'Manufacturing', path: '/manufacturing', menu: 'manufacturing' },
+  { label: 'Ecommerce', path: '/shop', menu: 'ecommerce' },
   { label: 'Contact', path: '/contact' },
 ];
+
+export const retailNavLinks = [
+  { label: 'Shop', path: '/shop' },
+  { label: 'New Arrivals', path: '/shop?sort=newest' },
+  { label: 'Best Sellers', path: '/shop?sort=best_selling' },
+  ...retailCategorySlugs.map((slug) => ({
+    label: slugToLabel(slug),
+    path: `/shop/${slug}`,
+  })),
+  { label: 'Wishlist', path: '/wishlist' },
+  { label: 'Cart', path: '/cart' },
+];
+
+export const wholesaleNavLinks = [
+  { label: 'Wholesale Shop', path: '/wholesale/shop' },
+  { label: 'Wholesale Collections', path: '/shop/wholesale-collections' },
+  { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing' },
+  { label: 'Request a Quote', path: '/contact?type=quote' },
+  { label: 'Become a Wholesale Partner', path: '/wholesale/register' },
+  { label: 'Partner Login', path: '/login' },
+  { label: 'Wholesale Dashboard', path: '/wholesale/dashboard' },
+];
+
+export const manufacturingNavLinks = [
+  { label: 'Manufacturing', path: '/manufacturing' },
+  { label: 'Manufacturing Process', path: '/manufacturing#process' },
+  { label: 'Quality & Craftsmanship', path: '/manufacturing#quality' },
+  { label: 'Custom Jewelry', path: '/custom-jewelry' },
+  { label: 'Private Label', path: '/custom-jewelry#private-label' },
+];
+
+export const ecommerceMenu = {
+  retail: {
+    title: 'Retail',
+    subtitle: 'Shop jewelry for individual customers',
+    cta: { label: 'Shop Retail', path: '/shop' },
+    links: [
+      { label: 'Shop', path: '/shop' },
+      { label: 'New Arrivals', path: '/shop?sort=newest' },
+      { label: 'Best Sellers', path: '/shop?sort=best_selling' },
+      { label: 'Collections', path: '/shop' },
+      { label: 'Cart', path: '/cart' },
+      { label: 'Wishlist', path: '/wishlist' },
+    ],
+  },
+  wholesale: {
+    title: 'Wholesale',
+    subtitle: 'Bulk jewelry solutions for retailers, brands and distributors',
+    cta: { label: 'Wholesale Partnership', path: '/wholesale/register' },
+    secondaryCta: { label: 'Wholesale Shop', path: '/wholesale/shop' },
+    links: [
+      { label: 'Wholesale Shop', path: '/wholesale/shop' },
+      { label: 'Wholesale Collections', path: '/shop/wholesale-collections' },
+      { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing' },
+      { label: 'Request a Quote', path: '/contact?type=quote' },
+      { label: 'Become a Partner', path: '/wholesale/register' },
+      { label: 'Partner Login', path: '/login' },
+    ],
+  },
+};
+
+export function isEcommerceRoute(pathname) {
+  return (
+    pathname === '/shop' ||
+    pathname.startsWith('/shop/') ||
+    pathname.startsWith('/product/') ||
+    pathname === '/cart' ||
+    pathname === '/checkout' ||
+    pathname === '/search' ||
+    pathname === '/wishlist' ||
+    pathname === '/wholesale' ||
+    pathname.startsWith('/wholesale/')
+  );
+}
+
+export function isManufacturingRoute(pathname) {
+  return pathname === '/manufacturing' || pathname === '/custom-jewelry';
+}
+
+export function isCollectionsRoute(pathname) {
+  return pathname === '/shop' || pathname.startsWith('/shop/');
+}
+
+export function isNavLinkActive(pathname, link) {
+  if (link.menu === 'ecommerce') return isEcommerceRoute(pathname);
+  if (link.menu === 'manufacturing') return isManufacturingRoute(pathname);
+  if (link.menu === 'collections') return isCollectionsRoute(pathname) && !isEcommerceRoute(pathname);
+  if (link.path === '/') return pathname === '/';
+  return pathname === link.path || pathname.startsWith(`${link.path}/`);
+}
 
 export const manufacturingSteps = [
   { step: '01', title: 'Design', desc: 'Concept development and jewelry design.' },
@@ -63,19 +171,6 @@ export const categoryIcons = [
   { name: 'Bridal Jewelry', slug: 'bridal-jewelry', icon: '👰' },
   { name: 'Fashion Jewelry', slug: 'fashion-jewelry', icon: '✨' },
   { name: 'Wholesale', slug: 'wholesale-collections', icon: '📦' },
-];
-
-export const collectionCategories = [
-  'rings',
-  'earrings',
-  'necklaces',
-  'bracelets',
-  'pendants',
-  'gold-jewelry',
-  'diamond-jewelry',
-  'bridal-jewelry',
-  'fashion-jewelry',
-  'wholesale-collections',
 ];
 
 export const whyChooseUs = trustIndicators;

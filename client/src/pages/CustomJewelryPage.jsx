@@ -29,7 +29,11 @@ export default function CustomJewelryPage() {
           { title: 'Wholesale Collections', desc: 'Curated collections ready for international wholesale distribution.' },
           { title: 'Product Development', desc: 'From prototype to production — full development support for new lines.' },
         ].map((item) => (
-          <div key={item.title} className="bg-white rounded-2xl p-8 border border-gold/10">
+          <div
+            key={item.title}
+            id={item.title === 'Private Label' ? 'private-label' : undefined}
+            className="bg-white rounded-2xl p-8 border border-gold/10"
+          >
             <h2 className="font-display text-xl text-charcoal mb-2">{item.title}</h2>
             <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
           </div>
