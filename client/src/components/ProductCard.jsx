@@ -52,15 +52,16 @@ export default function ProductCard({ product, onQuickView }) {
           <h3 className="font-display text-lg text-charcoal mb-1 line-clamp-1">{product.name}</h3>
           <p className="text-xs text-muted mb-2 line-clamp-2">{product.shortDescription}</p>
           <PriceDisplay price={product.price} mrp={product.mrp} showEmi />
-          <Link
-            to={`/contact?type=quote&product=${encodeURIComponent(product.name)}`}
-            onClick={(e) => e.stopPropagation()}
-            className="mt-3 flex items-center gap-1 text-xs text-gold-dark hover:text-gold font-medium"
-          >
-            <MessageCircle size={12} /> Request Quote
-          </Link>
         </div>
       </Link>
+      <div className="px-4 pb-4 -mt-2">
+        <Link
+          to={`/contact?type=quote&product=${encodeURIComponent(product.name)}`}
+          className="flex items-center gap-1 text-xs text-gold-dark hover:text-gold font-medium"
+        >
+          <MessageCircle size={12} /> Request Quote
+        </Link>
+      </div>
     </div>
   );
 }
