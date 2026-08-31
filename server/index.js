@@ -19,13 +19,11 @@ const searchRoutes = require('./routes/searchRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 
 connectDB().then(async () => {
-  if (process.env.USE_MEMORY_DB === 'true') {
-    const Product = require('./models/Product');
-    const count = await Product.countDocuments();
-    if (count === 0) {
-      console.log('Empty database detected — running seed...');
-      require('./services/seedRunner')();
-    }
+  const Product = require('./models/Product');
+  const count = await Product.countDocuments();
+  if (count === 0) {
+    console.log('Empty database detected — running seed...');
+    await require('./services/seedRunner')();
   }
 });
 
