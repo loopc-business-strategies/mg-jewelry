@@ -18,7 +18,11 @@ const connectDB = async () => {
     console.log(`MongoDB connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
-    if (!fallbackAttempted && process.env.USE_MEMORY_DB !== 'true') {
+    if (
+      !fallbackAttempted &&
+      process.env.USE_MEMORY_DB !== 'true' &&
+      !process.env.RAILWAY_ENVIRONMENT
+    ) {
       fallbackAttempted = true;
       console.warn('Local MongoDB unavailable, falling back to in-memory database...');
       process.env.USE_MEMORY_DB = 'true';
