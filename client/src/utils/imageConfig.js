@@ -63,7 +63,6 @@ export const premiumBanner = UNSPLASH('1599643478518-a784e069c662', 1600);
 export const aboutHero = UNSPLASH('1611591431799-11f2980a0c7f', 1600);
 export const wholesaleHero = UNSPLASH('1515562141207-7a88fb7071ee', 1600);
 export const manufacturingHero = UNSPLASH('1535632066922-ab7c3ab60908', 1600);
-export const marketsHero = UNSPLASH('1602751584552-8ba73aad10e2', 1600);
 export const customHero = UNSPLASH('1617032210318-096e6c314904', 1600);
 
 export const categoryImages = {

@@ -3,7 +3,7 @@ export const brand = {
   legalName: 'Modern Gold Jewelry Manufacturing FE LLC',
   tagline: 'Precision Crafted. Globally Connected.',
   heroSubtitle:
-    'Premium jewelry manufacturing from Uzbekistan, serving international markets across Central Asia, Russia, the UK, Singapore, Malaysia, Hong Kong, the United States and Dubai.',
+    'Premium jewelry manufacturing from Uzbekistan for international partners and discerning customers worldwide.',
   address: '242 Girvonbulok Street, Namangan Davlatabad, Namangan – Uzbekistan',
   addressLines: [
     '242 Girvonbulok Street',
@@ -20,20 +20,7 @@ export const navLinks = [
   { label: 'Collections', path: '/shop', megaMenu: true },
   { label: 'Manufacturing', path: '/manufacturing' },
   { label: 'Custom Jewelry', path: '/custom-jewelry' },
-  { label: 'Markets', path: '/markets' },
   { label: 'Contact', path: '/contact' },
-];
-
-export const internationalMarkets = [
-  { name: 'Uzbekistan', flag: '🇺🇿', region: 'Central Asia' },
-  { name: 'Central Asia', flag: '🇰🇿', region: 'Regional markets' },
-  { name: 'Russia', flag: '🇷🇺', region: 'Eastern Europe & CIS' },
-  { name: 'United Kingdom', flag: '🇬🇧', region: 'Europe' },
-  { name: 'Singapore', flag: '🇸🇬', region: 'Southeast Asia' },
-  { name: 'Malaysia', flag: '🇲🇾', region: 'Southeast Asia' },
-  { name: 'Hong Kong', flag: '🇭🇰', region: 'Greater China' },
-  { name: 'United States', flag: '🇺🇸', region: 'North America' },
-  { name: 'Dubai / UAE', flag: '🇦🇪', region: 'Middle East' },
 ];
 
 export const manufacturingSteps = [

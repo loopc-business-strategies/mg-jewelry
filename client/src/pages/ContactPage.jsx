@@ -105,7 +105,6 @@ export default function ContactPage() {
               <div className="flex flex-wrap gap-3">
                 <Link to="/wholesale" className="text-sm text-gold-dark font-medium hover:underline">Wholesale →</Link>
                 <Link to="/custom-jewelry" className="text-sm text-gold-dark font-medium hover:underline">Custom Jewelry →</Link>
-                <Link to="/markets" className="text-sm text-gold-dark font-medium hover:underline">Global Markets →</Link>
               </div>
             </div>
           </div>

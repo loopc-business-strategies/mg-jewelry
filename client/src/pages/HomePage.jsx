@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import HeroSection from '../components/sections/HeroSection';
-import MarketsSection from '../components/sections/MarketsSection';
 import ProductShowcaseSection from '../components/sections/ProductShowcaseSection';
 import AboutPreviewSection from '../components/sections/AboutPreviewSection';
 import ManufacturingSection from '../components/sections/ManufacturingSection';
@@ -45,7 +44,6 @@ export default function HomePage() {
         schema={schema}
       />
       <HeroSection />
-      <MarketsSection />
       <ProductShowcaseSection products={featured} />
       <section className="py-12 px-4 bg-cream">
         <div className="max-w-7xl mx-auto">
