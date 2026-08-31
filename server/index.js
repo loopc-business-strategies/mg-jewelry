@@ -1,5 +1,7 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+if (!process.env.RAILWAY_ENVIRONMENT && !process.env.MONGODB_URI) {
+  require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+}
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
@@ -20,10 +22,16 @@ const contentRoutes = require('./routes/contentRoutes');
 
 connectDB().then(async () => {
   const Product = require('./models/Product');
+  const { seedDatabase, needsLegacyReseed } = require('./services/seedDatabase');
   const count = await Product.countDocuments();
+  const forceReseed = process.env.FORCE_RESEED === 'true';
+
   if (count === 0) {
     console.log('Empty database detected — running seed...');
-    await require('./services/seedRunner')();
+    await seedDatabase();
+  } else if (forceReseed || await needsLegacyReseed()) {
+    console.log(forceReseed ? 'FORCE_RESEED enabled — reseeding database...' : 'Legacy catalog detected — reseeding database...');
+    await seedDatabase();
   }
 });
 

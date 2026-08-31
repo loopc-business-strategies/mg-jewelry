@@ -1,29 +1,14 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+if (!process.env.RAILWAY_ENVIRONMENT && !process.env.MONGODB_URI) {
+  require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+}
 const connectDB = require('../config/db');
-const User = require('../models/User');
-const Category = require('../models/Category');
 const Product = require('../models/Product');
-const Settings = require('../models/Settings');
-const Blog = require('../models/Blog');
-const seedRunner = require('./seedRunner');
-const { adminEmail, adminPassword } = require('../config/env');
+const { seedDatabase } = require('./seedDatabase');
 
 const seed = async () => {
   await connectDB();
-
-  await Promise.all([
-    User.deleteMany({}),
-    Category.deleteMany({}),
-    Product.deleteMany({}),
-    Settings.deleteMany({}),
-    Blog.deleteMany({}),
-  ]);
-
-  await seedRunner();
-
-  console.log('Database seeded successfully!');
-  console.log(`Admin login: ${adminEmail} / ${adminPassword}`);
+  await seedDatabase();
   process.exit(0);
 };
 

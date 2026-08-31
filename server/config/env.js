@@ -1,4 +1,7 @@
-require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
+const path = require('path');
+if (!process.env.RAILWAY_ENVIRONMENT && !process.env.MONGODB_URI) {
+  require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+}
 
 const parseOrigins = () => {
   if (process.env.CORS_ORIGINS) {

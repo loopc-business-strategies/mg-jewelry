@@ -1,5 +1,7 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+if (!process.env.RAILWAY_ENVIRONMENT && !process.env.MONGODB_URI) {
+  require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+}
 const User = require('../models/User');
 const Category = require('../models/Category');
 const Product = require('../models/Product');
@@ -62,7 +64,7 @@ const productNames = [
 const imageIds = ['1515562141207-7a88fb7071ee', '1535632066922-ab7c3ab60908', '1599643478518-a784e069c662', '1611591431799-11f2980a0c7f', '1605100804763-247f67b3557e'];
 
 async function seedRunner() {
-  await User.create({ name: 'Admin', email: adminEmail, phone: '', password: adminPassword, role: 'admin' });
+  await User.create({ name: 'Admin', email: adminEmail, phone: '0000000000', password: adminPassword, role: 'admin' });
   await Category.insertMany(categoriesData.map((c, i) => ({
     ...c,
     order: i,
