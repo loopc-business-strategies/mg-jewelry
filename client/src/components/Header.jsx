@@ -5,7 +5,6 @@ import {
   brand,
   navLinks,
   wholesaleNavLinks,
-  manufacturingNavLinks,
   ecommerceMenu,
   isNavLinkActive,
 } from '../utils/brandConfig';
@@ -14,7 +13,6 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import MegaMenu from './MegaMenu';
 import EcommerceMegaMenu from './EcommerceMegaMenu';
-import ManufacturingDropdown from './ManufacturingDropdown';
 import SearchBar from './SearchBar';
 
 function MobileAccordion({ title, children, defaultOpen = false }) {
@@ -67,7 +65,6 @@ export default function Header() {
     if (openMenu !== menu) return null;
     const close = () => setOpenMenu(null);
     if (menu === 'collections') return <MegaMenu onClose={close} />;
-    if (menu === 'manufacturing') return <ManufacturingDropdown onClose={close} />;
     if (menu === 'ecommerce') return <EcommerceMegaMenu onClose={close} />;
     return null;
   };
@@ -172,21 +169,6 @@ export default function Header() {
               >
                 Collections
               </Link>
-
-              <MobileAccordion title="Manufacturing">
-                <div className="space-y-1">
-                  {manufacturingNavLinks.map((link) => (
-                    <Link
-                      key={link.label}
-                      to={link.path}
-                      className="block text-sm text-muted hover:text-gold py-2"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </MobileAccordion>
 
               <MobileAccordion title="Ecommerce">
                 <div className="space-y-4">

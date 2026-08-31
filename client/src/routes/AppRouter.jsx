@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AdminLayout from '../layouts/AdminLayout';
 
@@ -14,7 +14,6 @@ import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 import ProfilePage from '../pages/ProfilePage';
 import WishlistPage from '../pages/WishlistPage';
 import SearchPage from '../pages/SearchPage';
-import ManufacturingPage from '../pages/ManufacturingPage';
 import CustomJewelryPage from '../pages/CustomJewelryPage';
 import AboutPage from '../pages/AboutPage';
 import ContactPage from '../pages/ContactPage';
@@ -54,7 +53,7 @@ export default function AppRouter() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="about" element={<AboutPage />} />
-        <Route path="manufacturing" element={<ManufacturingPage />} />
+        <Route path="manufacturing" element={<Navigate to="/custom-jewelry" replace />} />
         <Route path="custom-jewelry" element={<CustomJewelryPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="blog" element={<BlogPage />} />

@@ -36,7 +36,6 @@ export const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Collections', path: '/shop', menu: 'collections' },
-  { label: 'Manufacturing', path: '/manufacturing', menu: 'manufacturing' },
   { label: 'Ecommerce', path: '/shop', menu: 'ecommerce' },
   { label: 'Contact', path: '/contact' },
 ];
@@ -61,14 +60,6 @@ export const wholesaleNavLinks = [
   { label: 'Become a Wholesale Partner', path: '/wholesale/register' },
   { label: 'Partner Login', path: '/login' },
   { label: 'Wholesale Dashboard', path: '/wholesale/dashboard' },
-];
-
-export const manufacturingNavLinks = [
-  { label: 'Manufacturing', path: '/manufacturing' },
-  { label: 'Manufacturing Process', path: '/manufacturing#process' },
-  { label: 'Quality & Craftsmanship', path: '/manufacturing#quality' },
-  { label: 'Custom Jewelry', path: '/custom-jewelry' },
-  { label: 'Private Label', path: '/custom-jewelry#private-label' },
 ];
 
 export const ecommerceMenu = {
@@ -115,17 +106,12 @@ export function isEcommerceRoute(pathname) {
   );
 }
 
-export function isManufacturingRoute(pathname) {
-  return pathname === '/manufacturing' || pathname === '/custom-jewelry';
-}
-
 export function isCollectionsRoute(pathname) {
   return pathname === '/shop' || pathname.startsWith('/shop/');
 }
 
 export function isNavLinkActive(pathname, link) {
   if (link.menu === 'ecommerce') return isEcommerceRoute(pathname);
-  if (link.menu === 'manufacturing') return isManufacturingRoute(pathname);
   if (link.menu === 'collections') return isCollectionsRoute(pathname) && !isEcommerceRoute(pathname);
   if (link.path === '/') return pathname === '/';
   return pathname === link.path || pathname.startsWith(`${link.path}/`);

@@ -103,7 +103,6 @@ export const heroImage = UNSPLASH('1605100804763-247f67b3557e', 1600);
 export const premiumBanner = LOCAL('necklace-01.jpg');
 export const aboutHero = LOCAL('bracelet-01.jpg');
 export const wholesaleHero = LOCAL('ring-01.jpg');
-export const manufacturingHero = LOCAL('earring-01.jpg');
 export const customHero = LOCAL('default-01.jpg');
 
 export const categoryImages = {

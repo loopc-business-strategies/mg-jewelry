@@ -1,5 +1,5 @@
 import SEOHead from '../components/SEOHead';
-import { brand, trustIndicators, manufacturingSteps } from '../utils/brandConfig';
+import { brand, trustIndicators } from '../utils/brandConfig';
 import { aboutHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 
@@ -77,7 +77,7 @@ export default function AboutPage() {
         </section>
 
         <div className="text-center">
-          <Link to="/manufacturing" className="text-gold-dark font-medium hover:underline">Explore our manufacturing process →</Link>
+          <Link to="/custom-jewelry" className="text-gold-dark font-medium hover:underline">Explore custom jewelry manufacturing →</Link>
         </div>
       </div>
     </>

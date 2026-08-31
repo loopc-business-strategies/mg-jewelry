@@ -4,7 +4,6 @@ import SEOHead from '../components/SEOHead';
 import HeroSection from '../components/sections/HeroSection';
 import ProductShowcaseSection from '../components/sections/ProductShowcaseSection';
 import AboutPreviewSection from '../components/sections/AboutPreviewSection';
-import ManufacturingSection from '../components/sections/ManufacturingSection';
 import B2BSection from '../components/sections/B2BSection';
 import CustomManufacturingSection from '../components/sections/CustomManufacturingSection';
 import TrustSection from '../components/sections/TrustSection';
@@ -61,7 +60,6 @@ export default function HomePage() {
         </div>
       </section>
       <AboutPreviewSection />
-      <ManufacturingSection compact />
       <B2BSection />
       <CustomManufacturingSection />
       <TrustSection />

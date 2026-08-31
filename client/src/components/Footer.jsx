@@ -5,7 +5,6 @@ const footerLinks = {
   company: [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
-    { label: 'Manufacturing', path: '/manufacturing' },
     { label: 'Contact', path: '/contact' },
   ],
   collections: collectionCategories.map((slug) => ({
