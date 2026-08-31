@@ -77,7 +77,7 @@ export default function AboutPage() {
         </section>
 
         <div className="text-center">
-          <Link to="/custom-jewelry" className="text-gold-dark font-medium hover:underline">Explore custom jewelry manufacturing →</Link>
+          <Link to="/custom-jewelry" className="text-sm tracking-wide text-charcoal hover:text-gold transition-colors">Explore custom jewelry manufacturing →</Link>
         </div>
       </div>
     </>

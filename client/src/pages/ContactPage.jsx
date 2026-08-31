@@ -54,6 +54,7 @@ export default function ContactPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 py-16">
+        <p className="section-eyebrow text-center mb-2">Contact</p>
         <h1 className="font-display text-4xl text-center mb-2">
           {isQuote ? 'Request a Quote' : 'Contact Us'}
         </h1>
@@ -62,7 +63,7 @@ export default function ContactPage() {
         </p>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          <form onSubmit={handleSubmit} className="space-y-4 bg-white rounded-2xl p-8 border border-gold/10 shadow-sm">
+          <form onSubmit={handleSubmit} className="space-y-4 card-elegant p-8">
             {['name', 'email', 'phone', 'subject'].map((field) => (
               <div key={field}>
                 <label className="text-sm font-medium capitalize block mb-1">{field === 'subject' ? 'Subject' : field}</label>
@@ -71,15 +72,15 @@ export default function ContactPage() {
                   required={field !== 'phone'}
                   value={form[field]}
                   onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                  className="w-full border border-gold/20 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold bg-pearl/50"
+                  className="input-elegant"
                 />
               </div>
             ))}
             <div>
               <label className="text-sm font-medium block mb-1">Message</label>
-              <textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full border border-gold/20 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold bg-pearl/50" />
+              <textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="input-elegant" />
             </div>
-            <button type="submit" disabled={loading} className="w-full bg-gold text-white px-8 py-3 rounded-full text-sm font-medium disabled:opacity-50 hover:bg-gold-dark transition-colors">
+            <button type="submit" disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
               {loading ? 'Sending...' : isQuote ? 'Submit Quote Request' : 'Send Message'}
             </button>
           </form>

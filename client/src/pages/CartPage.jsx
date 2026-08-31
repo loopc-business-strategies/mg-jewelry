@@ -20,15 +20,15 @@ export default function CartPage() {
   return (
     <>
       <SEOHead title="Shopping Cart" path="/cart" />
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
         <Breadcrumbs items={[{ label: 'Cart' }]} />
-        <h1 className="font-display text-3xl mb-8">Shopping Cart</h1>
+        <h1 className="font-display text-3xl md:text-4xl mb-8">Shopping Cart</h1>
 
         {!cart.items?.length ? (
           <EmptyState
             title="Your cart is empty"
             description="Discover our beautiful jewellery collection."
-            action={<Link to="/shop" className="inline-block bg-gold text-white px-8 py-3 rounded-full text-sm">CONTINUE SHOPPING</Link>}
+            action={<Link to="/shop" className="inline-block btn-primary-ink text-xs">Continue Shopping</Link>}
           />
         ) : (
           <div className="grid lg:grid-cols-3 gap-8">
@@ -37,7 +37,7 @@ export default function CartPage() {
                 <CartItem key={item._id} item={item} onUpdate={updateQuantity} onRemove={removeItem} />
               ))}
             </div>
-            <div className="bg-cream rounded-xl p-6 h-fit sticky top-24">
+            <div className="card-elegant p-6 h-fit sticky top-24">
               <h3 className="font-display text-xl mb-4">Order Summary</h3>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
@@ -46,8 +46,8 @@ export default function CartPage() {
                 <div className="flex justify-between"><dt>Tax (3%)</dt><dd>{formatPrice(tax)}</dd></div>
                 <div className="flex justify-between font-semibold text-lg pt-3 border-t"><dt>Total</dt><dd>{formatPrice(total)}</dd></div>
               </dl>
-              <Link to="/checkout" className="block w-full text-center bg-charcoal text-white py-3.5 rounded-full mt-6 text-sm font-medium tracking-wider hover:bg-gold transition-colors">
-                PROCEED TO CHECKOUT
+              <Link to="/checkout" className="block w-full text-center btn-primary-ink justify-center text-xs mt-6">
+                Proceed to Checkout
               </Link>
               <Link to="/shop" className="block text-center text-sm text-gold-dark mt-4 hover:underline">Continue Shopping</Link>
             </div>

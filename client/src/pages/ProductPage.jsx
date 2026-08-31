@@ -11,7 +11,8 @@ import WishlistButton from '../components/WishlistButton';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { formatPrice, calcEmi } from '../utils/formatPrice';
-import { Star, Truck, Shield, RotateCcw, Award } from 'lucide-react';
+import StarRating from '../components/ui/StarRating';
+import { Truck, Shield, RotateCcw, Award } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function ProductPage() {
@@ -99,18 +100,15 @@ export default function ProductPage() {
 
           <div>
             <h1 className="font-display text-3xl md:text-4xl text-charcoal mb-2">{product.name}</h1>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="flex">{Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={14} className={i < Math.round(product.rating) ? 'fill-gold text-gold' : 'text-gray-300'} />
-              ))}</div>
-              <span className="text-sm text-muted">({product.reviewCount} reviews)</span>
+            <div className="mb-3">
+              <StarRating rating={product.rating} reviewCount={product.reviewCount} />
             </div>
             <p className="text-sm text-muted mb-4">Product Code: {product.sku}</p>
 
             <PriceDisplay price={product.price} mrp={product.mrp} size="lg" showEmi />
             <p className="text-sm text-muted mt-2">EMI from {formatPrice(calcEmi(product.price))}/month · No Cost EMI available</p>
 
-            <div className="grid grid-cols-2 gap-4 my-6 p-4 bg-cream rounded-xl text-sm">
+            <div className="grid grid-cols-2 gap-4 my-6 p-5 card-elegant text-sm">
               <div><span className="text-muted">Metal:</span> <strong>{product.metal}</strong></div>
               <div><span className="text-muted">Purity:</span> <strong>{product.purity}</strong></div>
               {product.weight && <div><span className="text-muted">Weight:</span> <strong>{product.weight}</strong></div>}
@@ -145,11 +143,11 @@ export default function ProductPage() {
             </div>
 
             <div className="flex gap-3 mb-6">
-              <button onClick={handleAddToCart} className="flex-1 bg-charcoal text-white py-3.5 rounded-full text-sm font-medium tracking-wider hover:bg-gold transition-colors">
-                ADD TO CART
+              <button onClick={handleAddToCart} className="flex-1 btn-primary-ink justify-center text-xs">
+                Add to Cart
               </button>
-              <button onClick={handleBuyNow} className="flex-1 border-2 border-charcoal py-3.5 rounded-full text-sm font-medium tracking-wider hover:bg-charcoal hover:text-white transition-colors">
-                BUY NOW
+              <button onClick={handleBuyNow} className="flex-1 btn-outline-elegant justify-center text-xs">
+                Buy Now
               </button>
               <WishlistButton productId={product._id} className="!static" />
             </div>
@@ -163,7 +161,7 @@ export default function ProductPage() {
                   maxLength={6}
                   value={pincode}
                   onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
-                  className="flex-1 border rounded-lg px-4 py-2 text-sm"
+                  className="flex-1 input-elegant"
                 />
                 <button onClick={checkDelivery} className="bg-gold text-white px-4 py-2 rounded-lg text-sm">Check</button>
               </div>

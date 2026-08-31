@@ -178,3 +178,51 @@ export const seoKeywords = [
   'international jewelry manufacturer',
   'private label jewelry manufacturing',
 ];
+
+export const heroTrustBadges = [
+  { title: 'Certified Quality', desc: 'Hallmarked gold and verified diamonds.' },
+  { title: 'Secure Shipping', desc: 'Insured delivery worldwide.' },
+  { title: 'Lifetime Craftsmanship', desc: 'Precision made to endure.' },
+];
+
+export const servicePromises = [
+  { title: 'Easy Returns', desc: '15-day hassle-free returns on retail orders.' },
+  { title: 'Secure Payment', desc: 'Encrypted checkout and trusted payment methods.' },
+  { title: 'Exceptional Quality', desc: 'Rigorous quality control at every stage.' },
+  { title: 'Dedicated Support', desc: 'Personal assistance for every customer.' },
+];
+
+export const categoryShowcase = [
+  { name: 'Necklaces', slug: 'necklaces' },
+  { name: 'Rings', slug: 'rings' },
+  { name: 'Earrings', slug: 'earrings' },
+  { name: 'Bracelets', slug: 'bracelets' },
+  { name: 'Pendants', slug: 'pendants' },
+  { name: 'Gold Jewelry', slug: 'gold-jewelry' },
+];
+
+export const footerColumns = {
+  shop: [
+    { label: 'All Collections', path: '/shop' },
+    { label: 'Rings', path: '/shop/rings' },
+    { label: 'Necklaces', path: '/shop/necklaces' },
+    { label: 'Earrings', path: '/shop/earrings' },
+    { label: 'New Arrivals', path: '/shop?sort=newest' },
+    { label: 'Best Sellers', path: '/shop?sort=best_selling' },
+  ],
+  about: [
+    { label: 'Our Story', path: '/about' },
+    { label: 'Custom Jewelry', path: '/custom-jewelry' },
+    { label: 'Wholesale', path: '/wholesale' },
+    { label: 'Blog', path: '/blog' },
+    { label: 'Contact', path: '/contact' },
+  ],
+  help: [
+    { label: 'Shipping', path: '/shipping' },
+    { label: 'Returns', path: '/returns' },
+    { label: 'FAQ', path: '/faq' },
+    { label: 'Track Order', path: '/track-order' },
+    { label: 'Privacy Policy', path: '/privacy' },
+    { label: 'Terms', path: '/terms' },
+  ],
+};

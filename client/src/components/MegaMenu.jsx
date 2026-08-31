@@ -10,7 +10,7 @@ export default function MegaMenu({ onClose }) {
   }, []);
 
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl bg-pearl border border-gold/15 shadow-xl shadow-gold/5 rounded-2xl p-6 mt-2 z-50 animate-fade-in">
+    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl bg-white border border-gold/12 shadow-lg p-8 mt-1 z-50 animate-fade-in">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {categories.map((cat) => (
           <div key={cat.slug}>

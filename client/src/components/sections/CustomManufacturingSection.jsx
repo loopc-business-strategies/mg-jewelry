@@ -9,6 +9,7 @@ export default function CustomManufacturingSection() {
           <img src={customHero} alt="Custom jewelry manufacturing by Modern Gold Jewelry" className="w-full aspect-[4/3] object-cover" />
         </div>
         <div className="order-1 lg:order-2">
+          <p className="section-eyebrow mb-3">Custom Jewelry</p>
           <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Custom Manufacturing</h2>
           <p className="text-muted leading-relaxed mb-6">
             Work with Modern Gold Jewelry for bespoke designs, private-label collections and tailored production runs built to your specifications.
@@ -21,7 +22,7 @@ export default function CustomManufacturingSection() {
               </li>
             ))}
           </ul>
-          <Link to="/custom-jewelry" className="inline-flex bg-gold text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gold-dark transition-colors">
+          <Link to="/custom-jewelry" className="inline-flex btn-outline-elegant text-xs">
             Discuss Your Collection
           </Link>
         </div>

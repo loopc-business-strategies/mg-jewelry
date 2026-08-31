@@ -64,11 +64,11 @@ export default function WholesalePage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 -mt-8 relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <Link to="/wholesale/register" className="bg-gold text-white px-8 py-3 rounded-full text-sm font-medium tracking-wider text-center hover:bg-gold-dark transition-colors">
-          BECOME A WHOLESALE PARTNER
+        <Link to="/wholesale/register" className="btn-primary-ink text-xs">
+          Become a Wholesale Partner
         </Link>
-        <Link to="/wholesale/shop" className="bg-white border-2 border-charcoal px-8 py-3 rounded-full text-sm font-medium tracking-wider text-center hover:bg-charcoal hover:text-white transition-colors">
-          VIEW WHOLESALE COLLECTION
+        <Link to="/wholesale/shop" className="btn-outline-elegant text-xs border-white text-white hover:bg-white hover:text-ink">
+          View Wholesale Collection
         </Link>
       </div>
 

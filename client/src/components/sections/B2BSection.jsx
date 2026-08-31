@@ -3,9 +3,10 @@ import { b2bAudience } from '../../utils/brandConfig';
 
 export default function B2BSection() {
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-champagne/40 via-cream to-ivory">
+    <section className="py-20 px-4 bg-pearl border-t border-gold/10">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div>
+          <p className="section-eyebrow mb-3">Wholesale</p>
           <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Built for Jewelry Businesses</h2>
           <p className="text-muted leading-relaxed mb-6">
             We partner with wholesalers, retailers, brands and international buyers who need reliable manufacturing, consistent quality and flexible production capabilities.
@@ -19,8 +20,8 @@ export default function B2BSection() {
             ))}
           </ul>
           <div className="flex flex-wrap gap-3">
-            <Link to="/wholesale/register" className="bg-gold text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gold-dark transition-colors">Become a Partner</Link>
-            <Link to="/contact?type=quote" className="border border-gold text-gold-dark px-6 py-3 rounded-full text-sm font-medium hover:bg-gold hover:text-white transition-colors">Request a Quote</Link>
+            <Link to="/wholesale/register" className="btn-primary-ink text-xs">Become a Partner</Link>
+            <Link to="/contact?type=quote" className="btn-outline-elegant text-xs">Request a Quote</Link>
           </div>
         </div>
         <div className="bg-white/70 rounded-2xl p-8 border border-gold/20 shadow-lg shadow-gold/5">

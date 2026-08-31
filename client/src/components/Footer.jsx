@@ -1,73 +1,83 @@
 import { Link } from 'react-router-dom';
-import { brand, collectionCategories } from '../utils/brandConfig';
-
-const footerLinks = {
-  company: [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Contact', path: '/contact' },
-  ],
-  collections: collectionCategories.map((slug) => ({
-    label: slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-    path: `/shop/${slug}`,
-  })),
-  business: [
-    { label: 'Shop Retail', path: '/shop' },
-    { label: 'Wholesale Shop', path: '/wholesale/shop' },
-    { label: 'Wholesale', path: '/wholesale' },
-    { label: 'Custom Jewelry', path: '/custom-jewelry' },
-    { label: 'Partner With Us', path: '/wholesale/register' },
-    { label: 'Request a Quote', path: '/contact?type=quote' },
-  ],
-  support: [
-    { label: 'Contact', path: '/contact' },
-    { label: 'Shipping', path: '/shipping' },
-    { label: 'Returns', path: '/returns' },
-    { label: 'FAQ', path: '/faq' },
-  ],
-};
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { brand, footerColumns } from '../utils/brandConfig';
+import { Share2, Mail } from 'lucide-react';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+
+  const handleNewsletter = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    toast.success('Thank you for subscribing!');
+    setEmail('');
+  };
+
   return (
-    <footer className="bg-gradient-to-br from-cream via-ivory to-champagne border-t border-gold/20">
+    <footer className="bg-linen border-t border-gold/15">
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <p className="font-display text-2xl text-gradient-gold mb-2">{brand.name}</p>
-            <p className="text-sm text-muted mb-4">{brand.legalName}</p>
-            <address className="text-sm text-muted not-italic leading-relaxed">
-              {brand.addressLines.map((line) => (
-                <span key={line} className="block">{line}</span>
-              ))}
-            </address>
-            <p className="text-xs text-muted mt-4 leading-relaxed">
-              Serving jewelry businesses across Central Asia, Russia, UK, Singapore, Malaysia, Hong Kong, USA and Dubai.
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+            <Link to="/" className="inline-block mb-4">
+              <p className="font-display text-2xl text-charcoal tracking-wide">{brand.name}</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-muted mt-1">Fine Jewelry</p>
+            </Link>
+            <p className="text-sm text-muted leading-relaxed mb-4 max-w-xs">
+              {brand.tagline}. Premium jewelry from Namangan, Uzbekistan for customers worldwide.
             </p>
+            <div className="flex gap-3">
+              <a href="/contact" className="p-2 border border-gold/20 rounded-full text-muted hover:text-gold transition-colors" aria-label="Social">
+                <Share2 size={16} />
+              </a>
+              <a href="/contact" className="p-2 border border-gold/20 rounded-full text-muted hover:text-gold transition-colors" aria-label="Email">
+                <Mail size={16} />
+              </a>
+            </div>
           </div>
           {[
-            { title: 'Company', links: footerLinks.company },
-            { title: 'Collections', links: footerLinks.collections.slice(0, 6) },
-            { title: 'Business', links: footerLinks.business },
-            { title: 'Support', links: footerLinks.support },
+            { title: 'Shop', links: footerColumns.shop },
+            { title: 'About', links: footerColumns.about },
+            { title: 'Help', links: footerColumns.help },
           ].map(({ title, links }) => (
             <div key={title}>
-              <h4 className="font-display text-lg mb-4 text-gold-dark">{title}</h4>
-              <ul className="space-y-2">
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-charcoal mb-4">{title}</h4>
+              <ul className="space-y-2.5">
                 {links.map((l) => (
                   <li key={l.path + l.label}>
-                    <Link to={l.path} className="text-sm text-muted hover:text-gold transition-colors">{l.label}</Link>
+                    <Link to={l.path} className="text-sm text-muted hover:text-gold transition-colors">
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="text-[10px] tracking-[0.2em] uppercase text-charcoal mb-4">Newsletter</h4>
+            <p className="text-sm text-muted mb-4">Receive updates on new collections and exclusive offers.</p>
+            <form onSubmit={handleNewsletter} className="flex border border-gold/20 bg-white">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+                className="flex-1 px-3 py-2.5 text-sm bg-transparent focus:outline-none"
+                required
+              />
+              <button type="submit" className="px-4 text-gold hover:text-gold-dark transition-colors text-sm">
+                →
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gold/20 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted italic">{brand.tagline}</p>
-          <p className="text-xs text-muted">
-            © {new Date().getFullYear()} {brand.legalName}. All rights reserved.
-          </p>
+        <div className="mt-12 pt-8 border-t border-gold/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted">
+          <p>© {new Date().getFullYear()} {brand.legalName}. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link to="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-gold transition-colors">Terms & Conditions</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -22,14 +22,14 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
             placeholder="Min"
             value={filters.minPrice || ''}
             onChange={(e) => onChange({ ...filters, minPrice: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-sm"
+            className="w-full border border-gold/20 rounded-lg px-3 py-2 text-sm bg-pearl focus:outline-none focus:border-gold"
           />
           <input
             type="number"
             placeholder="Max"
             value={filters.maxPrice || ''}
             onChange={(e) => onChange({ ...filters, maxPrice: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-sm"
+            className="w-full border border-gold/20 rounded-lg px-3 py-2 text-sm bg-pearl focus:outline-none focus:border-gold"
           />
         </div>
       </div>

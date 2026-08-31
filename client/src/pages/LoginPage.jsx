@@ -27,20 +27,21 @@ export default function LoginPage() {
   return (
     <>
       <SEOHead title="Login" path="/login" />
-      <div className="min-h-[60vh] flex items-center justify-center px-4 py-16">
-        <div className="w-full max-w-md">
+      <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-linen">
+        <div className="w-full max-w-md card-elegant p-8 md:p-10">
+          <p className="section-eyebrow text-center mb-2">Account</p>
           <h1 className="font-display text-3xl text-center mb-8">Welcome Back</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-sm font-medium block mb-1">Email</label>
-              <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold" />
+              <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-elegant" />
             </div>
             <div>
               <label className="text-sm font-medium block mb-1">Password</label>
-              <input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold" />
+              <input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="input-elegant" />
             </div>
-            <Link to="/forgot-password" className="text-sm text-gold-dark hover:underline block">Forgot password?</Link>
-            <button type="submit" disabled={loading} className="w-full bg-charcoal text-white py-3 rounded-full text-sm font-medium tracking-wider hover:bg-gold transition-colors disabled:opacity-50">
+            <Link to="/forgot-password" className="text-sm text-gold-dark hover:text-gold block">Forgot password?</Link>
+            <button type="submit" disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
               {loading ? 'Signing in...' : 'SIGN IN'}
             </button>
           </form>

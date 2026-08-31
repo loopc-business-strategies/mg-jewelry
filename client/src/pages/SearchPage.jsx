@@ -25,8 +25,9 @@ export default function SearchPage() {
   return (
     <>
       <SEOHead title={`Search: ${q}`} description={`Search results for ${q}`} path={`/search?q=${q}`} />
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="font-display text-3xl mb-2">Search Results</h1>
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
+        <p className="section-eyebrow mb-2">Search</p>
+        <h1 className="font-display text-3xl md:text-4xl mb-2">Search Results</h1>
         <p className="text-muted mb-8">{q ? `Showing results for "${q}"` : 'Enter a search term'}</p>
         {loading ? <LoadingSkeleton /> : products.length ? (
           <ProductGrid products={products} />

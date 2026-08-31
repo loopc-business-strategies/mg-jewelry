@@ -94,7 +94,7 @@ export default function CheckoutPage() {
                 />
               </div>
             ))}
-            <button onClick={() => setStep(2)} className="w-full bg-charcoal text-white py-3 rounded-full text-sm font-medium">Continue to Delivery</button>
+            <button onClick={() => setStep(2)} className="w-full btn-primary-ink justify-center text-xs">Continue to Delivery</button>
           </div>
         )}
 
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
           <div className="text-center space-y-4">
             <p className="text-muted">Standard delivery: 3-5 business days</p>
             <p className="font-semibold">Shipping: {shipping ? formatPrice(shipping) : 'Free'}</p>
-            <button onClick={() => setStep(3)} className="w-full bg-charcoal text-white py-3 rounded-full text-sm font-medium">Continue to Payment</button>
+            <button onClick={() => setStep(3)} className="w-full btn-primary-ink justify-center text-xs">Continue to Payment</button>
           </div>
         )}
 
@@ -118,7 +118,7 @@ export default function CheckoutPage() {
             <div className="bg-cream p-4 rounded-xl text-sm">
               <div className="flex justify-between"><span>Total</span><strong>{formatPrice(total)}</strong></div>
             </div>
-            <button onClick={placeOrder} disabled={loading} className="w-full bg-gold text-white py-3 rounded-full text-sm font-medium disabled:opacity-50">
+            <button onClick={placeOrder} disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
               {loading ? 'Placing Order...' : 'Place Order'}
             </button>
           </div>

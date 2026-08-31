@@ -60,35 +60,34 @@ export default function ShopPage() {
     <>
       <SEOHead title="Shop Jewellery" description="Browse our complete collection of premium gold and diamond jewellery." path="/shop" />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
         <Breadcrumbs items={[{ label: 'Jewellery' }]} />
+        <header className="mb-8 md:mb-10">
+          <p className="section-eyebrow mb-2">Collections</p>
+          <h1 className="font-display text-3xl md:text-4xl text-charcoal">Jewellery</h1>
+          {meta.total && (
+            <p className="text-sm text-muted mt-2">
+              Showing {meta.showing} of {meta.total} designs
+            </p>
+          )}
+        </header>
 
         <div className="flex gap-8">
           <ProductFilter filters={filters} onChange={updateFilters} />
 
           <div className="flex-1">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div>
-                <h1 className="font-display text-3xl text-charcoal">Jewellery</h1>
-                {meta.total && (
-                  <p className="text-sm text-muted mt-1">
-                    Showing {meta.showing} of {meta.total} designs
-                  </p>
-                )}
-              </div>
-              <div className="flex items-center gap-3">
-                <button
-                  className="lg:hidden flex items-center gap-2 border rounded-lg px-3 py-2 text-sm"
-                  onClick={() => setFilterOpen(true)}
-                >
-                  <SlidersHorizontal size={16} /> Filters
-                </button>
-                <ProductSort value={sort} onChange={(v) => {
-                  const params = new URLSearchParams(searchParams);
-                  params.set('sort', v);
-                  setSearchParams(params);
-                }} />
-              </div>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-end gap-4 mb-6">
+              <button
+                className="lg:hidden flex items-center gap-2 border border-gold/20 bg-white px-3 py-2 text-sm"
+                onClick={() => setFilterOpen(true)}
+              >
+                <SlidersHorizontal size={16} /> Filters
+              </button>
+              <ProductSort value={sort} onChange={(v) => {
+                const params = new URLSearchParams(searchParams);
+                params.set('sort', v);
+                setSearchParams(params);
+              }} />
             </div>
 
             {loading ? (

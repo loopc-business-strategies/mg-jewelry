@@ -5,7 +5,7 @@ export default function EcommerceMegaMenu({ onClose }) {
   const { retail, wholesale } = ecommerceMenu;
 
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[92vw] max-w-3xl bg-pearl border border-gold/15 rounded-2xl shadow-xl shadow-gold/5 p-6 mt-2 z-50 animate-fade-in">
+    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[92vw] max-w-3xl bg-white border border-gold/12 shadow-lg p-8 mt-1 z-50 animate-fade-in">
       <div className="grid md:grid-cols-2 gap-6 md:gap-8">
         <div className="bg-gradient-to-br from-ivory to-cream rounded-xl p-5 border border-gold/10">
           <p className="text-[10px] uppercase tracking-[0.2em] text-gold-dark font-medium mb-1">{retail.title}</p>
@@ -25,7 +25,7 @@ export default function EcommerceMegaMenu({ onClose }) {
           </ul>
           <Link
             to={retail.cta.path}
-            className="inline-flex bg-gold text-white text-xs font-medium px-5 py-2.5 rounded-full hover:bg-gold-dark transition-colors"
+            className="inline-flex bg-ink text-white text-xs font-medium px-5 py-2.5 tracking-wide uppercase hover:opacity-90 transition-opacity"
             onClick={onClose}
           >
             {retail.cta.label}
