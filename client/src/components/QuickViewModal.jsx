@@ -4,7 +4,6 @@ import { X, ShoppingBag } from 'lucide-react';
 import ProductImage from './ProductImage';
 import PriceDisplay from './PriceDisplay';
 import WishlistButton from './WishlistButton';
-import ProductServiceActions from './ProductServiceActions';
 import { useCart } from '../context/CartContext';
 
 export default function QuickViewModal({ product, onClose }) {
@@ -52,12 +51,6 @@ export default function QuickViewModal({ product, onClose }) {
               </button>
               <WishlistButton productId={product._id} />
             </div>
-            <ProductServiceActions
-              productName={product.name}
-              layout="stack"
-              className="mt-4"
-              onNavigate={onClose}
-            />
             <Link to={`/product/${product._id}`} onClick={onClose} className="text-center text-sm text-gold-dark mt-4 hover:underline">
               View Full Details →
             </Link>

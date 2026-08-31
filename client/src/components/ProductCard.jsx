@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import ProductImage from './ProductImage';
 import PriceDisplay from './PriceDisplay';
 import WishlistButton from './WishlistButton';
-import ProductServiceActions from './ProductServiceActions';
 import { useCart } from '../context/CartContext';
-import { Eye, ShoppingBag } from 'lucide-react';
+import { Eye, ShoppingBag, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ProductCard({ product, onQuickView }) {
@@ -56,7 +55,12 @@ export default function ProductCard({ product, onQuickView }) {
         </div>
       </Link>
       <div className="px-4 pb-4 -mt-2">
-        <ProductServiceActions productName={product.name} layout="row" />
+        <Link
+          to={`/contact?type=quote&product=${encodeURIComponent(product.name)}`}
+          className="flex items-center gap-1 text-xs text-gold-dark hover:text-gold font-medium"
+        >
+          <MessageCircle size={12} /> Request Quote
+        </Link>
       </div>
     </div>
   );

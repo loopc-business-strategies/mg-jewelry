@@ -8,7 +8,6 @@ import PriceDisplay from '../components/PriceDisplay';
 import ProductGrid from '../components/ProductGrid';
 import RecentlyViewed from '../components/RecentlyViewed';
 import WishlistButton from '../components/WishlistButton';
-import ProductServiceActions from '../components/ProductServiceActions';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { formatPrice, calcEmi } from '../utils/formatPrice';
@@ -153,11 +152,6 @@ export default function ProductPage() {
                 BUY NOW
               </button>
               <WishlistButton productId={product._id} className="!static" />
-            </div>
-
-            <div className="mb-6 p-4 bg-cream/50 rounded-xl border border-gold/10">
-              <p className="text-sm font-medium text-charcoal mb-3">Need help choosing?</p>
-              <ProductServiceActions productName={product.name} layout="stack" />
             </div>
 
             <div className="border rounded-xl p-4 mb-6">

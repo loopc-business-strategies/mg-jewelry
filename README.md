@@ -5,17 +5,14 @@ Full-stack e-commerce and wholesale platform for **Modern Gold Jewelry Manufactu
 - **Frontend:** React + Vite + Tailwind CSS (`client/`)
 - **Backend:** Express + MongoDB (`server/`)
 - **Live:** https://mg-jewelry.vercel.app
-- **API:** https://mg-jewelry-api-production.up.railway.app/api
-
-For a full system diagram, routing map, API surface, and deployment topology, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
 
 ## Features
 
 - B2C shop, cart, checkout, wishlist, search
 - B2B wholesale registration, bulk pricing, partner dashboard
 - Admin panel (products, orders, customers, blog, settings)
-- Manufacturer marketing pages (about, manufacturing, custom jewelry)
-- Local product image catalog with per-SKU uniqueness and fallbacks
+- International manufacturer homepage with global markets section
+- Guaranteed product image fallback system
 
 ## Local Development
 
@@ -44,9 +41,9 @@ Admin login (default): see `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`
 
 ## Production
 
-**Vercel (client):** Root directory `client`, env `VITE_API_URL=https://mg-jewelry-api-production.up.railway.app/api`
+**Vercel (client):** Root directory `client`, env `VITE_API_URL=https://<railway-api>/api`
 
-**Railway (server):** Root directory `server` (or monorepo `start` → server), MongoDB linked, `USE_MEMORY_DB=false`
+**Railway (server):** Root directory `server`, MongoDB linked, `USE_MEMORY_DB=false`
 
 ## Company
 
