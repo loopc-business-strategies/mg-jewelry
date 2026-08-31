@@ -72,10 +72,11 @@ async function seedRunner() {
   })));
 
   const products = productNames.map(([name, category, subcategory, price, mrp, metal, purity, gender, featured, newArrival, bestSeller], i) => {
-    const images = getProductImages(category, subcategory);
+    const sku = `MGJ-${String(i + 1).padStart(4, '0')}`;
+    const images = getProductImages(category, subcategory, sku);
     return {
       name, category, subcategory, price, mrp,
-      sku: `MGJ-${String(i + 1).padStart(4, '0')}`,
+      sku,
       discount: Math.round(((mrp - price) / mrp) * 100),
       wholesalePrice: Math.round(price * 0.65),
       moq: 10, stock: 50 + Math.floor(Math.random() * 100),

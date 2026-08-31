@@ -22,7 +22,14 @@ const contentRoutes = require('./routes/contentRoutes');
 
 connectDB().then(async () => {
   const Product = require('./models/Product');
-  const { seedDatabase, needsLegacyReseed, needsBrokenImageFix, fixBrokenImages } = require('./services/seedDatabase');
+  const {
+    seedDatabase,
+    needsLegacyReseed,
+    needsBrokenImageFix,
+    fixBrokenImages,
+    needsDuplicateImageFix,
+    fixDuplicateImages,
+  } = require('./services/seedDatabase');
   const count = await Product.countDocuments();
   const forceReseed = process.env.FORCE_RESEED === 'true';
 
@@ -35,6 +42,9 @@ connectDB().then(async () => {
   } else if (await needsBrokenImageFix()) {
     console.log('Broken product images detected — patching catalog...');
     await fixBrokenImages();
+  } else if (await needsDuplicateImageFix()) {
+    console.log('Duplicate product images detected — reassigning unique photos...');
+    await fixDuplicateImages();
   }
 });
 

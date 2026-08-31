@@ -12,7 +12,7 @@ export default function ProductImage({
   sizes,
 }) {
   const categoryFallback = getCategoryFallback(product?.category, product?.subcategory);
-  const catalogImages = getProductImages(product?.category, product?.subcategory);
+  const catalogImages = getProductImages(product?.category, product?.subcategory, product?.sku);
 
   const candidates = useMemo(() => {
     const urls = [];
@@ -23,13 +23,13 @@ export default function ProductImage({
     };
 
     if (product?.images?.length) {
+      if (index > 0 && product.images[index]) add(product.images[index]);
       product.images.forEach(add);
     } else {
       add(catalogImages[index]);
       add(catalogImages[0]);
     }
 
-    if (index > 0) add(product?.images?.[index]);
     catalogImages.forEach(add);
     add(categoryFallback);
     add(DEFAULT_FALLBACK);

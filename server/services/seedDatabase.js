@@ -5,7 +5,11 @@ const Settings = require('../models/Settings');
 const Blog = require('../models/Blog');
 const seedRunner = require('./seedRunner');
 const { adminEmail, adminPassword } = require('../config/env');
-const { getProductImages, getCategoryImage } = require('../config/productImages');
+const {
+  getProductImages,
+  getCategoryImage,
+  isSharedPrimaryPath,
+} = require('../config/productImages');
 
 async function wipeDatabase() {
   await Promise.all([
@@ -55,7 +59,7 @@ async function fixBrokenImages() {
   for (const product of products) {
     const needsFix = !product.images?.length || product.images.some((url) => !url?.startsWith('/images/products/'));
     if (needsFix) {
-      product.images = getProductImages(product.category, product.subcategory);
+      product.images = getProductImages(product.category, product.subcategory, product.sku);
       await product.save();
       productUpdates += 1;
     }
@@ -86,10 +90,49 @@ async function fixBrokenImages() {
   console.log(`Fixed product images: ${productUpdates}, categories: ${categoryUpdates}, blogs: ${blogUpdates}`);
 }
 
+async function needsDuplicateImageFix() {
+  const products = await Product.find({}).select('images sku').lean();
+  if (!products.length) return false;
+
+  const primaries = new Map();
+  for (const product of products) {
+    const primary = product.images?.[0];
+    if (!primary) return true;
+    if (isSharedPrimaryPath(primary)) return true;
+    if (!primary.includes('/images/products/product-')) return true;
+    if (primaries.has(primary)) return true;
+    primaries.set(primary, product.sku);
+  }
+
+  return false;
+}
+
+async function fixDuplicateImages() {
+  const products = await Product.find({});
+  let updates = 0;
+
+  for (const product of products) {
+    const nextImages = getProductImages(product.category, product.subcategory, product.sku);
+    const same =
+      product.images?.length === nextImages.length &&
+      product.images.every((url, i) => url === nextImages[i]);
+
+    if (!same) {
+      product.images = nextImages;
+      await product.save();
+      updates += 1;
+    }
+  }
+
+  console.log(`Reassigned unique product images: ${updates}`);
+}
+
 module.exports = {
   seedDatabase,
   wipeDatabase,
   needsLegacyReseed,
   needsBrokenImageFix,
   fixBrokenImages,
+  needsDuplicateImageFix,
+  fixDuplicateImages,
 };

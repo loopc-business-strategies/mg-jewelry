@@ -41,7 +41,7 @@ export default function AdminProducts() {
         moq: Number(form.moq),
         stock: Number(form.stock),
         discount: Math.round(((form.mrp - form.price) / form.mrp) * 100),
-        images: getProductImages(form.category, form.subcategory),
+        images: getProductImages(form.category, form.subcategory, form.sku || Date.now()),
         shortDescription: form.description?.slice(0, 80),
       };
       await api.post('/admin/products', payload);
