@@ -99,18 +99,18 @@ export default function ProductPage() {
           <ProductGallery product={product} />
 
           <div>
-            <h1 className="font-semibold text-3xl md:text-4xl text-charcoal mb-2">{product.name}</h1>
+            <h1 className="type-card-title text-xl md:text-2xl mb-2">{product.name}</h1>
             <div className="mb-3">
               <StarRating rating={product.rating} reviewCount={product.reviewCount} />
             </div>
-            <p className="text-sm text-muted mb-4">Product Code: {product.sku}</p>
+            <p className="type-micro normal-case text-muted mb-4">Product Code: {product.sku}</p>
 
             <PriceDisplay price={product.price} mrp={product.mrp} size="lg" showEmi />
-            <p className="text-sm text-muted mt-2">EMI from {formatPrice(calcEmi(product.price))}/month · No Cost EMI available</p>
+            <p className="type-body-sm mt-2">EMI from {formatPrice(calcEmi(product.price))}/month · No Cost EMI available</p>
 
-            <div className="grid grid-cols-2 gap-4 my-6 p-5 card-elegant text-sm">
-              <div><span className="text-muted">Metal:</span> <strong>{product.metal}</strong></div>
-              <div><span className="text-muted">Purity:</span> <strong>{product.purity}</strong></div>
+            <div className="grid grid-cols-2 gap-4 my-6 p-5 card-elegant type-body-sm">
+              <div><span className="text-muted">Metal:</span> <strong className="text-charcoal font-medium">{product.metal}</strong></div>
+              <div><span className="text-muted">Purity:</span> <strong className="text-gold font-semibold">{product.purity}</strong></div>
               {product.weight && <div><span className="text-muted">Weight:</span> <strong>{product.weight}</strong></div>}
               {product.diamondDetails?.hasDiamond && (
                 <>
@@ -124,7 +124,7 @@ export default function ProductPage() {
 
             {product.sizes?.length > 0 && (
               <div className="mb-4">
-                <label className="text-sm font-medium mb-2 block">Size</label>
+                <label className="type-form-label">Size</label>
                 <div className="flex gap-2 flex-wrap">
                   {product.sizes.map((s) => (
                     <button key={s} onClick={() => setSize(s)} className={`px-4 py-2 border rounded-lg text-sm ${size === s ? 'border-border bg-gold/10' : 'hover:border-border'}`}>{s}</button>
@@ -134,7 +134,7 @@ export default function ProductPage() {
             )}
 
             <div className="mb-6">
-              <label className="text-sm font-medium mb-2 block">Quantity</label>
+              <label className="type-form-label">Quantity</label>
               <div className="flex items-center border rounded-lg w-fit">
                 <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 hover:bg-cream">−</button>
                 <span className="px-4">{quantity}</span>
@@ -153,7 +153,7 @@ export default function ProductPage() {
             </div>
 
             <div className="border rounded-xl p-4 mb-6">
-              <label className="text-sm font-medium mb-2 block">Check Delivery Date</label>
+              <label className="type-form-label">Check Delivery Date</label>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -214,7 +214,7 @@ export default function ProductPage() {
 
         {similar.length > 0 && (
           <section className="mt-16">
-            <h2 className="font-semibold text-charcoal text-2xl mb-6">You May Also Like</h2>
+            <h2 className="type-section-title text-xl md:text-2xl mb-6">You May Also Like</h2>
             <ProductGrid products={similar} />
           </section>
         )}

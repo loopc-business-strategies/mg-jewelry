@@ -31,12 +31,12 @@ export default function SignupPage() {
       <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-white">
         <div className="w-full max-w-md card-elegant p-8 md:p-10">
           <BrandLogo variant="auth" linkTo={null} />
-          <p className="section-eyebrow text-center mb-2">Account</p>
-          <h1 className="font-semibold text-charcoal text-3xl text-center mb-8">Create Account</h1>
+          <p className="section-eyebrow text-center">Account</p>
+          <h1 className="text-center mb-8">Create Account</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             {['name', 'email', 'phone', 'password'].map((field) => (
               <div key={field}>
-                <label className="text-sm font-medium capitalize block mb-1">{field}</label>
+                <label className="type-form-label capitalize">{field}</label>
                 <input
                   type={field === 'password' ? 'password' : field === 'email' ? 'email' : 'text'}
                   required
@@ -46,11 +46,11 @@ export default function SignupPage() {
                 />
               </div>
             ))}
-            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center disabled:opacity-50">
               {loading ? 'Creating...' : 'Create Account'}
             </button>
           </form>
-          <p className="text-center text-sm text-muted mt-6">
+          <p className="text-center type-body-sm mt-6">
             Already have an account? <Link to="/login" className="text-gold-dark hover:text-gold">Sign in</Link>
           </p>
         </div>

@@ -51,12 +51,12 @@ export default function WholesaleRegisterPage() {
     <>
       <SEOHead title="Wholesale Registration" path="/wholesale/register" />
       <div className="max-w-2xl mx-auto px-4 py-16">
-        <h1 className="font-semibold text-charcoal text-3xl text-center mb-2">Wholesale Registration</h1>
-        <p className="text-center text-muted mb-8">International jewellers, gold traders and wholesalers — apply to partner with Modern Gold</p>
+        <h1 className="text-center mb-2">Wholesale Registration</h1>
+        <p className="text-center type-section-desc prose-section mx-auto mb-8">International jewellers, gold traders and wholesalers — apply to partner with Modern Gold</p>
         <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
           {fields.map(({ key, labelKey, label, type, required, full, select }) => (
             <div key={key} className={full ? 'md:col-span-2' : ''}>
-              <label className="text-sm font-medium block mb-1">{labelKey ? t(labelKey) : label}{required ? ' *' : ''}</label>
+              <label className="type-form-label">{labelKey ? t(labelKey) : label}{required ? ' *' : ''}</label>
               {select === 'country' ? (
                 <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="input-elegant">
                   <option value="">{t('common.selectCountry')}</option>

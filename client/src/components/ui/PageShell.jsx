@@ -3,9 +3,9 @@ export default function PageShell({ title, eyebrow, subtitle, children, classNam
     <div className={`max-w-7xl mx-auto px-4 py-10 md:py-14 ${className}`}>
       {(eyebrow || title) && (
         <header className="mb-8 md:mb-10">
-          {eyebrow && <p className="section-eyebrow mb-2">{eyebrow}</p>}
-          {title && <h1 className="font-display text-3xl md:text-4xl text-charcoal">{title}</h1>}
-          {subtitle && <p className="text-muted mt-2 max-w-2xl">{subtitle}</p>}
+          {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
+          {title && <h1>{title}</h1>}
+          {subtitle && <p className="type-section-desc prose-section mt-3">{subtitle}</p>}
         </header>
       )}
       {children}

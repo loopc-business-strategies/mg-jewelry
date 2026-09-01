@@ -22,14 +22,14 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-20">
         <div className="max-w-xl animate-reveal">
-          <p className="section-eyebrow mb-4">{heroBanner.eyebrow}</p>
-          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-semibold text-charcoal leading-tight mb-5">
+          <p className="section-eyebrow">{heroBanner.eyebrow}</p>
+          <h1 className="type-hero-title mb-5">
             {heroBanner.headlineBefore}{' '}
             <span className="text-gold">{heroBanner.headlineHighlight}</span>
             <br />
             {heroBanner.headlineAfter}
           </h1>
-          <p className="text-muted text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+          <p className="type-hero-desc prose-hero mb-8">
             {heroBanner.description}
           </p>
           <div className="flex flex-wrap items-center gap-3 mb-12 md:mb-14">
@@ -51,10 +51,10 @@ export default function HeroSection() {
                   <Icon className="hero-feature-icon shrink-0 mt-0.5" size={26} strokeWidth={1.5} />
                 )}
                 <div>
-                  <p className="text-xs md:text-sm font-semibold text-charcoal leading-snug">
+                  <p className="type-body-sm font-medium text-charcoal leading-snug">
                     {feature.title}
                   </p>
-                  <p className="text-[11px] text-muted leading-relaxed mt-0.5 hidden sm:block">
+                  <p className="type-form-help mt-0.5 hidden sm:block">
                     {feature.desc}
                   </p>
                 </div>

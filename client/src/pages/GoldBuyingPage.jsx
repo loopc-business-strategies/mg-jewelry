@@ -51,8 +51,8 @@ export default function GoldBuyingPage() {
       <>
         <SEOHead title="Sell Your Gold" path="/gold-buying" keywords={[...seoKeywords, 'sell gold Namangan']} />
         <div className="max-w-2xl mx-auto px-4 py-24 text-center">
-          <h1 className="font-semibold text-charcoal text-3xl mb-4">{t('goldBuying.received')}</h1>
-          <p className="text-muted mb-8">{t('goldBuying.receivedDesc')}</p>
+          <h1 className="mb-4">{t('goldBuying.received')}</h1>
+          <p className="type-body mb-8">{t('goldBuying.receivedDesc')}</p>
           <Link to="/" className="btn-primary-gold">{t('cta.returnHome')}</Link>
         </div>
       </>
@@ -70,81 +70,81 @@ export default function GoldBuyingPage() {
 
       <div className="bg-white border-b border-border py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          <p className="section-eyebrow mb-2">{t('goldBuying.eyebrow')}</p>
-          <h1 className="font-semibold text-charcoal text-3xl md:text-4xl mb-4">{t('goldBuying.title')}</h1>
-          <p className="text-muted leading-relaxed">{t('goldBuying.intro')}</p>
+          <p className="section-eyebrow">{t('goldBuying.eyebrow')}</p>
+          <h1 className="mb-4">{t('goldBuying.title')}</h1>
+          <p className="type-section-desc prose-section">{t('goldBuying.intro')}</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-16">
         <div>
-          <h2 className="font-semibold text-charcoal text-xl mb-6">How It Works</h2>
+          <h2 className="type-card-title text-xl mb-6">How It Works</h2>
           <ol className="space-y-3">
             {(Array.isArray(steps) ? steps : goldBuyingSteps).map((step, i) => (
-              <li key={step} className="flex gap-3 text-sm text-charcoal">
-                <span className="text-gold font-semibold shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <li key={step} className="flex gap-3 type-body-sm text-charcoal">
+                <span className="text-gold font-semibold shrink-0 type-micro normal-case">{String(i + 1).padStart(2, '0')}</span>
                 <span>{step}</span>
               </li>
             ))}
           </ol>
-          <p className="text-xs text-muted mt-8 p-4 bg-white border border-border rounded-lg">
+          <p className="type-form-help mt-8 p-4 bg-white border border-border rounded-lg">
             Gold prices are determined after physical inspection and purity assessment. No guaranteed online pricing.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white border border-border p-6 md:p-8 rounded-xl space-y-4 shadow-sm">
-          <h2 className="font-semibold text-charcoal text-xl mb-2">Request Gold Valuation</h2>
+          <h2 className="type-card-title text-xl mb-2">Request Gold Valuation</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium block mb-1">Full Name *</label>
+              <label className="type-form-label">Full Name *</label>
               <input required value={form.fullName} onChange={(e) => setForm({ ...form, fullName: e.target.value })} className="input-elegant" />
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Phone *</label>
+              <label className="type-form-label">Phone *</label>
               <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="input-elegant" />
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Email</label>
+              <label className="type-form-label">Email</label>
               <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-elegant" />
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">City *</label>
+              <label className="type-form-label">City *</label>
               <input required value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="input-elegant" />
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Gold Type</label>
+              <label className="type-form-label">Gold Type</label>
               <select value={form.goldType} onChange={(e) => setForm({ ...form, goldType: e.target.value })} className="input-elegant">
                 <option value="">Select type</option>
                 {GOLD_TYPES.map((gt) => <option key={gt} value={gt}>{gt}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Approximate Weight</label>
+              <label className="type-form-label">Approximate Weight</label>
               <input placeholder="e.g. 50g" value={form.approximateWeight} onChange={(e) => setForm({ ...form, approximateWeight: e.target.value })} className="input-elegant" />
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Estimated Purity</label>
+              <label className="type-form-label">Estimated Purity</label>
               <select value={form.estimatedPurity} onChange={(e) => setForm({ ...form, estimatedPurity: e.target.value })} className="input-elegant">
                 <option value="">Select purity</option>
                 {PURITY_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Preferred Contact</label>
+              <label className="type-form-label">Preferred Contact</label>
               <select value={form.preferredContactMethod} onChange={(e) => setForm({ ...form, preferredContactMethod: e.target.value })} className="input-elegant">
                 {CONTACT_METHODS.map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Preferred Appointment Date</label>
+              <label className="type-form-label">Preferred Appointment Date</label>
               <input type="date" value={form.preferredAppointmentDate} onChange={(e) => setForm({ ...form, preferredAppointmentDate: e.target.value })} className="input-elegant" />
             </div>
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium block mb-1">Description</label>
+              <label className="type-form-label">Description</label>
               <textarea rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="input-elegant resize-none" placeholder="Describe your gold items..." />
             </div>
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium block mb-1">Optional Photos</label>
+              <label className="type-form-label">Optional Photos</label>
               <input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(e) => setImages(Array.from(e.target.files))} className="text-sm" />
             </div>
           </div>

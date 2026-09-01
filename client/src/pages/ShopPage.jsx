@@ -66,13 +66,13 @@ export default function ShopPage() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-14 bg-white">
         <Breadcrumbs items={[{ label: 'Jewellery' }]} />
         <header className="mb-8 md:mb-10">
-          <p className="section-eyebrow mb-2">Collections</p>
-          <h1 className="font-semibold text-3xl md:text-4xl text-charcoal">Chains & Bangles</h1>
-          <p className="text-muted text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
+          <p className="section-eyebrow">Collections</p>
+          <h1>Chains & Bangles</h1>
+          <p className="type-section-desc prose-section mt-3">
             Premium gold chains and bangles — our specialty. Crafted in Namangan for retail customers and international partners.
           </p>
           {meta.total && (
-            <p className="text-sm text-gold font-medium mt-2">
+            <p className="type-body-sm font-medium text-gold mt-2">
               Showing {meta.showing} of {meta.total} designs
             </p>
           )}

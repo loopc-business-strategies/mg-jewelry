@@ -12,8 +12,8 @@ export default function ServiceBarSection() {
           return (
             <div key={item.title} className="text-center lg:text-left">
               <Icon size={22} className="text-gold mx-auto lg:mx-0 mb-3" strokeWidth={1.25} />
-              <h3 className="text-sm font-medium text-charcoal mb-1">{item.title}</h3>
-              <p className="text-xs text-muted leading-relaxed">{item.desc}</p>
+              <h3 className="type-body-sm font-medium text-charcoal mb-1">{item.title}</h3>
+              <p className="type-form-help">{item.desc}</p>
             </div>
           );
         })}

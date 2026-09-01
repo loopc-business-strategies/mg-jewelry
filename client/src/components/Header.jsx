@@ -25,7 +25,7 @@ function MobileAccordion({ title, children, defaultOpen = false }) {
     <div className="border-b border-border">
       <button
         type="button"
-        className="flex items-center justify-between w-full py-3 text-sm font-medium text-left"
+        className="flex items-center justify-between w-full py-3 type-body-sm font-medium text-left"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
@@ -155,13 +155,13 @@ export default function Header() {
               <Link
                 key={link.path + (link.key || link.label)}
                 to={link.path}
-                className={`text-sm py-3 border-b border-border ${isNavLinkActive(pathname, link) ? 'text-gold font-medium' : 'text-charcoal'}`}
+                className={`type-body-sm py-3 border-b border-border ${isNavLinkActive(pathname, link) ? 'text-gold font-medium' : 'text-charcoal'}`}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.key ? t(link.key) : link.label}
               </Link>
             ))}
-            <Link to="/shop" className="text-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
+            <Link to="/shop" className="type-body-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
               {t('nav.collections')}
             </Link>
             <MobileAccordion title={t('nav.retail')}>
@@ -170,7 +170,7 @@ export default function Header() {
                   <Link
                     key={link.path + (link.key || link.label)}
                     to={link.path}
-                    className="block text-sm text-muted hover:text-gold py-1.5"
+                    className="block type-body-sm text-muted hover:text-gold py-1.5"
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.key ? t(link.key) : link.label}
@@ -184,7 +184,7 @@ export default function Header() {
                   <Link
                     key={link.path + (link.key || link.label)}
                     to={link.path}
-                    className="block text-sm text-muted hover:text-gold py-1.5"
+                    className="block type-body-sm text-muted hover:text-gold py-1.5"
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.key ? t(link.key) : link.label}
@@ -192,8 +192,8 @@ export default function Header() {
                 ))}
               </div>
             </MobileAccordion>
-            <Link to="/wishlist" className="text-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
-            <Link to={user ? '/profile' : '/login'} className="text-sm py-3" onClick={() => setMobileOpen(false)}>
+            <Link to="/wishlist" className="type-body-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
+            <Link to={user ? '/profile' : '/login'} className="type-body-sm py-3" onClick={() => setMobileOpen(false)}>
               {user ? 'My Account' : 'Login'}
             </Link>
             <Link

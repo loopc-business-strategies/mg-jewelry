@@ -67,7 +67,7 @@ export default function CategoryPage() {
       <div className="relative h-56 md:h-72 overflow-hidden bg-white">
         <SafeImage src={heroImage} alt={heroAlt} category={slug} className="w-full h-full object-cover" />
         <div className="absolute inset-0 editorial-hero-overlay flex items-end justify-center pb-8 md:pb-10">
-          <h1 className="font-semibold text-4xl md:text-5xl text-charcoal">{title}</h1>
+          <h1 className="headline-editorial">{title}</h1>
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export default function CategoryPage() {
         <Breadcrumbs items={[{ label: 'Shop', path: '/shop' }, { label: title }]} />
 
         {category?.description && (
-          <p className="text-muted text-sm md:text-base leading-relaxed mb-6 max-w-3xl">{category.description}</p>
+          <p className="type-section-desc prose-section mb-6">{category.description}</p>
         )}
 
         {category?.subcategories?.length > 0 && (

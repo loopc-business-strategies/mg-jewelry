@@ -53,10 +53,10 @@ export default function ProductCard({ product }) {
 
       <div className="product-card-info p-4 md:p-5 flex flex-col flex-1">
         {product.category && (
-          <p className="text-[10px] tracking-wide uppercase text-gold mb-1 font-semibold">{slugToLabel(product.category)}</p>
+          <p className="type-micro mb-1.5">{slugToLabel(product.category)}</p>
         )}
         <Link to={`/product/${product._id}`}>
-          <h3 className="text-base font-semibold text-charcoal mb-1 line-clamp-1 hover:text-gold transition-colors">
+          <h3 className="type-card-title mb-1 line-clamp-1 hover:text-gold transition-colors">
             {product.name}
           </h3>
         </Link>

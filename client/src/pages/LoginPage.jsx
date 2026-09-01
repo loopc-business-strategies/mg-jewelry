@@ -31,23 +31,23 @@ export default function LoginPage() {
       <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-white">
         <div className="w-full max-w-md card-elegant p-8 md:p-10">
           <BrandLogo variant="auth" linkTo={null} />
-          <p className="section-eyebrow text-center mb-2">Account</p>
-          <h1 className="font-semibold text-charcoal text-3xl text-center mb-8">Welcome Back</h1>
+          <p className="section-eyebrow text-center">Account</p>
+          <h1 className="text-center mb-8">Welcome Back</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-sm font-medium block mb-1">Email</label>
+              <label className="type-form-label">Email</label>
               <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-elegant" />
             </div>
             <div>
-              <label className="text-sm font-medium block mb-1">Password</label>
+              <label className="type-form-label">Password</label>
               <input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="input-elegant" />
             </div>
-            <Link to="/forgot-password" className="text-sm text-gold-dark hover:text-gold block">Forgot password?</Link>
-            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
+            <Link to="/forgot-password" className="type-body-sm text-gold-dark hover:text-gold block">Forgot password?</Link>
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center disabled:opacity-50">
               {loading ? 'Signing in...' : 'SIGN IN'}
             </button>
           </form>
-          <p className="text-center text-sm text-muted mt-6">
+          <p className="text-center type-body-sm mt-6">
             Don't have an account? <Link to="/signup" className="text-gold-dark hover:underline">Sign up</Link>
           </p>
         </div>

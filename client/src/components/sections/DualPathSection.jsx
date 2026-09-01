@@ -34,11 +34,11 @@ function DualPathCard({
             strokeWidth={1.5}
           />
         </div>
-        <h3 className="text-xl md:text-2xl font-semibold text-charcoal mb-3 uppercase tracking-wide">
+        <h3 className="type-card-title mb-3">
           {title}
         </h3>
-        <p className="text-muted text-sm leading-relaxed mb-8 max-w-sm">{description}</p>
-        <Link to={ctaTo} className={`${ctaClass} text-xs md:text-sm uppercase tracking-wider`}>
+        <p className="type-card-desc prose-card mx-auto mb-8">{description}</p>
+        <Link to={ctaTo} className={ctaClass}>
           {ctaLabel}
         </Link>
       </div>
@@ -53,11 +53,11 @@ export default function DualPathSection() {
     <section className="dual-path-section py-20 md:py-24 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-14 max-w-[700px] mx-auto">
-          <p className="dual-path-eyebrow mb-3">{t('dualPath.eyebrow')}</p>
-          <h2 className="text-4xl md:text-[2.5rem] font-semibold text-charcoal mb-4 leading-tight">
+          <p className="section-eyebrow">{t('dualPath.eyebrow')}</p>
+          <h2 className="type-section-title mb-4">
             {t('dualPath.title')}
           </h2>
-          <p className="text-muted text-sm md:text-base leading-relaxed">
+          <p className="type-section-desc prose-section mx-auto">
             {t('dualPath.oppositeModel')}
           </p>
         </div>

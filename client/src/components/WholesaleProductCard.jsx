@@ -9,21 +9,21 @@ export default function WholesaleProductCard({ product, showPrices, onAdd }) {
         <ProductImage product={product} />
       </Link>
       <div className="p-4">
-        <h3 className="font-display text-lg line-clamp-1">{product.name}</h3>
-        <p className="text-xs text-muted mb-2">SKU: {product.sku}</p>
-        <div className="space-y-1 text-sm">
-          <p>Retail: <span className="line-through text-muted">{formatPrice(product.price)}</span></p>
+        <h3 className="type-card-title line-clamp-1 mb-1">{product.name}</h3>
+        <p className="type-micro text-muted normal-case mb-2">SKU: {product.sku}</p>
+        <div className="space-y-1 type-body-sm">
+          <p>Retail: <span className="line-through">{formatPrice(product.price)}</span></p>
           {showPrices ? (
-            <p className="font-semibold text-gold-dark">Wholesale: {formatPrice(product.wholesalePrice)}</p>
+            <p className="font-semibold text-gold">Wholesale: {formatPrice(product.wholesalePrice)}</p>
           ) : (
-            <p className="text-muted italic">Login for wholesale pricing</p>
+            <p className="italic">Login for wholesale pricing</p>
           )}
-          <p className="text-xs">MOQ: {product.moq} pieces · Stock: {product.stock}</p>
+          <p className="type-form-help">MOQ: {product.moq} pieces · Stock: {product.stock}</p>
         </div>
         {showPrices && onAdd && (
           <button
             onClick={() => onAdd(product._id, product.moq)}
-            className="w-full mt-3 bg-gold text-white py-2 rounded-lg text-sm hover:bg-gold-dark transition-colors"
+            className="w-full mt-3 btn-primary-gold justify-center text-xs py-2.5"
           >
             Add to Bulk Order
           </button>

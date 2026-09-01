@@ -70,9 +70,9 @@ export default function ContactPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <p className="section-eyebrow text-center mb-2">Contact</p>
-        <h1 className="font-semibold text-charcoal text-4xl text-center mb-2">{activeLabel}</h1>
-        <p className="text-center text-muted mb-8 max-w-xl mx-auto">
+        <p className="section-eyebrow text-center">Contact</p>
+        <h1 className="text-center mb-2">{activeLabel}</h1>
+        <p className="text-center type-section-desc prose-section mx-auto mb-8">
           Reach out to discuss wholesale orders, custom jewelry manufacturing or international partnerships.
         </p>
 
@@ -82,7 +82,7 @@ export default function ContactPage() {
               key={type.id}
               type="button"
               onClick={() => setInquiryType(type.id)}
-              className={`px-5 py-2.5 text-sm rounded-md border transition-colors ${
+              className={`px-5 py-2.5 type-body-sm rounded-md border transition-colors ${
                 activeType === type.id
                   ? 'bg-gold text-white border-border'
                   : 'bg-white border-border hover:border-border text-charcoal'
@@ -97,7 +97,7 @@ export default function ContactPage() {
           <form onSubmit={handleSubmit} className="space-y-4 card-elegant p-8">
             {['name', 'email', 'phone', 'subject'].map((field) => (
               <div key={field}>
-                <label className="text-sm font-medium capitalize block mb-1">{field === 'subject' ? 'Subject' : field}</label>
+                <label className="type-form-label capitalize">{field === 'subject' ? 'Subject' : field}</label>
                 <input
                   type={field === 'email' ? 'email' : 'text'}
                   required={field !== 'phone'}
@@ -108,20 +108,20 @@ export default function ContactPage() {
               </div>
             ))}
             <div>
-              <label className="text-sm font-medium block mb-1">Message</label>
+              <label className="type-form-label">Message</label>
               <textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="input-elegant" />
             </div>
-            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center disabled:opacity-50">
               {loading ? 'Sending...' : activeType === 'quote' ? 'Submit Quote Request' : 'Send Message'}
             </button>
           </form>
 
           <div className="space-y-6">
             <div className="bg-white rounded-2xl p-8 border border-border">
-              <h2 className="font-semibold text-charcoal text-2xl mb-4">{brand.legalName}</h2>
+              <h2 className="type-section-title text-xl md:text-2xl mb-4">{brand.legalName}</h2>
               <div className="flex gap-4">
                 <MapPin size={20} className="text-gold shrink-0 mt-1" />
-                <address className="text-sm text-muted not-italic leading-relaxed">
+                <address className="type-body-sm not-italic leading-relaxed">
                   {brand.addressLines.map((line) => (
                     <span key={line} className="block">{line}</span>
                   ))}
@@ -130,13 +130,13 @@ export default function ContactPage() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-border">
-              <h3 className="font-semibold text-charcoal text-lg mb-3 text-gold">Business Enquiries</h3>
-              <p className="text-sm text-muted leading-relaxed mb-4">
+              <h3 className="type-card-title mb-3 text-gold">Business Enquiries</h3>
+              <p className="type-body-sm mb-4">
                 For wholesale partnerships, custom manufacturing and international orders, use the form or explore our business pages.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link to="/wholesale" className="text-sm text-gold-dark font-medium hover:underline">Wholesale →</Link>
-                <Link to="/custom-jewelry" className="text-sm text-gold-dark font-medium hover:underline">Custom Jewelry →</Link>
+                <Link to="/wholesale" className="type-body-sm font-medium text-gold-dark hover:underline">Wholesale →</Link>
+                <Link to="/custom-jewelry" className="type-body-sm font-medium text-gold-dark hover:underline">Custom Jewelry →</Link>
               </div>
             </div>
           </div>
