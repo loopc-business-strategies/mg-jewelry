@@ -13,14 +13,17 @@ export default function SafeImage({
   category,
   subcategory,
   loading = 'lazy',
+  disableFallback = false,
 }) {
   const lifestyleFallback = getCategoryFallback(category, subcategory);
   const svgFallback = getCategorySvgFallback(category, subcategory);
   const defaultJewelry = CATEGORY_FALLBACKS.default;
 
-  const chain = [src, lifestyleFallback, defaultJewelry, svgFallback].filter(
-    (url, i, arr) => url && !isLegacyImagePath(url) && arr.indexOf(url) === i
-  );
+  const chain = disableFallback
+    ? [src].filter((url) => url && !isLegacyImagePath(url))
+    : [src, lifestyleFallback, defaultJewelry, svgFallback].filter(
+        (url, i, arr) => url && !isLegacyImagePath(url) && arr.indexOf(url) === i
+      );
 
   const [index, setIndex] = useState(0);
   const current = chain[index] || svgFallback;

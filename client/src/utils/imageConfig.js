@@ -185,27 +185,27 @@ export const manufacturingProcessSteps = [
   {
     label: 'Melting & Refining',
     src: jewelryStock('1751979362679-8687eb4d9301'),
-    alt: 'Molten gold being poured during refining',
+    alt: 'Molten metal being poured during refining',
   },
   {
     label: 'Chain Making',
-    src: jewelryStock('1617038220319-276d3aab2915'),
-    alt: 'Gold chain craftsmanship in production',
+    src: jewelryStock('1703034390153-7d1d72111e8a'),
+    alt: 'Close-up of a gold chain during production',
   },
   {
     label: 'Bangle Making',
-    src: jewelryStock('1611085583191-a6cfe1657e70'),
-    alt: 'Finished gold bangles from manufacturing',
+    src: jewelryStock('1689367436414-7acc3fdc3e2a'),
+    alt: 'Stack of gold bangles from manufacturing',
   },
   {
     label: 'Quality Inspection',
-    src: jewelryStock('1535632066927-ab7c754af398'),
-    alt: 'Jeweler inspecting gold jewelry for quality',
+    src: jewelryStock('1772442125263-c9dd28bbd938'),
+    alt: 'Jeweler examining jewelry at a workbench',
   },
   {
     label: 'Packaging',
-    src: jewelryStock('1515562141207-7a88fb7ce338'),
-    alt: 'Premium jewelry packaging presentation',
+    src: jewelryStock('1710753495822-3f1a0b7cfb8d'),
+    alt: 'Gold jewelry presented in a premium gift box',
   },
 ];
 

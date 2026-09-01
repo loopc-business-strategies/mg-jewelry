@@ -15,7 +15,7 @@ export default function OurManufacturingSection() {
                 <SafeImage
                   src={src}
                   alt={alt}
-                  category="gold-jewelry"
+                  disableFallback
                   className="w-full h-full object-cover"
                 />
               </div>
