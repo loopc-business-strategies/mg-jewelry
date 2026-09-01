@@ -7,7 +7,8 @@ export const brand = {
   legalName: 'Modern Gold Jewelry Manufacturing FE LLC',
   tagline: 'Crafted in Uzbekistan. Connected to the World.',
   heroSubtitle:
-    'Premium jewelry manufacturing and collections created for customers, retailers, wholesalers and international partners across Central Asia, Russia, the UK, Singapore, Malaysia, Hong Kong, the United States and Dubai.',
+    'An integrated gold company — from mining and refinery operations to precision jewelry manufacturing. Serving customers, retailers, wholesalers and international partners across Central Asia and global markets.',
+  heroSupportingLine: 'From raw gold to finished jewellery — one integrated operation.',
   address: '242 Girvonbulok Street, Namangan Davlatabad, Namangan – Uzbekistan',
   addressLines: [
     '242 Girvonbulok Street',
@@ -235,9 +236,9 @@ export const seoKeywords = [
 ];
 
 export const heroTrustBadges = [
-  { title: 'Certified Quality', desc: 'Hallmarked gold and verified diamonds.' },
-  { title: 'Secure Shipping', desc: 'Insured delivery worldwide.' },
-  { title: 'Lifetime Craftsmanship', desc: 'Precision made to endure.' },
+  { title: 'Gold Mining', desc: 'Upstream resource operations supporting our supply chain.' },
+  { title: 'Refinery', desc: 'Professional refining and gold processing capabilities.' },
+  { title: 'Manufacturing', desc: 'Chains and bangles crafted for retail and wholesale partners.' },
 ];
 
 export const servicePromises = [

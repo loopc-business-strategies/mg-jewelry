@@ -122,7 +122,7 @@ export function getCategorySvgFallback(category, subcategory) {
   return CATEGORY_SVG_FALLBACKS[slug] || CATEGORY_SVG_FALLBACKS.default;
 }
 
-export const heroImage = jewelryStock('1469334031218-e382a71b716b', 1200);
+export const heroImage = '/images/demo/hero-refinery.jpg';
 export const premiumBanner = jewelryStock('1599643478518-a784e5dc4c8f', 1200);
 export const aboutHero = jewelryStock('1516638918792-21578567a634', 1200);
 export const wholesaleHero = jewelryStock('1611085583191-a6cfe1657e70', 1200);

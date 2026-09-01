@@ -9,13 +9,16 @@ export default function HeroSection() {
     <section className="section-white py-16 md:py-24 lg:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="animate-reveal max-w-xl">
-          <p className="section-eyebrow mb-4">International Gold Manufacturing</p>
+          <p className="section-eyebrow mb-4">Mining · Refinery · Manufacturing</p>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-charcoal mb-4">
             {brand.name}
           </h1>
           <div className="section-title-line mb-5" />
           <p className="text-muted text-base md:text-lg leading-relaxed mb-3">
             {brand.tagline}
+          </p>
+          <p className="text-muted text-sm md:text-base leading-relaxed mb-2">
+            {brand.heroSupportingLine}
           </p>
           <p className="text-muted text-sm md:text-base leading-relaxed mb-8">
             {brand.heroSubtitle}
@@ -41,7 +44,8 @@ export default function HeroSection() {
           <div className="relative image-zoom-hover rounded-lg overflow-hidden border border-border">
             <SafeImage
               src={heroImage}
-              alt="Premium gold chains and bangles — Modern Gold Jewelry"
+              alt="Gold refinery operations — demo corporate photography"
+              disableFallback
               className="w-full aspect-[4/5] object-cover"
               loading="eager"
             />
