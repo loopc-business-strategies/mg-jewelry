@@ -13,7 +13,6 @@ export default function AboutPage() {
     alternateName: brand.name,
     description: brand.tagline,
     url: brand.siteUrl,
-    logo: `${brand.siteUrl}${brand.logo}`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: '242 Girvonbulok Street',

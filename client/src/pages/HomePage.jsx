@@ -33,7 +33,6 @@ export default function HomePage() {
     name: brand.legalName,
     alternateName: brand.name,
     url: brand.siteUrl,
-    logo: `${brand.siteUrl}${brand.logo}`,
     description: `${brand.legalName} — ${brand.tagline}. Local gold buying and international jewellery manufacturing from Namangan, Uzbekistan.`,
     address: {
       '@type': 'PostalAddress',
