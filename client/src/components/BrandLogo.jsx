@@ -1,6 +1,19 @@
 import { Link } from 'react-router-dom';
 import { brand } from '../utils/brandConfig';
 
+function LogoMark({ className = 'h-10 w-auto' }) {
+  if (!brand.logo) return null;
+  return (
+    <img
+      src={brand.logo}
+      alt={brand.logoAlt}
+      className={`${className} object-contain shrink-0`}
+      loading="eager"
+      decoding="async"
+    />
+  );
+}
+
 export default function BrandLogo({ variant = 'header', className = '', linkTo = '/' }) {
   if (variant === 'auth') {
     const authContent = (
@@ -14,13 +27,13 @@ export default function BrandLogo({ variant = 'header', className = '', linkTo =
 
   const content = {
     header: (
-      <div className={`flex flex-col items-center lg:items-start shrink-0 group ${className}`}>
-        <span className="font-display text-xl md:text-2xl text-charcoal tracking-wide">{brand.name}</span>
+      <div className={`shrink-0 group ${className}`}>
+        <LogoMark className="h-10 w-auto" />
       </div>
     ),
     footer: (
       <div className={`inline-block mb-4 ${className}`}>
-        <p className="font-display text-2xl text-charcoal tracking-wide mb-1">{brand.name}</p>
+        <LogoMark className="h-10 w-auto" />
       </div>
     ),
     admin: (
@@ -35,6 +48,10 @@ export default function BrandLogo({ variant = 'header', className = '', linkTo =
       </span>
     ),
   }[variant];
+
+  if (variant === 'header' || variant === 'footer') {
+    if (!brand.logo) return null;
+  }
 
   if (linkTo && variant !== 'admin') {
     return <Link to={linkTo}>{content}</Link>;
