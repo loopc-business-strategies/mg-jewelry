@@ -16,12 +16,6 @@ const wholesaleCustomerSchema = new mongoose.Schema(
     website: String,
     expectedMonthlyPurchase: String,
     categoriesInterested: [String],
-    country: String,
-    yearsInBusiness: String,
-    interestedProducts: [String],
-    preferredPurity: String,
-    verificationDocuments: [String],
-    assignedSalesperson: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     status: {
       type: String,
       enum: ['pending', 'approved', 'rejected', 'suspended'],

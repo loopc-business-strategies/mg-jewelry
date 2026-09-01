@@ -1,15 +1,18 @@
-# Modern Gold — Gold Industry Platform
+# Modern Gold Jewelry — International Jewelry Manufacturing Platform
 
-Full-stack platform for **Modern Gold Jewelry Manufacturing FE LLC**, based in Namangan, Uzbekistan.
+Full-stack e-commerce and wholesale platform for **Modern Gold Jewelry Manufacturing FE LLC**, based in Namangan, Uzbekistan.
 
 - **Frontend:** React + Vite + Tailwind CSS (`client/`)
 - **Backend:** Express + MongoDB (`server/`)
+- **Live:** https://mg-jewelry.vercel.app
 
-## Business Model
+## Features
 
-- **Local sellers:** Sell gold via `/gold-buying` valuation requests
-- **International buyers:** B2B registration, product catalogue, RFQ/quote workflow
-- **Manufacturing:** Chains and bangles in 14K, 18K, 22K
+- B2C shop, cart, checkout, wishlist, search
+- B2B wholesale registration, bulk pricing, partner dashboard
+- Admin panel (products, orders, customers, blog, settings)
+- International manufacturer homepage with global markets section
+- Guaranteed product image fallback system
 
 ## Local Development
 
@@ -17,6 +20,11 @@ Full-stack platform for **Modern Gold Jewelry Manufacturing FE LLC**, based in N
 npm install
 cd client && npm install
 cd ../server && npm install
+```
+
+Create `.env` from `.env.example` at project root.
+
+```bash
 npm run dev
 ```
 
@@ -29,18 +37,13 @@ npm run dev
 npm run seed
 ```
 
-Set `FORCE_RESEED=true` to reseed with chains/bangles catalogue.
+Admin login (default): see `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`
 
-## Key Routes
+## Production
 
-| Public | Admin |
-|--------|-------|
-| `/` Homepage | `/admin` Dashboard |
-| `/gold-buying` Sell gold | `/admin/gold-buying` Leads |
-| `/buyers` International buyers | `/admin/buyers` Applications |
-| `/products` B2B catalogue | `/admin/rfqs` RFQs |
-| `/manufacturing` Factory | `/admin/quotes` Quotes |
-| `/markets` Regional presence | |
+**Vercel (client):** Root directory `client`, env `VITE_API_URL=https://<railway-api>/api`
+
+**Railway (server):** Root directory `server`, MongoDB linked, `USE_MEMORY_DB=false`
 
 ## Company
 

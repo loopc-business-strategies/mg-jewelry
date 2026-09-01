@@ -4,10 +4,10 @@ import { brand } from '../utils/brandConfig';
 export default function SEOHead({ title, description, path = '', schema, type = 'website', image }) {
   const fullTitle = title
     ? `${title} | ${brand.name}`
-    : `${brand.name} — Gold Industry Company | Central Asia`;
+    : `${brand.name} — International Jewelry Manufacturing`;
   const desc = description || `${brand.tagline} ${brand.heroSubtitle.slice(0, 120)}...`;
   const url = `${brand.siteUrl}${path}`;
-  const ogImage = image || `${brand.siteUrl}${brand.logo}`;
+  const ogImage = image || `${brand.siteUrl}/images/fallbacks/product-fallback-default.svg`;
 
   return (
     <Helmet>
