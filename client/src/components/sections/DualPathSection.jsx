@@ -1,35 +1,45 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { Globe2, Users } from 'lucide-react';
 import SafeImage from '../SafeImage';
-import { goldBuyingSteps, buyerJourneySteps } from '../../utils/brandConfig';
 import { dualPathImages } from '../../utils/imageConfig';
 import { useTranslation } from '../../hooks/useTranslation';
 
-function DualPathCard({ image, imageAlt, eyebrow, title, description, steps, ctaTo, ctaLabel, ctaClass }) {
+function DualPathCard({
+  image,
+  imageAlt,
+  variant,
+  icon: Icon,
+  title,
+  description,
+  ctaTo,
+  ctaLabel,
+  ctaClass,
+}) {
   return (
-    <div className="dual-path-card flex flex-col overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-soft)]">
-      <div className="relative h-52 md:h-64 shrink-0 overflow-hidden">
-        <SafeImage
-          src={image}
-          alt={imageAlt}
-          disableFallback
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="p-8 md:p-10 flex flex-col flex-1">
-        <p className="dual-path-eyebrow mb-2">{eyebrow}</p>
-        <h3 className="text-2xl md:text-[1.625rem] font-semibold text-charcoal mb-3">{title}</h3>
-        <p className="text-muted text-sm mb-6">{description}</p>
-        <ol className="space-y-2 mb-8 flex-1">
-          {steps.map((step, i) => (
-            <li key={step} className="flex gap-3 text-sm text-charcoal">
-              <span className="text-gold font-semibold shrink-0 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-              <span>{step}</span>
-            </li>
-          ))}
-        </ol>
-        <Link to={ctaTo} className={`${ctaClass} text-sm w-fit`}>
-          {ctaLabel} <ArrowRight size={14} />
+    <div
+      className={`dual-path-card dual-path-card--${variant} relative overflow-hidden rounded-2xl shadow-[var(--shadow-soft)] min-h-[420px] md:min-h-[440px] flex flex-col`}
+    >
+      <SafeImage
+        src={image}
+        alt={imageAlt}
+        disableFallback
+        className="absolute inset-0 w-full h-full object-cover object-top"
+      />
+      <div className={`dual-path-card-overlay dual-path-card-overlay--${variant}`} aria-hidden="true" />
+      <div className="relative z-10 flex flex-col items-center text-center px-8 pt-24 md:pt-28 pb-10 flex-1 justify-end">
+        <div className="dual-path-icon-badge">
+          <Icon
+            className={variant === 'sell' ? 'text-gold' : 'text-charcoal'}
+            size={22}
+            strokeWidth={1.5}
+          />
+        </div>
+        <h3 className="text-xl md:text-2xl font-semibold text-charcoal mb-3 uppercase tracking-wide">
+          {title}
+        </h3>
+        <p className="text-muted text-sm leading-relaxed mb-8 max-w-sm">{description}</p>
+        <Link to={ctaTo} className={`${ctaClass} text-xs md:text-sm uppercase tracking-wider`}>
+          {ctaLabel}
         </Link>
       </div>
     </div>
@@ -38,8 +48,6 @@ function DualPathCard({ image, imageAlt, eyebrow, title, description, steps, cta
 
 export default function DualPathSection() {
   const { t } = useTranslation();
-  const localSteps = t('steps.goldBuying');
-  const buyerSteps = t('steps.buyerJourney');
 
   return (
     <section className="dual-path-section py-20 md:py-24 px-4">
@@ -56,25 +64,25 @@ export default function DualPathSection() {
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           <DualPathCard
+            variant="sell"
+            icon={Users}
             image={dualPathImages.sellGold}
-            imageAlt="Local customer selling gold at a professional counter — demo photography"
-            eyebrow={t('dualPath.localEyebrow')}
+            imageAlt="Hands holding polished gold chains — sell your gold at Modern Gold"
             title={t('dualPath.localTitle')}
             description={t('dualPath.localDesc')}
-            steps={(Array.isArray(localSteps) ? localSteps : goldBuyingSteps).slice(0, 6)}
             ctaTo="/gold-buying"
-            ctaLabel={t('cta.sellGold')}
+            ctaLabel={t('cta.startSelling')}
             ctaClass="btn-primary-gold"
           />
           <DualPathCard
+            variant="buy"
+            icon={Globe2}
             image={dualPathImages.buyGold}
-            imageAlt="International buyer sourcing gold jewellery — demo photography"
-            eyebrow={t('dualPath.intlEyebrow')}
+            imageAlt="Business handshake — become a wholesale buyer with Modern Gold"
             title={t('dualPath.intlTitle')}
             description={t('dualPath.intlDesc')}
-            steps={Array.isArray(buyerSteps) ? buyerSteps : buyerJourneySteps}
             ctaTo="/wholesale/register"
-            ctaLabel={t('cta.becomePartner')}
+            ctaLabel={t('cta.becomeBuyer')}
             ctaClass="btn-outline-gold"
           />
         </div>

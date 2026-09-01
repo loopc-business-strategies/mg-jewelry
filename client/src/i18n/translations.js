@@ -35,6 +35,8 @@ export const translations = {
     cta: {
       sellGold: 'Sell Gold',
       becomePartner: 'Become a Partner',
+      startSelling: 'START SELLING',
+      becomeBuyer: 'BECOME A BUYER',
       returnHome: 'Return Home',
       submitApplication: 'Submit Application',
     },
@@ -44,11 +46,13 @@ export const translations = {
       oppositeModel:
         'Most jewellers sell to local customers. Modern Gold works the opposite way — local people sell gold to us, and international traders and jewellers buy manufactured jewellery from us.',
       localEyebrow: 'Local Sellers',
-      localTitle: 'Sell Your Gold',
-      localDesc: 'Bring your gold to Modern Gold. We welcome local individuals and businesses who want to sell gold.',
+      localTitle: 'SELL YOUR GOLD',
+      localDesc:
+        'Bring your gold to Modern Gold. We ensure transparent testing, fair valuation and instant payment.',
       intlEyebrow: 'International Buyers',
-      intlTitle: 'Buy From Modern Gold',
-      intlDesc: 'Source jewellery for your business. Register as a wholesale partner and request quotations.',
+      intlTitle: 'BUY FROM MODERN GOLD',
+      intlDesc:
+        'Source premium gold chains and bangles in 14K, 18K and 22K for your business.',
     },
     credibility: {
       eyebrow: 'Company Proof',
@@ -173,6 +177,8 @@ export const translations = {
     cta: {
       sellGold: 'Продать золото',
       becomePartner: 'Стать партнёром',
+      startSelling: 'НАЧАТЬ ПРОДАЖУ',
+      becomeBuyer: 'СТАТЬ ПОКУПАТЕЛЕМ',
       returnHome: 'На главную',
       submitApplication: 'Отправить заявку',
     },
@@ -182,11 +188,13 @@ export const translations = {
       oppositeModel:
         'Большинство ювелиров продают местным клиентам. Modern Gold работает наоборот — местные продают нам золото, а международные трейдеры покупают у нас ювелирные изделия.',
       localEyebrow: 'Местные продавцы',
-      localTitle: 'Продайте своё золото',
-      localDesc: 'Принесите золото в Modern Gold. Мы принимаем физических и юридических лиц.',
+      localTitle: 'ПРОДАЙТЕ СВОЁ ЗОЛОТО',
+      localDesc:
+        'Принесите золото в Modern Gold. Прозрачная проверка, честная оценка и мгновенная оплата.',
       intlEyebrow: 'Международные покупатели',
-      intlTitle: 'Покупайте у Modern Gold',
-      intlDesc: 'Закупайте ювелирные изделия для бизнеса. Зарегистрируйтесь как оптовый партнёр.',
+      intlTitle: 'ПОКУПАЙТЕ У MODERN GOLD',
+      intlDesc:
+        'Закупайте премиальные золотые цепи и браслеты 14K, 18K и 22K для вашего бизнеса.',
     },
     credibility: {
       eyebrow: 'Подтверждение',
@@ -311,6 +319,8 @@ export const translations = {
     cta: {
       sellGold: 'Oltin sotish',
       becomePartner: 'Hamkor bo\'lish',
+      startSelling: 'SOTISHNI BOSHLASH',
+      becomeBuyer: 'XARIDOR BO\'LISH',
       returnHome: 'Bosh sahifaga',
       submitApplication: 'Arizani yuborish',
     },
@@ -320,11 +330,13 @@ export const translations = {
       oppositeModel:
         'Ko\'pchilik zargarlar mahalliy mijozlarga sotadi. Modern Gold aksincha — mahalliy odamlar bizga oltin sotadi, xalqaro treyderlar bizdan zargarlik buyumlari sotib oladi.',
       localEyebrow: 'Mahalliy sotuvchilar',
-      localTitle: 'Oltiningizni soting',
-      localDesc: 'Oltiningizni Modern Gold ga olib keling. Jismoniy va yuridik shaxslarni qabul qilamiz.',
+      localTitle: 'OLTININGIZNI SOTING',
+      localDesc:
+        'Oltiningizni Modern Gold ga olib keling. Shaffof tekshiruv, adolatli baholash va darhol to\'lov.',
       intlEyebrow: 'Xalqaro xaridorlar',
-      intlTitle: 'Modern Gold dan sotib oling',
-      intlDesc: 'Biznesingiz uchun zargarlik buyumlari. Ulgurji hamkor sifatida ro\'yxatdan o\'ting.',
+      intlTitle: 'MODERN GOLD DAN SOTIB OLING',
+      intlDesc:
+        'Biznesingiz uchun 14K, 18K va 22K premium oltin zanjirlar va bilakuzuklar.',
     },
     credibility: {
       eyebrow: 'Kompaniya isboti',
@@ -449,6 +461,8 @@ export const translations = {
     cta: {
       sellGold: 'بيع الذهب',
       becomePartner: 'كن شريكاً',
+      startSelling: 'ابدأ البيع',
+      becomeBuyer: 'كن مشترياً',
       returnHome: 'العودة للرئيسية',
       submitApplication: 'إرسال الطلب',
     },
@@ -458,11 +472,13 @@ export const translations = {
       oppositeModel:
         'معظم صاغة المجوهرات يبيعون للعملاء المحليين. Modern Gold تعمل بالعكس — يبيع المحليون الذهب لنا، ويشترون التجار الدوليون والصاغة المجوهرات المصنعة منا.',
       localEyebrow: 'البائعون المحليون',
-      localTitle: 'بيع الذهب',
-      localDesc: 'أحضر ذهبك إلى Modern Gold. نرحب بالأفراد والشركات المحلية الراغبة في بيع الذهب.',
+      localTitle: 'بيع ذهبك',
+      localDesc:
+        'أحضر ذهبك إلى Modern Gold. نضمن اختباراً شفافاً وتقييماً عادلاً ودفعاً فورياً.',
       intlEyebrow: 'المشترون الدوليون',
-      intlTitle: 'اشترِ من Modern Gold',
-      intlDesc: 'احصل على مجوهرات لعملك. سجّل كشريك جملة واطلب عروض الأسعار.',
+      intlTitle: 'اشترِ من MODERN GOLD',
+      intlDesc:
+        'احصل على سلاسل وأساور ذهبية فاخرة 14K و18K و22K لعملك.',
     },
     credibility: {
       eyebrow: 'إثبات الشركة',
@@ -587,6 +603,8 @@ export const translations = {
     cta: {
       sellGold: 'Altın Sat',
       becomePartner: 'Ortak Ol',
+      startSelling: 'SATIŞA BAŞLA',
+      becomeBuyer: 'ALICI OL',
       returnHome: 'Ana Sayfaya Dön',
       submitApplication: 'Başvuruyu Gönder',
     },
@@ -596,11 +614,13 @@ export const translations = {
       oppositeModel:
         'Çoğu kuyumcu yerel müşterilere satış yapar. Modern Gold tam tersi çalışır — yerel insanlar bize altın satar, uluslararası tüccarlar ve kuyumcular bizden üretilmiş mücevher satın alır.',
       localEyebrow: 'Yerel Satıcılar',
-      localTitle: 'Altınınızı Satın',
-      localDesc: 'Altınınızı Modern Gold\'a getirin. Altın satmak isteyen bireyleri ve işletmeleri kabul ediyoruz.',
+      localTitle: 'ALTININIZI SATIN',
+      localDesc:
+        'Altınınızı Modern Gold\'a getirin. Şeffaf test, adil değerleme ve anında ödeme garantisi.',
       intlEyebrow: 'Uluslararası Alıcılar',
-      intlTitle: 'Modern Gold\'dan Satın Alın',
-      intlDesc: 'İşletmeniz için mücevher tedarik edin. Toptan ortak olarak kaydolun ve teklif isteyin.',
+      intlTitle: 'MODERN GOLD\'DAN SATIN ALIN',
+      intlDesc:
+        'İşletmeniz için 14K, 18K ve 22K premium altın zincirler ve bilezikler.',
     },
     credibility: {
       eyebrow: 'Şirket Kanıtı',

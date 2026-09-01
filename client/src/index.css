@@ -609,6 +609,54 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-gold);
 }
 
+.dual-path-card--sell {
+  background: #FAF3E4;
+}
+
+.dual-path-card--buy {
+  background: #ffffff;
+}
+
+.dual-path-card-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dual-path-card-overlay--sell {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(250, 243, 228, 0.35) 32%,
+    #FAF3E4 52%,
+    #FAF3E4 100%
+  );
+}
+
+.dual-path-card-overlay--buy {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 32%,
+    #ffffff 52%,
+    #ffffff 100%
+  );
+}
+
+.dual-path-icon-badge {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -3rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
 .presence-card-title {
   color: #FFFFFF;
 }
