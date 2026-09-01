@@ -14,8 +14,8 @@ export default function SEOHead({ title, description, path = '', schema, type = 
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={url} />
-      <link rel="icon" type="image/png" href={brand.logoIcon} />
-      <link rel="apple-touch-icon" href={brand.logoIcon} />
+      <link rel="icon" type="image/png" href={brand.logo} />
+      <link rel="apple-touch-icon" href={brand.logo} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />
