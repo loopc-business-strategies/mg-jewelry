@@ -558,5 +558,68 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+.presence-demo-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.92);
+  color: #FF7A00;
+  border: 1px solid #FFE783;
+  border-radius: 4px;
+}
+
+.presence-gradient-accent {
+  background: var(--gradient-brand);
+}
+
+.presence-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .presence-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.25rem;
+  }
+
+  .presence-card-featured {
+    min-height: 320px;
+  }
+
+  .presence-card-standard {
+    min-height: 240px;
+  }
+
+  .presence-grid .presence-card:nth-child(1) {
+    grid-row: span 1;
+    min-height: 360px;
+  }
+
+  .presence-grid .presence-card:nth-child(4) {
+    min-height: 360px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .presence-grid .presence-card:nth-child(1) {
+    min-height: 400px;
+  }
+
+  .presence-grid .presence-card:nth-child(4) {
+    min-height: 400px;
+  }
+
+  .presence-card-standard {
+    min-height: 280px;
+  }
+}
+
+
 .admin-table-header { background: var(--color-cream); }
 .admin-table-row:hover { background: var(--color-cream); }

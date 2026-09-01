@@ -138,20 +138,48 @@ export const getCategoryImage = (slug) =>
 
 export const IMAGE_PLACEHOLDER_LABEL = 'Real Image Coming Soon';
 
-export const factoryGallery = [
-  { src: jewelryStock('1617038220319-276d3aab2915'), label: 'Chain Craftsmanship' },
-  { src: jewelryStock('1599643478518-a784e5dc4c8f'), label: 'Gold Chain Detail' },
-  { src: jewelryStock('1611085583191-a6cfe1657e70'), label: 'Bangle Work' },
-  { src: jewelryStock('1516638918792-21578567a634'), label: 'Finished Chains' },
-  { src: jewelryStock('1602751584552-8cf4eae49f4e'), label: 'Polishing' },
-  { src: jewelryStock('1515562141207-7a88fb7ce338'), label: 'Finished Pieces' },
-];
-
-export const showroomGallery = [
-  { src: jewelryStock('1515562141207-7a88fb7ce338'), label: 'Showroom' },
-  { src: jewelryStock('1599643478518-a784e5dc4c8f'), label: 'Chain Display' },
-  { src: jewelryStock('1611085583191-a6cfe1657e70'), label: 'Bangle Collection' },
-  { src: jewelryStock('1469334031218-e382a71b716b'), label: 'Gold Jewelry' },
+// Future client photography: /images/modern-gold/showroom.jpg, factory.jpg, team.jpg, quality.jpg
+export const presenceImages = [
+  {
+    id: 'showroom',
+    title: 'SHOWROOM & OFFICE',
+    description: 'A professional space for welcoming customers, partners and international business visitors.',
+    image: '/images/demo/showroom.jpg',
+    alt: 'Showroom and business office — demo corporate photography',
+    demoLabel: 'Showroom & Office — Demo Image',
+    isDemo: true,
+    featured: true,
+  },
+  {
+    id: 'manufacturing',
+    title: 'MANUFACTURING',
+    description: 'Skilled craftsmanship and production processes supporting our gold jewellery operations.',
+    image: '/images/demo/manufacturing.jpg',
+    alt: 'Gold jewellery manufacturing workshop — demo photography',
+    demoLabel: 'Manufacturing Operations — Demo Image',
+    isDemo: true,
+    featured: false,
+  },
+  {
+    id: 'team',
+    title: 'OUR PEOPLE',
+    description: 'Experienced professionals working across production, quality, business development and customer relationships.',
+    image: '/images/demo/team.jpg',
+    alt: 'Professional business team in meeting — demo corporate photography',
+    demoLabel: 'Professional Team — Demo Image',
+    isDemo: true,
+    featured: false,
+  },
+  {
+    id: 'quality',
+    title: 'QUALITY & OPERATIONS',
+    description: 'Careful inspection, weighing and quality-focused processes across our gold operations.',
+    image: '/images/demo/quality.jpg',
+    alt: 'Gold quality inspection and weighing — demo photography',
+    demoLabel: 'Quality & Operations — Demo Image',
+    isDemo: true,
+    featured: true,
+  },
 ];
 
 export const manufacturingProcessSteps = [

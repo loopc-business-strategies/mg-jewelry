@@ -3,8 +3,7 @@ import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import DualPathSection from '../components/sections/DualPathSection';
 import CredibilitySection from '../components/sections/CredibilitySection';
-import ManufacturingGallerySection from '../components/sections/ManufacturingGallerySection';
-import ShowroomGallerySection from '../components/sections/ShowroomGallerySection';
+import OurPresenceSection from '../components/sections/OurPresenceSection';
 import HeroSection from '../components/sections/HeroSection';
 import CategoryShowcaseSection from '../components/sections/CategoryShowcaseSection';
 import ProductShowcaseSection from '../components/sections/ProductShowcaseSection';
@@ -55,8 +54,7 @@ export default function HomePage() {
       <HeroSection />
       <DualPathSection />
       <CredibilitySection />
-      <ManufacturingGallerySection />
-      <ShowroomGallerySection />
+      <OurPresenceSection />
       <CategoryShowcaseSection />
       <ProductShowcaseSection products={bestSellers} />
       <CollectionPromoSection />

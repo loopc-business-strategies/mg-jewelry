@@ -60,15 +60,16 @@ export const translations = {
         { title: 'International Trade', desc: 'Serving gold traders, jewellers and wholesalers worldwide.' },
       ],
     },
-    manufacturing: {
-      eyebrow: 'Manufacturing',
-      title: 'Our Factory & Production',
-      desc: 'Professional jewellery manufacturing facilities in Namangan. Real photos coming soon.',
-    },
-    showroom: {
-      eyebrow: 'Showroom & Office',
+    presence: {
+      eyebrow: 'Our Presence',
       title: 'Visit Modern Gold',
-      desc: 'Our showroom and business office in Namangan — where international partners can see our operations.',
+      desc: 'Explore the people, facilities and operations behind Modern Gold. Our business connects regional gold expertise with jewellery manufacturing and international trade.',
+      demoNote: 'Demo photography shown for presentation purposes. Actual Modern Gold photography will be added after client approval.',
+      trustTitle: 'Built for long-term relationships.',
+      trustDesc: 'Modern Gold brings together gold sourcing, jewellery manufacturing and international business relationships with a focus on professionalism, quality and transparent communication.',
+      locationEyebrow: 'Location',
+      location: 'Namangan, Central Asia',
+      demoBadge: 'Demo Image',
     },
     wholesale: {
       oppositeModel:
@@ -197,15 +198,16 @@ export const translations = {
         { title: 'Международная торговля', desc: 'Обслуживание трейдеров и ювелиров по всему миру.' },
       ],
     },
-    manufacturing: {
-      eyebrow: 'Производство',
-      title: 'Наш завод',
-      desc: 'Производственные мощности в Намангане. Реальные фото скоро.',
-    },
-    showroom: {
-      eyebrow: 'Шоурум и офис',
+    presence: {
+      eyebrow: 'Наше присутствие',
       title: 'Посетите Modern Gold',
-      desc: 'Шоурум и офис в Намангане для международных партнёров.',
+      desc: 'Познакомьтесь с людьми, объектами и операциями Modern Gold. Наш бизнес объединяет региональную экспертизу в золоте с ювелирным производством и международной торговлей.',
+      demoNote: 'Демонстрационные фотографии для презентации. Реальные фотографии Modern Gold будут добавлены после одобрения клиента.',
+      trustTitle: 'Создано для долгосрочных отношений.',
+      trustDesc: 'Modern Gold объединяет закупку золота, ювелирное производство и международные деловые отношения с акцентом на профессионализм, качество и прозрачную коммуникацию.',
+      locationEyebrow: 'Местоположение',
+      location: 'Наманган, Центральная Азия',
+      demoBadge: 'Демо',
     },
     wholesale: {
       oppositeModel:
@@ -334,15 +336,16 @@ export const translations = {
         { title: 'Xalqaro savdo', desc: 'Butun dunyo treyderlari va zargarlariga xizmat.' },
       ],
     },
-    manufacturing: {
-      eyebrow: 'Ishlab chiqarish',
-      title: 'Bizning fabrikamiz',
-      desc: 'Namangandagi ishlab chiqarish. Haqiqiy rasmlar tez orada.',
-    },
-    showroom: {
-      eyebrow: 'Ko\'rgazma zali',
+    presence: {
+      eyebrow: 'Bizning mavjudligimiz',
       title: 'Modern Gold ni tashrif buyuring',
-      desc: 'Namangandagi ko\'rgazma zali va ofis — xalqaro hamkorlar uchun.',
+      desc: 'Modern Gold ortidagi odamlar, ob\'ektlar va operatsiyalar bilan tanishing. Bizning biznes mintaqaviy oltin tajribasini zargarlik ishlab chiqarish va xalqaro savdo bilan bog\'laydi.',
+      demoNote: 'Taqdimot maqsadida demo fotosuratlar ko\'rsatilgan. Haqiqiy Modern Gold fotosuratlari mijoz tasdiqlangandan keyin qo\'shiladi.',
+      trustTitle: 'Uzoq muddatli munosabatlar uchun yaratilgan.',
+      trustDesc: 'Modern Gold oltin manbalari, zargarlik ishlab chiqarish va xalqaro biznes munosabatlarini professionalism, sifat va shaffof muloqotga e\'tibor bilan birlashtiradi.',
+      locationEyebrow: 'Manzil',
+      location: 'Namangan, Markaziy Osiyo',
+      demoBadge: 'Demo',
     },
     wholesale: {
       oppositeModel:
@@ -471,15 +474,16 @@ export const translations = {
         { title: 'التجارة الدولية', desc: 'خدمة تجار الذهب والصاغة وتجار الجملة حول العالم.' },
       ],
     },
-    manufacturing: {
-      eyebrow: 'التصنيع',
-      title: 'مصنعنا والإنتاج',
-      desc: 'مرافق تصنيع مجوهرات احترافية في نامانغان. صور حقيقية قريباً.',
-    },
-    showroom: {
-      eyebrow: 'صالة العرض والمكتب',
+    presence: {
+      eyebrow: 'حضورنا',
       title: 'زُر Modern Gold',
-      desc: 'صالة العرض والمكتب في نامانغان — حيث يمكن للشركاء الدوليين رؤية عملياتنا.',
+      desc: 'تعرّف على الأشخاص والمرافق والعمليات وراء Modern Gold. يربط عملنا بين خبرة الذهب الإقليمية وتصنيع المجوهرات والتجارة الدولية.',
+      demoNote: 'صور تجريبية للعرض التقديمي. سيتم إضافة صور Modern Gold الفعلية بعد موافقة العميل.',
+      trustTitle: 'مبني لعلاقات طويلة الأمد.',
+      trustDesc: 'تجمع Modern Gold بين توريد الذهب وتصنيع المجوهرات والعلاقات التجارية الدولية مع التركيز على الاحترافية والجودة والتواصل الشفاف.',
+      locationEyebrow: 'الموقع',
+      location: 'نامانغان، آسيا الوسطى',
+      demoBadge: 'صورة تجريبية',
     },
     wholesale: {
       oppositeModel:
@@ -608,15 +612,16 @@ export const translations = {
         { title: 'Uluslararası Ticaret', desc: 'Dünya genelinde altın tüccarları, kuyumcular ve toptancılara hizmet.' },
       ],
     },
-    manufacturing: {
-      eyebrow: 'Üretim',
-      title: 'Fabrikamız ve Üretim',
-      desc: 'Namangan\'daki profesyonel mücevher üretim tesisleri. Gerçek fotoğraflar yakında.',
-    },
-    showroom: {
-      eyebrow: 'Showroom ve Ofis',
+    presence: {
+      eyebrow: 'Varlığımız',
       title: 'Modern Gold\'u Ziyaret Edin',
-      desc: 'Namangan\'daki showroom ve iş ofisimiz — uluslararası ortakların operasyonlarımızı görebileceği yer.',
+      desc: 'Modern Gold\'un arkasındaki insanları, tesisleri ve operasyonları keşfedin. İşimiz bölgesel altın uzmanlığını mücevher üretimi ve uluslararası ticaretle birleştirir.',
+      demoNote: 'Sunum amaçlı demo fotoğraflar gösterilmektedir. Gerçek Modern Gold fotoğrafları müşteri onayından sonra eklenecektir.',
+      trustTitle: 'Uzun vadeli ilişkiler için tasarlandı.',
+      trustDesc: 'Modern Gold; altın tedariki, mücevher üretimi ve uluslararası iş ilişkilerini profesyonellik, kalite ve şeffaf iletişim odağıyla bir araya getirir.',
+      locationEyebrow: 'Konum',
+      location: 'Namangan, Orta Asya',
+      demoBadge: 'Demo',
     },
     wholesale: {
       oppositeModel:
