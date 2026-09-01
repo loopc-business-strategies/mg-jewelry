@@ -2,6 +2,7 @@ import { SlidersHorizontal } from 'lucide-react';
 
 const b2bFilterGroups = [
   { key: 'purity', label: 'Purity', options: ['14K', '18K', '22K'] },
+  { key: 'goldColour', label: 'Gold Colour', options: ['Yellow', 'White', 'Rose'] },
 ];
 
 const retailFilterGroups = [

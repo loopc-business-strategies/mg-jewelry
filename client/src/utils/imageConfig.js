@@ -172,24 +172,6 @@ export const categoryImages = {
 export const getCategoryImage = (slug) =>
   categoryImages[slug] || categoryImages['gold-jewelry'] || CATEGORY_FALLBACKS.default;
 
-export const IMAGE_PLACEHOLDER_LABEL = 'Real Image Coming Soon';
-
-export const factoryGallery = [
-  { src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80&auto=format&fit=crop', label: 'Factory' },
-  { src: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&q=80&auto=format&fit=crop', label: 'Production' },
-  { src: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop', label: 'Chain Production' },
-  { src: 'https://images.unsplash.com/photo-1610375461246-207c099ac6cc?w=800&q=80&auto=format&fit=crop', label: 'Quality Control' },
-  { src: 'https://images.unsplash.com/photo-1617038220319-276d3aab2915?w=800&q=80&auto=format&fit=crop', label: 'Gold Handling' },
-  { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80&auto=format&fit=crop', label: 'Packaging' },
-];
-
-export const showroomGallery = [
-  { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80&auto=format&fit=crop', label: 'Showroom' },
-  { src: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80&auto=format&fit=crop', label: 'Display Counter' },
-  { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80&auto=format&fit=crop', label: 'Product Samples' },
-  { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop', label: 'Business Office' },
-];
-
 export const marketAccentColors = [
   'from-coral/20 to-champagne',
   'from-sapphire/15 to-pearl',

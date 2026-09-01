@@ -20,7 +20,6 @@ const wholesaleCustomerSchema = new mongoose.Schema(
     yearsInBusiness: String,
     interestedProducts: [String],
     preferredPurity: String,
-    message: String,
     verificationDocuments: [String],
     assignedSalesperson: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     status: {

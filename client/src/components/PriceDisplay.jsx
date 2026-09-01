@@ -1,13 +1,15 @@
 import { formatPrice as formatPriceBase } from '../utils/formatPrice';
 import { useMarket } from '../context/MarketContext';
+import { getMarketById } from '../utils/marketConfig';
 
 export function useFormatPrice() {
-  const { prefs, locale } = useMarket();
+  const { prefs } = useMarket();
+  const market = getMarketById(prefs.market);
 
   return (price) =>
     formatPriceBase(price, {
       currency: prefs.currency,
-      locale: locale || 'en',
+      locale: market.locale,
     });
 }
 

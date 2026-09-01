@@ -2,33 +2,38 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import ScrollReveal from '../components/ScrollReveal';
-import PlaceholderImage from '../components/PlaceholderImage';
 import SafeImage from '../components/SafeImage';
-import { manufacturingSteps, seoKeywords } from '../utils/brandConfig';
-import { factoryGallery, showroomGallery } from '../utils/imageConfig';
+import { manufacturingSteps, manufacturingCapabilities, IMAGE_PLACEHOLDER_LABEL, seoKeywords } from '../utils/brandConfig';
+
+const FACTORY_IMAGES = {
+  overview: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80&auto=format&fit=crop',
+  production: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80&auto=format&fit=crop',
+  chains: 'https://images.unsplash.com/photo-1617038220319-276d3aab2915?w=1200&q=80&auto=format&fit=crop',
+  bangles: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80&auto=format&fit=crop',
+  qc: 'https://images.unsplash.com/photo-1610375461246-207c099ac6cc?w=1200&q=80&auto=format&fit=crop',
+};
+
+function ImageBlock({ src, label, alt }) {
+  return (
+    <div className="relative aspect-[16/10] overflow-hidden image-zoom-hover">
+      <SafeImage src={src} alt={alt} category="gold-jewelry" className="w-full h-full object-cover opacity-80" />
+      <span className="image-placeholder-label">Modern Gold {label} — {IMAGE_PLACEHOLDER_LABEL}</span>
+    </div>
+  );
+}
 
 export default function ManufacturingPage() {
-  const heroImage = factoryGallery[0]?.src;
-
-  const productionSections = [
-    { title: 'Chain Production', desc: 'Professional gold chain manufacturing in 14K, 18K and 22K.', image: factoryGallery[2], label: 'Chain Production' },
-    { title: 'Bangle Production', desc: 'Gold bangle manufacturing for international wholesale buyers.', image: factoryGallery[3], label: 'Bangle Production' },
-    { title: 'Gold Handling', desc: 'Precision gold preparation and alloy management.', image: factoryGallery[1], label: 'Gold Handling' },
-    { title: 'Quality Control', desc: 'Weight, purity and craftsmanship verification at every stage.', image: factoryGallery[4], label: 'Quality Control' },
-    { title: 'Packaging', desc: 'Export-ready packaging for international shipments.', image: factoryGallery[5], label: 'Packaging' },
-  ];
-
   return (
     <>
       <SEOHead
         title="Manufacturing — Gold Chain & Bangle Production"
-        description="Modern Gold manufacturing capabilities — factory, production, chains, bangles, quality control and packaging in Namangan, Uzbekistan."
+        description="Modern Gold manufacturing capabilities — factory, production, chains, bangles, quality control and packaging."
         path="/manufacturing"
         keywords={seoKeywords}
       />
 
       <section className="relative min-h-[50vh] flex items-end bg-dark overflow-hidden">
-        <SafeImage src={heroImage} alt="Factory" className="absolute inset-0 w-full h-full object-cover opacity-40" category="gold-jewelry" />
+        <SafeImage src={FACTORY_IMAGES.overview} alt="Factory" className="absolute inset-0 w-full h-full object-cover opacity-40" category="gold-jewelry" />
         <div className="absolute inset-0 corporate-hero-overlay" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 pb-12 pt-32 w-full">
           <p className="section-eyebrow text-gold mb-3">Manufacturing</p>
@@ -45,15 +50,11 @@ export default function ManufacturingPage() {
             <h2 className="headline-corporate headline-corporate-dark text-2xl mb-4">Factory Overview</h2>
             <p className="text-muted max-w-2xl">
               Modern Gold operates professional manufacturing facilities in Namangan, Uzbekistan.
+              Production capacity: [Client to provide]
             </p>
           </ScrollReveal>
           <ScrollReveal>
-            <PlaceholderImage
-              src={heroImage}
-              alt="Factory overview"
-              label="Modern Gold Factory Exterior"
-              aspect="aspect-[16/10]"
-            />
+            <ImageBlock src={FACTORY_IMAGES.overview} label="Factory Exterior" alt="Factory overview" />
           </ScrollReveal>
         </div>
       </section>
@@ -79,19 +80,20 @@ export default function ManufacturingPage() {
 
       <section className="section-light py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 space-y-16">
-          {productionSections.map((section) => (
+          {[
+            { title: 'Chain Production', desc: 'Professional gold chain manufacturing in 14K, 18K and 22K.', image: FACTORY_IMAGES.chains, label: 'Chain Production' },
+            { title: 'Bangle Production', desc: 'Gold bangle manufacturing for international wholesale buyers.', image: FACTORY_IMAGES.bangles, label: 'Bangle Production' },
+            { title: 'Gold Handling', desc: 'Precision gold preparation and alloy management.', image: FACTORY_IMAGES.production, label: 'Gold Handling' },
+            { title: 'Quality Control', desc: 'Weight, purity and craftsmanship verification at every stage.', image: FACTORY_IMAGES.qc, label: 'Quality Control' },
+            { title: 'Packaging', desc: 'Export-ready packaging for international shipments.', image: FACTORY_IMAGES.overview, label: 'Packaging' },
+          ].map((section) => (
             <ScrollReveal key={section.title}>
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <h2 className="headline-corporate headline-corporate-dark text-2xl mb-4">{section.title}</h2>
                   <p className="text-muted leading-relaxed">{section.desc}</p>
                 </div>
-                <PlaceholderImage
-                  src={section.image?.src}
-                  alt={section.title}
-                  label={`Modern Gold ${section.label}`}
-                  aspect="aspect-[16/10]"
-                />
+                <ImageBlock src={section.image} label={section.label} alt={section.title} />
               </div>
             </ScrollReveal>
           ))}
@@ -104,42 +106,16 @@ export default function ManufacturingPage() {
             <h2 className="headline-corporate headline-corporate-light text-2xl mb-4">Factory Gallery</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {factoryGallery.map((item) => (
-              <ScrollReveal key={item.label}>
-                <PlaceholderImage
-                  src={item.src}
-                  alt={item.label}
-                  label={`Modern Gold ${item.label}`}
-                />
+            {manufacturingCapabilities.map((cap, i) => (
+              <ScrollReveal key={cap}>
+                <ImageBlock src={Object.values(FACTORY_IMAGES)[i % 5]} label={cap} alt={cap} />
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-light py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <ScrollReveal className="mb-8">
-            <h2 className="headline-corporate headline-corporate-dark text-2xl mb-4">Showroom & Office</h2>
-            <p className="text-muted max-w-2xl mb-8">
-              Visit our showroom and business office in Namangan. Real photos will be added soon.
-            </p>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {showroomGallery.map((item) => (
-              <ScrollReveal key={item.label}>
-                <PlaceholderImage
-                  src={item.src}
-                  alt={item.label}
-                  label={`Modern Gold ${item.label}`}
-                />
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-light py-16 text-center border-t border-gold/10">
+      <section className="section-light py-16 text-center">
         <div className="max-w-2xl mx-auto px-4">
           <h2 className="headline-corporate headline-corporate-dark text-2xl mb-6">View Our Products</h2>
           <Link to="/products" className="btn-gold-solid">

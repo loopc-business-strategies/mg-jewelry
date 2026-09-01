@@ -8,7 +8,6 @@ import ProductFocusSection from '../components/sections/ProductFocusSection';
 import InternationalBuyersSection from '../components/sections/InternationalBuyersSection';
 import RegionalMarketsSection from '../components/sections/RegionalMarketsSection';
 import TrustProofSection from '../components/sections/TrustProofSection';
-import ShowroomGallerySection from '../components/sections/ShowroomGallerySection';
 import FinalCTASection from '../components/sections/FinalCTASection';
 import { brand, seoKeywords } from '../utils/brandConfig';
 
@@ -43,7 +42,6 @@ export default function HomePage() {
       <DualPathSection />
       <CompanyStorySection />
       <ManufacturingPreviewSection />
-      <ShowroomGallerySection />
       <ProductFocusSection />
       <InternationalBuyersSection />
       <RegionalMarketsSection />

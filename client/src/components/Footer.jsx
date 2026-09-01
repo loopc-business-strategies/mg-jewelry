@@ -1,18 +1,9 @@
 import { Link } from 'react-router-dom';
-import { brand, footerColumnKeys, socialLinks } from '../utils/brandConfig';
+import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
 import { socialIconMap } from './ui/SocialIcons';
 import BrandLogo from './BrandLogo';
-import { useTranslation } from '../hooks/useTranslation';
 
 export default function Footer() {
-  const { t } = useTranslation();
-
-  const columns = [
-    { titleKey: 'footer.company', links: footerColumnKeys.company },
-    { titleKey: 'footer.business', links: footerColumnKeys.business },
-    { titleKey: 'footer.legal', links: footerColumnKeys.legal },
-  ];
-
   return (
     <footer className="bg-dark border-t border-gold/15">
       <div className="max-w-7xl mx-auto px-4 py-16">
@@ -22,7 +13,7 @@ export default function Footer() {
               <BrandLogo className="h-10 w-10 object-contain" alt={brand.name} />
               <div>
                 <p className="font-display text-xl font-semibold text-off-white">{brand.name}</p>
-                <p className="text-[10px] tracking-[0.2em] uppercase text-gold/70">{t('footer.goldIndustry')}</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-gold/70">Gold Industry</p>
               </div>
             </Link>
             <p className="text-sm font-medium text-off-white/80 mb-1">{brand.legalName}</p>
@@ -51,14 +42,18 @@ export default function Footer() {
             </div>
           </div>
 
-          {columns.map(({ titleKey, links }) => (
-            <div key={titleKey}>
-              <h4 className="text-[10px] tracking-[0.2em] uppercase text-gold mb-4">{t(titleKey)}</h4>
+          {[
+            { title: 'Company', links: footerColumns.company },
+            { title: 'Business', links: footerColumns.business },
+            { title: 'Legal', links: footerColumns.legal },
+          ].map(({ title, links }) => (
+            <div key={title}>
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-gold mb-4">{title}</h4>
               <ul className="space-y-2.5">
                 {links.map((l) => (
-                  <li key={l.path + l.key}>
+                  <li key={l.path + l.label}>
                     <Link to={l.path} className="text-sm text-muted-light hover:text-gold transition-colors">
-                      {l.label || t(l.key)}
+                      {l.label}
                     </Link>
                   </li>
                 ))}
@@ -68,10 +63,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gold/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-light">
-          <p>© {new Date().getFullYear()} {brand.legalName}. {t('footer.rights')}</p>
+          <p>© {new Date().getFullYear()} {brand.legalName}. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-gold transition-colors">{t('footer.privacy')}</Link>
-            <Link to="/terms" className="hover:text-gold transition-colors">{t('footer.terms')}</Link>
+            <Link to="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-gold transition-colors">Terms & Conditions</Link>
           </div>
         </div>
       </div>
