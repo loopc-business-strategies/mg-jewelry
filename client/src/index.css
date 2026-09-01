@@ -24,11 +24,13 @@
   --color-turquoise: #FFB13D;
   --color-burgundy: #F94F1E;
   --color-lavender: #FFB13D;
-  --font-display: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Manrope', sans-serif;
 }
 
 :root {
+  --font-body: "Manrope", sans-serif;
+  --font-heading: "Manrope", sans-serif;
   --gradient-brand: linear-gradient(90deg, #FFE783 0%, #FFB13D 35%, #FF7A00 70%, #F94F1E 100%);
   --gradient-cta: linear-gradient(90deg, #FFB13D, #FF7A00);
   --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -48,7 +50,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
   color: var(--color-charcoal);
   font-weight: 600;
 }
