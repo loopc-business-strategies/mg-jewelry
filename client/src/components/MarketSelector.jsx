@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { X, Globe } from 'lucide-react';
 import { useMarket } from '../context/MarketContext';
-import {
-  languages,
-  markets,
-  currencies,
-  selectorTranslations,
-} from '../utils/marketConfig';
+import { languages, markets, currencies } from '../utils/marketConfig';
+import { translate } from '../i18n/translations';
 
 function RadioOption({ name, value, checked, onChange, label, flag }) {
   return (
@@ -34,7 +30,7 @@ export default function MarketSelector({ compact = false }) {
     if (open) setDraft(prefs);
   }, [open, prefs]);
 
-  const t = selectorTranslations[draft.language] || selectorTranslations.en;
+  const draftT = (key) => translate(draft.language, key);
 
   const handleContinue = () => {
     updatePrefs(draft);
@@ -78,15 +74,15 @@ export default function MarketSelector({ compact = false }) {
             aria-labelledby="market-selector-title"
           >
             <div className="sticky top-0 bg-pearl border-b border-gold/10 px-5 py-4 flex items-center justify-between">
-              <h2 id="market-selector-title" className="font-display text-xl text-charcoal">{t.title}</h2>
-              <button type="button" onClick={() => setOpen(false)} className="p-1 text-muted hover:text-charcoal" aria-label={t.close}>
+              <h2 id="market-selector-title" className="font-display text-xl text-charcoal">{draftT('selector.title')}</h2>
+              <button type="button" onClick={() => setOpen(false)} className="p-1 text-muted hover:text-charcoal" aria-label={draftT('selector.close')}>
                 <X size={20} />
               </button>
             </div>
 
             <div className="p-5 space-y-6">
               <div>
-                <p className="section-eyebrow mb-3">{t.selectLanguage}</p>
+                <p className="section-eyebrow mb-3">{draftT('selector.selectLanguage')}</p>
                 <div className="space-y-1">
                   {languages.map((lang) => (
                     <RadioOption
@@ -102,7 +98,7 @@ export default function MarketSelector({ compact = false }) {
               </div>
 
               <div>
-                <p className="section-eyebrow mb-3">{t.selectMarket}</p>
+                <p className="section-eyebrow mb-3">{draftT('selector.selectMarket')}</p>
                 <div className="space-y-1 max-h-48 overflow-y-auto">
                   {markets.map((m) => (
                     <RadioOption
@@ -119,7 +115,7 @@ export default function MarketSelector({ compact = false }) {
               </div>
 
               <div>
-                <p className="section-eyebrow mb-3">{t.selectCurrency}</p>
+                <p className="section-eyebrow mb-3">{draftT('selector.selectCurrency')}</p>
                 <div className="space-y-1 max-h-40 overflow-y-auto">
                   {currencies.map((c) => (
                     <RadioOption
@@ -134,10 +130,10 @@ export default function MarketSelector({ compact = false }) {
                 </div>
               </div>
 
-              <p className="text-[11px] text-muted leading-relaxed">{t.priceNote}</p>
+              <p className="text-[11px] text-muted leading-relaxed">{draftT('selector.priceNote')}</p>
 
               <button type="button" onClick={handleContinue} className="w-full btn-primary-gold justify-center text-xs">
-                {t.continue}
+                {draftT('selector.continue')}
               </button>
             </div>
           </div>

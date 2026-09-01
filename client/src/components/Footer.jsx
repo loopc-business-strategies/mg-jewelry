@@ -3,9 +3,11 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
 import { socialIconMap } from './ui/SocialIcons';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
+  const { t } = useTranslation();
 
   const handleNewsletter = (e) => {
     e.preventDefault();
@@ -49,12 +51,12 @@ export default function Footer() {
             </div>
           </div>
           {[
-            { title: 'Shop', links: footerColumns.shop },
-            { title: 'About', links: footerColumns.about },
-            { title: 'Help', links: footerColumns.help },
-          ].map(({ title, links }) => (
-            <div key={title}>
-              <h4 className="text-[10px] tracking-[0.2em] uppercase text-charcoal mb-4">{title}</h4>
+            { titleKey: 'footer.shop', links: footerColumns.shop },
+            { titleKey: 'footer.about', links: footerColumns.about },
+            { titleKey: 'footer.help', links: footerColumns.help },
+          ].map(({ titleKey, links }) => (
+            <div key={titleKey}>
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-charcoal mb-4">{t(titleKey)}</h4>
               <ul className="space-y-2.5">
                 {links.map((l) => (
                   <li key={l.path + l.label}>
@@ -86,10 +88,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gold/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted">
-          <p>© {new Date().getFullYear()} {brand.legalName}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {brand.legalName}. {t('footer.rights')}</p>
           <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-gold transition-colors">Terms & Conditions</Link>
+            <Link to="/privacy" className="hover:text-gold transition-colors">{t('footer.privacy')}</Link>
+            <Link to="/terms" className="hover:text-gold transition-colors">{t('footer.terms')}</Link>
           </div>
         </div>
       </div>

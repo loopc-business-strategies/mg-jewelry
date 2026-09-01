@@ -14,6 +14,7 @@ import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 import ProfilePage from '../pages/ProfilePage';
 import WishlistPage from '../pages/WishlistPage';
 import SearchPage from '../pages/SearchPage';
+import GoldBuyingPage from '../pages/GoldBuyingPage';
 import CustomJewelryPage from '../pages/CustomJewelryPage';
 import AboutPage from '../pages/AboutPage';
 import ContactPage from '../pages/ContactPage';
@@ -53,6 +54,7 @@ export default function AppRouter() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="about" element={<AboutPage />} />
+        <Route path="gold-buying" element={<GoldBuyingPage />} />
         <Route path="manufacturing" element={<Navigate to="/custom-jewelry" replace />} />
         <Route path="custom-jewelry" element={<CustomJewelryPage />} />
         <Route path="contact" element={<ContactPage />} />

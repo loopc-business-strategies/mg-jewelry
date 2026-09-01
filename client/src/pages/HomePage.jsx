@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
+import DualPathSection from '../components/sections/DualPathSection';
+import CredibilitySection from '../components/sections/CredibilitySection';
+import ManufacturingGallerySection from '../components/sections/ManufacturingGallerySection';
+import ShowroomGallerySection from '../components/sections/ShowroomGallerySection';
 import HeroSection from '../components/sections/HeroSection';
 import CategoryShowcaseSection from '../components/sections/CategoryShowcaseSection';
 import ProductShowcaseSection from '../components/sections/ProductShowcaseSection';
@@ -29,7 +33,7 @@ export default function HomePage() {
     name: brand.legalName,
     alternateName: brand.name,
     url: brand.siteUrl,
-    description: brand.heroSubtitle,
+    description: `${brand.legalName} — ${brand.tagline}. Local gold buying and international jewellery manufacturing from Namangan, Uzbekistan.`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: '242 Girvonbulok Street',
@@ -42,12 +46,16 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="International Jewelry Manufacturing from Uzbekistan"
-        description={`${brand.name} — ${brand.tagline} Premium gold and diamond jewelry for global markets.`}
+        title="Gold Manufacturer Uzbekistan | Sell Gold & Wholesale Jewellery"
+        description={`${brand.name} — ${brand.tagline}. Sell gold locally or source wholesale jewellery from Namangan, Central Asia. ${brand.legalName}.`}
         path="/"
         schema={schema}
       />
       <HeroSection />
+      <DualPathSection />
+      <CredibilitySection />
+      <ManufacturingGallerySection />
+      <ShowroomGallerySection />
       <CategoryShowcaseSection />
       <ProductShowcaseSection products={bestSellers} />
       <CollectionPromoSection />

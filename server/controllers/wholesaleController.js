@@ -12,7 +12,7 @@ const registerWholesale = async (req, res) => {
   const {
     businessName, ownerName, email, phone, password,
     gstNumber, businessType, businessAddress, city, state, pincode,
-    website, expectedMonthlyPurchase, categoriesInterested,
+    website, expectedMonthlyPurchase, categoriesInterested, country,
   } = req.body;
 
   let user = await User.findOne({ email });
@@ -47,6 +47,7 @@ const registerWholesale = async (req, res) => {
     state,
     pincode,
     website,
+    country,
     expectedMonthlyPurchase,
     categoriesInterested,
     status: 'pending',

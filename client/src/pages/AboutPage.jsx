@@ -1,8 +1,9 @@
 import SEOHead from '../components/SEOHead';
-import { brand, trustIndicators } from '../utils/brandConfig';
-import { aboutHero } from '../utils/imageConfig';
+import { brand, trustIndicators, oppositeModelCopy } from '../utils/brandConfig';
+import { aboutHero, factoryGallery, showroomGallery } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 import SafeImage from '../components/SafeImage';
+import PlaceholderImage from '../components/PlaceholderImage';
 
 export default function AboutPage() {
   const schema = {
@@ -44,6 +45,20 @@ export default function AboutPage() {
         </section>
 
         <section>
+          <h2 className="font-display text-3xl mb-4">How We Work</h2>
+          <p className="text-muted leading-relaxed mb-4">
+            {oppositeModelCopy}
+          </p>
+          <p className="text-muted leading-relaxed mb-4">
+            <strong>Local sellers</strong> can bring gold to Modern Gold for inspection, valuation and purchase. <strong>International buyers</strong> — jewellers, gold traders and wholesalers — register as partners to source manufactured jewellery from our Namangan facility.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-4">
+            <Link to="/gold-buying" className="btn-primary-gold text-xs">Sell Gold</Link>
+            <Link to="/wholesale/register" className="btn-outline-gold text-xs">Become a Partner</Link>
+          </div>
+        </section>
+
+        <section>
           <h2 className="font-display text-3xl mb-4">Mission & Vision</h2>
           <p className="text-muted leading-relaxed mb-4">
             <strong>Mission:</strong> To deliver precision-crafted jewelry manufacturing that empowers international partners with reliable quality, flexible production and professional service.
@@ -63,6 +78,21 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section>
+          <h2 className="font-display text-3xl mb-4">Factory & Showroom</h2>
+          <p className="text-muted text-sm mb-6">Our manufacturing and showroom facilities in Namangan. Real photos will be added soon.</p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {factoryGallery.slice(0, 4).map((item) => (
+              <PlaceholderImage key={item.label} src={item.src} alt={item.label} label={`Modern Gold ${item.label}`} />
+            ))}
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {showroomGallery.map((item) => (
+              <PlaceholderImage key={item.label} src={item.src} alt={item.label} label={`Modern Gold ${item.label}`} />
+            ))}
+          </div>
         </section>
 
         <section>

@@ -5,10 +5,11 @@ import SEOHead from '../components/SEOHead';
 import HeroBanner from '../components/HeroBanner';
 import WholesaleInquiryForm from '../components/WholesaleInquiryForm';
 import WholesaleProductCard from '../components/WholesaleProductCard';
-import { brand, categoryIcons } from '../utils/brandConfig';
+import { brand, categoryIcons, oppositeModelCopy } from '../utils/brandConfig';
 import { wholesaleHero } from '../utils/imageConfig';
 import { CheckCircle, Mail, MessageCircle, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useTranslation } from '../hooks/useTranslation';
 
 const benefits = [
   'Competitive wholesale pricing', 'Bulk order discounts', 'Wide product selection',
@@ -30,6 +31,7 @@ const faqs = [
 ];
 
 export default function WholesalePage() {
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -52,16 +54,34 @@ export default function WholesalePage() {
 
   return (
     <>
-      <SEOHead title="Wholesale Jewellery" description="Premium wholesale jewellery for retailers and jewellery businesses." path="/wholesale" schema={faqSchema} />
+      <SEOHead title="Wholesale Jewellery for International Buyers" description="Gold traders, jewellers and wholesalers — source jewellery from Modern Gold, Namangan, Uzbekistan." path="/wholesale" schema={faqSchema} />
 
       <HeroBanner
-        title="Wholesale Jewellery for Growing Businesses"
-        subtitle="Premium jewellery collections, competitive wholesale pricing and reliable supply for retailers and jewellery businesses."
+        title="Wholesale Jewellery for International Buyers"
+        subtitle={t('wholesale.intlSubtitle')}
         image={wholesaleHero}
         primaryLink="/wholesale/register"
         secondaryLink="/wholesale/shop"
         compact
       />
+
+      <div className="max-w-3xl mx-auto px-4 py-8 text-center">
+        <p className="text-sm text-muted leading-relaxed border-l-2 border-gold/30 pl-4 text-left">
+          {t('wholesale.oppositeModel') || oppositeModelCopy}
+        </p>
+      </div>
+
+      <section className="py-8 px-4 max-w-4xl mx-auto">
+        <div className="bg-cream border border-gold/15 rounded-xl p-6 text-center">
+          <p className="text-sm font-medium text-charcoal mb-1">{brand.legalName}</p>
+          <address className="text-sm text-muted not-italic">
+            {brand.addressLines.map((line) => (
+              <span key={line} className="block">{line}</span>
+            ))}
+          </address>
+          <p className="text-xs text-gold-dark mt-2 uppercase tracking-wider">Central Asia HQ · Namangan, Uzbekistan</p>
+        </div>
+      </section>
 
       <div className="max-w-4xl mx-auto px-4 -mt-8 relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
         <Link to="/wholesale/register" className="btn-primary-gold text-xs">

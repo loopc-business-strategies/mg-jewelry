@@ -4,15 +4,17 @@ import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown, Gem } from 'luc
 import {
   brand,
   navLinks,
-  wholesaleNavLinks,
-  ecommerceMenu,
+  retailMenu,
+  wholesaleMenu,
   isNavLinkActive,
 } from '../utils/brandConfig';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../hooks/useTranslation';
 import MegaMenu from './MegaMenu';
-import EcommerceMegaMenu from './EcommerceMegaMenu';
+import RetailMegaMenu from './RetailMegaMenu';
+import WholesaleMegaMenu from './WholesaleMegaMenu';
 import MarketSelector from './MarketSelector';
 import SearchBar from './SearchBar';
 
@@ -43,6 +45,7 @@ export default function Header() {
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onScroll = () => setSticky(window.scrollY > 20);
@@ -64,7 +67,8 @@ export default function Header() {
     if (openMenu !== menu) return null;
     const close = () => setOpenMenu(null);
     if (menu === 'collections') return <MegaMenu onClose={close} />;
-    if (menu === 'ecommerce') return <EcommerceMegaMenu onClose={close} />;
+    if (menu === 'retail') return <RetailMegaMenu onClose={close} />;
+    if (menu === 'wholesale') return <WholesaleMegaMenu onClose={close} />;
     return null;
   };
 
@@ -89,13 +93,13 @@ export default function Header() {
           <nav className="hidden lg:flex items-center gap-8 flex-1 justify-center">
             {navLinks.map((link) => (
               <div
-                key={link.label}
+                key={link.path + (link.key || link.label)}
                 className="relative"
                 onMouseEnter={() => link.menu && setOpenMenu(link.menu)}
                 onMouseLeave={() => link.menu && setOpenMenu(null)}
               >
                 <Link to={link.path} className={`${navClass(link)} inline-flex items-center gap-1`}>
-                  {link.label}
+                  {link.key ? t(link.key) : link.label}
                   {link.menu && <ChevronDown size={12} className="opacity-50" />}
                 </Link>
                 {link.menu && renderDropdown(link.menu)}
@@ -147,39 +151,43 @@ export default function Header() {
             </div>
             {directMobileLinks.map((link) => (
               <Link
-                key={link.label}
+                key={link.path + (link.key || link.label)}
                 to={link.path}
                 className={`text-sm py-3 border-b border-gold/10 ${isNavLinkActive(pathname, link) ? 'text-gold' : 'text-charcoal'}`}
                 onClick={() => setMobileOpen(false)}
               >
-                {link.label}
+                {link.key ? t(link.key) : link.label}
               </Link>
             ))}
             <Link to="/shop" className="text-sm py-3 border-b border-gold/10" onClick={() => setMobileOpen(false)}>
-              Collections
+              {t('nav.collections')}
             </Link>
-            <MobileAccordion title="Ecommerce">
-              <div className="space-y-4">
-                <div>
-                  <p className="section-eyebrow mb-2">{ecommerceMenu.retail.title}</p>
-                  <div className="space-y-1">
-                    {ecommerceMenu.retail.links.map((link) => (
-                      <Link key={link.label + link.path} to={link.path} className="block text-sm text-muted hover:text-gold py-1.5" onClick={() => setMobileOpen(false)}>
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase tracking-wider text-burgundy mb-2">{ecommerceMenu.wholesale.title}</p>
-                  <div className="space-y-1">
-                    {wholesaleNavLinks.map((link) => (
-                      <Link key={link.label} to={link.path} className="block text-sm text-muted hover:text-gold py-1.5" onClick={() => setMobileOpen(false)}>
-                        {link.label === 'Become a Wholesale Partner' ? 'Become a Partner' : link.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+            <MobileAccordion title={t('nav.retail')}>
+              <div className="space-y-1">
+                {retailMenu.links.map((link) => (
+                  <Link
+                    key={link.path + (link.key || link.label)}
+                    to={link.path}
+                    className="block text-sm text-muted hover:text-gold py-1.5"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.key ? t(link.key) : link.label}
+                  </Link>
+                ))}
+              </div>
+            </MobileAccordion>
+            <MobileAccordion title={t('nav.wholesale')}>
+              <div className="space-y-1">
+                {wholesaleMenu.links.map((link) => (
+                  <Link
+                    key={link.path + (link.key || link.label)}
+                    to={link.path}
+                    className="block text-sm text-muted hover:text-gold py-1.5"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.key ? t(link.key) : link.label}
+                  </Link>
+                ))}
               </div>
             </MobileAccordion>
             <Link to="/wishlist" className="text-sm py-3 border-t border-gold/10 mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>

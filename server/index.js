@@ -19,6 +19,7 @@ const wholesaleRoutes = require('./routes/wholesaleRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const goldBuyingRoutes = require('./routes/goldBuyingRoutes');
 
 connectDB().then(async () => {
   const Product = require('./models/Product');
@@ -31,6 +32,8 @@ connectDB().then(async () => {
     fixDuplicateImages,
     needsCategoryEditorialFix,
     fixCategoryEditorialImages,
+    needsJewelryImageFix,
+    fixJewelryImages,
   } = require('./services/seedDatabase');
   const count = await Product.countDocuments();
   const forceReseed = process.env.FORCE_RESEED === 'true';
@@ -41,6 +44,9 @@ connectDB().then(async () => {
   } else if (forceReseed || await needsLegacyReseed()) {
     console.log(forceReseed ? 'FORCE_RESEED enabled — reseeding database...' : 'Legacy catalog detected — reseeding database...');
     await seedDatabase();
+  } else if (await needsJewelryImageFix()) {
+    console.log('Legacy or non-jewelry images detected — migrating to jewelry stock photos...');
+    await fixJewelryImages();
   } else if (await needsBrokenImageFix()) {
     console.log('Broken product images detected — patching catalog...');
     await fixBrokenImages();
@@ -82,6 +88,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/wholesale', wholesaleRoutes);
+app.use('/api/gold-buying', goldBuyingRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api', contentRoutes);

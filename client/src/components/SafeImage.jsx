@@ -1,5 +1,10 @@
 import { useState, useCallback } from 'react';
-import { getCategoryFallback, getProductCategoryFallback, getCategorySvgFallback } from '../utils/imageConfig';
+import {
+  getCategoryFallback,
+  getCategorySvgFallback,
+  isLegacyImagePath,
+  CATEGORY_FALLBACKS,
+} from '../utils/imageConfig';
 
 export default function SafeImage({
   src,
@@ -10,12 +15,11 @@ export default function SafeImage({
   loading = 'lazy',
 }) {
   const lifestyleFallback = getCategoryFallback(category, subcategory);
-  const productFallback = getProductCategoryFallback(category, subcategory);
   const svgFallback = getCategorySvgFallback(category, subcategory);
-  const defaultJpg = '/images/products/default-01.jpg';
+  const defaultJewelry = CATEGORY_FALLBACKS.default;
 
-  const chain = [src, lifestyleFallback, productFallback, defaultJpg, svgFallback].filter(
-    (url, i, arr) => url && arr.indexOf(url) === i
+  const chain = [src, lifestyleFallback, defaultJewelry, svgFallback].filter(
+    (url, i, arr) => url && !isLegacyImagePath(url) && arr.indexOf(url) === i
   );
 
   const [index, setIndex] = useState(0);

@@ -9,6 +9,8 @@ const {
   getProductImages,
   getCategoryImage,
   isSharedPrimaryPath,
+  isLegacyImagePath,
+  isJewelryStockUrl,
 } = require('../config/productImages');
 
 async function wipeDatabase() {
@@ -34,20 +36,22 @@ async function needsLegacyReseed() {
 }
 
 async function needsBrokenImageFix() {
-  const remoteProduct = await Product.findOne({
-    images: { $elemMatch: { $not: { $regex: '^/images/products/' } } },
-  }).select('_id').lean();
-  if (remoteProduct) return true;
+  const products = await Product.find({}).select('images').lean();
+  for (const product of products) {
+    if (!product.images?.length || product.images.some((url) => !isJewelryStockUrl(url))) {
+      return true;
+    }
+  }
 
-  const remoteCategory = await Category.findOne({
-    image: { $not: { $regex: '^/images/(products|categories)/' } },
-  }).select('_id').lean();
-  if (remoteCategory) return true;
+  const categories = await Category.find({}).select('image').lean();
+  for (const category of categories) {
+    if (!isJewelryStockUrl(category.image)) return true;
+  }
 
-  const remoteBlog = await Blog.findOne({
-    image: { $not: { $regex: '^/images/products/' } },
-  }).select('_id').lean();
-  if (remoteBlog) return true;
+  const blogs = await Blog.find({}).select('image').lean();
+  for (const blog of blogs) {
+    if (!isJewelryStockUrl(blog.image)) return true;
+  }
 
   return false;
 }
@@ -57,7 +61,7 @@ async function fixBrokenImages() {
   let productUpdates = 0;
 
   for (const product of products) {
-    const needsFix = !product.images?.length || product.images.some((url) => !url?.startsWith('/images/products/'));
+    const needsFix = !product.images?.length || product.images.some((url) => !isJewelryStockUrl(url));
     if (needsFix) {
       product.images = getProductImages(product.category, product.subcategory, product.sku);
       await product.save();
@@ -69,10 +73,7 @@ async function fixBrokenImages() {
   let categoryUpdates = 0;
 
   for (const category of categories) {
-    const isValid =
-      category.image?.startsWith('/images/products/') ||
-      category.image?.startsWith('/images/categories/');
-    if (!isValid) {
+    if (!isJewelryStockUrl(category.image)) {
       category.image = getCategoryImage(category.slug);
       await category.save();
       categoryUpdates += 1;
@@ -83,7 +84,7 @@ async function fixBrokenImages() {
   let blogUpdates = 0;
 
   for (const blog of blogs) {
-    if (!blog.image?.startsWith('/images/products/')) {
+    if (!isJewelryStockUrl(blog.image)) {
       blog.image = getCategoryImage('rings');
       await blog.save();
       blogUpdates += 1;
@@ -102,7 +103,7 @@ async function needsDuplicateImageFix() {
     const primary = product.images?.[0];
     if (!primary) return true;
     if (isSharedPrimaryPath(primary)) return true;
-    if (!primary.includes('/images/products/product-')) return true;
+    if (isLegacyImagePath(primary)) return true;
     if (primaries.has(primary)) return true;
     primaries.set(primary, product.sku);
   }
@@ -132,7 +133,7 @@ async function fixDuplicateImages() {
 
 async function needsCategoryEditorialFix() {
   const legacyCategory = await Category.findOne({
-    image: { $regex: '^/images/products/' },
+    image: { $regex: '^/images/(products|categories)/' },
   }).select('_id').lean();
   return Boolean(legacyCategory);
 }
@@ -153,6 +154,63 @@ async function fixCategoryEditorialImages() {
   console.log(`Updated category editorial images: ${updates}`);
 }
 
+async function needsJewelryImageFix() {
+  const products = await Product.find({}).select('images').lean();
+  for (const product of products) {
+    if (!product.images?.length || product.images.some(isLegacyImagePath)) return true;
+  }
+
+  const categories = await Category.find({}).select('image').lean();
+  for (const category of categories) {
+    if (isLegacyImagePath(category.image)) return true;
+  }
+
+  const blogs = await Blog.find({}).select('image').lean();
+  for (const blog of blogs) {
+    if (isLegacyImagePath(blog.image)) return true;
+  }
+
+  return false;
+}
+
+async function fixJewelryImages() {
+  const products = await Product.find({});
+  let productUpdates = 0;
+
+  for (const product of products) {
+    const needsFix = !product.images?.length || product.images.some(isLegacyImagePath);
+    if (needsFix) {
+      product.images = getProductImages(product.category, product.subcategory, product.sku);
+      await product.save();
+      productUpdates += 1;
+    }
+  }
+
+  const categories = await Category.find({});
+  let categoryUpdates = 0;
+
+  for (const category of categories) {
+    if (isLegacyImagePath(category.image)) {
+      category.image = getCategoryImage(category.slug);
+      await category.save();
+      categoryUpdates += 1;
+    }
+  }
+
+  const blogs = await Blog.find({});
+  let blogUpdates = 0;
+
+  for (const blog of blogs) {
+    if (isLegacyImagePath(blog.image)) {
+      blog.image = getCategoryImage('rings');
+      await blog.save();
+      blogUpdates += 1;
+    }
+  }
+
+  console.log(`Fixed jewelry images: ${productUpdates} products, ${categoryUpdates} categories, ${blogUpdates} blogs`);
+}
+
 module.exports = {
   seedDatabase,
   wipeDatabase,
@@ -163,4 +221,6 @@ module.exports = {
   fixDuplicateImages,
   needsCategoryEditorialFix,
   fixCategoryEditorialImages,
+  needsJewelryImageFix,
+  fixJewelryImages,
 };

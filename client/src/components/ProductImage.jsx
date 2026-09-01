@@ -1,7 +1,14 @@
 import { useState, useCallback, useMemo } from 'react';
-import { getCategoryFallback, getCategorySvgFallback, getProductAlt, getProductImages } from '../utils/imageConfig';
+import {
+  getCategoryFallback,
+  getCategorySvgFallback,
+  getProductAlt,
+  getProductImages,
+  isLegacyImagePath,
+  CATEGORY_FALLBACKS,
+} from '../utils/imageConfig';
 
-const DEFAULT_FALLBACK = getCategoryFallback();
+const DEFAULT_JEWELRY = CATEGORY_FALLBACKS.default;
 const DEFAULT_SVG = getCategorySvgFallback();
 
 export default function ProductImage({
@@ -19,7 +26,7 @@ export default function ProductImage({
   const candidates = useMemo(() => {
     const urls = [];
     const add = (url) => {
-      if (url && typeof url === 'string' && url.trim() && !urls.includes(url.trim())) {
+      if (url && typeof url === 'string' && url.trim() && !isLegacyImagePath(url) && !urls.includes(url.trim())) {
         urls.push(url.trim());
       }
     };
@@ -27,14 +34,12 @@ export default function ProductImage({
     if (product?.images?.length) {
       if (index > 0 && product.images[index]) add(product.images[index]);
       product.images.forEach(add);
-    } else {
-      add(catalogImages[index]);
-      add(catalogImages[0]);
     }
 
-    catalogImages.forEach(add);
+    add(catalogImages[index]);
+    add(catalogImages[0]);
     add(categoryFallback);
-    add(DEFAULT_FALLBACK);
+    add(DEFAULT_JEWELRY);
     add(svgFallback);
     add(DEFAULT_SVG);
 

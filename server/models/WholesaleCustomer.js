@@ -14,6 +14,7 @@ const wholesaleCustomerSchema = new mongoose.Schema(
     state: String,
     pincode: String,
     website: String,
+    country: String,
     expectedMonthlyPurchase: String,
     categoriesInterested: [String],
     status: {
