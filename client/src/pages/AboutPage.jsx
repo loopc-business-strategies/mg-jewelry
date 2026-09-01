@@ -1,9 +1,9 @@
 import SEOHead from '../components/SEOHead';
+import OurManufacturingSection from '../components/sections/OurManufacturingSection';
 import { brand, trustIndicators, oppositeModelCopy } from '../utils/brandConfig';
-import { aboutHero, factoryGallery, showroomGallery } from '../utils/imageConfig';
+import { aboutHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 import SafeImage from '../components/SafeImage';
-import PlaceholderImage from '../components/PlaceholderImage';
 
 export default function AboutPage() {
   const schema = {
@@ -80,22 +80,11 @@ export default function AboutPage() {
             ))}
           </ul>
         </section>
+      </div>
 
-        <section>
-          <h2 className="font-semibold text-charcoal text-3xl mb-4">Factory & Showroom</h2>
-          <p className="text-muted text-sm mb-6">Our manufacturing and showroom facilities in Namangan. Real photos will be added soon.</p>
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            {factoryGallery.slice(0, 4).map((item) => (
-              <PlaceholderImage key={item.label} src={item.src} alt={item.label} label={`Modern Gold ${item.label}`} />
-            ))}
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            {showroomGallery.map((item) => (
-              <PlaceholderImage key={item.label} src={item.src} alt={item.label} label={`Modern Gold ${item.label}`} />
-            ))}
-          </div>
-        </section>
+      <OurManufacturingSection />
 
+      <div className="max-w-3xl mx-auto px-4 pb-16 space-y-12">
         <section>
           <h2 className="font-semibold text-charcoal text-3xl mb-6">Why Partners Trust Us</h2>
           <div className="grid md:grid-cols-3 gap-6">

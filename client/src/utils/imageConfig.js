@@ -181,6 +181,34 @@ export const showroomGallery = [
   { src: jewelryStock('1469334031218-e382a71b716b'), label: 'Gold Jewelry' },
 ];
 
+export const manufacturingProcessSteps = [
+  {
+    label: 'Melting & Refining',
+    src: jewelryStock('1751979362679-8687eb4d9301'),
+    alt: 'Molten gold being poured during refining',
+  },
+  {
+    label: 'Chain Making',
+    src: jewelryStock('1617038220319-276d3aab2915'),
+    alt: 'Gold chain craftsmanship in production',
+  },
+  {
+    label: 'Bangle Making',
+    src: jewelryStock('1611085583191-a6cfe1657e70'),
+    alt: 'Finished gold bangles from manufacturing',
+  },
+  {
+    label: 'Quality Inspection',
+    src: jewelryStock('1535632066927-ab7c754af398'),
+    alt: 'Jeweler inspecting gold jewelry for quality',
+  },
+  {
+    label: 'Packaging',
+    src: jewelryStock('1515562141207-7a88fb7ce338'),
+    alt: 'Premium jewelry packaging presentation',
+  },
+];
+
 export const marketAccentColors = [
   'from-coral/20 to-champagne',
   'from-sapphire/15 to-pearl',
