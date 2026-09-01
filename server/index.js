@@ -34,6 +34,8 @@ connectDB().then(async () => {
     fixCategoryEditorialImages,
     needsJewelryImageFix,
     fixJewelryImages,
+    needsChainsBanglesCatalogFix,
+    migrateToChainsBanglesCatalog,
   } = require('./services/seedDatabase');
   const count = await Product.countDocuments();
   const forceReseed = process.env.FORCE_RESEED === 'true';
@@ -44,6 +46,9 @@ connectDB().then(async () => {
   } else if (forceReseed || await needsLegacyReseed()) {
     console.log(forceReseed ? 'FORCE_RESEED enabled — reseeding database...' : 'Legacy catalog detected — reseeding database...');
     await seedDatabase();
+  } else if (await needsChainsBanglesCatalogFix()) {
+    console.log('Legacy catalog detected — migrating to chains and bangles...');
+    await migrateToChainsBanglesCatalog();
   } else if (await needsJewelryImageFix()) {
     console.log('Legacy or non-jewelry images detected — migrating to jewelry stock photos...');
     await fixJewelryImages();

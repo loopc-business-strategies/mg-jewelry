@@ -85,7 +85,7 @@ async function fixBrokenImages() {
 
   for (const blog of blogs) {
     if (!isJewelryStockUrl(blog.image)) {
-      blog.image = getCategoryImage('rings');
+      blog.image = getCategoryImage('chains');
       await blog.save();
       blogUpdates += 1;
     }
@@ -202,13 +202,69 @@ async function fixJewelryImages() {
 
   for (const blog of blogs) {
     if (isLegacyImagePath(blog.image)) {
-      blog.image = getCategoryImage('rings');
+      blog.image = getCategoryImage('chains');
       await blog.save();
       blogUpdates += 1;
     }
   }
 
   console.log(`Fixed jewelry images: ${productUpdates} products, ${categoryUpdates} categories, ${blogUpdates} blogs`);
+}
+
+const ALLOWED_CATALOG_SLUGS = ['chains', 'bangles'];
+
+async function needsChainsBanglesCatalogFix() {
+  const legacyCategory = await Category.findOne({ slug: { $nin: ALLOWED_CATALOG_SLUGS } }).select('_id').lean();
+  if (legacyCategory) return true;
+
+  const legacyProduct = await Product.findOne({ category: { $nin: ALLOWED_CATALOG_SLUGS } }).select('_id').lean();
+  if (legacyProduct) return true;
+
+  const chainCount = await Category.countDocuments({ slug: 'chains' });
+  const bangleCount = await Category.countDocuments({ slug: 'bangles' });
+  if (chainCount === 0 || bangleCount === 0) return true;
+
+  return false;
+}
+
+async function migrateToChainsBanglesCatalog() {
+  const { getCategoriesData, buildProducts, getBlogPosts } = require('./seedRunner');
+  const { getCategoryImage } = require('../config/productImages');
+
+  await Category.deleteMany({ slug: { $nin: ALLOWED_CATALOG_SLUGS } });
+  await Product.deleteMany({});
+
+  const categoriesData = getCategoriesData();
+  for (const [i, c] of categoriesData.entries()) {
+    await Category.findOneAndUpdate(
+      { slug: c.slug },
+      {
+        ...c,
+        image: getCategoryImage(c.slug),
+        order: i,
+        seoTitle: `${c.name} | Modern Gold Jewelry Manufacturer`,
+        seoDescription: c.seoContent,
+      },
+      { upsert: true, new: true }
+    );
+  }
+
+  await Product.insertMany(buildProducts());
+
+  const blogPosts = getBlogPosts();
+  const blogs = await Blog.find({});
+  for (let i = 0; i < blogs.length; i += 1) {
+    const post = blogPosts[i % blogPosts.length];
+    blogs[i].title = post.title;
+    blogs[i].slug = post.slug;
+    blogs[i].excerpt = post.excerpt;
+    blogs[i].content = post.content;
+    blogs[i].category = post.category;
+    blogs[i].image = post.image;
+    await blogs[i].save();
+  }
+
+  console.log('Migrated catalog to chains and bangles only');
 }
 
 module.exports = {
@@ -223,4 +279,6 @@ module.exports = {
   fixCategoryEditorialImages,
   needsJewelryImageFix,
   fixJewelryImages,
+  needsChainsBanglesCatalogFix,
+  migrateToChainsBanglesCatalog,
 };

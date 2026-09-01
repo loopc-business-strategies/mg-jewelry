@@ -12,7 +12,7 @@ function CategoryCard({ name, slug }) {
     >
       <div className="category-carousel-image editorial-image-card relative bg-linen">
         <SafeImage
-          src={categoryImages[slug] || categoryImages['gold-jewelry']}
+          src={categoryImages[slug] || categoryImages.chains}
           alt={`${name} — luxury gold jewelry editorial by Modern Gold Jewelry`}
           category={slug}
           className="w-full h-full object-cover"

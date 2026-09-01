@@ -9,7 +9,7 @@ export default function CategoryShowcaseSection() {
         <SectionHeader
           eyebrow="Collections"
           title="Shop by Category"
-          subtitle="Discover curated jewelry for every occasion."
+          subtitle="Gold chains and bangles crafted in Namangan."
           linkTo="/shop"
           linkLabel="View all"
         />

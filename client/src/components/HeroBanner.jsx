@@ -64,7 +64,7 @@ export function ProductCarousel({ products, title }) {
 }
 
 export function CategoryCard({ name, slug, image }) {
-  const src = image || categoryImages[slug] || categoryImages['gold-jewelry'];
+  const src = image || categoryImages[slug] || categoryImages.chains;
   return (
     <Link to={`/shop/${slug}`} className="group/card editorial-image-card relative rounded-xl overflow-hidden border border-gold/10 bg-linen hover:border-gold/35 transition-colors duration-[350ms]">
       <SafeImage

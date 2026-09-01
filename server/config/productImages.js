@@ -25,58 +25,42 @@ function isJewelryStockUrl(url) {
   return typeof url === 'string' && url.includes('images.unsplash.com') && !isLegacyImagePath(url);
 }
 
-const JEWELRY_PRODUCT_IDS = [
-  '1605100804763-247f67b3557e',
-  '1535632066927-ab7c754af398',
+const CHAIN_IMAGE_IDS = [
   '1599643478518-a784e5dc4c8f',
-  '1611085583191-a6cfe1657e70',
-  '1573408301185-9146fe634ad0',
   '1617038220319-276d3aab2915',
-  '1602751584552-8cf4eae49f4e',
   '1516638918792-21578567a634',
-  '1515562141207-7a88fb7ce338',
-  '1506630448388-459e089110ec',
-  '1611599085274-84caa4e2e4a7',
   '1469334031218-e382a71b716b',
   '1603561591562-778103b7d5bc',
-  '1535632066927-ab7c754af398',
-  '1599643478518-a784e5dc4c8f',
-  '1611085583191-a6cfe1657e70',
-  '1605100804763-247f67b3557e',
-  '1573408301185-9146fe634ad0',
-  '1617038220319-276d3aab2915',
-  '1602751584552-8cf4eae49f4e',
-  '1516638918792-21578567a634',
-  '1515562141207-7a88fb7ce338',
   '1506630448388-459e089110ec',
   '1611599085274-84caa4e2e4a7',
-  '1469334031218-e382a71b716b',
-  '1603561591562-778103b7d5bc',
-  '1535632066927-ab7c754af398',
-  '1599643478518-a784e5dc4c8f',
-  '1611085583191-a6cfe1657e70',
+  '1515562141207-7a88fb7ce338',
   '1605100804763-247f67b3557e',
+  '1535632066927-ab7c754af398',
+  '1602751584552-8cf4eae49f4e',
   '1573408301185-9146fe634ad0',
-  '1617038220319-276d3aab2915',
 ];
 
-const PRODUCT_IMAGES = JEWELRY_PRODUCT_IDS.map((id) => jewelryStock(id));
+const BANGLE_IMAGE_IDS = [
+  '1611085583191-a6cfe1657e70',
+  '1602751584552-8cf4eae49f4e',
+  '1605100804763-247f67b3557e',
+  '1573408301185-9146fe634ad0',
+  '1535632066927-ab7c754af398',
+  '1617038220319-276d3aab2915',
+  '1516638918792-21578567a634',
+  '1603561591562-778103b7d5bc',
+  '1506630448388-459e089110ec',
+  '1611599085274-84caa4e2e4a7',
+  '1515562141207-7a88fb7ce338',
+  '1469334031218-e382a71b716b',
+];
+
+const PRODUCT_IMAGES = [...CHAIN_IMAGE_IDS, ...BANGLE_IMAGE_IDS].map((id) => jewelryStock(id));
 
 const CATEGORY_JEWELRY_IDS = {
-  rings: '1605100804763-247f67b3557e',
-  earrings: '1535632066927-ab7c754af398',
-  necklaces: '1599643478518-a784e5dc4c8f',
-  bracelets: '1611085583191-a6cfe1657e70',
-  pendants: '1573408301185-9146fe634ad0',
-  'gold-jewelry': '1617038220319-276d3aab2915',
-  'diamond-jewelry': '1602751584552-8cf4eae49f4e',
-  'custom-jewelry': '1506630448388-459e089110ec',
-  'bridal-jewelry': '1515562141207-7a88fb7ce338',
-  'fashion-jewelry': '1535632066927-ab7c754af398',
-  'wholesale-collections': '1516638918792-21578567a634',
+  chains: '1599643478518-a784e5dc4c8f',
   bangles: '1611085583191-a6cfe1657e70',
-  gifting: '1573408301185-9146fe634ad0',
-  default: '1573408301185-9146fe634ad0',
+  default: '1599643478518-a784e5dc4c8f',
 };
 
 const CATEGORY_FALLBACKS = Object.fromEntries(
@@ -84,33 +68,14 @@ const CATEGORY_FALLBACKS = Object.fromEntries(
 );
 
 const SUBCATEGORY_MAP = {
-  'diamond-rings': 'rings',
-  'gold-rings': 'rings',
-  'solitaire-rings': 'rings',
-  'engagement-rings': 'rings',
-  'wedding-rings': 'rings',
-  'stud-earrings': 'earrings',
-  'hoop-earrings': 'earrings',
-  'drop-earrings': 'earrings',
-  'gold-necklaces': 'necklaces',
-  'layered-necklaces': 'necklaces',
-  'pendant-necklaces': 'pendants',
-  'gold-bracelets': 'bracelets',
-  'diamond-bracelets': 'bracelets',
-  'tennis-bracelets': 'bracelets',
-  'gold-pendants': 'pendants',
-  'diamond-pendants': 'pendants',
-  'gold-chains': 'gold-jewelry',
-  'gold-sets': 'gold-jewelry',
-  'diamond-sets': 'diamond-jewelry',
-  'private-label': 'custom-jewelry',
-  'bespoke-designs': 'custom-jewelry',
-  'bridal-sets': 'bridal-jewelry',
-  'wedding-bands': 'bridal-jewelry',
-  contemporary: 'fashion-jewelry',
-  'statement-pieces': 'fashion-jewelry',
-  'bulk-orders': 'wholesale-collections',
-  'partner-collections': 'wholesale-collections',
+  'rope-chain': 'chains',
+  'cuban-chain': 'chains',
+  'figaro-chain': 'chains',
+  'box-chain': 'chains',
+  'classic-bangle': 'bangles',
+  'kada-bangle': 'bangles',
+  'hinged-bangle': 'bangles',
+  'stackable-bangle': 'bangles',
 };
 
 const SHARED_PRIMARY_PATHS = [
@@ -133,6 +98,11 @@ function resolveCategory(category, subcategory) {
   return 'default';
 }
 
+function getImagePool(category, subcategory) {
+  const slug = resolveCategory(category, subcategory);
+  return slug === 'bangles' ? BANGLE_IMAGE_IDS : CHAIN_IMAGE_IDS;
+}
+
 function parseSkuIndex(skuOrIndex) {
   if (typeof skuOrIndex === 'number' && Number.isFinite(skuOrIndex)) {
     return Math.max(0, Math.floor(skuOrIndex));
@@ -145,10 +115,12 @@ function parseSkuIndex(skuOrIndex) {
 }
 
 function getProductImages(category, subcategory, skuOrIndex = 0) {
+  const pool = getImagePool(category, subcategory);
   const index = parseSkuIndex(skuOrIndex);
-  const primary = PRODUCT_IMAGES[index % PRODUCT_IMAGES.length];
-  const secondary = PRODUCT_IMAGES[(index + 11) % PRODUCT_IMAGES.length];
-  return [primary, secondary];
+  const primaryIdx = index % pool.length;
+  let secondaryIdx = (index + 5) % pool.length;
+  if (secondaryIdx === primaryIdx) secondaryIdx = (secondaryIdx + 1) % pool.length;
+  return [jewelryStock(pool[primaryIdx]), jewelryStock(pool[secondaryIdx])];
 }
 
 function getCategoryImage(category) {

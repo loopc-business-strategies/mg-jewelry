@@ -24,23 +24,12 @@ export const socialLinks = [
   { label: 'LinkedIn', icon: 'linkedin', href: '/contact' },
 ];
 
-export const collectionCategories = [
-  'rings',
-  'earrings',
-  'necklaces',
-  'bracelets',
-  'pendants',
-  'gold-jewelry',
-  'diamond-jewelry',
-  'bridal-jewelry',
-  'fashion-jewelry',
-  'wholesale-collections',
-];
+export const collectionCategories = ['chains', 'bangles'];
 
 const slugToLabel = (slug) =>
   slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-const retailCategorySlugs = collectionCategories.filter((slug) => slug !== 'wholesale-collections');
+const retailCategorySlugs = collectionCategories;
 
 export const navLinks = [
   { label: 'Home', path: '/', key: 'nav.home' },
@@ -71,7 +60,7 @@ export const retailNavLinks = [
 
 export const wholesaleNavLinks = [
   { label: 'Wholesale Shop', path: '/wholesale/shop' },
-  { label: 'Wholesale Collections', path: '/shop/wholesale-collections' },
+  { label: 'Wholesale Collections', path: '/shop/chains' },
   { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing' },
   { label: 'Request a Quote', path: '/contact?type=quote' },
   { label: 'Become a Wholesale Partner', path: '/wholesale/register' },
@@ -100,7 +89,7 @@ export const wholesaleMenu = {
   secondaryCta: { label: 'Wholesale Shop', path: '/wholesale/shop', key: 'wholesaleMenu.shopCta' },
   links: [
     { label: 'Wholesale Shop', path: '/wholesale/shop', key: 'wholesaleMenu.shop' },
-    { label: 'Wholesale Collections', path: '/shop/wholesale-collections', key: 'wholesaleMenu.collections' },
+    { label: 'Wholesale Collections', path: '/shop/chains', key: 'wholesaleMenu.collections' },
     { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing', key: 'wholesaleMenu.bulkPricing' },
     { label: 'Request a Quote', path: '/contact?type=quote', key: 'wholesaleMenu.quote' },
     { label: 'Become a Partner', path: '/wholesale/register', key: 'wholesaleMenu.becomePartner' },
@@ -218,16 +207,8 @@ export const businessTypes = [
 export const IMAGE_PLACEHOLDER_LABEL = 'Real Image Coming Soon';
 
 export const categoryIcons = [
-  { name: 'Rings', slug: 'rings', icon: '💍' },
-  { name: 'Earrings', slug: 'earrings', icon: '✨' },
-  { name: 'Necklaces', slug: 'necklaces', icon: '📿' },
-  { name: 'Bracelets', slug: 'bracelets', icon: '⭕' },
-  { name: 'Pendants', slug: 'pendants', icon: '🔶' },
-  { name: 'Gold Jewelry', slug: 'gold-jewelry', icon: '🥇' },
-  { name: 'Diamond Jewelry', slug: 'diamond-jewelry', icon: '💎' },
-  { name: 'Bridal Jewelry', slug: 'bridal-jewelry', icon: '👰' },
-  { name: 'Fashion Jewelry', slug: 'fashion-jewelry', icon: '✨' },
-  { name: 'Wholesale', slug: 'wholesale-collections', icon: '📦' },
+  { name: 'Chains', slug: 'chains', icon: '⛓️' },
+  { name: 'Bangles', slug: 'bangles', icon: '⭕' },
 ];
 
 export const whyChooseUs = trustIndicators;
@@ -267,25 +248,16 @@ export const servicePromises = [
 ];
 
 export const categoryShowcase = [
-  { name: 'Rings', slug: 'rings' },
-  { name: 'Earrings', slug: 'earrings' },
-  { name: 'Bracelets', slug: 'bracelets' },
+  { name: 'Chains', slug: 'chains' },
   { name: 'Bangles', slug: 'bangles' },
-  { name: 'Necklaces', slug: 'necklaces' },
-  { name: 'Pendants', slug: 'pendants' },
-  { name: 'Diamond Jewelry', slug: 'diamond-jewelry' },
-  { name: 'Gold Jewelry', slug: 'gold-jewelry' },
-  { name: 'Bridal Jewelry', slug: 'bridal-jewelry' },
-  { name: 'Custom Jewelry', slug: 'custom-jewelry' },
-  { name: 'Wholesale Collections', slug: 'wholesale-collections' },
 ];
 
 export const footerColumns = {
   shop: [
     { label: 'Home', path: '/' },
     { label: 'All Collections', path: '/shop' },
-    { label: 'Rings', path: '/shop/rings' },
-    { label: 'Necklaces', path: '/shop/necklaces' },
+    { label: 'Chains', path: '/shop/chains' },
+    { label: 'Bangles', path: '/shop/bangles' },
     { label: 'New Arrivals', path: '/shop?sort=newest' },
     { label: 'Best Sellers', path: '/shop?sort=best_selling' },
   ],

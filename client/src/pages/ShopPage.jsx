@@ -14,7 +14,7 @@ import { SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { categoryShowcase } from '../utils/brandConfig';
 
-const shopCategories = categoryShowcase.slice(0, 8);
+const shopCategories = categoryShowcase;
 
 export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -61,15 +61,15 @@ export default function ShopPage() {
 
   return (
     <>
-      <SEOHead title="Shop Jewellery" description="Browse our complete collection of premium gold and diamond jewellery." path="/shop" />
+      <SEOHead title="Shop Chains & Bangles" description="Browse premium gold chains and bangles manufactured in Uzbekistan." path="/shop" />
 
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
         <Breadcrumbs items={[{ label: 'Jewellery' }]} />
         <header className="mb-8 md:mb-10">
           <p className="section-eyebrow mb-2">Collections</p>
-          <h1 className="font-display text-3xl md:text-4xl text-charcoal">All Collections</h1>
+          <h1 className="font-display text-3xl md:text-4xl text-charcoal">Chains & Bangles</h1>
           <p className="text-muted text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
-            Browse premium gold and diamond jewelry — rings, earrings, necklaces, bracelets and more. Crafted in Uzbekistan for international customers and partners.
+            Premium gold chains and bangles — our specialty. Crafted in Namangan for retail customers and international partners.
           </p>
           {meta.total && (
             <p className="text-sm text-emerald font-medium mt-2">
