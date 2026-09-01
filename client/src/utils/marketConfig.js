@@ -1,7 +1,9 @@
 export const languages = [
   { code: 'en', label: 'English', short: 'EN' },
-  { code: 'ru', label: 'Russian', short: 'RU' },
   { code: 'uz', label: 'Uzbek', short: 'UZ' },
+  { code: 'ar', label: 'Arabic', short: 'AR' },
+  { code: 'ru', label: 'Russian', short: 'RU' },
+  { code: 'tr', label: 'Turkish', short: 'TR' },
 ];
 
 export const markets = [
@@ -69,6 +71,24 @@ export const selectorTranslations = {
     continue: 'Davom etish',
     priceNote: 'Narxlar tanlangan valyutada ko\'rsatiladi. Konvertatsiya keyinroq qo\'shiladi.',
     close: 'Yopish',
+  },
+  ar: {
+    title: 'السوق الدولي',
+    selectLanguage: 'اختر اللغة',
+    selectMarket: 'اختر السوق',
+    selectCurrency: 'اختر العملة',
+    continue: 'متابعة',
+    priceNote: 'الأسعار معروضة بالعملة المختارة. التحويل المباشر متاح عند التفعيل.',
+    close: 'إغلاق',
+  },
+  tr: {
+    title: 'Uluslararası Pazar',
+    selectLanguage: 'Dil Seçin',
+    selectMarket: 'Pazar Seçin',
+    selectCurrency: 'Para Birimi Seçin',
+    continue: 'Devam',
+    priceNote: 'Fiyatlar seçilen para biriminde gösterilir. Canlı dönüşüm yapılandırıldığında kullanılabilir.',
+    close: 'Kapat',
   },
 };
 

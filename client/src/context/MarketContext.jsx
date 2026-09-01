@@ -24,6 +24,7 @@ export function MarketProvider({ children }) {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
     document.documentElement.lang = prefs.language || 'en';
+    document.documentElement.dir = prefs.language === 'ar' ? 'rtl' : 'ltr';
   }, [prefs]);
 
   const setLanguage = useCallback((language) => {

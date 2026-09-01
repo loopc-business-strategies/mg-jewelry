@@ -104,7 +104,7 @@ export default function Header() {
 
           <Link
             to={sellGoldCta.path}
-            className="hidden lg:inline-flex btn-primary-gold text-xs px-4 py-2 shrink-0"
+            className="hidden lg:inline-flex btn-primary-gold-sm shrink-0"
           >
             {t(sellGoldCta.key)}
           </Link>
@@ -198,7 +198,7 @@ export default function Header() {
             </Link>
             <Link
               to={sellGoldCta.path}
-              className="btn-primary-gold w-full justify-center text-xs py-3 mt-4"
+              className="btn-primary-gold-sm w-full justify-center py-2.5 mt-4"
               onClick={() => setMobileOpen(false)}
             >
               {t(sellGoldCta.key)}
