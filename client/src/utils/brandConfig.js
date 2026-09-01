@@ -49,8 +49,13 @@ export const navLinks = [
   { label: 'Retail', path: '/shop', menu: 'retail', key: 'nav.retail' },
   { label: 'Wholesale', path: '/wholesale', menu: 'wholesale', key: 'nav.wholesale' },
   { label: 'Contact', path: '/contact', key: 'nav.contact' },
-  { label: 'Sell Gold', path: '/gold-buying', key: 'nav.sellGold' },
 ];
+
+export const sellGoldCta = {
+  label: 'Sell Gold',
+  path: '/gold-buying',
+  key: 'nav.sellGold',
+};
 
 export const retailNavLinks = [
   { label: 'Shop', path: '/shop' },

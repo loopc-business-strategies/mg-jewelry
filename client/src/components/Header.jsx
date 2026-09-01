@@ -5,6 +5,7 @@ import {
   navLinks,
   retailMenu,
   wholesaleMenu,
+  sellGoldCta,
   isNavLinkActive,
 } from '../utils/brandConfig';
 import { useCart } from '../context/CartContext';
@@ -101,6 +102,13 @@ export default function Header() {
             ))}
           </nav>
 
+          <Link
+            to={sellGoldCta.path}
+            className="hidden lg:inline-flex btn-primary-gold text-xs px-4 py-2 shrink-0"
+          >
+            {t(sellGoldCta.key)}
+          </Link>
+
           <div className="flex items-center gap-1 shrink-0">
             <div className="hidden md:block">
               <MarketSelector compact />
@@ -187,6 +195,13 @@ export default function Header() {
             <Link to="/wishlist" className="text-sm py-3 border-t border-gold/10 mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
             <Link to={user ? '/profile' : '/login'} className="text-sm py-3" onClick={() => setMobileOpen(false)}>
               {user ? 'My Account' : 'Login'}
+            </Link>
+            <Link
+              to={sellGoldCta.path}
+              className="btn-primary-gold w-full justify-center text-xs py-3 mt-4"
+              onClick={() => setMobileOpen(false)}
+            >
+              {t(sellGoldCta.key)}
             </Link>
           </nav>
         </div>
