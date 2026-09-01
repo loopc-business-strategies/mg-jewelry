@@ -45,11 +45,11 @@ const retailCategorySlugs = collectionCategories.filter((slug) => slug !== 'whol
 export const navLinks = [
   { label: 'Home', path: '/', key: 'nav.home' },
   { label: 'About', path: '/about', key: 'nav.about' },
-  { label: 'Sell Gold', path: '/gold-buying', key: 'nav.sellGold' },
   { label: 'Collections', path: '/shop', menu: 'collections', key: 'nav.collections' },
   { label: 'Retail', path: '/shop', menu: 'retail', key: 'nav.retail' },
   { label: 'Wholesale', path: '/wholesale', menu: 'wholesale', key: 'nav.wholesale' },
   { label: 'Contact', path: '/contact', key: 'nav.contact' },
+  { label: 'Sell Gold', path: '/gold-buying', key: 'nav.sellGold' },
 ];
 
 export const retailNavLinks = [
@@ -286,10 +286,10 @@ export const footerColumns = {
   ],
   about: [
     { label: 'About', path: '/about' },
-    { label: 'Sell Gold', path: '/gold-buying' },
     { label: 'Collections', path: '/shop' },
     { label: 'Custom Jewelry', path: '/custom-jewelry' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Sell Gold', path: '/gold-buying' },
   ],
   help: [
     { label: 'Shipping', path: '/shipping' },
