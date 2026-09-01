@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown, Gem } from 'lucide-react';
+import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
 import {
-  brand,
   navLinks,
   retailMenu,
   wholesaleMenu,
@@ -16,6 +15,7 @@ import MegaMenu from './MegaMenu';
 import RetailMegaMenu from './RetailMegaMenu';
 import WholesaleMegaMenu from './WholesaleMegaMenu';
 import MarketSelector from './MarketSelector';
+import BrandLogo from './BrandLogo';
 import SearchBar from './SearchBar';
 
 function MobileAccordion({ title, children, defaultOpen = false }) {
@@ -82,13 +82,7 @@ export default function Header() {
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
-          <Link to="/" className="flex flex-col items-center lg:items-start shrink-0 group">
-            <div className="flex items-center gap-2">
-              <Gem size={18} className="text-gold hidden sm:block" strokeWidth={1.25} />
-              <span className="font-display text-xl md:text-2xl text-charcoal tracking-wide">{brand.name}</span>
-            </div>
-            <span className="text-[9px] tracking-[0.25em] uppercase text-muted hidden md:block">Fine Jewelry</span>
-          </Link>
+          <BrandLogo variant="header" />
 
           <nav className="hidden lg:flex items-center gap-8 flex-1 justify-center">
             {navLinks.map((link) => (

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SEOHead from '../components/SEOHead';
+import BrandLogo from '../components/BrandLogo';
 import toast from 'react-hot-toast';
 
 export default function SignupPage() {
@@ -29,6 +30,7 @@ export default function SignupPage() {
       <SEOHead title="Sign Up" path="/signup" />
       <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-linen">
         <div className="w-full max-w-md card-elegant p-8 md:p-10">
+          <BrandLogo variant="auth" linkTo={null} />
           <p className="section-eyebrow text-center mb-2">Account</p>
           <h1 className="font-display text-3xl text-center mb-8">Create Account</h1>
           <form onSubmit={handleSubmit} className="space-y-4">

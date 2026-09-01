@@ -1,6 +1,6 @@
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { brand } from '../utils/brandConfig';
+import BrandLogo from '../components/BrandLogo';
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Store,
   FileText, Settings, LogOut, MessageSquare,
@@ -25,8 +25,7 @@ export default function AdminLayout() {
     <div className="min-h-screen flex bg-gray-50">
       <aside className="w-64 bg-gradient-to-b from-champagne to-cream border-r border-gold/20 shrink-0">
         <div className="p-6 border-b border-gold/20">
-          <p className="font-display text-xl text-gradient-gold">{brand.name}</p>
-          <p className="text-xs text-muted mt-1">Admin Panel</p>
+          <BrandLogo variant="admin" linkTo={null} />
         </div>
         <nav className="p-4 space-y-1">
           {links.map(({ to, icon: Icon, label, end }) => (

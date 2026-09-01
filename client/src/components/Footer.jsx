@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
+import BrandLogo from './BrandLogo';
 import { socialIconMap } from './ui/SocialIcons';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -21,10 +22,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <Link to="/" className="inline-block mb-4">
-              <p className="font-display text-2xl text-charcoal tracking-wide">{brand.name}</p>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-gold-dark mt-1">International Jewelry</p>
-            </Link>
+            <BrandLogo variant="footer" />
             <p className="text-sm font-medium text-charcoal mb-1">{brand.legalName}</p>
             <address className="text-sm text-muted leading-relaxed mb-4 not-italic">
               {brand.addressLines.map((line) => (

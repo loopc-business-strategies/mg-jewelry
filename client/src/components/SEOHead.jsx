@@ -7,13 +7,15 @@ export default function SEOHead({ title, description, path = '', schema, type = 
     : `${brand.name} — International Jewelry Manufacturing`;
   const desc = description || `${brand.tagline} ${brand.heroSubtitle.slice(0, 120)}...`;
   const url = `${brand.siteUrl}${path}`;
-  const ogImage = image || `${brand.siteUrl}/images/fallbacks/product-fallback-default.svg`;
+  const ogImage = image || `${brand.siteUrl}${brand.logo}`;
 
   return (
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={url} />
+      <link rel="icon" type="image/png" href={brand.logoIcon} />
+      <link rel="apple-touch-icon" href={brand.logoIcon} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />

@@ -1,5 +1,8 @@
 export const brand = {
   name: 'Modern Gold Jewelry',
+  logo: '/images/logo.jpg',
+  logoIcon: '/images/logo-icon.png',
+  logoAlt: 'Modern Gold Jewelry',
   legalName: 'Modern Gold Jewelry Manufacturing FE LLC',
   tagline: 'Crafted in Uzbekistan. Connected to the World.',
   heroSubtitle:
