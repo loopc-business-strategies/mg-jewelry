@@ -3,19 +3,16 @@ import { useAuth } from '../context/AuthContext';
 import { brand } from '../utils/brandConfig';
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Store,
-  FileText, Settings, LogOut, Coins, FileCheck, ClipboardList,
+  FileText, Settings, LogOut, MessageSquare,
 } from 'lucide-react';
 
 const links = [
   { to: '/admin', icon: LayoutDashboard, label: 'Dashboard', end: true },
-  { to: '/admin/gold-buying', icon: Coins, label: 'Gold Buying' },
-  { to: '/admin/buyers', icon: Store, label: 'International Buyers' },
-  { to: '/admin/rfqs', icon: ClipboardList, label: 'RFQs' },
-  { to: '/admin/quotes', icon: FileCheck, label: 'Quotes' },
   { to: '/admin/products', icon: Package, label: 'Products' },
   { to: '/admin/orders', icon: ShoppingCart, label: 'Orders' },
+  { to: '/admin/wholesale', icon: Store, label: 'Wholesale' },
   { to: '/admin/customers', icon: Users, label: 'Customers' },
-  { to: '/admin/blog', icon: FileText, label: 'Content' },
+  { to: '/admin/blog', icon: FileText, label: 'Blog' },
   { to: '/admin/settings', icon: Settings, label: 'Settings' },
 ];
 
@@ -25,16 +22,11 @@ export default function AdminLayout() {
   if (!user || !isAdmin) return <Navigate to="/login" replace />;
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      <aside className="w-64 bg-dark border-r border-gold/10 shrink-0">
-        <div className="p-6 border-b border-gold/10">
-          <div className="flex items-center gap-2">
-            <img src={brand.logo} alt={brand.name} className="h-8 w-8" />
-            <div>
-              <p className="font-display text-sm font-semibold text-off-white">{brand.name}</p>
-              <p className="text-[10px] text-gold/60 uppercase tracking-wider">Admin</p>
-            </div>
-          </div>
+    <div className="min-h-screen flex bg-gray-50">
+      <aside className="w-64 bg-gradient-to-b from-champagne to-cream border-r border-gold/20 shrink-0">
+        <div className="p-6 border-b border-gold/20">
+          <p className="font-display text-xl text-gradient-gold">{brand.name}</p>
+          <p className="text-xs text-muted mt-1">Admin Panel</p>
         </div>
         <nav className="p-4 space-y-1">
           {links.map(({ to, icon: Icon, label, end }) => (
@@ -43,8 +35,8 @@ export default function AdminLayout() {
               to={to}
               end={end}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                  isActive ? 'bg-gold/20 text-gold' : 'text-off-white/70 hover:text-gold hover:bg-white/5'
+                `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActive ? 'bg-gold text-white' : 'text-charcoal hover:bg-white/60'
                 }`
               }
             >
@@ -53,7 +45,7 @@ export default function AdminLayout() {
           ))}
           <button
             onClick={logout}
-            className="flex items-center gap-3 px-4 py-2.5 text-sm text-off-white/50 hover:text-off-white w-full mt-4"
+            className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-300 hover:bg-gray-800 w-full mt-4"
           >
             <LogOut size={18} /> Logout
           </button>

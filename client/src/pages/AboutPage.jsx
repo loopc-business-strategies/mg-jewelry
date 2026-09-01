@@ -1,11 +1,8 @@
 import SEOHead from '../components/SEOHead';
-import ScrollReveal from '../components/ScrollReveal';
-import SafeImage from '../components/SafeImage';
+import { brand, trustIndicators } from '../utils/brandConfig';
+import { aboutHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { brand, trustIndicators, companyStory, manufacturingCapabilities, IMAGE_PLACEHOLDER_LABEL, seoKeywords } from '../utils/brandConfig';
-
-const ABOUT_HERO = 'https://images.unsplash.com/photo-1610375461246-207c099ac6cc?w=1920&q=80&auto=format&fit=crop';
+import SafeImage from '../components/SafeImage';
 
 export default function AboutPage() {
   const schema = {
@@ -26,157 +23,64 @@ export default function AboutPage() {
 
   return (
     <>
-      <SEOHead
-        title="About Modern Gold — Gold Industry Company"
-        description={`Learn about ${brand.name} — gold jewellery manufacturing and gold industry operations from ${brand.location}.`}
-        path="/about"
-        keywords={seoKeywords}
-        schema={schema}
-      />
+      <SEOHead title="About Us" description={`${brand.legalName} — jewelry manufacturing from Namangan, Uzbekistan, serving international markets.`} path="/about" schema={schema} />
 
-      <section className="relative h-64 md:h-96 overflow-hidden bg-dark">
-        <SafeImage src={ABOUT_HERO} alt="Modern Gold operations" className="w-full h-full object-cover opacity-40" category="gold-jewelry" />
-        <div className="absolute inset-0 corporate-hero-overlay" />
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-7xl mx-auto px-4 pb-12 w-full">
-            <p className="section-eyebrow text-gold mb-3">About Us</p>
-            <h1 className="headline-corporate headline-corporate-light">Modern Gold</h1>
-          </div>
+      <div className="relative h-64 md:h-80 overflow-hidden bg-linen">
+        <SafeImage src={aboutHero} alt="Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-pearl/85 to-cream/50 flex items-center justify-center px-4">
+          <h1 className="font-display text-3xl md:text-5xl text-charcoal text-center">Crafted in Namangan, Uzbekistan</h1>
         </div>
-        <span className="image-placeholder-label">Modern Gold Headquarters — {IMAGE_PLACEHOLDER_LABEL}</span>
-      </section>
+      </div>
 
-      <section className="section-light py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-4">
-          <ScrollReveal>
-            <h2 className="headline-corporate headline-corporate-dark text-2xl mb-6">Company Overview</h2>
-            <p className="text-muted leading-relaxed mb-4">
-              {brand.legalName} is a gold industry company based in Namangan, Uzbekistan. The company produces
-              gold chains and bangles for business and international buyers, while expanding across the broader
-              gold industry value chain.
-            </p>
-            <p className="text-muted leading-relaxed">
-              Modern Gold connects regional gold supply with professional manufacturing and international trade —
-              serving both local gold sellers and global business partners.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <div className="max-w-3xl mx-auto px-4 py-16 space-y-12">
+        <section id="story">
+          <h2 className="font-display text-3xl mb-4">Our Story</h2>
+          <p className="text-muted leading-relaxed mb-4">
+            {brand.legalName} is a jewelry manufacturing company based in Namangan, Uzbekistan, focused on creating quality jewelry products for international markets.
+          </p>
+          <p className="text-muted leading-relaxed">
+            We combine skilled craftsmanship, modern production capabilities and rigorous quality control to serve wholesalers, retailers, jewelry brands and international business partners across Central Asia, Russia, the UK, Singapore, Malaysia, Hong Kong, the United States and Dubai.
+          </p>
+        </section>
 
-      <section className="section-dark py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <ScrollReveal className="mb-12">
-            <h2 className="headline-corporate headline-corporate-light text-2xl mb-4">Company History</h2>
-            <p className="text-off-white/70 max-w-2xl">
-              From jewellery production to gold industry leadership — our growth trajectory.
-            </p>
-          </ScrollReveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {companyStory.phases.map((phase, i) => (
-              <ScrollReveal key={phase.title}>
-                <div className="p-6 border border-gold/15 bg-dark-surface h-full">
-                  <p className="text-xs tracking-widest uppercase text-gold mb-2">Phase {String(i + 1).padStart(2, '0')}</p>
-                  <h3 className="font-display font-semibold text-off-white mb-2">{phase.title}</h3>
-                  <p className="text-sm text-off-white/60">{phase.desc}</p>
-                </div>
-              </ScrollReveal>
+        <section>
+          <h2 className="font-display text-3xl mb-4">Mission & Vision</h2>
+          <p className="text-muted leading-relaxed mb-4">
+            <strong>Mission:</strong> To deliver precision-crafted jewelry manufacturing that empowers international partners with reliable quality, flexible production and professional service.
+          </p>
+          <p className="text-muted leading-relaxed">
+            <strong>Vision:</strong> To be a trusted international jewelry manufacturer connecting Uzbekistan craftsmanship with global jewelry markets.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-display text-3xl mb-6">What We Offer</h2>
+          <ul className="grid md:grid-cols-2 gap-3">
+            {['Manufacturing expertise', 'Skilled craftsmanship', 'Modern production', 'Quality control', 'Custom manufacturing', 'Wholesale partnerships', 'International business', 'Reliable production'].map((item) => (
+              <li key={item} className="flex items-center gap-2 text-muted text-sm">
+                <span className="w-2 h-2 rounded-full bg-gold shrink-0" />
+                {item}
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+        </section>
 
-      <section className="section-light py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12">
-          <ScrollReveal>
-            <h2 className="headline-corporate headline-corporate-dark text-2xl mb-6">Jewellery Manufacturing</h2>
-            <p className="text-muted leading-relaxed mb-6">
-              Our core manufacturing focus is gold chains and bangles — produced in 14K, 18K and 22K purities
-              for international business buyers. Every product is manufactured to professional standards with
-              rigorous quality control.
-            </p>
-            <Link to="/manufacturing" className="btn-gold-outline inline-flex">
-              View Manufacturing <ArrowRight size={16} />
-            </Link>
-          </ScrollReveal>
-          <ScrollReveal>
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <SafeImage src={ABOUT_HERO} alt="Manufacturing" category="gold-jewelry" className="w-full h-full object-cover" />
-              <span className="image-placeholder-label">Modern Gold Factory — {IMAGE_PLACEHOLDER_LABEL}</span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="section-light py-16 border-t border-gold/10">
-        <div className="max-w-7xl mx-auto px-4">
-          <ScrollReveal className="mb-12 text-center">
-            <h2 className="headline-corporate headline-corporate-dark text-2xl">Why Modern Gold</h2>
-          </ScrollReveal>
+        <section>
+          <h2 className="font-display text-3xl mb-6">Why Partners Trust Us</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {trustIndicators.map((item) => (
-              <ScrollReveal key={item.title}>
-                <div className="p-6 bg-white border border-gold/10 text-center h-full">
-                  <h3 className="font-display font-semibold text-dark mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted">{item.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-dark py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <ScrollReveal className="mb-12">
-            <h2 className="headline-corporate headline-corporate-light text-2xl mb-4">Leadership & Team</h2>
-            <p className="text-off-white/60">[Client to provide leadership information and photos]</p>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {['Leadership', 'Production Team', 'Quality Team'].map((role) => (
-              <div key={role} className="relative aspect-[3/4] bg-dark-surface border border-gold/10 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-sm text-muted-light">{role}</p>
-                </div>
-                <span className="image-placeholder-label">Modern Gold {role} — {IMAGE_PLACEHOLDER_LABEL}</span>
+            {trustIndicators.slice(0, 3).map(({ title, desc }) => (
+              <div key={title} className="text-center p-6 bg-cream rounded-xl border border-gold/10">
+                <h3 className="font-display text-xl mb-2 text-charcoal">{title}</h3>
+                <p className="text-sm text-muted">{desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section-light py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12">
-          <ScrollReveal>
-            <h2 className="headline-corporate headline-corporate-dark text-2xl mb-6">Factory & Showroom</h2>
-            <p className="text-muted leading-relaxed mb-4">{brand.address}</p>
-            <p className="text-sm text-muted mb-6">Production capacity: [Client to provide]</p>
-            <div className="flex flex-wrap gap-2">
-              {manufacturingCapabilities.slice(0, 4).map((cap) => (
-                <span key={cap} className="px-3 py-1 text-xs uppercase tracking-wider border border-gold/20 text-gold-dark">{cap}</span>
-              ))}
-            </div>
-          </ScrollReveal>
-          <ScrollReveal>
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <SafeImage src={ABOUT_HERO} alt="Showroom" category="gold-jewelry" className="w-full h-full object-cover" />
-              <span className="image-placeholder-label">Modern Gold Showroom — {IMAGE_PLACEHOLDER_LABEL}</span>
-            </div>
-          </ScrollReveal>
+        <div className="text-center">
+          <Link to="/custom-jewelry" className="text-sm tracking-wide text-charcoal hover:text-gold transition-colors">Explore custom jewelry manufacturing →</Link>
         </div>
-      </section>
-
-      <section className="section-dark py-16 text-center">
-        <div className="max-w-2xl mx-auto px-4">
-          <h2 className="headline-corporate headline-corporate-light text-2xl mb-6">International Vision</h2>
-          <p className="text-off-white/70 mb-8">
-            Modern Gold is building toward becoming a trusted regional gold industry company with global reach.
-            Export markets — coming soon. [Client to provide]
-          </p>
-          <Link to="/buyers" className="btn-gold-solid">
-            Partner With Us <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
+      </div>
     </>
   );
 }

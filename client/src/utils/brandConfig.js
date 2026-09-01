@@ -1,10 +1,9 @@
 export const brand = {
-  name: 'Modern Gold',
+  name: 'Modern Gold Jewelry',
   legalName: 'Modern Gold Jewelry Manufacturing FE LLC',
-  tagline: 'From Gold Supply to Global Markets',
-  heroHeadline: 'Connecting Central Asian Gold to Global Markets',
+  tagline: 'Crafted in Uzbekistan. Connected to the World.',
   heroSubtitle:
-    'Modern Gold operates across gold sourcing, jewellery manufacturing and international business — connecting regional gold supply with global markets.',
+    'Premium jewelry manufacturing and collections created for customers, retailers, wholesalers and international partners across Central Asia, Russia, the UK, Singapore, Malaysia, Hong Kong, the United States and Dubai.',
   address: '242 Girvonbulok Street, Namangan Davlatabad, Namangan – Uzbekistan',
   addressLines: [
     '242 Girvonbulok Street',
@@ -13,8 +12,6 @@ export const brand = {
   ],
   siteUrl: 'https://mg-jewelry.vercel.app',
   location: 'Namangan, Uzbekistan',
-  region: 'Central Asia',
-  logo: '/images/logo-modern-gold.png',
 };
 
 export const socialLinks = [
@@ -23,204 +20,222 @@ export const socialLinks = [
   { label: 'LinkedIn', icon: 'linkedin', href: '/contact' },
 ];
 
-export const productCategories = [
-  { slug: 'chains', label: 'Chains' },
-  { slug: 'bangles', label: 'Bangles' },
+export const collectionCategories = [
+  'rings',
+  'earrings',
+  'necklaces',
+  'bracelets',
+  'pendants',
+  'gold-jewelry',
+  'diamond-jewelry',
+  'bridal-jewelry',
+  'fashion-jewelry',
+  'wholesale-collections',
 ];
 
-export const purityOptions = ['14K', '18K', '22K'];
+const slugToLabel = (slug) =>
+  slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-export const businessTypes = [
-  'Jeweller',
-  'Wholesaler',
-  'Gold Trader',
-  'Distributor',
-  'Manufacturer',
-  'Retailer',
-  'Other',
-];
+const retailCategorySlugs = collectionCategories.filter((slug) => slug !== 'wholesale-collections');
 
 export const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
-  { label: 'Gold Buying', path: '/gold-buying' },
-  { label: 'Manufacturing', path: '/manufacturing' },
-  { label: 'Products', path: '/products' },
-  { label: 'International Buyers', path: '/buyers' },
-  { label: 'Markets', path: '/markets' },
-  { label: 'News', path: '/blog' },
+  { label: 'Collections', path: '/shop', menu: 'collections' },
+  { label: 'Ecommerce', path: '/shop', menu: 'ecommerce' },
   { label: 'Contact', path: '/contact' },
 ];
 
-export const headerCTAs = [
-  { label: 'Sell Gold', path: '/gold-buying', variant: 'primary' },
-  { label: 'Become a Buyer', path: '/buyers/register', variant: 'outline' },
+export const retailNavLinks = [
+  { label: 'Shop', path: '/shop' },
+  { label: 'New Arrivals', path: '/shop?sort=newest' },
+  { label: 'Best Sellers', path: '/shop?sort=best_selling' },
+  ...retailCategorySlugs.map((slug) => ({
+    label: slugToLabel(slug),
+    path: `/shop/${slug}`,
+  })),
+  { label: 'Wishlist', path: '/wishlist' },
+  { label: 'Cart', path: '/cart' },
 ];
 
+export const wholesaleNavLinks = [
+  { label: 'Wholesale Shop', path: '/wholesale/shop' },
+  { label: 'Wholesale Collections', path: '/shop/wholesale-collections' },
+  { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing' },
+  { label: 'Request a Quote', path: '/contact?type=quote' },
+  { label: 'Become a Wholesale Partner', path: '/wholesale/register' },
+  { label: 'Partner Login', path: '/login' },
+  { label: 'Wholesale Dashboard', path: '/wholesale/dashboard' },
+];
+
+export const ecommerceMenu = {
+  retail: {
+    title: 'Retail',
+    subtitle: 'Shop jewelry for individual customers',
+    cta: { label: 'Shop Retail', path: '/shop' },
+    links: [
+      { label: 'Shop', path: '/shop' },
+      { label: 'New Arrivals', path: '/shop?sort=newest' },
+      { label: 'Best Sellers', path: '/shop?sort=best_selling' },
+      { label: 'Collections', path: '/shop' },
+      { label: 'Cart', path: '/cart' },
+      { label: 'Wishlist', path: '/wishlist' },
+    ],
+  },
+  wholesale: {
+    title: 'Wholesale',
+    subtitle: 'Bulk jewelry solutions for retailers, brands and distributors',
+    cta: { label: 'Wholesale Partnership', path: '/wholesale/register' },
+    secondaryCta: { label: 'Wholesale Shop', path: '/wholesale/shop' },
+    links: [
+      { label: 'Wholesale Shop', path: '/wholesale/shop' },
+      { label: 'Wholesale Collections', path: '/shop/wholesale-collections' },
+      { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing' },
+      { label: 'Request a Quote', path: '/contact?type=quote' },
+      { label: 'Become a Partner', path: '/wholesale/register' },
+      { label: 'Partner Login', path: '/login' },
+    ],
+  },
+};
+
+export function isEcommerceRoute(pathname) {
+  return (
+    pathname === '/shop' ||
+    pathname.startsWith('/shop/') ||
+    pathname.startsWith('/product/') ||
+    pathname === '/cart' ||
+    pathname === '/checkout' ||
+    pathname === '/search' ||
+    pathname === '/wishlist' ||
+    pathname === '/wholesale' ||
+    pathname.startsWith('/wholesale/')
+  );
+}
+
+export function isCollectionsRoute(pathname) {
+  return pathname === '/shop' || pathname.startsWith('/shop/');
+}
+
 export function isNavLinkActive(pathname, link) {
+  if (link.menu === 'ecommerce') return isEcommerceRoute(pathname);
+  if (link.menu === 'collections') return isCollectionsRoute(pathname) && !isEcommerceRoute(pathname);
   if (link.path === '/') return pathname === '/';
   return pathname === link.path || pathname.startsWith(`${link.path}/`);
 }
 
-export function isProductsRoute(pathname) {
-  return (
-    pathname === '/products' ||
-    pathname.startsWith('/products/') ||
-    pathname === '/shop' ||
-    pathname.startsWith('/shop/') ||
-    pathname.startsWith('/product/')
-  );
-}
-
-// Legacy aliases — kept for backward compatibility
-export const collectionCategories = ['chains', 'bangles'];
-export const retailNavLinks = [];
-export const wholesaleNavLinks = [
-  { label: 'Buyer Dashboard', path: '/buyers/dashboard' },
-  { label: 'Product Catalogue', path: '/products' },
-  { label: 'Request Quote', path: '/rfq' },
-  { label: 'Become a Buyer', path: '/buyers/register' },
-];
-
 export const manufacturingSteps = [
-  { step: '01', title: 'Design & Specification', desc: 'Product development aligned with international standards.' },
-  { step: '02', title: 'Gold Preparation', desc: 'Precision gold handling and alloy preparation.' },
-  { step: '03', title: 'Production', desc: 'Chain and bangle manufacturing at scale.' },
+  { step: '01', title: 'Design', desc: 'Concept development and jewelry design.' },
+  { step: '02', title: 'Development', desc: 'CAD refinement and production preparation.' },
+  { step: '03', title: 'Casting', desc: 'Precision jewelry manufacturing.' },
   { step: '04', title: 'Finishing', desc: 'Polishing, detailing and surface finishing.' },
-  { step: '05', title: 'Quality Control', desc: 'Weight, purity and craftsmanship verification.' },
-  { step: '06', title: 'Packaging & Export', desc: 'Prepared for international business partners.' },
-];
-
-export const goldBuyingSteps = [
-  'Submit your request',
-  'Visit or contact Modern Gold',
-  'Gold inspection',
-  'Weight and purity assessment',
-  'Valuation',
-  'Receive quotation',
-  'Accept or decline',
-  'Complete transaction',
-];
-
-export const buyerJourneySteps = [
-  'Explore products',
-  'Register business',
-  'Verification',
-  'Request quotation',
-  'Order',
+  { step: '05', title: 'Quality Control', desc: 'Detailed inspection and quality verification.' },
+  { step: '06', title: 'International Delivery', desc: 'Prepared for international customers and business partners.' },
 ];
 
 export const trustIndicators = [
-  { title: 'Regional Gold Expertise', desc: 'Deep knowledge of Central Asian gold markets and production.' },
-  { title: 'Manufacturing Capability', desc: 'Professional chain and bangle production facilities.' },
-  { title: 'International Business Focus', desc: 'Built to serve global jewellery traders and wholesalers.' },
-  { title: 'Quality Standards', desc: 'Rigorous quality control at every production stage.' },
-  { title: 'Gold Industry Growth', desc: 'Expanding from jewellery into broader gold industry operations.' },
-  { title: 'Trusted Partnerships', desc: 'Dedicated support for international business relationships.' },
+  { title: 'Precision Manufacturing', desc: 'Advanced production processes for consistent quality.' },
+  { title: 'Quality-Focused Production', desc: 'Rigorous standards at every stage of manufacturing.' },
+  { title: 'Custom Jewelry Capability', desc: 'Tailored designs and private-label collections.' },
+  { title: 'International Market Focus', desc: 'Built to serve partners across global jewelry markets.' },
+  { title: 'Professional Craftsmanship', desc: 'Skilled artisans and modern production techniques.' },
+  { title: 'Reliable Business Partnerships', desc: 'Dedicated support for wholesalers and brands.' },
 ];
 
 export const b2bAudience = [
-  'International jewellers',
-  'Gold traders',
-  'Wholesalers',
-  'Jewellery manufacturers',
-  'Retail businesses',
+  'Jewelry wholesalers',
+  'Retailers',
+  'Jewelry brands',
   'Distributors',
+  'International buyers',
+  'Private-label businesses',
+  'Fashion brands',
+  'Custom jewelry businesses',
 ];
 
 export const categoryIcons = [
-  { name: 'Chains', slug: 'chains', icon: '⛓' },
-  { name: 'Bangles', slug: 'bangles', icon: '⭕' },
+  { name: 'Rings', slug: 'rings', icon: '💍' },
+  { name: 'Earrings', slug: 'earrings', icon: '✨' },
+  { name: 'Necklaces', slug: 'necklaces', icon: '📿' },
+  { name: 'Bracelets', slug: 'bracelets', icon: '⭕' },
+  { name: 'Pendants', slug: 'pendants', icon: '🔶' },
+  { name: 'Gold Jewelry', slug: 'gold-jewelry', icon: '🥇' },
+  { name: 'Diamond Jewelry', slug: 'diamond-jewelry', icon: '💎' },
+  { name: 'Bridal Jewelry', slug: 'bridal-jewelry', icon: '👰' },
+  { name: 'Fashion Jewelry', slug: 'fashion-jewelry', icon: '✨' },
+  { name: 'Wholesale', slug: 'wholesale-collections', icon: '📦' },
 ];
+
+export const whyChooseUs = trustIndicators;
 
 export const sortOptions = [
   { value: 'featured', label: 'Featured' },
   { value: 'newest', label: 'Newest' },
-  { value: 'best_selling', label: 'Most Requested' },
+  { value: 'price_asc', label: 'Price: Low to High' },
+  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'best_selling', label: 'Best Selling' },
 ];
 
 export const seoKeywords = [
-  'Modern Gold',
-  'gold company Central Asia',
-  'gold jewellery manufacturer',
-  'gold chains manufacturer',
-  'gold bangles manufacturer',
-  '14K gold',
-  '18K gold',
-  '22K gold',
-  'gold supplier',
-  'gold wholesaler',
-  'sell gold',
-  'international gold jewellery supplier',
-  'gold manufacturer Uzbekistan',
+  'jewelry manufacturer Uzbekistan',
+  'gold jewelry manufacturer',
+  'jewelry manufacturing',
+  'jewelry wholesale',
+  'custom jewelry manufacturing',
+  'jewelry supplier',
+  'Central Asia jewelry',
+  'international jewelry manufacturer',
+  'gold jewelry wholesale',
+  'private label jewelry',
 ];
 
 export const heroTrustBadges = [
-  { title: 'Gold Industry Focus', desc: 'Sourcing, manufacturing and international trade.' },
-  { title: 'Central Asia HQ', desc: 'Based in Namangan, Uzbekistan.' },
-  { title: 'Global Markets', desc: 'Serving international business partners.' },
+  { title: 'Certified Quality', desc: 'Hallmarked gold and verified diamonds.' },
+  { title: 'Secure Shipping', desc: 'Insured delivery worldwide.' },
+  { title: 'Lifetime Craftsmanship', desc: 'Precision made to endure.' },
+];
+
+export const servicePromises = [
+  { title: 'Easy Returns', desc: '15-day hassle-free returns on retail orders.' },
+  { title: 'Secure Payment', desc: 'Encrypted checkout and trusted payment methods.' },
+  { title: 'Exceptional Quality', desc: 'Rigorous quality control at every stage.' },
+  { title: 'Dedicated Support', desc: 'Personal assistance for every customer.' },
+];
+
+export const categoryShowcase = [
+  { name: 'Rings', slug: 'rings' },
+  { name: 'Earrings', slug: 'earrings' },
+  { name: 'Bracelets', slug: 'bracelets' },
+  { name: 'Bangles', slug: 'bangles' },
+  { name: 'Necklaces', slug: 'necklaces' },
+  { name: 'Pendants', slug: 'pendants' },
+  { name: 'Diamond Jewelry', slug: 'diamond-jewelry' },
+  { name: 'Gold Jewelry', slug: 'gold-jewelry' },
+  { name: 'Bridal Jewelry', slug: 'bridal-jewelry' },
+  { name: 'Custom Jewelry', slug: 'custom-jewelry' },
+  { name: 'Wholesale Collections', slug: 'wholesale-collections' },
 ];
 
 export const footerColumns = {
-  company: [
+  shop: [
+    { label: 'Home', path: '/' },
+    { label: 'All Collections', path: '/shop' },
+    { label: 'Rings', path: '/shop/rings' },
+    { label: 'Necklaces', path: '/shop/necklaces' },
+    { label: 'New Arrivals', path: '/shop?sort=newest' },
+    { label: 'Best Sellers', path: '/shop?sort=best_selling' },
+  ],
+  about: [
     { label: 'About', path: '/about' },
-    { label: 'Manufacturing', path: '/manufacturing' },
-    { label: 'Markets', path: '/markets' },
-    { label: 'News', path: '/blog' },
+    { label: 'Collections', path: '/shop' },
+    { label: 'Custom Jewelry', path: '/custom-jewelry' },
     { label: 'Contact', path: '/contact' },
   ],
-  business: [
-    { label: 'Sell Gold', path: '/gold-buying' },
-    { label: 'International Buyers', path: '/buyers' },
-    { label: 'Products', path: '/products' },
-    { label: 'Chains', path: '/products/chains' },
-    { label: 'Bangles', path: '/products/bangles' },
-    { label: 'Request Quote', path: '/rfq' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', path: '/privacy' },
-    { label: 'Terms & Conditions', path: '/terms' },
+  help: [
     { label: 'Shipping', path: '/shipping' },
+    { label: 'Returns', path: '/returns' },
     { label: 'FAQ', path: '/faq' },
+    { label: 'Track Order', path: '/track-order' },
+    { label: 'Privacy Policy', path: '/privacy' },
+    { label: 'Terms', path: '/terms' },
   ],
 };
-
-export const credibilityPoints = [
-  { title: 'Regional Presence', desc: 'Headquartered in Namangan, Central Asia.' },
-  { title: 'Manufacturing', desc: 'Professional gold chain and bangle production.' },
-  { title: 'Gold Expertise', desc: '14K, 18K and 22K gold product capabilities.' },
-  { title: 'International Business', desc: 'Built for global trade partnerships.' },
-  { title: 'Industry Growth', desc: 'Expanding across the gold industry value chain.' },
-];
-
-export const companyStory = {
-  phases: [
-    { title: 'Jewellery Production', desc: 'Established manufacturing of gold chains and bangles for business buyers.' },
-    { title: 'Gold Industry Expansion', desc: 'Growing beyond jewellery into broader gold industry operations.' },
-    { title: 'Regional Growth', desc: 'Strengthening presence across Central Asia.' },
-    { title: 'Exploration Direction', desc: 'Future focus on exploration and mining in the region. [Client to provide details]' },
-    { title: 'International Markets', desc: 'Export markets — coming soon. [Client to provide]' },
-  ],
-};
-
-export const manufacturingCapabilities = [
-  'Factory',
-  'Production',
-  'Gold Handling',
-  'Chain Production',
-  'Bangle Production',
-  'Quality Control',
-  'Packaging',
-  'Team',
-];
-
-export const IMAGE_PLACEHOLDER_LABEL = 'Real Image Coming Soon';
-
-// Legacy exports for unused retail components
-export const categoryShowcase = productCategories.map((c) => ({ name: c.label, slug: c.slug }));
-export const servicePromises = [];
-export const ecommerceMenu = { retail: { title: 'Retail', links: [] }, wholesale: { title: 'Wholesale', links: wholesaleNavLinks } };
-export const isEcommerceRoute = isProductsRoute;
-export const isCollectionsRoute = isProductsRoute;
-export const whyChooseUs = trustIndicators;
-export const categoryIcons_legacy = categoryIcons;
