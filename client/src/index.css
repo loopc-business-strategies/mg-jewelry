@@ -558,6 +558,18 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+.dual-path-section {
+  background: #FAF3E4;
+}
+
+.dual-path-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
 .presence-card-title {
   color: #FFFFFF;
 }
