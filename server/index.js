@@ -19,6 +19,8 @@ const wholesaleRoutes = require('./routes/wholesaleRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const goldBuyingRoutes = require('./routes/goldBuyingRoutes');
+const rfqRoutes = require('./routes/rfqRoutes');
 
 connectDB().then(async () => {
   const Product = require('./models/Product');
@@ -82,6 +84,8 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/wholesale', wholesaleRoutes);
+app.use('/api/gold-buying', goldBuyingRoutes);
+app.use('/api/rfqs', rfqRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api', contentRoutes);

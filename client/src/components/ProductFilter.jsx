@@ -1,19 +1,27 @@
 import { SlidersHorizontal } from 'lucide-react';
 
-const filterGroups = [
+const b2bFilterGroups = [
+  { key: 'purity', label: 'Purity', options: ['14K', '18K', '22K'] },
+  { key: 'goldColour', label: 'Gold Colour', options: ['Yellow', 'White', 'Rose'] },
+];
+
+const retailFilterGroups = [
   { key: 'gender', label: 'Gender', options: ['women', 'men', 'unisex', 'kids'] },
   { key: 'metal', label: 'Metal', options: ['Gold', 'Silver', 'Platinum'] },
-  { key: 'purity', label: 'Gold Karat', options: ['18K', '22K', '925', '950'] },
+  { key: 'purity', label: 'Gold Karat', options: ['14K', '18K', '22K'] },
   { key: 'occasion', label: 'Occasion', options: ['wedding', 'daily wear', 'festive', 'engagement'] },
 ];
 
-export default function ProductFilter({ filters, onChange, mobile = false, onClose }) {
+export default function ProductFilter({ filters, onChange, mobile = false, onClose, b2b = false }) {
   const updateFilter = (key, value) => {
     onChange({ ...filters, [key]: filters[key] === value ? '' : value });
   };
 
+  const filterGroups = b2b ? b2bFilterGroups : retailFilterGroups;
+
   const content = (
     <div className="space-y-6">
+      {!b2b && (
       <div>
         <h4 className="font-medium text-sm mb-3 uppercase tracking-wider">Price</h4>
         <div className="flex gap-2">
@@ -33,6 +41,7 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
           />
         </div>
       </div>
+      )}
 
       {filterGroups.map((group) => (
         <div key={group.key}>
@@ -53,6 +62,7 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
         </div>
       ))}
 
+      {!b2b && (
       <label className="flex items-center gap-2 text-sm cursor-pointer">
         <input
           type="checkbox"
@@ -62,6 +72,7 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
         />
         On Discount
       </label>
+      )}
 
       <label className="flex items-center gap-2 text-sm cursor-pointer">
         <input
