@@ -10,8 +10,13 @@ const {
   getCategoryImage,
   isSharedPrimaryPath,
   isLegacyImagePath,
-  isJewelryStockUrl,
+  isCatalogProductImagePath,
+  isValidProductImagePath,
 } = require('../config/productImages');
+
+function isValidStoredProductImage(url) {
+  return isValidProductImagePath(url);
+}
 
 async function wipeDatabase() {
   await Promise.all([
@@ -38,19 +43,19 @@ async function needsLegacyReseed() {
 async function needsBrokenImageFix() {
   const products = await Product.find({}).select('images').lean();
   for (const product of products) {
-    if (!product.images?.length || product.images.some((url) => !isJewelryStockUrl(url))) {
+    if (!product.images?.length || product.images.some((url) => !isValidStoredProductImage(url))) {
       return true;
     }
   }
 
   const categories = await Category.find({}).select('image').lean();
   for (const category of categories) {
-    if (!isJewelryStockUrl(category.image)) return true;
+    if (!isValidStoredProductImage(category.image)) return true;
   }
 
   const blogs = await Blog.find({}).select('image').lean();
   for (const blog of blogs) {
-    if (!isJewelryStockUrl(blog.image)) return true;
+    if (!isValidStoredProductImage(blog.image) && isLegacyImagePath(blog.image)) return true;
   }
 
   return false;
@@ -61,7 +66,7 @@ async function fixBrokenImages() {
   let productUpdates = 0;
 
   for (const product of products) {
-    const needsFix = !product.images?.length || product.images.some((url) => !isJewelryStockUrl(url));
+    const needsFix = !product.images?.length || product.images.some((url) => !isValidStoredProductImage(url));
     if (needsFix) {
       product.images = getProductImages(product.category, product.subcategory, product.sku);
       await product.save();
@@ -73,7 +78,7 @@ async function fixBrokenImages() {
   let categoryUpdates = 0;
 
   for (const category of categories) {
-    if (!isJewelryStockUrl(category.image)) {
+    if (!isValidStoredProductImage(category.image)) {
       category.image = getCategoryImage(category.slug);
       await category.save();
       categoryUpdates += 1;
@@ -84,7 +89,7 @@ async function fixBrokenImages() {
   let blogUpdates = 0;
 
   for (const blog of blogs) {
-    if (!isJewelryStockUrl(blog.image)) {
+    if (isLegacyImagePath(blog.image)) {
       blog.image = getCategoryImage('chains');
       await blog.save();
       blogUpdates += 1;
@@ -92,6 +97,58 @@ async function fixBrokenImages() {
   }
 
   console.log(`Fixed product images: ${productUpdates}, categories: ${categoryUpdates}, blogs: ${blogUpdates}`);
+}
+
+async function needsCatalogImageMigration() {
+  const products = await Product.find({}).select('images category subcategory sku').lean();
+  if (!products.length) return false;
+
+  for (const product of products) {
+    const expected = getProductImages(product.category, product.subcategory, product.sku);
+    const primary = product.images?.[0];
+    if (!isCatalogProductImagePath(primary)) return true;
+    if (primary !== expected[0]) return true;
+  }
+
+  const categories = await Category.find({}).select('image slug').lean();
+  for (const category of categories) {
+    const expected = getCategoryImage(category.slug);
+    if (!isCatalogProductImagePath(category.image) || category.image !== expected) return true;
+  }
+
+  return false;
+}
+
+async function migrateToCatalogImages() {
+  const products = await Product.find({});
+  let productUpdates = 0;
+
+  for (const product of products) {
+    const nextImages = getProductImages(product.category, product.subcategory, product.sku);
+    const same =
+      product.images?.length === nextImages.length &&
+      product.images.every((url, i) => url === nextImages[i]);
+
+    if (!same) {
+      product.images = nextImages;
+      await product.save();
+      productUpdates += 1;
+    }
+  }
+
+  const categories = await Category.find({});
+  let categoryUpdates = 0;
+
+  for (const category of categories) {
+    const nextImage = getCategoryImage(category.slug);
+    if (category.image !== nextImage) {
+      category.image = nextImage;
+      await category.save();
+      categoryUpdates += 1;
+    }
+  }
+
+  console.log(`Migrated to catalogue images: ${productUpdates} products, ${categoryUpdates} categories`);
 }
 
 async function needsDuplicateImageFix() {
@@ -279,6 +336,8 @@ module.exports = {
   fixCategoryEditorialImages,
   needsJewelryImageFix,
   fixJewelryImages,
+  needsCatalogImageMigration,
+  migrateToCatalogImages,
   needsChainsBanglesCatalogFix,
   migrateToChainsBanglesCatalog,
 };

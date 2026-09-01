@@ -5,6 +5,7 @@ import {
   getProductAlt,
   getProductImages,
   isLegacyImagePath,
+  isCatalogProductImagePath,
   CATEGORY_FALLBACKS,
 } from '../utils/imageConfig';
 
@@ -50,6 +51,8 @@ export default function ProductImage({
   const [candidateIndex, setCandidateIndex] = useState(startIndex);
   const [loaded, setLoaded] = useState(false);
   const src = candidates[candidateIndex] || DEFAULT_SVG;
+  const isCatalogue = isCatalogProductImagePath(src);
+  const fitClass = isCatalogue ? 'object-contain' : 'object-cover';
 
   const handleError = useCallback(() => {
     setLoaded(false);
@@ -63,7 +66,7 @@ export default function ProductImage({
         key={src}
         src={src}
         alt={getProductAlt(product, index)}
-        className={`w-full h-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+        className={`w-full h-full ${fitClass} transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}
         loading={loading}
         decoding="async"
         sizes={sizes}

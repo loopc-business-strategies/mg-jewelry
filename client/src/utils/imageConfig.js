@@ -26,47 +26,23 @@ export function isJewelryStockUrl(url) {
   return typeof url === 'string' && url.includes('images.unsplash.com') && !isLegacyImagePath(url);
 }
 
-const CHAIN_IMAGE_IDS = [
-  '1599643478518-a784e5dc4c8f',
-  '1617038220319-276d3aab2915',
-  '1516638918792-21578567a634',
-  '1469334031218-e382a71b716b',
-  '1603561591562-778103b7d5bc',
-  '1506630448388-459e089110ec',
-  '1611599085274-84caa4e2e4a7',
-  '1515562141207-7a88fb7ce338',
-  '1605100804763-247f67b3557e',
-  '1535632066927-ab7c754af398',
-  '1602751584552-8cf4eae49f4e',
-  '1573408301185-9146fe634ad0',
-];
+const catalogImage = (folder, n) => `/images/${folder}/${folder.slice(0, -1)}-${String(n).padStart(2, '0')}.jpg`;
 
-const BANGLE_IMAGE_IDS = [
-  '1611085583191-a6cfe1657e70',
-  '1602751584552-8cf4eae49f4e',
-  '1605100804763-247f67b3557e',
-  '1573408301185-9146fe634ad0',
-  '1535632066927-ab7c754af398',
-  '1617038220319-276d3aab2915',
-  '1516638918792-21578567a634',
-  '1603561591562-778103b7d5bc',
-  '1506630448388-459e089110ec',
-  '1611599085274-84caa4e2e4a7',
-  '1515562141207-7a88fb7ce338',
-  '1469334031218-e382a71b716b',
-];
+export const CHAIN_CATALOG = Array.from({ length: 12 }, (_, i) => catalogImage('chains', i + 1));
+export const BANGLE_CATALOG = Array.from({ length: 12 }, (_, i) => catalogImage('bangles', i + 1));
 
-export const PRODUCT_IMAGES = [...CHAIN_IMAGE_IDS, ...BANGLE_IMAGE_IDS].map((id) => jewelryStock(id));
+export const PRODUCT_IMAGES = [...CHAIN_CATALOG, ...BANGLE_CATALOG];
 
-const CATEGORY_JEWELRY_IDS = {
-  chains: '1599643478518-a784e5dc4c8f',
-  bangles: '1611085583191-a6cfe1657e70',
-  default: '1599643478518-a784e5dc4c8f',
+export function isCatalogProductImagePath(url) {
+  if (!url || typeof url !== 'string') return false;
+  return url.startsWith('/images/chains/') || url.startsWith('/images/bangles/');
+}
+
+export const PRODUCT_CATEGORY_FALLBACKS = {
+  chains: CHAIN_CATALOG[0],
+  bangles: BANGLE_CATALOG[0],
+  default: CHAIN_CATALOG[0],
 };
-
-export const PRODUCT_CATEGORY_FALLBACKS = Object.fromEntries(
-  Object.entries(CATEGORY_JEWELRY_IDS).map(([slug, id]) => [slug, jewelryStock(id)])
-);
 
 export const CATEGORY_FALLBACKS = { ...PRODUCT_CATEGORY_FALLBACKS };
 
@@ -88,11 +64,6 @@ function resolveCategory(category, subcategory) {
   return 'default';
 }
 
-function getImagePool(category, subcategory) {
-  const slug = resolveCategory(category, subcategory);
-  return slug === 'bangles' ? BANGLE_IMAGE_IDS : CHAIN_IMAGE_IDS;
-}
-
 export function parseSkuIndex(skuOrIndex) {
   if (typeof skuOrIndex === 'number' && Number.isFinite(skuOrIndex)) {
     return Math.max(0, Math.floor(skuOrIndex));
@@ -105,12 +76,14 @@ export function parseSkuIndex(skuOrIndex) {
 }
 
 export const getProductImages = (category, subcategory, skuOrIndex = 0) => {
-  const pool = getImagePool(category, subcategory);
   const index = parseSkuIndex(skuOrIndex);
-  const primaryIdx = index % pool.length;
-  let secondaryIdx = (index + 5) % pool.length;
-  if (secondaryIdx === primaryIdx) secondaryIdx = (secondaryIdx + 1) % pool.length;
-  return [jewelryStock(pool[primaryIdx]), jewelryStock(pool[secondaryIdx])];
+  const slug = resolveCategory(category, subcategory);
+  if (slug === 'bangles') {
+    const bangleIdx = Math.min(Math.max(index - CHAIN_CATALOG.length, 0), BANGLE_CATALOG.length - 1);
+    return [BANGLE_CATALOG[bangleIdx]];
+  }
+  const chainIdx = Math.min(index, CHAIN_CATALOG.length - 1);
+  return [CHAIN_CATALOG[chainIdx]];
 };
 
 export const getCategoryFallback = (category, subcategory) => {
@@ -156,8 +129,8 @@ export const wholesaleHero = jewelryStock('1611085583191-a6cfe1657e70', 1200);
 export const customHero = jewelryStock('1506630448388-459e089110ec', 1200);
 
 export const categoryImages = {
-  chains: jewelryStock(CATEGORY_JEWELRY_IDS.chains),
-  bangles: jewelryStock(CATEGORY_JEWELRY_IDS.bangles),
+  chains: CHAIN_CATALOG[0],
+  bangles: BANGLE_CATALOG[0],
 };
 
 export const getCategoryImage = (slug) =>

@@ -34,6 +34,8 @@ connectDB().then(async () => {
     fixCategoryEditorialImages,
     needsJewelryImageFix,
     fixJewelryImages,
+    needsCatalogImageMigration,
+    migrateToCatalogImages,
     needsChainsBanglesCatalogFix,
     migrateToChainsBanglesCatalog,
   } = require('./services/seedDatabase');
@@ -52,6 +54,9 @@ connectDB().then(async () => {
   } else if (await needsJewelryImageFix()) {
     console.log('Legacy or non-jewelry images detected — migrating to jewelry stock photos...');
     await fixJewelryImages();
+  } else if (await needsCatalogImageMigration()) {
+    console.log('Migrating product images to local catalogue assets...');
+    await migrateToCatalogImages();
   } else if (await needsBrokenImageFix()) {
     console.log('Broken product images detected — patching catalog...');
     await fixBrokenImages();

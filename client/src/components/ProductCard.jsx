@@ -39,7 +39,7 @@ export default function ProductCard({ product }) {
     <div className="product-card-grid group card-elegant h-full bg-white">
       <div className="product-card-image relative aspect-square bg-white overflow-hidden image-zoom-hover rounded-t-[0.625rem]">
         <Link to={`/product/${product._id}`} className="block w-full h-full">
-          <ProductImage product={product} containerClassName="w-full h-full object-cover" />
+          <ProductImage product={product} containerClassName="w-full h-full bg-white" />
         </Link>
         <div className="absolute top-3 right-3 z-10">
           <WishlistButton productId={product._id} />
