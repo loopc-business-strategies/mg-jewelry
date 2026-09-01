@@ -54,6 +54,7 @@ const registerWholesale = async (req, res) => {
     yearsInBusiness,
     interestedProducts: interestedProducts || categoriesInterested || [],
     preferredPurity,
+    message,
     status: 'pending',
   });
 

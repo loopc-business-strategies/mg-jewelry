@@ -30,6 +30,13 @@ export const productCategories = [
 
 export const purityOptions = ['14K', '18K', '22K'];
 
+export const countries = [
+  'Uzbekistan', 'Kazakhstan', 'Kyrgyzstan', 'Tajikistan', 'Turkmenistan',
+  'Russia', 'United Kingdom', 'United States', 'United Arab Emirates',
+  'Singapore', 'Malaysia', 'Hong Kong', 'India', 'Turkey', 'Germany',
+  'France', 'Italy', 'China', 'Other',
+];
+
 export const businessTypes = [
   'Jeweller',
   'Wholesaler',
@@ -41,21 +48,45 @@ export const businessTypes = [
 ];
 
 export const navLinks = [
-  { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Gold Buying', path: '/gold-buying' },
-  { label: 'Manufacturing', path: '/manufacturing' },
-  { label: 'Products', path: '/products' },
-  { label: 'International Buyers', path: '/buyers' },
-  { label: 'Markets', path: '/markets' },
-  { label: 'News', path: '/blog' },
-  { label: 'Contact', path: '/contact' },
+  { key: 'nav.home', path: '/' },
+  { key: 'nav.about', path: '/about' },
+  { key: 'nav.goldBuying', path: '/gold-buying' },
+  { key: 'nav.manufacturing', path: '/manufacturing' },
+  { key: 'nav.products', path: '/products' },
+  { key: 'nav.internationalBuyers', path: '/buyers' },
+  { key: 'nav.markets', path: '/markets' },
+  { key: 'nav.news', path: '/blog' },
+  { key: 'nav.contact', path: '/contact' },
 ];
 
 export const headerCTAs = [
-  { label: 'Sell Gold', path: '/gold-buying', variant: 'primary' },
-  { label: 'Become a Buyer', path: '/buyers/register', variant: 'outline' },
+  { key: 'cta.sellGold', path: '/gold-buying', variant: 'primary' },
+  { key: 'cta.becomeBuyer', path: '/buyers/register', variant: 'outline' },
 ];
+
+export const footerColumnKeys = {
+  company: [
+    { key: 'nav.about', path: '/about' },
+    { key: 'nav.manufacturing', path: '/manufacturing' },
+    { key: 'nav.markets', path: '/markets' },
+    { key: 'nav.news', path: '/blog' },
+    { key: 'nav.contact', path: '/contact' },
+  ],
+  business: [
+    { key: 'cta.sellGold', path: '/gold-buying' },
+    { key: 'nav.internationalBuyers', path: '/buyers' },
+    { key: 'nav.products', path: '/products' },
+    { key: 'common.chains', path: '/products/chains' },
+    { key: 'common.bangles', path: '/products/bangles' },
+    { key: 'cta.requestQuote', path: '/rfq', label: 'Request Quote' },
+  ],
+  legal: [
+    { key: 'footer.privacy', path: '/privacy' },
+    { key: 'footer.terms', path: '/terms' },
+    { key: 'nav.shipping', path: '/shipping', label: 'Shipping' },
+    { key: 'nav.faq', path: '/faq', label: 'FAQ' },
+  ],
+};
 
 export function isNavLinkActive(pathname, link) {
   if (link.path === '/') return pathname === '/';

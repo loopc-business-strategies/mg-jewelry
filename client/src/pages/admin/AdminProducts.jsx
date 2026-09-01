@@ -4,6 +4,8 @@ import { formatPrice } from '../../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { getProductImages } from '../../utils/imageConfig';
 
+import { productCategories, purityOptions } from '../../utils/brandConfig';
+
 const emptyForm = {
   name: '', sku: '', category: 'chains', subcategory: '', description: '',
   price: '', mrp: '', wholesalePrice: '', moq: 10, stock: 100,
@@ -11,6 +13,11 @@ const emptyForm = {
   weight: '', weightRange: '', length: '', width: '', diameter: '',
   design: '', finish: 'Polished', goldColour: 'Yellow',
   productionLeadTime: '2–4 weeks', availability: 'made_to_order',
+};
+
+const selectFields = {
+  category: productCategories.map((c) => c.slug),
+  purity: purityOptions,
 };
 
 export default function AdminProducts() {
@@ -71,12 +78,25 @@ export default function AdminProducts() {
           {['name', 'sku', 'category', 'subcategory', 'price', 'mrp', 'wholesalePrice', 'stock', 'metal', 'purity', 'gender', 'weight', 'weightRange', 'length', 'width', 'diameter', 'design', 'finish', 'goldColour', 'productionLeadTime', 'moq'].map((field) => (
             <div key={field}>
               <label className="text-xs font-medium capitalize block mb-1">{field}</label>
-              <input
-                required={['name', 'sku', 'category', 'price', 'mrp'].includes(field)}
-                value={form[field]}
-                onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
-              />
+              {selectFields[field] ? (
+                <select
+                  required={['name', 'sku', 'category', 'price', 'mrp'].includes(field)}
+                  value={form[field]}
+                  onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2 text-sm"
+                >
+                  {selectFields[field].map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  required={['name', 'sku', 'category', 'price', 'mrp'].includes(field)}
+                  value={form[field]}
+                  onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2 text-sm"
+                />
+              )}
             </div>
           ))}
           <div className="md:col-span-3">

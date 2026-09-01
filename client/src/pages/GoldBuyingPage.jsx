@@ -4,6 +4,7 @@ import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import ScrollReveal from '../components/ScrollReveal';
 import { goldBuyingSteps, seoKeywords } from '../utils/brandConfig';
+import { useTranslation } from '../hooks/useTranslation';
 import toast from 'react-hot-toast';
 
 const GOLD_TYPES = ['Jewellery', 'Coins', 'Bars', 'Scrap Gold', 'Other'];
@@ -16,6 +17,8 @@ const CONTACT_METHODS = [
 ];
 
 export default function GoldBuyingPage() {
+  const { t } = useTranslation();
+  const steps = t('steps.goldBuying');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -49,11 +52,11 @@ export default function GoldBuyingPage() {
       <>
         <SEOHead title="Sell Your Gold to Modern Gold" path="/gold-buying" keywords={seoKeywords} />
         <div className="max-w-2xl mx-auto px-4 py-24 text-center">
-          <h1 className="headline-corporate headline-corporate-dark text-3xl mb-4">Request Received</h1>
+          <h1 className="headline-corporate headline-corporate-dark text-3xl mb-4">{t('goldBuying.received')}</h1>
           <p className="text-muted mb-8">
-            Thank you for your gold valuation request. Our team will contact you shortly to arrange inspection and valuation.
+            {t('goldBuying.receivedDesc')}
           </p>
-          <Link to="/" className="btn-gold-solid">Return Home</Link>
+          <Link to="/" className="btn-gold-solid">{t('cta.returnHome')}</Link>
         </div>
       </>
     );
@@ -71,12 +74,12 @@ export default function GoldBuyingPage() {
       <section className="section-dark py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <ScrollReveal>
-            <p className="section-eyebrow text-gold mb-3">Gold Buying</p>
+            <p className="section-eyebrow text-gold mb-3">{t('goldBuying.eyebrow')}</p>
             <h1 className="headline-corporate headline-corporate-light mb-4">
-              Sell Your Gold to Modern Gold
+              {t('goldBuying.title')}
             </h1>
             <p className="text-off-white/70 max-w-2xl text-lg">
-              Do you have gold to sell? Modern Gold welcomes local individuals and businesses. Submit your request and we will arrange inspection and valuation.
+              {t('goldBuying.intro')}
             </p>
           </ScrollReveal>
         </div>
@@ -87,7 +90,7 @@ export default function GoldBuyingPage() {
           <ScrollReveal>
             <h2 className="headline-corporate headline-corporate-dark text-xl mb-8">How It Works</h2>
             <ol className="space-y-4">
-              {goldBuyingSteps.map((step, i) => (
+              {(Array.isArray(steps) ? steps : goldBuyingSteps).map((step, i) => (
                 <li key={step} className="process-step">
                   <span className="process-step-number">{String(i + 1).padStart(2, '0')}</span>
                   <span className="text-sm text-charcoal pt-0.5">{step}</span>
@@ -161,7 +164,7 @@ export default function GoldBuyingPage() {
                 </div>
               </div>
               <button type="submit" disabled={loading} className="btn-gold-solid w-full justify-center disabled:opacity-50">
-                {loading ? 'Submitting...' : 'Request Gold Valuation'}
+                {loading ? t('common.submitting') : t('goldBuying.submit')}
               </button>
             </form>
           </ScrollReveal>

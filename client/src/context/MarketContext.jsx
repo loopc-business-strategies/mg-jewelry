@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import {
   STORAGE_KEY,
   defaultPrefs,
@@ -6,6 +6,7 @@ import {
   getLanguageByCode,
   getCurrencyForMarket,
 } from '../utils/marketConfig';
+import { translate, languageLocales } from '../i18n/translations';
 
 const MarketContext = createContext();
 
@@ -22,6 +23,7 @@ export function MarketProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    document.documentElement.lang = prefs.language || 'en';
   }, [prefs]);
 
   const setLanguage = useCallback((language) => {
@@ -43,19 +45,30 @@ export function MarketProvider({ children }) {
 
   const market = getMarketById(prefs.market);
   const language = getLanguageByCode(prefs.language);
+  const locale = languageLocales[prefs.language] || languageLocales.en;
+
+  const t = useCallback(
+    (key, fallback = '') => translate(prefs.language, key, fallback),
+    [prefs.language]
+  );
+
+  const value = useMemo(
+    () => ({
+      prefs,
+      market,
+      language,
+      locale,
+      setLanguage,
+      setMarket,
+      setCurrency,
+      updatePrefs,
+      t,
+    }),
+    [prefs, market, language, locale, setLanguage, setMarket, setCurrency, updatePrefs, t]
+  );
 
   return (
-    <MarketContext.Provider
-      value={{
-        prefs,
-        market,
-        language,
-        setLanguage,
-        setMarket,
-        setCurrency,
-        updatePrefs,
-      }}
-    >
+    <MarketContext.Provider value={value}>
       {children}
     </MarketContext.Provider>
   );
