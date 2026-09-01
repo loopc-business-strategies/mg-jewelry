@@ -1,28 +1,17 @@
-import { useEffect, useState } from 'react';
-import api from '../services/api';
 import SEOHead from '../components/SEOHead';
-import HeroSection from '../components/sections/HeroSection';
-import CategoryShowcaseSection from '../components/sections/CategoryShowcaseSection';
-import ProductShowcaseSection from '../components/sections/ProductShowcaseSection';
-import CollectionPromoSection from '../components/sections/CollectionPromoSection';
-import ServiceBarSection from '../components/sections/ServiceBarSection';
-import AboutPreviewSection from '../components/sections/AboutPreviewSection';
-import B2BSection from '../components/sections/B2BSection';
-import CustomManufacturingSection from '../components/sections/CustomManufacturingSection';
-import ContactCTASection from '../components/sections/ContactCTASection';
-import { brand } from '../utils/brandConfig';
+import CorporateHeroSection from '../components/sections/CorporateHeroSection';
+import CredibilitySection from '../components/sections/CredibilitySection';
+import DualPathSection from '../components/sections/DualPathSection';
+import CompanyStorySection from '../components/sections/CompanyStorySection';
+import ManufacturingPreviewSection from '../components/sections/ManufacturingPreviewSection';
+import ProductFocusSection from '../components/sections/ProductFocusSection';
+import InternationalBuyersSection from '../components/sections/InternationalBuyersSection';
+import RegionalMarketsSection from '../components/sections/RegionalMarketsSection';
+import TrustProofSection from '../components/sections/TrustProofSection';
+import FinalCTASection from '../components/sections/FinalCTASection';
+import { brand, seoKeywords } from '../utils/brandConfig';
 
 export default function HomePage() {
-  const [bestSellers, setBestSellers] = useState([]);
-
-  useEffect(() => {
-    api.get('/products?sort=best_selling&limit=4')
-      .then(({ data }) => setBestSellers(data.products || []))
-      .catch(() => {
-        api.get('/products?featured=true&limit=4').then(({ data }) => setBestSellers(data.products || [])).catch(() => {});
-      });
-  }, []);
-
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -42,20 +31,22 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="International Jewelry Manufacturing from Uzbekistan"
-        description={`${brand.name} — ${brand.tagline} Premium gold and diamond jewelry for global markets.`}
+        title="Modern Gold — Gold Industry Company | Central Asia"
+        description={`${brand.name} — ${brand.tagline}. Gold buying, jewellery manufacturing and international trade from ${brand.location}.`}
         path="/"
+        keywords={seoKeywords}
         schema={schema}
       />
-      <HeroSection />
-      <CategoryShowcaseSection />
-      <ProductShowcaseSection products={bestSellers} />
-      <CollectionPromoSection />
-      <ServiceBarSection />
-      <AboutPreviewSection />
-      <B2BSection />
-      <CustomManufacturingSection />
-      <ContactCTASection />
+      <CorporateHeroSection />
+      <CredibilitySection />
+      <DualPathSection />
+      <CompanyStorySection />
+      <ManufacturingPreviewSection />
+      <ProductFocusSection />
+      <InternationalBuyersSection />
+      <RegionalMarketsSection />
+      <TrustProofSection />
+      <FinalCTASection />
     </>
   );
 }

@@ -13,6 +13,7 @@ const registerWholesale = async (req, res) => {
     businessName, ownerName, email, phone, password,
     gstNumber, businessType, businessAddress, city, state, pincode,
     website, expectedMonthlyPurchase, categoriesInterested,
+    country, yearsInBusiness, interestedProducts, preferredPurity, message,
   } = req.body;
 
   let user = await User.findOne({ email });
@@ -48,7 +49,11 @@ const registerWholesale = async (req, res) => {
     pincode,
     website,
     expectedMonthlyPurchase,
-    categoriesInterested,
+    categoriesInterested: categoriesInterested || interestedProducts || [],
+    country,
+    yearsInBusiness,
+    interestedProducts: interestedProducts || categoriesInterested || [],
+    preferredPurity,
     status: 'pending',
   });
 

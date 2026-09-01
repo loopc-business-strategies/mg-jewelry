@@ -5,9 +5,12 @@ import toast from 'react-hot-toast';
 import { getProductImages } from '../../utils/imageConfig';
 
 const emptyForm = {
-  name: '', sku: '', category: 'rings', subcategory: '', description: '',
+  name: '', sku: '', category: 'chains', subcategory: '', description: '',
   price: '', mrp: '', wholesalePrice: '', moq: 10, stock: 100,
-  metal: 'Gold', purity: '18K', gender: 'women',
+  metal: 'Gold', purity: '18K', gender: 'unisex',
+  weight: '', weightRange: '', length: '', width: '', diameter: '',
+  design: '', finish: 'Polished', goldColour: 'Yellow',
+  productionLeadTime: '2–4 weeks', availability: 'made_to_order',
 };
 
 export default function AdminProducts() {
@@ -65,7 +68,7 @@ export default function AdminProducts() {
 
       {showForm && (
         <form onSubmit={createProduct} className="bg-white rounded-xl border p-6 mb-8 grid md:grid-cols-3 gap-4">
-          {['name', 'sku', 'category', 'subcategory', 'price', 'mrp', 'wholesalePrice', 'stock', 'metal', 'purity', 'gender'].map((field) => (
+          {['name', 'sku', 'category', 'subcategory', 'price', 'mrp', 'wholesalePrice', 'stock', 'metal', 'purity', 'gender', 'weight', 'weightRange', 'length', 'width', 'diameter', 'design', 'finish', 'goldColour', 'productionLeadTime', 'moq'].map((field) => (
             <div key={field}>
               <label className="text-xs font-medium capitalize block mb-1">{field}</label>
               <input

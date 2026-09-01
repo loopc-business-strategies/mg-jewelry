@@ -1,49 +1,40 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ProductGallery from '../components/ProductGallery';
-import PriceDisplay from '../components/PriceDisplay';
 import ProductGrid from '../components/ProductGrid';
-import RecentlyViewed from '../components/RecentlyViewed';
-import WishlistButton from '../components/WishlistButton';
-import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { formatPrice, calcEmi } from '../utils/formatPrice';
-import StarRating from '../components/ui/StarRating';
-import { Truck, Shield, RotateCcw, Award } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
+
+function SpecRow({ label, value }) {
+  if (!value) return null;
+  return (
+    <div className="flex justify-between py-2 border-b border-gold/10 text-sm">
+      <span className="text-muted">{label}</span>
+      <span className="font-medium text-dark">{value}</span>
+    </div>
+  );
+}
 
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
-  const { user } = useAuth();
+  const { user, isWholesaleApproved } = useAuth();
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
-  const [reviews, setReviews] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState('');
-  const [pincode, setPincode] = useState('');
-  const [delivery, setDelivery] = useState(null);
-  const [tab, setTab] = useState('details');
+  const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     api.get(`/products/${id}`)
-      .then(({ data }) => {
-        setProduct(data);
-        setSize(data.sizes?.[0] || 'Standard');
-        const viewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
-        const updated = [data._id, ...viewed.filter((v) => v !== data._id)].slice(0, 8);
-        localStorage.setItem('recentlyViewed', JSON.stringify(updated));
-      })
+      .then(({ data }) => setProduct(data))
       .catch(() => toast.error('Product not found'))
       .finally(() => setLoading(false));
-
-    api.get(`/products/${id}/reviews`).then(({ data }) => setReviews(data)).catch(() => {});
   }, [id]);
 
   useEffect(() => {
@@ -54,172 +45,150 @@ export default function ProductPage() {
     }
   }, [product]);
 
-  const checkDelivery = () => {
-    if (pincode.length === 6) {
-      setDelivery({ date: '3-5 business days', available: true });
-    } else {
-      toast.error('Please enter a valid 6-digit pincode');
+  const handleRequestQuote = () => {
+    if (!user) {
+      toast.error('Please login to request a quote');
+      navigate('/login');
+      return;
     }
+    navigate('/rfq', { state: { product, quantity, notes } });
   };
 
-  const handleAddToCart = () => {
-    addToCart(product._id, quantity, size);
+  const handleAddToRFQ = () => {
+    const rfqItems = JSON.parse(localStorage.getItem('rfqDraft') || '[]');
+    const existing = rfqItems.find((i) => i.productId === product._id);
+    if (existing) {
+      existing.quantity = quantity;
+      existing.notes = notes;
+    } else {
+      rfqItems.push({
+        productId: product._id,
+        productName: product.name,
+        sku: product.sku,
+        purity: product.purity,
+        quantity,
+        notes,
+      });
+    }
+    localStorage.setItem('rfqDraft', JSON.stringify(rfqItems));
+    toast.success('Added to RFQ');
   };
 
-  const handleBuyNow = () => {
-    addToCart(product._id, quantity, size);
-    navigate('/checkout');
-  };
-
-  if (loading) return <div className="max-w-7xl mx-auto px-4 py-16"><div className="skeleton h-96 rounded-xl" /></div>;
+  if (loading) return <div className="max-w-7xl mx-auto px-4 py-16"><div className="skeleton h-96" /></div>;
   if (!product) return null;
+
+  const availabilityLabel = {
+    in_stock: 'In Stock',
+    made_to_order: 'Made to Order',
+    out_of_stock: 'Out of Stock',
+  }[product.availability] || 'Made to Order';
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: product.description,
+    description: product.description || product.shortDescription,
     sku: product.sku,
     image: product.images,
-    offers: { '@type': 'Offer', price: product.price, priceCurrency: 'INR', availability: product.stock > 0 ? 'InStock' : 'OutOfStock' },
+    brand: { '@type': 'Brand', name: 'Modern Gold' },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/PreOrder',
+      description: 'Price on request',
+    },
   };
 
   return (
     <>
-      <SEOHead title={product.name} description={product.shortDescription} path={`/product/${id}`} schema={schema} type="product" />
+      <SEOHead title={product.name} description={product.shortDescription || `${product.name} — ${product.purity} gold. Request a quote.`} path={`/product/${id}`} schema={schema} type="product" />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <Breadcrumbs items={[
-          { label: 'Shop', path: '/shop' },
-          { label: product.category, path: `/shop/${product.category}` },
+          { label: 'Products', path: '/products' },
+          { label: product.category, path: `/products/${product.category}` },
           { label: product.name },
         ]} />
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           <ProductGallery product={product} />
 
           <div>
-            <h1 className="font-display text-3xl md:text-4xl text-charcoal mb-2">{product.name}</h1>
-            <div className="mb-3">
-              <StarRating rating={product.rating} reviewCount={product.reviewCount} />
+            <p className="section-eyebrow mb-2">{product.category?.replace(/-/g, ' ')}</p>
+            <h1 className="headline-corporate headline-corporate-dark text-3xl md:text-4xl mb-2">{product.name}</h1>
+            <p className="text-sm text-muted mb-6">SKU: {product.sku}</p>
+
+            <div className="p-6 bg-white border border-gold/15 mb-6">
+              <p className="text-2xl font-display font-semibold text-gold-dark mb-1">Price on Request</p>
+              <p className="text-xs text-muted">International pricing via negotiated quotation</p>
             </div>
-            <p className="text-sm text-muted mb-4">Product Code: {product.sku}</p>
-
-            <PriceDisplay price={product.price} mrp={product.mrp} size="lg" showEmi />
-            <p className="text-sm text-muted mt-2">EMI from {formatPrice(calcEmi(product.price))}/month · No Cost EMI available</p>
-
-            <div className="grid grid-cols-2 gap-4 my-6 p-5 card-elegant text-sm">
-              <div><span className="text-muted">Metal:</span> <strong>{product.metal}</strong></div>
-              <div><span className="text-muted">Purity:</span> <strong>{product.purity}</strong></div>
-              {product.weight && <div><span className="text-muted">Weight:</span> <strong>{product.weight}</strong></div>}
-              {product.diamondDetails?.hasDiamond && (
-                <>
-                  <div><span className="text-muted">Carat:</span> <strong>{product.diamondDetails.carat}</strong></div>
-                  <div><span className="text-muted">Clarity:</span> <strong>{product.diamondDetails.clarity}</strong></div>
-                  <div><span className="text-muted">Color:</span> <strong>{product.diamondDetails.color}</strong></div>
-                  <div><span className="text-muted">Cut:</span> <strong>{product.diamondDetails.cut}</strong></div>
-                </>
-              )}
-            </div>
-
-            {product.sizes?.length > 0 && (
-              <div className="mb-4">
-                <label className="text-sm font-medium mb-2 block">Size</label>
-                <div className="flex gap-2 flex-wrap">
-                  {product.sizes.map((s) => (
-                    <button key={s} onClick={() => setSize(s)} className={`px-4 py-2 border rounded-lg text-sm ${size === s ? 'border-gold bg-gold/10' : 'hover:border-gold'}`}>{s}</button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             <div className="mb-6">
+              <SpecRow label="Purity" value={product.purity} />
+              <SpecRow label="Metal" value={product.metal} />
+              <SpecRow label="Weight" value={product.weight} />
+              <SpecRow label="Weight Range" value={product.weightRange} />
+              <SpecRow label="Length" value={product.length} />
+              <SpecRow label="Width" value={product.width} />
+              <SpecRow label="Diameter" value={product.diameter} />
+              <SpecRow label="Design" value={product.design} />
+              <SpecRow label="Finish" value={product.finish} />
+              <SpecRow label="Gold Colour" value={product.goldColour} />
+              <SpecRow label="MOQ" value={product.moq ? `${product.moq} units` : null} />
+              <SpecRow label="Lead Time" value={product.productionLeadTime} />
+              <SpecRow label="Availability" value={availabilityLabel} />
+            </div>
+
+            <div className="mb-4">
               <label className="text-sm font-medium mb-2 block">Quantity</label>
-              <div className="flex items-center border rounded-lg w-fit">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 hover:bg-cream">−</button>
-                <span className="px-4">{quantity}</span>
-                <button onClick={() => setQuantity(quantity + 1)} className="px-4 py-2 hover:bg-cream">+</button>
+              <div className="flex items-center border border-gold/20 w-fit">
+                <button type="button" onClick={() => setQuantity(Math.max(product.moq || 1, quantity - 1))} className="px-4 py-2 hover:bg-off-white">−</button>
+                <span className="px-4 min-w-[3rem] text-center">{quantity}</span>
+                <button type="button" onClick={() => setQuantity(quantity + 1)} className="px-4 py-2 hover:bg-off-white">+</button>
               </div>
             </div>
 
-            <div className="flex gap-3 mb-6">
-              <button onClick={handleAddToCart} className="flex-1 btn-primary-ink justify-center text-xs">
-                Add to Cart
-              </button>
-              <button onClick={handleBuyNow} className="flex-1 btn-outline-elegant justify-center text-xs">
-                Buy Now
-              </button>
-              <WishlistButton productId={product._id} className="!static" />
+            <div className="mb-6">
+              <label className="text-sm font-medium mb-2 block">Notes / Specifications</label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                rows={3}
+                placeholder="Size, weight requirements, purity preferences..."
+                className="input-elegant resize-none"
+              />
             </div>
 
-            <div className="border rounded-xl p-4 mb-6">
-              <label className="text-sm font-medium mb-2 block">Check Delivery Date</label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Enter pincode"
-                  maxLength={6}
-                  value={pincode}
-                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
-                  className="flex-1 input-elegant"
-                />
-                <button onClick={checkDelivery} className="bg-gold text-white px-4 py-2 rounded-lg text-sm">Check</button>
-              </div>
-              {delivery && <p className="text-sm text-green-600 mt-2">✓ Delivery in {delivery.date}</p>}
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              {[
-                { icon: Truck, text: 'Free shipping above ₹5,000' },
-                { icon: RotateCcw, text: '15-day easy returns' },
-                { icon: Shield, text: 'Secure payments' },
-                { icon: Award, text: 'Certified jewellery' },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-2 text-muted">
-                  <Icon size={16} className="text-gold shrink-0" /> {text}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="mt-16">
-          <div className="flex border-b gap-8">
-            {['details', 'specs', 'care', 'faq'].map((t) => (
-              <button key={t} onClick={() => setTab(t)} className={`pb-3 text-sm font-medium capitalize ${tab === t ? 'border-b-2 border-gold text-gold' : 'text-muted'}`}>
-                {t === 'faq' ? 'FAQ' : t === 'specs' ? 'Specifications' : t === 'care' ? 'Jewellery Care' : 'Product Details'}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              <button type="button" onClick={handleRequestQuote} className="btn-gold-solid flex-1 justify-center">
+                Request Quote <ArrowRight size={16} />
               </button>
-            ))}
-          </div>
-          <div className="py-6 text-sm text-muted leading-relaxed">
-            {tab === 'details' && <p>{product.description}</p>}
-            {tab === 'specs' && (
-              <dl className="grid grid-cols-2 gap-4">
-                <div><dt className="font-medium text-charcoal">SKU</dt><dd>{product.sku}</dd></div>
-                <div><dt className="font-medium text-charcoal">Metal</dt><dd>{product.metal}</dd></div>
-                <div><dt className="font-medium text-charcoal">Purity</dt><dd>{product.purity}</dd></div>
-                <div><dt className="font-medium text-charcoal">Weight</dt><dd>{product.weight || 'N/A'}</dd></div>
-              </dl>
+              <button type="button" onClick={handleAddToRFQ} className="btn-gold-outline flex-1 justify-center">
+                Add to RFQ
+              </button>
+            </div>
+
+            {!isWholesaleApproved && user && (
+              <p className="text-xs text-muted mb-4">
+                Your buyer account is pending approval. You can still submit RFQs for review.
+              </p>
             )}
-            {tab === 'care' && <p>Store in a dry place. Clean with a soft cloth. Avoid contact with perfumes and chemicals. Professional cleaning recommended annually.</p>}
-            {tab === 'faq' && (
-              <div className="space-y-4">
-                <div><strong>Is this BIS hallmarked?</strong><p>Yes, all our gold jewellery is BIS hallmarked.</p></div>
-                <div><strong>Can I resize this?</strong><p>Complimentary resizing within 15 days of purchase.</p></div>
+
+            {product.description && (
+              <div className="pt-6 border-t border-gold/10">
+                <h2 className="font-display font-semibold text-lg mb-3">Product Description</h2>
+                <p className="text-sm text-muted leading-relaxed">{product.description}</p>
               </div>
             )}
           </div>
         </div>
 
         {similar.length > 0 && (
-          <section className="mt-16">
-            <h2 className="font-display text-2xl mb-6">You May Also Like</h2>
-            <ProductGrid products={similar} />
+          <section className="mt-16 pt-12 border-t border-gold/10">
+            <h2 className="headline-corporate headline-corporate-dark text-2xl mb-8">Related Products</h2>
+            <ProductGrid products={similar} variant="b2b" />
           </section>
         )}
-
-        <RecentlyViewed excludeId={product._id} />
       </div>
     </>
   );

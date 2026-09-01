@@ -30,7 +30,8 @@ async function seedDatabase() {
 
 async function needsLegacyReseed() {
   const legacyProduct = await Product.findOne({ sku: /^AG-/ }).select('_id').lean();
-  return Boolean(legacyProduct);
+  const oldCatalog = await Product.findOne({ category: 'rings' }).select('_id').lean();
+  return Boolean(legacyProduct || oldCatalog);
 }
 
 async function needsBrokenImageFix() {
