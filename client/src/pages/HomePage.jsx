@@ -3,9 +3,7 @@ import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import DualPathSection from '../components/sections/DualPathSection';
 import CredibilitySection from '../components/sections/CredibilitySection';
-import OurPresenceSection from '../components/sections/OurPresenceSection';
 import HeroSection from '../components/sections/HeroSection';
-import CategoryShowcaseSection from '../components/sections/CategoryShowcaseSection';
 import ProductShowcaseSection from '../components/sections/ProductShowcaseSection';
 import CollectionPromoSection from '../components/sections/CollectionPromoSection';
 import ServiceBarSection from '../components/sections/ServiceBarSection';
@@ -54,8 +52,6 @@ export default function HomePage() {
       <HeroSection />
       <DualPathSection />
       <CredibilitySection />
-      <OurPresenceSection />
-      <CategoryShowcaseSection />
       <ProductShowcaseSection products={bestSellers} />
       <CollectionPromoSection />
       <ServiceBarSection />

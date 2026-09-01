@@ -1,5 +1,6 @@
 import SEOHead from '../components/SEOHead';
 import OurManufacturingSection from '../components/sections/OurManufacturingSection';
+import OurPresenceSection from '../components/sections/OurPresenceSection';
 import { brand, trustIndicators, oppositeModelCopy } from '../utils/brandConfig';
 import { aboutHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
@@ -83,6 +84,8 @@ export default function AboutPage() {
       </div>
 
       <OurManufacturingSection />
+
+      <OurPresenceSection />
 
       <div className="max-w-3xl mx-auto px-4 pb-16 space-y-12">
         <section>

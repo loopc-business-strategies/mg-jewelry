@@ -138,6 +138,11 @@ export const getCategoryImage = (slug) =>
 
 export const IMAGE_PLACEHOLDER_LABEL = 'Real Image Coming Soon';
 
+export const dualPathImages = {
+  sellGold: '/images/demo/sell-gold.jpg',
+  buyGold: '/images/demo/buy-gold.jpg',
+};
+
 // Future client photography: /images/modern-gold/showroom.jpg, factory.jpg, team.jpg, quality.jpg
 export const presenceImages = [
   {
