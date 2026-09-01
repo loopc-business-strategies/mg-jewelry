@@ -8,12 +8,12 @@ export default function CartItem({ item, onUpdate, onRemove }) {
   if (!product) return null;
 
   return (
-    <div className="flex gap-4 py-6 border-b border-gold/10">
+    <div className="flex gap-4 py-6 border-b border-border">
       <Link to={`/product/${product._id}`} className="w-24 h-24 rounded-lg overflow-hidden shrink-0">
         <ProductImage product={product} containerClassName="w-full h-full" />
       </Link>
       <div className="flex-1">
-        <Link to={`/product/${product._id}`} className="font-display text-lg hover:text-gold transition-colors">{product.name}</Link>
+        <Link to={`/product/${product._id}`} className="font-semibold text-charcoal text-lg hover:text-gold transition-colors">{product.name}</Link>
         <p className="text-sm text-muted">{product.sku} {item.size && `· Size ${item.size}`}</p>
         <p className="font-semibold mt-1">{formatPrice(product.price)}</p>
         <div className="flex items-center gap-4 mt-3">

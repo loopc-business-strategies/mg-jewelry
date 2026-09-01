@@ -38,7 +38,7 @@ export default function SearchBar({ onClose }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search jewellery, categories, metals..."
-          className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:border-gold text-sm"
+          className="w-full pl-11 pr-4 py-3 border border-border rounded-md min-h-[44px] focus:outline-none focus:border-border text-sm"
           autoFocus
         />
       </form>

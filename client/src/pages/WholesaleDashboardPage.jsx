@@ -44,12 +44,12 @@ export default function WholesaleDashboardPage() {
     <>
       <SEOHead title="Wholesale Dashboard" path="/wholesale/dashboard" />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="font-display text-3xl mb-8">Wholesale Dashboard</h1>
+        <h1 className="font-semibold text-charcoal text-3xl mb-8">Wholesale Dashboard</h1>
 
         {profile && (
           <div className="bg-cream rounded-xl p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h2 className="font-display text-xl">{profile.businessName}</h2>
+              <h2 className="font-semibold text-charcoal text-xl">{profile.businessName}</h2>
               <p className="text-sm text-muted">{profile.email}</p>
             </div>
             <span className={`px-3 py-1 rounded-full text-sm capitalize ${statusColors[profile.status]}`}>
@@ -106,7 +106,7 @@ export default function WholesaleDashboardPage() {
                       <span>{formatPrice(cart.total)}</span>
                     </div>
                     {profile?.status === 'approved' && (
-                      <button onClick={placeOrder} className="mt-4 bg-gold text-white px-6 py-2 rounded-full text-sm">Place Wholesale Order</button>
+                      <button onClick={placeOrder} className="mt-4 btn-primary-gold text-xs">Place Wholesale Order</button>
                     )}
                   </>
                 ) : (

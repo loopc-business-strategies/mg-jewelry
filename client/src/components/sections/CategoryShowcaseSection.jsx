@@ -4,7 +4,7 @@ import SectionHeader from '../ui/SectionHeader';
 
 export default function CategoryShowcaseSection() {
   return (
-    <section className="py-16 md:py-24 px-4 bg-pearl overflow-hidden">
+    <section className="section-cream py-16 md:py-24 lg:py-28 px-4 md:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="Collections"

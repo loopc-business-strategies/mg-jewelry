@@ -8,9 +8,9 @@ function CategoryCard({ name, slug }) {
   return (
     <Link
       to={`/shop/${slug}`}
-      className="category-carousel-card group/card flex-shrink-0 snap-start card-elegant overflow-hidden bg-white border border-gold/10 hover:border-gold/35"
+      className="category-carousel-card group/card flex-shrink-0 snap-start card-elegant overflow-hidden bg-white border border-border"
     >
-      <div className="category-carousel-image editorial-image-card relative bg-linen">
+      <div className="category-carousel-image editorial-image-card relative bg-white">
         <SafeImage
           src={categoryImages[slug] || categoryImages.chains}
           alt={`${name} — luxury gold jewelry editorial by Modern Gold Jewelry`}
@@ -20,10 +20,10 @@ function CategoryCard({ name, slug }) {
         <div className="editorial-image-overlay" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-[350ms] pointer-events-none" />
       </div>
-      <div className="p-4 text-center bg-pearl">
-        <p className="text-xs tracking-[0.15em] uppercase text-charcoal mb-1 font-medium">{name}</p>
-        <span className="text-[11px] text-muted group-hover/card:text-gold-dark group-hover/card:font-medium group-hover/card:tracking-wide transition-all duration-[350ms] inline-flex items-center gap-1">
-          Explore Now <span className="group-hover/card:translate-x-1 transition-transform duration-[350ms]">→</span>
+      <div className="p-4 text-center bg-white border-t border-border">
+        <p className="text-xs tracking-wide uppercase text-charcoal mb-1 font-semibold">{name}</p>
+        <span className="text-[11px] text-gold group-hover/card:font-medium transition-all duration-200 inline-flex items-center gap-1">
+          Explore Now →
         </span>
       </div>
     </Link>

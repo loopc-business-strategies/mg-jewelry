@@ -64,10 +64,10 @@ export default function CategoryPage() {
         path={`/shop/${slug}`}
       />
 
-      <div className="relative h-56 md:h-72 overflow-hidden bg-linen">
+      <div className="relative h-56 md:h-72 overflow-hidden bg-white">
         <SafeImage src={heroImage} alt={heroAlt} category={slug} className="w-full h-full object-cover" />
         <div className="absolute inset-0 editorial-hero-overlay flex items-end justify-center pb-8 md:pb-10">
-          <h1 className="font-display text-4xl md:text-5xl text-charcoal">{title}</h1>
+          <h1 className="font-semibold text-4xl md:text-5xl text-charcoal">{title}</h1>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export default function CategoryPage() {
           <div className="flex flex-wrap gap-2 mb-6">
             <button
               onClick={() => { const p = new URLSearchParams(searchParams); p.delete('subcategory'); setSearchParams(p); }}
-              className={`px-4 py-2 rounded-full text-sm border transition-colors ${!subcategory ? 'bg-gold text-white border-gold' : 'bg-cream hover:bg-gold/10 border-gold/10'}`}
+              className={`px-4 py-2 rounded-md text-sm border transition-colors ${!subcategory ? 'bg-gold text-white border-border' : 'bg-white hover:bg-gold/10 border-border'}`}
             >
               All
             </button>
@@ -90,7 +90,7 @@ export default function CategoryPage() {
               <button
                 key={sub.slug}
                 onClick={() => { const p = new URLSearchParams(searchParams); p.set('subcategory', sub.slug); setSearchParams(p); }}
-                className={`px-4 py-2 rounded-full text-sm border transition-colors ${subcategory === sub.slug ? 'bg-gold text-white border-gold' : 'bg-cream hover:bg-gold/10 border-gold/10'}`}
+                className={`px-4 py-2 rounded-md text-sm border transition-colors ${subcategory === sub.slug ? 'bg-gold text-white border-border' : 'bg-white hover:bg-gold/10 border-border'}`}
               >
                 {sub.name}
               </button>

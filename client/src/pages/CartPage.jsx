@@ -22,7 +22,7 @@ export default function CartPage() {
       <SEOHead title="Shopping Cart" path="/cart" />
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
         <Breadcrumbs items={[{ label: 'Cart' }]} />
-        <h1 className="font-display text-3xl md:text-4xl mb-8">Shopping Cart</h1>
+        <h1 className="font-semibold text-charcoal text-3xl md:text-4xl mb-8">Shopping Cart</h1>
 
         {!cart.items?.length ? (
           <EmptyState
@@ -38,7 +38,7 @@ export default function CartPage() {
               ))}
             </div>
             <div className="card-elegant p-6 h-fit sticky top-24">
-              <h3 className="font-display text-xl mb-4">Order Summary</h3>
+              <h3 className="font-semibold text-charcoal text-xl mb-4">Order Summary</h3>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
                 {discount > 0 && <div className="flex justify-between text-green-600"><dt>Discount</dt><dd>-{formatPrice(discount)}</dd></div>}

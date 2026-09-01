@@ -63,25 +63,25 @@ export default function ShopPage() {
     <>
       <SEOHead title="Shop Chains & Bangles" description="Browse premium gold chains and bangles manufactured in Uzbekistan." path="/shop" />
 
-      <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-14 bg-white">
         <Breadcrumbs items={[{ label: 'Jewellery' }]} />
         <header className="mb-8 md:mb-10">
           <p className="section-eyebrow mb-2">Collections</p>
-          <h1 className="font-display text-3xl md:text-4xl text-charcoal">Chains & Bangles</h1>
+          <h1 className="font-semibold text-3xl md:text-4xl text-charcoal">Chains & Bangles</h1>
           <p className="text-muted text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
             Premium gold chains and bangles — our specialty. Crafted in Namangan for retail customers and international partners.
           </p>
           {meta.total && (
-            <p className="text-sm text-emerald font-medium mt-2">
+            <p className="text-sm text-gold font-medium mt-2">
               Showing {meta.showing} of {meta.total} designs
             </p>
           )}
         </header>
 
-        <div className="flex flex-wrap gap-2 mb-8 pb-6 border-b border-gold/10">
+        <div className="flex flex-wrap gap-2 mb-8 pb-6 border-b border-border">
           <Link
             to="/shop"
-            className="px-4 py-2 rounded-full text-sm bg-gold text-white"
+            className="px-4 py-2 rounded-md text-sm bg-gold text-white font-medium"
           >
             All
           </Link>
@@ -89,7 +89,7 @@ export default function ShopPage() {
             <Link
               key={cat.slug}
               to={`/shop/${cat.slug}`}
-              className="px-4 py-2 rounded-full text-sm bg-cream hover:bg-gold/10 border border-gold/10 hover:border-gold/30 transition-colors"
+              className="px-4 py-2 rounded-md text-sm bg-white hover:bg-cream border border-border hover:border-gold transition-colors text-charcoal"
             >
               {cat.name}
             </Link>

@@ -22,7 +22,7 @@ import SearchBar from './SearchBar';
 function MobileAccordion({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-gold/10">
+    <div className="border-b border-border">
       <button
         type="button"
         className="flex items-center justify-between w-full py-3 text-sm font-medium text-left"
@@ -76,9 +76,9 @@ export default function Header() {
   const directMobileLinks = navLinks.filter((link) => !link.menu);
 
   return (
-    <header className={`sticky top-0 z-50 bg-linen/95 backdrop-blur-md transition-all duration-300 border-b border-gold/10 ${sticky ? 'shadow-md shadow-gold/5' : ''}`}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className={`flex items-center justify-between gap-4 transition-all duration-300 ${sticky ? 'h-14 md:h-16' : 'h-16 md:h-[4.5rem]'}`}>
+    <header className={`sticky top-0 z-50 bg-white transition-all duration-300 border-b border-border ${sticky ? 'shadow-[var(--shadow-soft)]' : ''}`}>
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="flex items-center justify-between gap-4 h-[60px] md:h-[68px] lg:h-[72px]">
           <button className="lg:hidden p-2 shrink-0" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -130,7 +130,7 @@ export default function Header() {
             <Link to="/cart" className="p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label="Cart">
               <ShoppingBag size={18} strokeWidth={1.5} />
               {cartCount > 0 && (
-                <span className="absolute top-1 right-1 bg-emerald text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 right-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -139,14 +139,14 @@ export default function Header() {
         </div>
 
         {searchOpen && (
-          <div className="pb-4 animate-fade-in border-t border-gold/10 pt-4">
+          <div className="pb-4 animate-fade-in border-t border-border pt-4">
             <SearchBar onClose={() => setSearchOpen(false)} />
           </div>
         )}
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-gold/10 bg-linen animate-fade-in max-h-[70vh] overflow-y-auto">
+        <div className="lg:hidden border-t border-border bg-white animate-fade-in max-h-[70vh] overflow-y-auto">
           <nav className="flex flex-col p-4 gap-0">
             <div className="mb-4 md:hidden">
               <MarketSelector />
@@ -155,13 +155,13 @@ export default function Header() {
               <Link
                 key={link.path + (link.key || link.label)}
                 to={link.path}
-                className={`text-sm py-3 border-b border-gold/10 ${isNavLinkActive(pathname, link) ? 'text-gold' : 'text-charcoal'}`}
+                className={`text-sm py-3 border-b border-border ${isNavLinkActive(pathname, link) ? 'text-gold font-medium' : 'text-charcoal'}`}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.key ? t(link.key) : link.label}
               </Link>
             ))}
-            <Link to="/shop" className="text-sm py-3 border-b border-gold/10" onClick={() => setMobileOpen(false)}>
+            <Link to="/shop" className="text-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
               {t('nav.collections')}
             </Link>
             <MobileAccordion title={t('nav.retail')}>
@@ -192,7 +192,7 @@ export default function Header() {
                 ))}
               </div>
             </MobileAccordion>
-            <Link to="/wishlist" className="text-sm py-3 border-t border-gold/10 mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
+            <Link to="/wishlist" className="text-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
             <Link to={user ? '/profile' : '/login'} className="text-sm py-3" onClick={() => setMobileOpen(false)}>
               {user ? 'My Account' : 'Login'}
             </Link>

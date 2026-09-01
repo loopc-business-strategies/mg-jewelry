@@ -27,16 +27,16 @@ export default function AboutPage() {
     <>
       <SEOHead title="About Us" description={`${brand.legalName} — jewelry manufacturing from Namangan, Uzbekistan, serving international markets.`} path="/about" schema={schema} />
 
-      <div className="relative h-64 md:h-80 overflow-hidden bg-linen">
+      <div className="relative h-64 md:h-80 overflow-hidden bg-white">
         <SafeImage src={aboutHero} alt="Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-pearl/85 to-cream/50 flex items-center justify-center px-4">
-          <h1 className="font-display text-3xl md:text-5xl text-charcoal text-center">Crafted in Namangan, Uzbekistan</h1>
+          <h1 className="font-semibold text-charcoal text-3xl md:text-5xl text-center">Crafted in Namangan, Uzbekistan</h1>
         </div>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-16 space-y-12">
         <section id="story">
-          <h2 className="font-display text-3xl mb-4">Our Story</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-4">Our Story</h2>
           <p className="text-muted leading-relaxed mb-4">
             {brand.legalName} is a jewelry manufacturing company based in Namangan, Uzbekistan, focused on creating quality jewelry products for international markets.
           </p>
@@ -46,7 +46,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-3xl mb-4">How We Work</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-4">How We Work</h2>
           <p className="text-muted leading-relaxed mb-4">
             {oppositeModelCopy}
           </p>
@@ -60,7 +60,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-3xl mb-4">Mission & Vision</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-4">Mission & Vision</h2>
           <p className="text-muted leading-relaxed mb-4">
             <strong>Mission:</strong> To deliver precision-crafted jewelry manufacturing that empowers international partners with reliable quality, flexible production and professional service.
           </p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-3xl mb-6">What We Offer</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-6">What We Offer</h2>
           <ul className="grid md:grid-cols-2 gap-3">
             {['Manufacturing expertise', 'Skilled craftsmanship', 'Modern production', 'Quality control', 'Custom manufacturing', 'Wholesale partnerships', 'International business', 'Reliable production'].map((item) => (
               <li key={item} className="flex items-center gap-2 text-muted text-sm">
@@ -82,7 +82,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-3xl mb-4">Factory & Showroom</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-4">Factory & Showroom</h2>
           <p className="text-muted text-sm mb-6">Our manufacturing and showroom facilities in Namangan. Real photos will be added soon.</p>
           <div className="grid grid-cols-2 gap-3 mb-6">
             {factoryGallery.slice(0, 4).map((item) => (
@@ -97,11 +97,11 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-3xl mb-6">Why Partners Trust Us</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-6">Why Partners Trust Us</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {trustIndicators.slice(0, 3).map(({ title, desc }) => (
-              <div key={title} className="text-center p-6 bg-cream rounded-xl border border-gold/10">
-                <h3 className="font-display text-xl mb-2 text-charcoal">{title}</h3>
+              <div key={title} className="text-center p-6 bg-cream rounded-xl border border-border">
+                <h3 className="font-semibold text-charcoal text-xl mb-2">{title}</h3>
                 <p className="text-sm text-muted">{desc}</p>
               </div>
             ))}

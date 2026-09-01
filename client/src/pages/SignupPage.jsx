@@ -28,11 +28,11 @@ export default function SignupPage() {
   return (
     <>
       <SEOHead title="Sign Up" path="/signup" />
-      <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-linen">
+      <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-white">
         <div className="w-full max-w-md card-elegant p-8 md:p-10">
           <BrandLogo variant="auth" linkTo={null} />
           <p className="section-eyebrow text-center mb-2">Account</p>
-          <h1 className="font-display text-3xl text-center mb-8">Create Account</h1>
+          <h1 className="font-semibold text-charcoal text-3xl text-center mb-8">Create Account</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             {['name', 'email', 'phone', 'password'].map((field) => (
               <div key={field}>
@@ -46,7 +46,7 @@ export default function SignupPage() {
                 />
               </div>
             ))}
-            <button type="submit" disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
               {loading ? 'Creating...' : 'Create Account'}
             </button>
           </form>

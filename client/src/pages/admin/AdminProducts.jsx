@@ -57,7 +57,7 @@ export default function AdminProducts() {
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="font-display text-3xl">Products</h1>
+        <h1 className="font-semibold text-charcoal text-3xl">Products</h1>
         <button onClick={() => setShowForm(!showForm)} className="bg-gold text-white px-4 py-2 rounded-lg text-sm">
           {showForm ? 'Cancel' : 'Add Product'}
         </button>
@@ -72,16 +72,16 @@ export default function AdminProducts() {
                 required={['name', 'sku', 'category', 'price', 'mrp'].includes(field)}
                 value={form[field]}
                 onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
+                className="input-elegant"
               />
             </div>
           ))}
           <div className="md:col-span-3">
             <label className="text-xs font-medium block mb-1">Description</label>
-            <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full border rounded-lg px-3 py-2 text-sm" rows={3} />
+            <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="input-elegant" rows={3} />
           </div>
           <div className="md:col-span-3">
-            <button type="submit" className="bg-charcoal text-white px-6 py-2 rounded-lg text-sm">Save Product</button>
+            <button type="submit" className="btn-primary-gold text-xs">Save Product</button>
           </div>
         </form>
       )}

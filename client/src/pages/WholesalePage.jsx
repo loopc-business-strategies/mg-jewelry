@@ -66,13 +66,13 @@ export default function WholesalePage() {
       />
 
       <div className="max-w-3xl mx-auto px-4 py-8 text-center">
-        <p className="text-sm text-muted leading-relaxed border-l-2 border-gold/30 pl-4 text-left">
+        <p className="text-sm text-muted leading-relaxed border-l-2 border-border pl-4 text-left">
           {t('wholesale.oppositeModel') || oppositeModelCopy}
         </p>
       </div>
 
       <section className="py-8 px-4 max-w-4xl mx-auto">
-        <div className="bg-cream border border-gold/15 rounded-xl p-6 text-center">
+        <div className="bg-white border border-border rounded-xl p-6 text-center">
           <p className="text-sm font-medium text-charcoal mb-1">{brand.legalName}</p>
           <address className="text-sm text-muted not-italic">
             {brand.addressLines.map((line) => (
@@ -93,7 +93,7 @@ export default function WholesalePage() {
       </div>
 
       <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="font-display text-3xl text-center mb-10">Why Wholesale With Us</h2>
+        <h2 className="font-semibold text-charcoal text-3xl text-center mb-10">Why Wholesale With Us</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {benefits.map((b) => (
             <div key={b} className="flex items-start gap-3 p-4 bg-cream rounded-xl">
@@ -106,7 +106,7 @@ export default function WholesalePage() {
 
       <section className="py-16 bg-ivory">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="font-display text-3xl text-center mb-10">Wholesale Categories</h2>
+          <h2 className="font-semibold text-charcoal text-3xl text-center mb-10">Wholesale Categories</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categoryIcons.map((cat) => (
               <Link key={cat.slug} to={`/wholesale/shop?category=${cat.slug}`} className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow">
@@ -120,7 +120,7 @@ export default function WholesalePage() {
 
       {products.length > 0 && (
         <section className="py-16 px-4 max-w-7xl mx-auto">
-          <h2 className="font-display text-3xl text-center mb-10">Wholesale Collections</h2>
+          <h2 className="font-semibold text-charcoal text-3xl text-center mb-10">Wholesale Collections</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {products.map((p) => (
               <WholesaleProductCard key={p._id} product={p} showPrices={false} />
@@ -132,13 +132,13 @@ export default function WholesalePage() {
         </section>
       )}
 
-      <section id="bulk-pricing" className="py-16 bg-gradient-to-br from-champagne/50 to-ivory border-y border-gold/10">
+      <section id="bulk-pricing" className="py-16 bg-white border-y border-border">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="font-display text-3xl text-center mb-10 text-charcoal">Bulk Pricing</h2>
+          <h2 className="font-semibold text-charcoal text-3xl text-center mb-10">Bulk Pricing</h2>
           <div className="grid md:grid-cols-4 gap-4">
             {bulkTiers.map((tier) => (
-              <div key={tier.label} className="card-elegant p-6 text-center hover:border-gold/30 transition-colors">
-                <p className="text-gold-dark font-display text-xl mb-2">{tier.label}</p>
+              <div key={tier.label} className="card-elegant p-6 text-center hover:border-border transition-colors">
+                <p className="text-gold-dark font-semibold text-charcoal text-xl mb-2">{tier.label}</p>
                 <p className="text-sm text-muted mb-2">{tier.range}</p>
                 <p className="font-semibold text-charcoal">{tier.discount}</p>
               </div>
@@ -149,7 +149,7 @@ export default function WholesalePage() {
 
       <section className="py-16 px-4 max-w-3xl mx-auto text-center">
         <Download size={32} className="text-gold mx-auto mb-4" />
-        <h2 className="font-display text-3xl mb-4">Download Wholesale Catalogue</h2>
+        <h2 className="font-semibold text-charcoal text-3xl mb-4">Download Wholesale Catalogue</h2>
         <p className="text-muted mb-6">Request our complete wholesale catalogue with pricing, MOQ details, and product specifications.</p>
         <button onClick={requestCatalogue} className="btn-primary-gold text-xs">
           REQUEST CATALOGUE
@@ -157,22 +157,22 @@ export default function WholesalePage() {
       </section>
 
       <section className="py-16 px-4 max-w-3xl mx-auto">
-        <h2 className="font-display text-3xl text-center mb-8">Request Wholesale Pricing</h2>
+        <h2 className="font-semibold text-charcoal text-3xl text-center mb-8">Request Wholesale Pricing</h2>
         <WholesaleInquiryForm />
       </section>
 
       <section className="py-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="font-display text-3xl mb-6">Dedicated Wholesale Support</h2>
+          <h2 className="font-semibold text-charcoal text-3xl mb-6">Dedicated Wholesale Support</h2>
           <div className="flex flex-wrap justify-center gap-8 text-sm">
             <Link to="/contact?type=quote" className="flex items-center gap-2 text-gold-dark hover:underline"><Mail size={16} className="text-gold" /> Request a quote via contact form</Link>
-            <Link to="/contact?type=business" className="flex items-center gap-2 text-emerald hover:underline"><MessageCircle size={16} className="text-emerald" /> Business inquiry</Link>
+            <Link to="/contact?type=business" className="flex items-center gap-2 text-gold hover:underline"><MessageCircle size={16} className="text-gold" /> Business inquiry</Link>
           </div>
         </div>
       </section>
 
       <section id="faq" className="py-16 px-4 max-w-3xl mx-auto">
-        <h2 className="font-display text-3xl text-center mb-8">Wholesale FAQ</h2>
+        <h2 className="font-semibold text-charcoal text-3xl text-center mb-8">Wholesale FAQ</h2>
         <div className="space-y-4">
           {faqs.map((faq) => (
             <div key={faq.q} className="border rounded-xl p-4">

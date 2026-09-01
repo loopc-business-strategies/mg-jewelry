@@ -34,7 +34,7 @@ export default function QuickViewModal({ product, onClose }) {
         <div className="grid md:grid-cols-2 gap-6 p-6">
           <ProductImage product={product} containerClassName="aspect-square overflow-hidden bg-cream rounded-xl" />
           <div className="flex flex-col">
-            <h2 className="font-display text-2xl mb-2">{product.name}</h2>
+            <h2 className="font-semibold text-charcoal text-2xl mb-2">{product.name}</h2>
             <p className="text-sm text-muted mb-4 line-clamp-2">{product.shortDescription}</p>
             <PriceDisplay price={product.price} mrp={product.mrp} showEmi />
             <div className="flex gap-2 mt-4 text-sm text-muted">

@@ -7,7 +7,7 @@ import { translate } from '../i18n/translations';
 
 function RadioOption({ name, value, checked, onChange, label, flag }) {
   return (
-    <label className="flex items-center gap-3 px-3 py-2.5 rounded-md cursor-pointer hover:bg-gold/5 transition-colors border border-transparent has-[:checked]:border-gold/30 has-[:checked]:bg-champagne/30">
+    <label className="flex items-center gap-3 px-3 py-2.5 rounded-md cursor-pointer hover:bg-cream transition-colors border border-transparent has-[:checked]:border-border has-[:checked]:bg-cream">
       <input
         type="radio"
         name={name}
@@ -51,7 +51,7 @@ export default function MarketSelector({ compact = false }) {
     <button
       type="button"
       onClick={() => setOpen(true)}
-      className="flex items-center gap-1.5 text-xs text-charcoal hover:text-gold-dark transition-colors px-2 py-1 border border-gold/20 rounded-full bg-white/60"
+      className="flex items-center gap-1.5 text-xs text-charcoal hover:text-gold transition-colors px-2 py-1 border border-border rounded-full bg-white"
       aria-label="Select market and language"
     >
       <Globe size={14} className="text-gold" />
@@ -64,7 +64,7 @@ export default function MarketSelector({ compact = false }) {
     <button
       type="button"
       onClick={() => setOpen(true)}
-      className="w-full flex items-center gap-2 px-4 py-3 text-sm text-left border border-gold/15 bg-white rounded-md hover:border-gold/40 transition-colors"
+      className="w-full flex items-center gap-2 px-4 py-3 text-sm text-left border border-border bg-white rounded-md hover:border-gold transition-colors"
     >
       <Globe size={16} className="text-gold shrink-0" />
       <span>{language.short} | {market.flag} {market.label}</span>
@@ -75,13 +75,13 @@ export default function MarketSelector({ compact = false }) {
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="absolute inset-0 modal-backdrop" onClick={() => setOpen(false)} aria-hidden="true" />
       <div
-        className="relative w-full sm:max-w-md bg-pearl border border-gold/20 shadow-xl sm:rounded-lg max-h-[90vh] overflow-y-auto overscroll-contain animate-fade-in"
+        className="relative w-full sm:max-w-md bg-white border border-border shadow-xl sm:rounded-lg max-h-[90vh] overflow-y-auto overscroll-contain animate-fade-in"
         role="dialog"
         aria-modal="true"
         aria-labelledby="market-selector-title"
       >
-        <div className="sticky top-0 bg-pearl border-b border-gold/10 px-5 py-4 flex items-center justify-between">
-          <h2 id="market-selector-title" className="font-display text-xl text-charcoal">{draftT('selector.title')}</h2>
+        <div className="sticky top-0 bg-white border-b border-border px-5 py-4 flex items-center justify-between">
+          <h2 id="market-selector-title" className="text-xl font-semibold text-charcoal">{draftT('selector.title')}</h2>
           <button type="button" onClick={() => setOpen(false)} className="p-1 text-muted hover:text-charcoal" aria-label={draftT('selector.close')}>
             <X size={20} />
           </button>

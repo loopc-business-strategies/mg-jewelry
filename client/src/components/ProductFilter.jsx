@@ -22,14 +22,14 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
             placeholder="Min"
             value={filters.minPrice || ''}
             onChange={(e) => onChange({ ...filters, minPrice: e.target.value })}
-            className="w-full border border-gold/20 rounded-lg px-3 py-2 text-sm bg-pearl focus:outline-none focus:border-gold"
+            className="input-elegant"
           />
           <input
             type="number"
             placeholder="Max"
             value={filters.maxPrice || ''}
             onChange={(e) => onChange({ ...filters, maxPrice: e.target.value })}
-            className="w-full border border-gold/20 rounded-lg px-3 py-2 text-sm bg-pearl focus:outline-none focus:border-gold"
+            className="input-elegant"
           />
         </div>
       </div>
@@ -87,7 +87,7 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
       <div className="fixed inset-0 z-50 modal-backdrop" onClick={onClose}>
         <div className="absolute right-0 top-0 bottom-0 w-80 bg-white p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <div className="flex items-center justify-between mb-6">
-            <h3 className="font-display text-xl flex items-center gap-2"><SlidersHorizontal size={18} /> Filters</h3>
+            <h3 className="font-semibold text-charcoal text-xl flex items-center gap-2"><SlidersHorizontal size={18} /> Filters</h3>
             <button onClick={onClose} className="text-sm text-muted">Close</button>
           </div>
           {content}
@@ -98,7 +98,7 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
 
   return (
     <aside className="hidden lg:block w-64 shrink-0">
-      <h3 className="font-display text-xl mb-6 flex items-center gap-2">
+      <h3 className="font-semibold text-charcoal text-xl mb-6 flex items-center gap-2">
         <SlidersHorizontal size={18} /> Filters
       </h3>
       {content}

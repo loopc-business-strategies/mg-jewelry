@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import BrandLogo from '../components/BrandLogo';
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Store,
-  FileText, Settings, LogOut, MessageSquare,
+  FileText, Settings, LogOut,
 } from 'lucide-react';
 
 const links = [
@@ -22,9 +22,9 @@ export default function AdminLayout() {
   if (!user || !isAdmin) return <Navigate to="/login" replace />;
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      <aside className="w-64 bg-gradient-to-b from-champagne to-cream border-r border-gold/20 shrink-0">
-        <div className="p-6 border-b border-gold/20">
+    <div className="min-h-screen flex bg-white">
+      <aside className="w-64 bg-white border-r border-border shrink-0">
+        <div className="p-6 border-b border-border">
           <BrandLogo variant="admin" linkTo={null} />
         </div>
         <nav className="p-4 space-y-1">
@@ -34,8 +34,8 @@ export default function AdminLayout() {
               to={to}
               end={end}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
-                  isActive ? 'bg-gold text-white' : 'text-charcoal hover:bg-white/60'
+                `flex items-center gap-3 px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                  isActive ? 'bg-gold text-white' : 'text-charcoal hover:bg-cream hover:text-gold'
                 }`
               }
             >
@@ -44,13 +44,13 @@ export default function AdminLayout() {
           ))}
           <button
             onClick={logout}
-            className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-300 hover:bg-gray-800 w-full mt-4"
+            className="flex items-center gap-3 px-4 py-2.5 rounded-md text-sm text-muted hover:bg-cream hover:text-gold w-full mt-4"
           >
             <LogOut size={18} /> Logout
           </button>
         </nav>
       </aside>
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto bg-white">
         <Outlet />
       </div>
     </div>

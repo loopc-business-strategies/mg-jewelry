@@ -29,7 +29,7 @@ export default function ProfilePage() {
     <>
       <SEOHead title="My Account" path="/profile" />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="font-display text-3xl mb-8">My Account</h1>
+        <h1 className="font-semibold text-charcoal text-3xl mb-8">My Account</h1>
         <div className="grid md:grid-cols-4 gap-8">
           <nav className="space-y-1">
             {tabs.map(({ id, icon: Icon, label }) => (
@@ -45,7 +45,7 @@ export default function ProfilePage() {
           <div className="md:col-span-3">
             {tab === 'orders' && (
               <div>
-                <h2 className="font-display text-xl mb-4">My Orders</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">My Orders</h2>
                 {orders.length ? orders.map((order) => (
                   <div key={order._id} className="border rounded-xl p-4 mb-4">
                     <div className="flex justify-between mb-2">
@@ -59,13 +59,13 @@ export default function ProfilePage() {
             )}
             {tab === 'wishlist' && (
               <div>
-                <h2 className="font-display text-xl mb-4">Wishlist</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">Wishlist</h2>
                 <Link to="/wishlist" className="text-gold-dark hover:underline">View full wishlist →</Link>
               </div>
             )}
             {tab === 'addresses' && (
               <div>
-                <h2 className="font-display text-xl mb-4">Saved Addresses</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">Saved Addresses</h2>
                 {user.addresses?.length ? user.addresses.map((addr, i) => (
                   <div key={i} className="border rounded-xl p-4 mb-3 text-sm">
                     <p className="font-medium">{addr.name}</p>
@@ -76,7 +76,7 @@ export default function ProfilePage() {
             )}
             {tab === 'profile' && (
               <div>
-                <h2 className="font-display text-xl mb-4">Profile Details</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">Profile Details</h2>
                 <dl className="space-y-3 text-sm">
                   <div><dt className="text-muted">Name</dt><dd className="font-medium">{user.name}</dd></div>
                   <div><dt className="text-muted">Email</dt><dd className="font-medium">{user.email}</dd></div>

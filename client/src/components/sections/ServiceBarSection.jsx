@@ -5,7 +5,7 @@ const icons = [RotateCcw, Shield, Award, Headphones];
 
 export default function ServiceBarSection() {
   return (
-    <section className="py-12 md:py-16 px-4 border-y border-gold/10 bg-ivory">
+    <section className="section-white py-12 md:py-16 px-4 border-y border-border">
       <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
         {servicePromises.map((item, i) => {
           const Icon = icons[i] || Award;

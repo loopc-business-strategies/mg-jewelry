@@ -36,8 +36,8 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="product-card-grid group card-elegant h-full">
-      <div className="product-card-image relative aspect-square bg-linen overflow-hidden image-zoom-hover">
+    <div className="product-card-grid group card-elegant h-full bg-white">
+      <div className="product-card-image relative aspect-square bg-white overflow-hidden image-zoom-hover rounded-t-[0.625rem]">
         <Link to={`/product/${product._id}`} className="block w-full h-full">
           <ProductImage product={product} containerClassName="w-full h-full object-cover" />
         </Link>
@@ -45,18 +45,18 @@ export default function ProductCard({ product }) {
           <WishlistButton productId={product._id} />
         </div>
         {product.discount > 0 && (
-          <span className="absolute top-3 left-3 z-10 bg-white/95 text-ruby text-[10px] px-2 py-1 tracking-wide font-medium">
-            {product.discount}% OFF
+          <span className="absolute top-3 left-3 z-10 badge-subtle">
+            {product.discount}% off
           </span>
         )}
       </div>
 
       <div className="product-card-info p-4 md:p-5 flex flex-col flex-1">
         {product.category && (
-          <p className="text-[10px] tracking-[0.15em] uppercase text-emerald mb-1">{slugToLabel(product.category)}</p>
+          <p className="text-[10px] tracking-wide uppercase text-gold mb-1 font-semibold">{slugToLabel(product.category)}</p>
         )}
         <Link to={`/product/${product._id}`}>
-          <h3 className="font-display text-lg text-charcoal mb-1 line-clamp-1 hover:text-gold-dark transition-colors">
+          <h3 className="text-base font-semibold text-charcoal mb-1 line-clamp-1 hover:text-gold transition-colors">
             {product.name}
           </h3>
         </Link>

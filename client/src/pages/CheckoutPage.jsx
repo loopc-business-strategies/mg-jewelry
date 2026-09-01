@@ -59,7 +59,7 @@ export default function CheckoutPage() {
     <>
       <SEOHead title="Checkout" path="/checkout" />
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="font-display text-3xl mb-8 text-center">Checkout</h1>
+        <h1 className="font-semibold text-charcoal text-3xl mb-8 text-center">Checkout</h1>
 
         {/* Steps */}
         <div className="flex justify-between mb-10">
@@ -76,7 +76,7 @@ export default function CheckoutPage() {
         {step === 0 && (
           <div className="text-center space-y-4">
             <p>Please login or continue as guest</p>
-            <Link to="/login" className="inline-block bg-gold text-white px-8 py-3 rounded-full text-sm">Login</Link>
+            <Link to="/login" className="inline-block btn-primary-gold text-xs">Login</Link>
             <button onClick={() => setStep(1)} className="block mx-auto text-sm text-gold-dark hover:underline">Continue as Guest</button>
           </div>
         )}
@@ -90,11 +90,11 @@ export default function CheckoutPage() {
                   required
                   value={address[field]}
                   onChange={(e) => setAddress({ ...address, [field]: e.target.value })}
-                  className="w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+                  className="input-elegant"
                 />
               </div>
             ))}
-            <button onClick={() => setStep(2)} className="w-full btn-primary-ink justify-center text-xs">Continue to Delivery</button>
+            <button onClick={() => setStep(2)} className="w-full btn-primary-gold justify-center text-xs">Continue to Delivery</button>
           </div>
         )}
 
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
           <div className="text-center space-y-4">
             <p className="text-muted">Standard delivery: 3-5 business days</p>
             <p className="font-semibold">Shipping: {shipping ? formatPrice(shipping) : 'Free'}</p>
-            <button onClick={() => setStep(3)} className="w-full btn-primary-ink justify-center text-xs">Continue to Payment</button>
+            <button onClick={() => setStep(3)} className="w-full btn-primary-gold justify-center text-xs">Continue to Payment</button>
           </div>
         )}
 
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
           <div className="space-y-4">
             <p className="text-sm text-muted mb-4">Select payment method (card details are not stored)</p>
             {paymentMethods.map((pm) => (
-              <label key={pm.id} className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer ${paymentMethod === pm.id ? 'border-gold bg-gold/5' : ''}`}>
+              <label key={pm.id} className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer ${paymentMethod === pm.id ? 'border-border bg-gold/5' : ''}`}>
                 <input type="radio" name="payment" checked={paymentMethod === pm.id} onChange={() => setPaymentMethod(pm.id)} className="accent-gold" />
                 {pm.label}
               </label>
@@ -118,7 +118,7 @@ export default function CheckoutPage() {
             <div className="bg-cream p-4 rounded-xl text-sm">
               <div className="flex justify-between"><span>Total</span><strong>{formatPrice(total)}</strong></div>
             </div>
-            <button onClick={placeOrder} disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
+            <button onClick={placeOrder} disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
               {loading ? 'Placing Order...' : 'Place Order'}
             </button>
           </div>
@@ -129,10 +129,10 @@ export default function CheckoutPage() {
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
               <Check size={32} className="text-green-600" />
             </div>
-            <h2 className="font-display text-2xl">Order Confirmed!</h2>
+            <h2 className="font-semibold text-charcoal text-2xl">Order Confirmed!</h2>
             <p className="text-muted">Order #{order.orderNumber}</p>
             <p className="text-sm">Total: {formatPrice(order.total)}</p>
-            <Link to="/shop" className="inline-block bg-gold text-white px-8 py-3 rounded-full text-sm mt-4">Continue Shopping</Link>
+            <Link to="/shop" className="inline-block btn-primary-gold text-xs mt-4">Continue Shopping</Link>
           </div>
         )}
       </div>

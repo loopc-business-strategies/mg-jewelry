@@ -25,7 +25,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="p-8">
-      <h1 className="font-display text-3xl mb-8">Dashboard</h1>
+      <h1 className="font-semibold text-charcoal text-3xl mb-8">Dashboard</h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map(({ label, value, icon: Icon }) => (
           <div key={label} className="bg-white rounded-xl p-5 shadow-sm border">
@@ -40,7 +40,7 @@ export default function AdminDashboard() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <h2 className="font-display text-xl mb-4">Recent B2C Orders</h2>
+          <h2 className="font-semibold text-charcoal text-xl mb-4">Recent B2C Orders</h2>
           {data.recentB2COrders?.map((o) => (
             <div key={o._id} className="flex justify-between py-2 border-b text-sm">
               <span>#{o.orderNumber}</span>
@@ -49,7 +49,7 @@ export default function AdminDashboard() {
           ))}
         </div>
         <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <h2 className="font-display text-xl mb-4">Recent Wholesale Orders</h2>
+          <h2 className="font-semibold text-charcoal text-xl mb-4">Recent Wholesale Orders</h2>
           {data.recentWholesaleOrders?.map((o) => (
             <div key={o._id} className="flex justify-between py-2 border-b text-sm">
               <span>#{o.orderNumber}</span>

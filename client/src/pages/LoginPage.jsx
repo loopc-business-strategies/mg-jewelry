@@ -28,11 +28,11 @@ export default function LoginPage() {
   return (
     <>
       <SEOHead title="Login" path="/login" />
-      <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-linen">
+      <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-white">
         <div className="w-full max-w-md card-elegant p-8 md:p-10">
           <BrandLogo variant="auth" linkTo={null} />
           <p className="section-eyebrow text-center mb-2">Account</p>
-          <h1 className="font-display text-3xl text-center mb-8">Welcome Back</h1>
+          <h1 className="font-semibold text-charcoal text-3xl text-center mb-8">Welcome Back</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-sm font-medium block mb-1">Email</label>
@@ -43,7 +43,7 @@ export default function LoginPage() {
               <input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="input-elegant" />
             </div>
             <Link to="/forgot-password" className="text-sm text-gold-dark hover:text-gold block">Forgot password?</Link>
-            <button type="submit" disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
               {loading ? 'Signing in...' : 'SIGN IN'}
             </button>
           </form>

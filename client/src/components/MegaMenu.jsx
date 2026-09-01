@@ -10,13 +10,13 @@ export default function MegaMenu({ onClose }) {
   }, []);
 
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl bg-white border border-gold/12 shadow-lg p-8 mt-1 z-50 animate-fade-in">
+    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl bg-white border border-border shadow-lg p-8 mt-1 z-50 animate-fade-in">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {categories.map((cat) => (
           <div key={cat.slug}>
             <Link
               to={`/shop/${cat.slug}`}
-              className="font-display text-lg text-charcoal hover:text-gold transition-colors mb-2 block"
+              className="text-lg font-semibold text-charcoal hover:text-gold transition-colors mb-2 block"
               onClick={onClose}
             >
               {cat.name}
@@ -37,8 +37,8 @@ export default function MegaMenu({ onClose }) {
           </div>
         ))}
       </div>
-      <div className="mt-4 pt-4 border-t flex justify-center">
-        <Link to="/shop" className="text-sm text-gold-dark font-medium hover:underline" onClick={onClose}>
+      <div className="mt-4 pt-4 border-t border-border flex justify-center">
+        <Link to="/shop" className="text-sm text-gold font-medium hover:underline" onClick={onClose}>
           View All Jewellery →
         </Link>
       </div>

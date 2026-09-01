@@ -4,7 +4,7 @@ import SectionHeader from '../ui/SectionHeader';
 export default function ProductShowcaseSection({ products, title = 'Our Most Loved Pieces', eyebrow = 'Best Sellers' }) {
   if (!products?.length) return null;
   return (
-    <section className="py-16 md:py-24 px-4 bg-linen">
+    <section className="section-white py-16 md:py-24 px-4">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow={eyebrow}

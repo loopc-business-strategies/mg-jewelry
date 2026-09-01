@@ -11,7 +11,7 @@ export default function AdminBlog() {
 
   return (
     <div className="p-8">
-      <h1 className="font-display text-3xl mb-8">Blog Posts</h1>
+      <h1 className="font-semibold text-charcoal text-3xl mb-8">Blog Posts</h1>
       <div className="space-y-3">
         {blogs.map((b) => (
           <div key={b._id} className="bg-white rounded-xl p-4 shadow-sm border flex justify-between items-center">

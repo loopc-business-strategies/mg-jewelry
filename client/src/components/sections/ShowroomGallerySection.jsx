@@ -6,11 +6,11 @@ export default function ShowroomGallerySection() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-16 px-4 bg-ivory border-y border-gold/10">
+    <section className="section-white py-16 px-4 border-y border-border">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
           <p className="section-eyebrow mb-2">{t('showroom.eyebrow')}</p>
-          <h2 className="font-display text-2xl md:text-3xl text-charcoal">{t('showroom.title')}</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold text-charcoal">{t('showroom.title')}</h2>
           <p className="text-muted text-sm mt-2 max-w-2xl">{t('showroom.desc')}</p>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">

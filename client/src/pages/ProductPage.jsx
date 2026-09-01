@@ -99,7 +99,7 @@ export default function ProductPage() {
           <ProductGallery product={product} />
 
           <div>
-            <h1 className="font-display text-3xl md:text-4xl text-charcoal mb-2">{product.name}</h1>
+            <h1 className="font-semibold text-3xl md:text-4xl text-charcoal mb-2">{product.name}</h1>
             <div className="mb-3">
               <StarRating rating={product.rating} reviewCount={product.reviewCount} />
             </div>
@@ -127,7 +127,7 @@ export default function ProductPage() {
                 <label className="text-sm font-medium mb-2 block">Size</label>
                 <div className="flex gap-2 flex-wrap">
                   {product.sizes.map((s) => (
-                    <button key={s} onClick={() => setSize(s)} className={`px-4 py-2 border rounded-lg text-sm ${size === s ? 'border-gold bg-gold/10' : 'hover:border-gold'}`}>{s}</button>
+                    <button key={s} onClick={() => setSize(s)} className={`px-4 py-2 border rounded-lg text-sm ${size === s ? 'border-border bg-gold/10' : 'hover:border-border'}`}>{s}</button>
                   ))}
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function ProductPage() {
         <div className="mt-16">
           <div className="flex border-b gap-8">
             {['details', 'specs', 'care', 'faq'].map((t) => (
-              <button key={t} onClick={() => setTab(t)} className={`pb-3 text-sm font-medium capitalize ${tab === t ? 'border-b-2 border-gold text-gold' : 'text-muted'}`}>
+              <button key={t} onClick={() => setTab(t)} className={`pb-3 text-sm font-medium capitalize ${tab === t ? 'border-b-2 border-border text-gold' : 'text-muted'}`}>
                 {t === 'faq' ? 'FAQ' : t === 'specs' ? 'Specifications' : t === 'care' ? 'Jewellery Care' : 'Product Details'}
               </button>
             ))}
@@ -214,7 +214,7 @@ export default function ProductPage() {
 
         {similar.length > 0 && (
           <section className="mt-16">
-            <h2 className="font-display text-2xl mb-6">You May Also Like</h2>
+            <h2 className="font-semibold text-charcoal text-2xl mb-6">You May Also Like</h2>
             <ProductGrid products={similar} />
           </section>
         )}

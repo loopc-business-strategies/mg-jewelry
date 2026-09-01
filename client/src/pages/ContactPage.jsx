@@ -71,7 +71,7 @@ export default function ContactPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-16">
         <p className="section-eyebrow text-center mb-2">Contact</p>
-        <h1 className="font-display text-4xl text-center mb-2">{activeLabel}</h1>
+        <h1 className="font-semibold text-charcoal text-4xl text-center mb-2">{activeLabel}</h1>
         <p className="text-center text-muted mb-8 max-w-xl mx-auto">
           Reach out to discuss wholesale orders, custom jewelry manufacturing or international partnerships.
         </p>
@@ -82,10 +82,10 @@ export default function ContactPage() {
               key={type.id}
               type="button"
               onClick={() => setInquiryType(type.id)}
-              className={`px-5 py-2.5 text-sm rounded-full border transition-colors ${
+              className={`px-5 py-2.5 text-sm rounded-md border transition-colors ${
                 activeType === type.id
-                  ? 'bg-gold text-white border-gold'
-                  : 'bg-cream border-gold/20 hover:border-gold/40 text-charcoal'
+                  ? 'bg-gold text-white border-border'
+                  : 'bg-white border-border hover:border-border text-charcoal'
               }`}
             >
               {type.label}
@@ -117,8 +117,8 @@ export default function ContactPage() {
           </form>
 
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-champagne/40 to-cream rounded-2xl p-8 border border-gold/10">
-              <h2 className="font-display text-2xl text-charcoal mb-4">{brand.legalName}</h2>
+            <div className="bg-white rounded-2xl p-8 border border-border">
+              <h2 className="font-semibold text-charcoal text-2xl mb-4">{brand.legalName}</h2>
               <div className="flex gap-4">
                 <MapPin size={20} className="text-gold shrink-0 mt-1" />
                 <address className="text-sm text-muted not-italic leading-relaxed">
@@ -129,8 +129,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-ivory rounded-2xl p-6 border border-emerald/20">
-              <h3 className="font-display text-lg mb-3 text-emerald">Business Enquiries</h3>
+            <div className="bg-white rounded-2xl p-6 border border-border">
+              <h3 className="font-semibold text-charcoal text-lg mb-3 text-gold">Business Enquiries</h3>
               <p className="text-sm text-muted leading-relaxed mb-4">
                 For wholesale partnerships, custom manufacturing and international orders, use the form or explore our business pages.
               </p>

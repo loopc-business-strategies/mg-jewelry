@@ -51,19 +51,19 @@ export default function WholesaleRegisterPage() {
     <>
       <SEOHead title="Wholesale Registration" path="/wholesale/register" />
       <div className="max-w-2xl mx-auto px-4 py-16">
-        <h1 className="font-display text-3xl text-center mb-2">Wholesale Registration</h1>
+        <h1 className="font-semibold text-charcoal text-3xl text-center mb-2">Wholesale Registration</h1>
         <p className="text-center text-muted mb-8">International jewellers, gold traders and wholesalers — apply to partner with Modern Gold</p>
         <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
           {fields.map(({ key, labelKey, label, type, required, full, select }) => (
             <div key={key} className={full ? 'md:col-span-2' : ''}>
               <label className="text-sm font-medium block mb-1">{labelKey ? t(labelKey) : label}{required ? ' *' : ''}</label>
               {select === 'country' ? (
-                <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+                <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="input-elegant">
                   <option value="">{t('common.selectCountry')}</option>
                   {countries.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               ) : select === 'businessType' ? (
-                <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+                <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="input-elegant">
                   <option value="">{t('common.selectType')}</option>
                   {businessTypes.map((bt) => <option key={bt} value={bt}>{bt}</option>)}
                 </select>
@@ -73,13 +73,13 @@ export default function WholesaleRegisterPage() {
                   required={required}
                   value={form[key]}
                   onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                  className="w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+                  className="input-elegant"
                 />
               )}
             </div>
           ))}
           <div className="md:col-span-2">
-            <button type="submit" disabled={loading} className="w-full bg-gold text-white py-3 rounded-full text-sm font-medium disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
               {loading ? t('common.submitting') : t('cta.submitApplication')}
             </button>
           </div>

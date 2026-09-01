@@ -6,9 +6,9 @@ export default function RetailMegaMenu({ onClose }) {
   const { t } = useTranslation();
 
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[92vw] max-w-sm bg-white border border-gold/12 shadow-lg p-6 mt-1 z-50 animate-fade-in">
-      <div className="bg-gradient-to-br from-ivory to-cream rounded-xl p-5 border border-gold/10">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-gold-dark font-medium mb-1">
+    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[92vw] max-w-sm bg-white border border-border shadow-lg p-6 mt-1 z-50 animate-fade-in">
+      <div className="bg-white rounded-xl p-5 border border-border">
+        <p className="section-eyebrow mb-1">
           {t('retailMenu.title')}
         </p>
         <p className="text-xs text-muted mb-4 leading-relaxed">{t('retailMenu.subtitle')}</p>
