@@ -2,7 +2,7 @@ import SafeImage from '../SafeImage';
 import { presenceImages } from '../../utils/imageConfig';
 import { useTranslation } from '../../hooks/useTranslation';
 
-function PresenceCard({ item, demoBadge, featured }) {
+function PresenceCard({ item, featured }) {
   return (
     <article
       className={`presence-card group relative overflow-hidden rounded-[10px] border border-border bg-white shadow-[var(--shadow-soft)] ${
@@ -17,13 +17,8 @@ function PresenceCard({ item, demoBadge, featured }) {
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
         />
         <div className="presence-card-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10" />
-        {item.isDemo && (
-          <span className="presence-demo-badge absolute top-3 left-3 z-10" title={item.demoLabel}>
-            {demoBadge}
-          </span>
-        )}
         <div className="absolute inset-x-0 bottom-0 z-10 p-4 md:p-5">
-          <h3 className="text-sm md:text-base font-semibold tracking-wide text-white mb-1.5">
+          <h3 className="presence-card-title text-sm md:text-base font-semibold tracking-wide mb-1.5">
             {item.title}
           </h3>
           <p className="text-xs md:text-sm text-white/90 leading-relaxed max-w-md">
@@ -72,7 +67,6 @@ export default function OurPresenceSection() {
             <PresenceCard
               key={item.id}
               item={item}
-              demoBadge={t('presence.demoBadge')}
               featured={item.featured}
             />
           ))}
