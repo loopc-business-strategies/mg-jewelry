@@ -16,17 +16,11 @@ export default function BrandLogo({ variant = 'header', className = '', linkTo =
     header: (
       <div className={`flex flex-col items-center lg:items-start shrink-0 group ${className}`}>
         <span className="font-display text-xl md:text-2xl text-charcoal tracking-wide">{brand.name}</span>
-        <span className="text-[9px] tracking-[0.25em] uppercase text-muted hidden md:block">
-          Fine Jewelry
-        </span>
       </div>
     ),
     footer: (
       <div className={`inline-block mb-4 ${className}`}>
         <p className="font-display text-2xl text-charcoal tracking-wide mb-1">{brand.name}</p>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-gold-dark">
-          International Jewelry
-        </p>
       </div>
     ),
     admin: (
