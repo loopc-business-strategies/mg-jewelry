@@ -241,6 +241,39 @@ export const heroTrustBadges = [
   { title: 'Manufacturing', desc: 'Chains and bangles crafted for retail and wholesale partners.' },
 ];
 
+export const heroBanner = {
+  eyebrow: 'CONNECTING',
+  headlineBefore: 'CENTRAL ASIAN',
+  headlineHighlight: 'GOLD',
+  headlineAfter: 'TO GLOBAL MARKETS',
+  description:
+    'Modern Gold is a leading gold company in Central Asia, specializing in gold mining, refinery operations, jewelry manufacturing and international trade.',
+  primaryCta: { label: 'Sell Gold', path: '/gold-buying' },
+  secondaryCta: { label: 'Become a Buyer', path: '/wholesale/register' },
+  features: [
+    {
+      icon: 'HardHat',
+      title: 'Trusted by International Partners',
+      desc: 'Long-standing partnerships across Central Asia and global markets.',
+    },
+    {
+      icon: 'Gem',
+      title: 'Premium Gold Quality',
+      desc: 'Refined and processed to international standards.',
+    },
+    {
+      icon: 'Factory',
+      title: 'Modern Manufacturing Facilities',
+      desc: 'Integrated jewelry production at industrial scale.',
+    },
+    {
+      icon: 'Globe2',
+      title: 'Global Business Network',
+      desc: 'Connecting gold suppliers and buyers worldwide.',
+    },
+  ],
+};
+
 export const servicePromises = [
   { title: 'Easy Returns', desc: '15-day hassle-free returns on retail orders.' },
   { title: 'Secure Payment', desc: 'Encrypted checkout and trusted payment methods.' },

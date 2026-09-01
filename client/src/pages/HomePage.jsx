@@ -45,7 +45,7 @@ export default function HomePage() {
     <>
       <SEOHead
         title="Gold Manufacturer Uzbekistan | Sell Gold & Wholesale Jewellery"
-        description={`${brand.name} — integrated gold mining, refinery and jewelry manufacturing from Namangan, Central Asia.`}
+        description={`${brand.name} — connecting Central Asian gold to global markets through mining, refinery operations, jewelry manufacturing and international trade.`}
         path="/"
         schema={schema}
       />
