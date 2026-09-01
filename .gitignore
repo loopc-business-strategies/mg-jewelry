@@ -8,3 +8,4 @@ uploads/
 client/dist/
 server/uploads/
 .cursor/
+.vercel/
