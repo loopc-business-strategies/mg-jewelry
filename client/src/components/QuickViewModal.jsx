@@ -23,7 +23,7 @@ export default function QuickViewModal({ product, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 modal-backdrop" />
       <div
         className="relative bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in"
         onClick={(e) => e.stopPropagation()}
@@ -45,9 +45,9 @@ export default function QuickViewModal({ product, onClose }) {
             <div className="flex gap-3 mt-auto pt-6">
               <button
                 onClick={() => { addToCart(product._id); onClose(); }}
-                className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-white py-3 rounded-full text-sm hover:bg-gold transition-colors"
+                className="btn-card-cart py-2 px-4 text-[10px]"
               >
-                <ShoppingBag size={16} /> Add to Cart
+                <ShoppingBag size={12} /> Add to Cart
               </button>
               <WishlistButton productId={product._id} />
             </div>

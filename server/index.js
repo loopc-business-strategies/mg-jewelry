@@ -29,6 +29,8 @@ connectDB().then(async () => {
     fixBrokenImages,
     needsDuplicateImageFix,
     fixDuplicateImages,
+    needsCategoryEditorialFix,
+    fixCategoryEditorialImages,
   } = require('./services/seedDatabase');
   const count = await Product.countDocuments();
   const forceReseed = process.env.FORCE_RESEED === 'true';
@@ -45,6 +47,9 @@ connectDB().then(async () => {
   } else if (await needsDuplicateImageFix()) {
     console.log('Duplicate product images detected — reassigning unique photos...');
     await fixDuplicateImages();
+  } else if (await needsCategoryEditorialFix()) {
+    console.log('Legacy category images detected — migrating to editorial photography...');
+    await fixCategoryEditorialImages();
   }
 });
 

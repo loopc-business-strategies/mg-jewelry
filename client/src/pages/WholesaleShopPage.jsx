@@ -36,7 +36,7 @@ export default function WholesaleShopPage() {
             )}
           </div>
           {isWholesaleApproved && (
-            <Link to="/wholesale/dashboard" className="text-sm bg-charcoal text-white px-4 py-2 rounded-lg">
+            <Link to="/wholesale/dashboard" className="text-sm btn-primary-gold text-xs px-4 py-2">
               Bulk Cart ({cart.items?.length || 0}) · {formatPrice(cart.total || 0)}
             </Link>
           )}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { brand } from '../../utils/brandConfig';
 import { aboutHero } from '../../utils/imageConfig';
+import SafeImage from '../SafeImage';
 
 export default function AboutPreviewSection() {
   return (
@@ -18,7 +19,7 @@ export default function AboutPreviewSection() {
           <Link to="/about" className="text-sm tracking-wide text-charcoal hover:text-gold transition-colors">Read our full story →</Link>
         </div>
         <div className="rounded-2xl overflow-hidden shadow-lg border border-gold/10">
-          <img src={aboutHero} alt="Modern Gold Jewelry craftsmanship in Uzbekistan" className="w-full aspect-[4/3] object-cover" />
+          <SafeImage src={aboutHero} alt="Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial" className="w-full aspect-[4/3] object-cover" />
         </div>
       </div>
     </section>

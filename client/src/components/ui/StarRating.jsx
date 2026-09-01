@@ -1,6 +1,7 @@
 import { Star } from 'lucide-react';
 
 export default function StarRating({ rating = 0, reviewCount, size = 14, showCount = true }) {
+  if (!rating && !reviewCount) return null;
   const rounded = Math.round(rating || 0);
   return (
     <div className="flex items-center gap-1.5">
@@ -13,7 +14,7 @@ export default function StarRating({ rating = 0, reviewCount, size = 14, showCou
           />
         ))}
       </div>
-      {showCount && reviewCount != null && (
+      {showCount && reviewCount != null && reviewCount > 0 && (
         <span className="text-xs text-muted">({reviewCount})</span>
       )}
     </div>

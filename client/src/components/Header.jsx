@@ -13,6 +13,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import MegaMenu from './MegaMenu';
 import EcommerceMegaMenu from './EcommerceMegaMenu';
+import MarketSelector from './MarketSelector';
 import SearchBar from './SearchBar';
 
 function MobileAccordion({ title, children, defaultOpen = false }) {
@@ -70,9 +71,9 @@ export default function Header() {
   const directMobileLinks = navLinks.filter((link) => !link.menu);
 
   return (
-    <header className={`sticky top-0 z-50 bg-linen/95 backdrop-blur-md transition-shadow duration-300 border-b border-gold/10 ${sticky ? 'shadow-sm' : ''}`}>
+    <header className={`sticky top-0 z-50 bg-linen/95 backdrop-blur-md transition-all duration-300 border-b border-gold/10 ${sticky ? 'shadow-md shadow-gold/5' : ''}`}>
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-[4.5rem] gap-4">
+        <div className={`flex items-center justify-between gap-4 transition-all duration-300 ${sticky ? 'h-14 md:h-16' : 'h-16 md:h-[4.5rem]'}`}>
           <button className="lg:hidden p-2 shrink-0" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -103,6 +104,9 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1 shrink-0">
+            <div className="hidden md:block">
+              <MarketSelector compact />
+            </div>
             <button onClick={() => setSearchOpen(!searchOpen)} className="p-2.5 text-charcoal hover:text-gold transition-colors" aria-label="Search">
               <Search size={18} strokeWidth={1.5} />
             </button>
@@ -120,7 +124,7 @@ export default function Header() {
             <Link to="/cart" className="p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label="Cart">
               <ShoppingBag size={18} strokeWidth={1.5} />
               {cartCount > 0 && (
-                <span className="absolute top-1 right-1 bg-ink text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 right-1 bg-emerald text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -138,6 +142,9 @@ export default function Header() {
       {mobileOpen && (
         <div className="lg:hidden border-t border-gold/10 bg-linen animate-fade-in max-h-[70vh] overflow-y-auto">
           <nav className="flex flex-col p-4 gap-0">
+            <div className="mb-4 md:hidden">
+              <MarketSelector />
+            </div>
             {directMobileLinks.map((link) => (
               <Link
                 key={link.label}

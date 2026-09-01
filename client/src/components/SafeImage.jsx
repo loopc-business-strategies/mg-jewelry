@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { getCategoryFallback } from '../utils/imageConfig';
+import { getCategoryFallback, getProductCategoryFallback, getCategorySvgFallback } from '../utils/imageConfig';
 
 export default function SafeImage({
   src,
@@ -9,26 +9,25 @@ export default function SafeImage({
   subcategory,
   loading = 'lazy',
 }) {
-  const fallback = getCategoryFallback(category, subcategory);
-  const [current, setCurrent] = useState(src || fallback);
-  const [stage, setStage] = useState(0);
+  const lifestyleFallback = getCategoryFallback(category, subcategory);
+  const productFallback = getProductCategoryFallback(category, subcategory);
+  const svgFallback = getCategorySvgFallback(category, subcategory);
+  const defaultJpg = '/images/products/default-01.jpg';
+
+  const chain = [src, lifestyleFallback, productFallback, defaultJpg, svgFallback].filter(
+    (url, i, arr) => url && arr.indexOf(url) === i
+  );
+
+  const [index, setIndex] = useState(0);
+  const current = chain[index] || svgFallback;
 
   const handleError = useCallback(() => {
-    setStage((prev) => {
-      if (prev === 0 && fallback !== current) {
-        setCurrent(fallback);
-        return 1;
-      }
-      if (prev === 1) {
-        setCurrent('/images/products/default-01.jpg');
-        return 2;
-      }
-      return prev;
-    });
-  }, [fallback, current]);
+    setIndex((prev) => (prev < chain.length - 1 ? prev + 1 : prev));
+  }, [chain.length]);
 
   return (
     <img
+      key={current}
       src={current}
       alt={alt}
       className={className}

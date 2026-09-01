@@ -7,7 +7,7 @@ import WholesaleInquiryForm from '../components/WholesaleInquiryForm';
 import WholesaleProductCard from '../components/WholesaleProductCard';
 import { brand, categoryIcons } from '../utils/brandConfig';
 import { wholesaleHero } from '../utils/imageConfig';
-import { CheckCircle, Phone, Mail, MessageCircle, Download } from 'lucide-react';
+import { CheckCircle, Mail, MessageCircle, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const benefits = [
@@ -64,10 +64,10 @@ export default function WholesalePage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 -mt-8 relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <Link to="/wholesale/register" className="btn-primary-ink text-xs">
+        <Link to="/wholesale/register" className="btn-primary-gold text-xs">
           Become a Wholesale Partner
         </Link>
-        <Link to="/wholesale/shop" className="btn-outline-elegant text-xs border-white text-white hover:bg-white hover:text-ink">
+        <Link to="/wholesale/shop" className="btn-outline-gold text-xs">
           View Wholesale Collection
         </Link>
       </div>
@@ -112,15 +112,15 @@ export default function WholesalePage() {
         </section>
       )}
 
-      <section id="bulk-pricing" className="py-16 bg-charcoal text-white">
+      <section id="bulk-pricing" className="py-16 bg-gradient-to-br from-champagne/50 to-ivory border-y border-gold/10">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="font-display text-3xl text-center mb-10">Bulk Pricing</h2>
+          <h2 className="font-display text-3xl text-center mb-10 text-charcoal">Bulk Pricing</h2>
           <div className="grid md:grid-cols-4 gap-4">
             {bulkTiers.map((tier) => (
-              <div key={tier.label} className="border border-gray-700 rounded-xl p-6 text-center">
-                <p className="text-gold font-display text-xl mb-2">{tier.label}</p>
-                <p className="text-sm text-gray-400 mb-2">{tier.range}</p>
-                <p className="font-semibold">{tier.discount}</p>
+              <div key={tier.label} className="card-elegant p-6 text-center hover:border-gold/30 transition-colors">
+                <p className="text-gold-dark font-display text-xl mb-2">{tier.label}</p>
+                <p className="text-sm text-muted mb-2">{tier.range}</p>
+                <p className="font-semibold text-charcoal">{tier.discount}</p>
               </div>
             ))}
           </div>
@@ -131,7 +131,7 @@ export default function WholesalePage() {
         <Download size={32} className="text-gold mx-auto mb-4" />
         <h2 className="font-display text-3xl mb-4">Download Wholesale Catalogue</h2>
         <p className="text-muted mb-6">Request our complete wholesale catalogue with pricing, MOQ details, and product specifications.</p>
-        <button onClick={requestCatalogue} className="bg-charcoal text-white px-8 py-3 rounded-full text-sm font-medium tracking-wider hover:bg-gold transition-colors">
+        <button onClick={requestCatalogue} className="btn-primary-gold text-xs">
           REQUEST CATALOGUE
         </button>
       </section>
@@ -145,11 +145,9 @@ export default function WholesalePage() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="font-display text-3xl mb-6">Dedicated Wholesale Support</h2>
           <div className="flex flex-wrap justify-center gap-8 text-sm">
-            <span className="flex items-center gap-2"><Phone size={16} className="text-gold" /> {brand.phone}</span>
             <Link to="/contact?type=quote" className="flex items-center gap-2 text-gold-dark hover:underline"><Mail size={16} className="text-gold" /> Request a quote via contact form</Link>
-            <span className="flex items-center gap-2"><MessageCircle size={16} className="text-gold" /> WhatsApp</span>
+            <Link to="/contact?type=business" className="flex items-center gap-2 text-emerald hover:underline"><MessageCircle size={16} className="text-emerald" /> Business inquiry</Link>
           </div>
-          <p className="text-muted mt-4">{brand.businessHours}</p>
         </div>
       </section>
 

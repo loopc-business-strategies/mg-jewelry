@@ -1,7 +1,21 @@
-import { formatPrice, calcEmi, calcDiscount } from '../utils/formatPrice';
+import { formatPrice as formatPriceBase } from '../utils/formatPrice';
+import { useMarket } from '../context/MarketContext';
+import { getMarketById } from '../utils/marketConfig';
+
+export function useFormatPrice() {
+  const { prefs } = useMarket();
+  const market = getMarketById(prefs.market);
+
+  return (price) =>
+    formatPriceBase(price, {
+      currency: prefs.currency,
+      locale: market.locale,
+    });
+}
 
 export default function PriceDisplay({ price, mrp, size = 'md', showEmi = false }) {
-  const discount = calcDiscount(mrp, price);
+  const formatPrice = useFormatPrice();
+  const discount = mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0;
   const sizes = { sm: 'text-sm', md: 'text-lg', lg: 'text-2xl' };
 
   return (
@@ -20,7 +34,7 @@ export default function PriceDisplay({ price, mrp, size = 'md', showEmi = false 
         )}
       </div>
       {showEmi && price > 5000 && (
-        <p className="text-xs text-muted mt-1">EMI from {formatPrice(calcEmi(price))}/mo</p>
+        <p className="text-xs text-muted mt-1">EMI from {formatPrice(Math.round(price / 12))}/mo</p>
       )}
     </div>
   );

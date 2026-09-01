@@ -2,6 +2,7 @@ import SEOHead from '../components/SEOHead';
 import { brand, trustIndicators } from '../utils/brandConfig';
 import { aboutHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
+import SafeImage from '../components/SafeImage';
 
 export default function AboutPage() {
   const schema = {
@@ -24,10 +25,10 @@ export default function AboutPage() {
     <>
       <SEOHead title="About Us" description={`${brand.legalName} — jewelry manufacturing from Namangan, Uzbekistan, serving international markets.`} path="/about" schema={schema} />
 
-      <div className="relative h-64 md:h-80 overflow-hidden">
-        <img src={aboutHero} alt="Modern Gold Jewelry manufacturing facility" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-pearl/80 to-cream/40 flex items-center justify-center">
-          <h1 className="font-display text-4xl md:text-5xl text-charcoal">Crafted in Uzbekistan. Connected to the World.</h1>
+      <div className="relative h-64 md:h-80 overflow-hidden bg-linen">
+        <SafeImage src={aboutHero} alt="Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-pearl/85 to-cream/50 flex items-center justify-center px-4">
+          <h1 className="font-display text-3xl md:text-5xl text-charcoal text-center">Crafted in Namangan, Uzbekistan</h1>
         </div>
       </div>
 

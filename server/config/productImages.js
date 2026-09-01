@@ -1,22 +1,23 @@
 const LOCAL = (file) => `/images/products/${file}`;
+const CATEGORY_LIFESTYLE = (slug) => `/images/categories/${slug}.jpg`;
 
 const PRODUCT_IMAGES = Array.from({ length: 32 }, (_, i) =>
   LOCAL(`product-${String(i + 1).padStart(2, '0')}.jpg`)
 );
 
 const CATEGORY_FALLBACKS = {
-  rings: LOCAL('ring-01.jpg'),
-  earrings: LOCAL('earring-01.jpg'),
-  necklaces: LOCAL('necklace-01.jpg'),
-  bracelets: LOCAL('bracelet-01.jpg'),
-  pendants: LOCAL('pendant-01.jpg'),
-  'gold-jewelry': LOCAL('gold-set-01.jpg'),
-  'diamond-jewelry': LOCAL('ring-01.jpg'),
-  'custom-jewelry': LOCAL('default-01.jpg'),
-  'bridal-jewelry': LOCAL('necklace-01.jpg'),
-  'fashion-jewelry': LOCAL('earring-01.jpg'),
-  'wholesale-collections': LOCAL('gold-set-01.jpg'),
-  bangles: LOCAL('bracelet-01.jpg'),
+  rings: CATEGORY_LIFESTYLE('rings'),
+  earrings: CATEGORY_LIFESTYLE('earrings'),
+  necklaces: CATEGORY_LIFESTYLE('necklaces'),
+  bracelets: CATEGORY_LIFESTYLE('bracelets'),
+  pendants: CATEGORY_LIFESTYLE('pendants'),
+  'gold-jewelry': CATEGORY_LIFESTYLE('gold-jewelry'),
+  'diamond-jewelry': CATEGORY_LIFESTYLE('diamond-jewelry'),
+  'custom-jewelry': CATEGORY_LIFESTYLE('custom-jewelry'),
+  'bridal-jewelry': CATEGORY_LIFESTYLE('bridal-jewelry'),
+  'fashion-jewelry': CATEGORY_LIFESTYLE('earrings'),
+  'wholesale-collections': CATEGORY_LIFESTYLE('wholesale-collections'),
+  bangles: CATEGORY_LIFESTYLE('bangles'),
   gifting: LOCAL('default-01.jpg'),
   default: LOCAL('default-01.jpg'),
 };
@@ -108,6 +109,10 @@ function isSharedPrimaryPath(url) {
   return SHARED_PRIMARY_PATHS.includes(url);
 }
 
+function isValidCategoryImagePath(url) {
+  return url?.startsWith('/images/categories/') || url?.startsWith('/images/products/');
+}
+
 module.exports = {
   PRODUCT_IMAGES,
   CATEGORY_FALLBACKS,
@@ -118,4 +123,5 @@ module.exports = {
   getProductImage,
   parseSkuIndex,
   isSharedPrimaryPath,
+  isValidCategoryImagePath,
 };

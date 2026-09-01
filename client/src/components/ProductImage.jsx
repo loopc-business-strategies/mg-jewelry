@@ -1,7 +1,8 @@
 import { useState, useCallback, useMemo } from 'react';
-import { getCategoryFallback, getProductAlt, getProductImages } from '../utils/imageConfig';
+import { getCategoryFallback, getCategorySvgFallback, getProductAlt, getProductImages } from '../utils/imageConfig';
 
 const DEFAULT_FALLBACK = getCategoryFallback();
+const DEFAULT_SVG = getCategorySvgFallback();
 
 export default function ProductImage({
   product,
@@ -12,6 +13,7 @@ export default function ProductImage({
   sizes,
 }) {
   const categoryFallback = getCategoryFallback(product?.category, product?.subcategory);
+  const svgFallback = getCategorySvgFallback(product?.category, product?.subcategory);
   const catalogImages = getProductImages(product?.category, product?.subcategory, product?.sku);
 
   const candidates = useMemo(() => {
@@ -33,14 +35,16 @@ export default function ProductImage({
     catalogImages.forEach(add);
     add(categoryFallback);
     add(DEFAULT_FALLBACK);
+    add(svgFallback);
+    add(DEFAULT_SVG);
 
     return urls;
-  }, [product, index, catalogImages, categoryFallback]);
+  }, [product, index, catalogImages, categoryFallback, svgFallback]);
 
   const startIndex = Math.min(index, Math.max(candidates.length - 1, 0));
   const [candidateIndex, setCandidateIndex] = useState(startIndex);
   const [loaded, setLoaded] = useState(false);
-  const src = candidates[candidateIndex] || DEFAULT_FALLBACK;
+  const src = candidates[candidateIndex] || DEFAULT_SVG;
 
   const handleError = useCallback(() => {
     setLoaded(false);

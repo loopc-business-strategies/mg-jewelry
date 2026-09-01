@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { brand, footerColumns } from '../utils/brandConfig';
-import { Share2, Mail } from 'lucide-react';
+import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
+import { socialIconMap } from './ui/SocialIcons';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -15,24 +15,37 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-linen border-t border-gold/15">
+    <footer className="bg-gradient-to-b from-ivory to-cream border-t border-gold/15">
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link to="/" className="inline-block mb-4">
               <p className="font-display text-2xl text-charcoal tracking-wide">{brand.name}</p>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-muted mt-1">Fine Jewelry</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-gold-dark mt-1">International Jewelry</p>
             </Link>
+            <p className="text-sm font-medium text-charcoal mb-1">{brand.legalName}</p>
+            <address className="text-sm text-muted leading-relaxed mb-4 not-italic">
+              {brand.addressLines.map((line) => (
+                <span key={line} className="block">{line}</span>
+              ))}
+            </address>
             <p className="text-sm text-muted leading-relaxed mb-4 max-w-xs">
-              {brand.tagline}. Premium jewelry from Namangan, Uzbekistan for customers worldwide.
+              {brand.tagline}
             </p>
-            <div className="flex gap-3">
-              <a href="/contact" className="p-2 border border-gold/20 rounded-full text-muted hover:text-gold transition-colors" aria-label="Social">
-                <Share2 size={16} />
-              </a>
-              <a href="/contact" className="p-2 border border-gold/20 rounded-full text-muted hover:text-gold transition-colors" aria-label="Email">
-                <Mail size={16} />
-              </a>
+            <div className="flex gap-2.5">
+              {socialLinks.map((social) => {
+                const Icon = socialIconMap[social.icon];
+                return (
+                  <Link
+                    key={social.label}
+                    to={social.href}
+                    className="p-2 border border-gold/25 rounded-full text-muted hover:text-gold hover:border-gold/50 bg-white/50 transition-colors"
+                    aria-label={social.label}
+                  >
+                    {Icon && <Icon size={16} />}
+                  </Link>
+                );
+              })}
             </div>
           </div>
           {[

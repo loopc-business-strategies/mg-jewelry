@@ -1,31 +1,32 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { premiumBanner, heroImage } from '../../utils/imageConfig';
+import { premiumBanner } from '../../utils/imageConfig';
+import SafeImage from '../SafeImage';
 
 export default function CollectionPromoSection() {
   return (
-    <section className="bg-ink text-white overflow-hidden">
+    <section className="section-gradient-warm overflow-hidden border-y border-gold/10">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 min-h-[420px]">
         <div className="relative hidden md:block">
-          <img src={premiumBanner} alt="" className="w-full h-full object-cover opacity-90" />
+          <SafeImage src={premiumBanner} alt="Woman wearing premium gold jewelry — Modern Glamour Collection editorial" className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col justify-center px-8 md:px-16 py-16 md:py-20">
-          <p className="text-[10px] tracking-[0.25em] uppercase text-gold mb-4">New Collection</p>
-          <h2 className="font-display text-3xl md:text-4xl mb-4 leading-tight">
+          <p className="section-eyebrow section-eyebrow-emerald mb-4">New Collection</p>
+          <h2 className="font-display text-3xl md:text-4xl mb-4 leading-tight text-charcoal">
             Modern Glamour Collection
           </h2>
-          <p className="text-white/70 text-sm leading-relaxed mb-8 max-w-md">
-            Refined gold and diamond pieces designed for discerning customers who appreciate understated luxury.
+          <p className="text-muted text-sm leading-relaxed mb-8 max-w-md">
+            Refined gold and diamond pieces designed for discerning customers who appreciate colorful, understated luxury.
           </p>
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 self-start border border-white/60 px-6 py-3 text-xs tracking-[0.15em] uppercase hover:bg-white hover:text-ink transition-colors"
+            className="inline-flex items-center gap-2 self-start btn-primary-gold text-xs"
           >
             Discover Collection <ArrowRight size={14} />
           </Link>
         </div>
         <div className="relative md:hidden aspect-video">
-          <img src={heroImage} alt="Modern Glamour Collection" className="w-full h-full object-cover" />
+          <SafeImage src={premiumBanner} alt="Woman wearing premium gold jewelry — Modern Glamour Collection editorial" className="w-full h-full object-cover" />
         </div>
       </div>
     </section>

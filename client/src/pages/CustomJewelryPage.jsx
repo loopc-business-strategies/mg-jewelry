@@ -4,6 +4,7 @@ import B2BSection from '../components/sections/B2BSection';
 import { brand } from '../utils/brandConfig';
 import { customHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
+import SafeImage from '../components/SafeImage';
 
 export default function CustomJewelryPage() {
   return (
@@ -40,7 +41,7 @@ export default function CustomJewelryPage() {
         ))}
       </section>
       <div className="px-4 pb-16 max-w-7xl mx-auto">
-        <img src={customHero} alt="Custom jewelry production" className="w-full rounded-2xl object-cover aspect-[21/9] border border-gold/10" />
+        <SafeImage src={customHero} alt="Woman wearing luxury gold jewelry set — custom jewelry editorial" category="custom-jewelry" className="w-full rounded-2xl object-cover aspect-[21/9] border border-gold/10" />
       </div>
       <B2BSection />
       <div className="text-center pb-16">

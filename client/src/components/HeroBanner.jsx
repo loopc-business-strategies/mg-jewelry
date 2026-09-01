@@ -3,11 +3,13 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import ProductImage from './ProductImage';
 import { formatPrice } from '../utils/formatPrice';
+import { categoryImages } from '../utils/imageConfig';
+import SafeImage from './SafeImage';
 
 export default function HeroBanner({ title, subtitle, image, primaryLink = '/shop', secondaryLink = '/wholesale', compact = false }) {
   return (
     <section className={`relative overflow-hidden ${compact ? 'h-[40vh]' : 'h-[70vh] min-h-[500px]'}`}>
-      <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <img src={image} alt={`${title} — Modern Gold Jewelry editorial collection`} className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-r from-pearl/90 via-cream/75 to-transparent" />
       <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center">
         <div className="max-w-xl text-charcoal animate-fade-in">
@@ -62,13 +64,20 @@ export function ProductCarousel({ products, title }) {
 }
 
 export function CategoryCard({ name, slug, image }) {
+  const src = image || categoryImages[slug] || categoryImages['gold-jewelry'];
   return (
-    <Link to={`/shop/${slug}`} className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-gold/10">
-      <img src={image} alt={`${name} collection by Modern Gold Jewelry`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+    <Link to={`/shop/${slug}`} className="group/card editorial-image-card relative rounded-xl overflow-hidden border border-gold/10 bg-linen hover:border-gold/35 transition-colors duration-[350ms]">
+      <SafeImage
+        src={src}
+        alt={`${name} — luxury gold jewelry editorial by Modern Gold Jewelry`}
+        category={slug}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div className="editorial-image-overlay" />
+      <div className="absolute bottom-0 left-0 right-0 p-6 text-charcoal bg-gradient-to-t from-pearl/90 via-pearl/40 to-transparent">
         <h3 className="font-display text-2xl mb-2">{name}</h3>
-        <span className="text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+        <span className="text-sm flex items-center gap-1 group-hover/card:gap-2 group-hover/card:text-gold-dark transition-all duration-[350ms]">
           View Collection <ArrowRight size={14} />
         </span>
       </div>

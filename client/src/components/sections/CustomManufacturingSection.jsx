@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { customHero } from '../../utils/imageConfig';
+import SafeImage from '../SafeImage';
 
 export default function CustomManufacturingSection() {
   return (
     <section className="py-20 px-4 bg-pearl">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div className="rounded-2xl overflow-hidden shadow-xl border border-gold/10 order-2 lg:order-1">
-          <img src={customHero} alt="Custom jewelry manufacturing by Modern Gold Jewelry" className="w-full aspect-[4/3] object-cover" />
+          <SafeImage src={customHero} alt="Woman wearing luxury gold jewelry set — custom jewelry editorial" category="custom-jewelry" className="w-full aspect-[4/3] object-cover" />
         </div>
         <div className="order-1 lg:order-2">
           <p className="section-eyebrow mb-3">Custom Jewelry</p>
@@ -22,7 +23,7 @@ export default function CustomManufacturingSection() {
               </li>
             ))}
           </ul>
-          <Link to="/custom-jewelry" className="inline-flex btn-outline-elegant text-xs">
+          <Link to="/custom-jewelry" className="inline-flex btn-outline-gold text-xs">
             Discuss Your Collection
           </Link>
         </div>

@@ -1,9 +1,9 @@
 export const brand = {
   name: 'Modern Gold Jewelry',
   legalName: 'Modern Gold Jewelry Manufacturing FE LLC',
-  tagline: 'Precision Crafted. Globally Connected.',
+  tagline: 'Crafted in Uzbekistan. Connected to the World.',
   heroSubtitle:
-    'Premium jewelry manufacturing from Uzbekistan for international partners and discerning customers worldwide.',
+    'Premium jewelry manufacturing and collections created for customers, retailers, wholesalers and international partners across Central Asia, Russia, the UK, Singapore, Malaysia, Hong Kong, the United States and Dubai.',
   address: '242 Girvonbulok Street, Namangan Davlatabad, Namangan – Uzbekistan',
   addressLines: [
     '242 Girvonbulok Street',
@@ -13,6 +13,12 @@ export const brand = {
   siteUrl: 'https://mg-jewelry.vercel.app',
   location: 'Namangan, Uzbekistan',
 };
+
+export const socialLinks = [
+  { label: 'Instagram', icon: 'instagram', href: '/contact' },
+  { label: 'Facebook', icon: 'facebook', href: '/contact' },
+  { label: 'LinkedIn', icon: 'linkedin', href: '/contact' },
+];
 
 export const collectionCategories = [
   'rings',
@@ -123,7 +129,7 @@ export const manufacturingSteps = [
   { step: '03', title: 'Casting', desc: 'Precision jewelry manufacturing.' },
   { step: '04', title: 'Finishing', desc: 'Polishing, detailing and surface finishing.' },
   { step: '05', title: 'Quality Control', desc: 'Detailed inspection and quality verification.' },
-  { step: '06', title: 'Delivery', desc: 'Prepared for international customers and business partners.' },
+  { step: '06', title: 'International Delivery', desc: 'Prepared for international customers and business partners.' },
 ];
 
 export const trustIndicators = [
@@ -175,8 +181,11 @@ export const seoKeywords = [
   'jewelry manufacturing',
   'jewelry wholesale',
   'custom jewelry manufacturing',
+  'jewelry supplier',
+  'Central Asia jewelry',
   'international jewelry manufacturer',
-  'private label jewelry manufacturing',
+  'gold jewelry wholesale',
+  'private label jewelry',
 ];
 
 export const heroTrustBadges = [
@@ -193,28 +202,32 @@ export const servicePromises = [
 ];
 
 export const categoryShowcase = [
-  { name: 'Necklaces', slug: 'necklaces' },
   { name: 'Rings', slug: 'rings' },
   { name: 'Earrings', slug: 'earrings' },
   { name: 'Bracelets', slug: 'bracelets' },
+  { name: 'Bangles', slug: 'bangles' },
+  { name: 'Necklaces', slug: 'necklaces' },
   { name: 'Pendants', slug: 'pendants' },
+  { name: 'Diamond Jewelry', slug: 'diamond-jewelry' },
   { name: 'Gold Jewelry', slug: 'gold-jewelry' },
+  { name: 'Bridal Jewelry', slug: 'bridal-jewelry' },
+  { name: 'Custom Jewelry', slug: 'custom-jewelry' },
+  { name: 'Wholesale Collections', slug: 'wholesale-collections' },
 ];
 
 export const footerColumns = {
   shop: [
+    { label: 'Home', path: '/' },
     { label: 'All Collections', path: '/shop' },
     { label: 'Rings', path: '/shop/rings' },
     { label: 'Necklaces', path: '/shop/necklaces' },
-    { label: 'Earrings', path: '/shop/earrings' },
     { label: 'New Arrivals', path: '/shop?sort=newest' },
     { label: 'Best Sellers', path: '/shop?sort=best_selling' },
   ],
   about: [
-    { label: 'Our Story', path: '/about' },
+    { label: 'About', path: '/about' },
+    { label: 'Collections', path: '/shop' },
     { label: 'Custom Jewelry', path: '/custom-jewelry' },
-    { label: 'Wholesale', path: '/wholesale' },
-    { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
   ],
   help: [

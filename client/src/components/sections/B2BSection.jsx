@@ -7,7 +7,7 @@ export default function B2BSection() {
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <p className="section-eyebrow mb-3">Wholesale</p>
-          <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Built for Jewelry Businesses</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Built for Global Jewelry Businesses</h2>
           <p className="text-muted leading-relaxed mb-6">
             We partner with wholesalers, retailers, brands and international buyers who need reliable manufacturing, consistent quality and flexible production capabilities.
           </p>
@@ -20,8 +20,8 @@ export default function B2BSection() {
             ))}
           </ul>
           <div className="flex flex-wrap gap-3">
-            <Link to="/wholesale/register" className="btn-primary-ink text-xs">Become a Partner</Link>
-            <Link to="/contact?type=quote" className="btn-outline-elegant text-xs">Request a Quote</Link>
+            <Link to="/contact?type=quote" className="btn-primary-gold text-xs">Request a Quote</Link>
+            <Link to="/wholesale/register" className="btn-outline-gold text-xs">Become a Partner</Link>
           </div>
         </div>
         <div className="bg-white/70 rounded-2xl p-8 border border-gold/20 shadow-lg shadow-gold/5">

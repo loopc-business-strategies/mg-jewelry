@@ -40,7 +40,7 @@ async function needsBrokenImageFix() {
   if (remoteProduct) return true;
 
   const remoteCategory = await Category.findOne({
-    image: { $not: { $regex: '^/images/products/' } },
+    image: { $not: { $regex: '^/images/(products|categories)/' } },
   }).select('_id').lean();
   if (remoteCategory) return true;
 
@@ -69,7 +69,10 @@ async function fixBrokenImages() {
   let categoryUpdates = 0;
 
   for (const category of categories) {
-    if (!category.image?.startsWith('/images/products/')) {
+    const isValid =
+      category.image?.startsWith('/images/products/') ||
+      category.image?.startsWith('/images/categories/');
+    if (!isValid) {
       category.image = getCategoryImage(category.slug);
       await category.save();
       categoryUpdates += 1;
@@ -127,6 +130,29 @@ async function fixDuplicateImages() {
   console.log(`Reassigned unique product images: ${updates}`);
 }
 
+async function needsCategoryEditorialFix() {
+  const legacyCategory = await Category.findOne({
+    image: { $regex: '^/images/products/' },
+  }).select('_id').lean();
+  return Boolean(legacyCategory);
+}
+
+async function fixCategoryEditorialImages() {
+  const categories = await Category.find({});
+  let updates = 0;
+
+  for (const category of categories) {
+    const nextImage = getCategoryImage(category.slug);
+    if (category.image !== nextImage) {
+      category.image = nextImage;
+      await category.save();
+      updates += 1;
+    }
+  }
+
+  console.log(`Updated category editorial images: ${updates}`);
+}
+
 module.exports = {
   seedDatabase,
   wipeDatabase,
@@ -135,4 +161,6 @@ module.exports = {
   fixBrokenImages,
   needsDuplicateImageFix,
   fixDuplicateImages,
+  needsCategoryEditorialFix,
+  fixCategoryEditorialImages,
 };

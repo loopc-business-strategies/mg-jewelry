@@ -2,29 +2,33 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { brand, heroTrustBadges } from '../../utils/brandConfig';
 import { heroImage } from '../../utils/imageConfig';
+import SafeImage from '../SafeImage';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-[88vh] flex items-center bg-linen overflow-hidden">
-      <div className="absolute inset-0 opacity-40">
-        <img src={heroImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+      <div className="absolute inset-0 opacity-30">
+        <SafeImage src={heroImage} alt="Woman wearing luxury gold necklace — Modern Gold Jewelry editorial" className="w-full h-full object-cover" loading="eager" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-linen via-linen/95 to-linen/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-linen via-linen/95 to-linen/30" />
       <div className="relative max-w-7xl mx-auto px-4 py-16 md:py-24 w-full grid lg:grid-cols-2 gap-12 items-center">
         <div className="animate-reveal max-w-xl">
-          <p className="section-eyebrow mb-4">Timeless Elegance</p>
-          <h1 className="headline-editorial mb-6">
-            Crafted to Shine <em className="italic text-gold-dark">Forever</em>
+          <p className="section-eyebrow mb-4">International Jewelry Manufacturing</p>
+          <h1 className="headline-editorial mb-4">
+            {brand.name}
           </h1>
+          <p className="font-display text-xl md:text-2xl text-gold-dark italic mb-6">
+            {brand.tagline}
+          </p>
           <p className="text-muted text-base md:text-lg leading-relaxed mb-8">
             {brand.heroSubtitle}
           </p>
           <div className="flex flex-wrap items-center gap-4 mb-10">
-            <Link to="/shop" className="btn-primary-ink">
-              Shop Collection <ArrowRight size={14} />
+            <Link to="/shop" className="btn-primary-gold">
+              Explore Collections <ArrowRight size={14} />
             </Link>
-            <Link to="/about" className="text-sm tracking-widest uppercase text-charcoal hover:text-gold transition-colors">
-              Explore Our Story
+            <Link to="/contact?type=quote" className="btn-outline-gold">
+              Request a Quote
             </Link>
           </div>
           <div className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-gold/15">
@@ -36,12 +40,13 @@ export default function HeroSection() {
             ))}
           </div>
         </div>
-        <div className="hidden lg:block animate-reveal">
-          <div className="relative image-zoom-hover rounded-sm overflow-hidden border border-gold/10 shadow-lg shadow-gold/5">
-            <img
+        <div className="hidden lg:block animate-reveal animate-float">
+          <div className="relative image-zoom-hover rounded-sm overflow-hidden border border-gold/20 shadow-lg shadow-gold/10">
+            <SafeImage
               src={heroImage}
-              alt="Premium gold jewelry by Modern Gold Jewelry"
+              alt="Woman wearing luxury gold necklace — Modern Gold Jewelry editorial campaign"
               className="w-full aspect-[4/5] object-cover"
+              loading="eager"
             />
           </div>
         </div>

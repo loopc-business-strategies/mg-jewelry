@@ -6,30 +6,44 @@ import { brand } from '../utils/brandConfig';
 import { MapPin } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+const inquiryTypes = [
+  { id: 'contact', label: 'Contact', subject: '' },
+  { id: 'quote', label: 'Request Quote', subject: 'Quote Request' },
+  { id: 'business', label: 'Business Inquiry', subject: 'Business Inquiry' },
+];
+
 export default function ContactPage() {
-  const [params] = useSearchParams();
-  const isQuote = params.get('type') === 'quote';
+  const [params, setParams] = useSearchParams();
+  const typeParam = params.get('type');
   const productQuery = params.get('product') || '';
+  const activeType = typeParam === 'quote' ? 'quote' : typeParam === 'business' ? 'business' : 'contact';
 
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: isQuote ? 'Quote Request' : productQuery ? `Enquiry: ${productQuery}` : '',
-    message: productQuery ? `I would like to request a quote for: ${productQuery}` : '',
+    subject: '',
+    message: '',
   });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isQuote) setForm((f) => ({ ...f, subject: 'Quote Request' }));
+    const type = inquiryTypes.find((t) => t.id === activeType);
+    let subject = type?.subject || '';
+    let message = '';
     if (productQuery) {
-      setForm((f) => ({
-        ...f,
-        subject: `Enquiry: ${productQuery}`,
-        message: `I would like to request a quote for: ${productQuery}`,
-      }));
+      subject = `Enquiry: ${productQuery}`;
+      message = `I would like to request a quote for: ${productQuery}`;
     }
-  }, [isQuote, productQuery]);
+    setForm((f) => ({ ...f, subject, message: message || f.message }));
+  }, [activeType, productQuery]);
+
+  const setInquiryType = (id) => {
+    const params = new URLSearchParams();
+    if (id === 'quote') params.set('type', 'quote');
+    else if (id === 'business') params.set('type', 'business');
+    setParams(params);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,22 +59,39 @@ export default function ContactPage() {
     }
   };
 
+  const activeLabel = inquiryTypes.find((t) => t.id === activeType)?.label || 'Contact';
+
   return (
     <>
       <SEOHead
-        title={isQuote ? 'Request a Quote' : 'Contact Us'}
+        title={activeLabel}
         description={`Contact ${brand.legalName} for wholesale orders, custom manufacturing and international partnerships.`}
         path="/contact"
       />
 
       <div className="max-w-7xl mx-auto px-4 py-16">
         <p className="section-eyebrow text-center mb-2">Contact</p>
-        <h1 className="font-display text-4xl text-center mb-2">
-          {isQuote ? 'Request a Quote' : 'Contact Us'}
-        </h1>
-        <p className="text-center text-muted mb-12 max-w-xl mx-auto">
+        <h1 className="font-display text-4xl text-center mb-2">{activeLabel}</h1>
+        <p className="text-center text-muted mb-8 max-w-xl mx-auto">
           Reach out to discuss wholesale orders, custom jewelry manufacturing or international partnerships.
         </p>
+
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {inquiryTypes.map((type) => (
+            <button
+              key={type.id}
+              type="button"
+              onClick={() => setInquiryType(type.id)}
+              className={`px-5 py-2.5 text-sm rounded-full border transition-colors ${
+                activeType === type.id
+                  ? 'bg-gold text-white border-gold'
+                  : 'bg-cream border-gold/20 hover:border-gold/40 text-charcoal'
+              }`}
+            >
+              {type.label}
+            </button>
+          ))}
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           <form onSubmit={handleSubmit} className="space-y-4 card-elegant p-8">
@@ -80,8 +111,8 @@ export default function ContactPage() {
               <label className="text-sm font-medium block mb-1">Message</label>
               <textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="input-elegant" />
             </div>
-            <button type="submit" disabled={loading} className="w-full btn-primary-ink justify-center text-xs disabled:opacity-50">
-              {loading ? 'Sending...' : isQuote ? 'Submit Quote Request' : 'Send Message'}
+            <button type="submit" disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
+              {loading ? 'Sending...' : activeType === 'quote' ? 'Submit Quote Request' : 'Send Message'}
             </button>
           </form>
 
@@ -98,8 +129,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-ivory rounded-2xl p-6 border border-gold/10">
-              <h3 className="font-display text-lg mb-3">Business Enquiries</h3>
+            <div className="bg-ivory rounded-2xl p-6 border border-emerald/20">
+              <h3 className="font-display text-lg mb-3 text-emerald">Business Enquiries</h3>
               <p className="text-sm text-muted leading-relaxed mb-4">
                 For wholesale partnerships, custom manufacturing and international orders, use the form or explore our business pages.
               </p>

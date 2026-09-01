@@ -11,6 +11,7 @@ import QuickViewModal from '../components/QuickViewModal';
 import Pagination from '../components/Pagination';
 import SafeImage from '../components/SafeImage';
 import { SlidersHorizontal } from 'lucide-react';
+import { getCategoryImage } from '../utils/imageConfig';
 
 export default function CategoryPage() {
   const { slug } = useParams();
@@ -52,6 +53,8 @@ export default function CategoryPage() {
   }, [slug, searchParams]);
 
   const title = category?.name || slug?.replace(/-/g, ' ');
+  const heroImage = getCategoryImage(slug);
+  const heroAlt = `${title} — luxury gold jewelry editorial by Modern Gold Jewelry`;
 
   return (
     <>
@@ -61,23 +64,25 @@ export default function CategoryPage() {
         path={`/shop/${slug}`}
       />
 
-      {category?.image && (
-        <div className="relative h-48 md:h-64 overflow-hidden">
-          <SafeImage src={category.image} alt={title} category={slug} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <h1 className="font-display text-4xl md:text-5xl text-white">{title}</h1>
-          </div>
+      <div className="relative h-56 md:h-72 overflow-hidden bg-linen">
+        <SafeImage src={heroImage} alt={heroAlt} category={slug} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 editorial-hero-overlay flex items-end justify-center pb-8 md:pb-10">
+          <h1 className="font-display text-4xl md:text-5xl text-charcoal">{title}</h1>
         </div>
-      )}
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Breadcrumbs items={[{ label: 'Shop', path: '/shop' }, { label: title }]} />
+
+        {category?.description && (
+          <p className="text-muted text-sm md:text-base leading-relaxed mb-6 max-w-3xl">{category.description}</p>
+        )}
 
         {category?.subcategories?.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             <button
               onClick={() => { const p = new URLSearchParams(searchParams); p.delete('subcategory'); setSearchParams(p); }}
-              className={`px-4 py-2 rounded-full text-sm ${!subcategory ? 'bg-gold text-white' : 'bg-cream hover:bg-gold/10'}`}
+              className={`px-4 py-2 rounded-full text-sm border transition-colors ${!subcategory ? 'bg-gold text-white border-gold' : 'bg-cream hover:bg-gold/10 border-gold/10'}`}
             >
               All
             </button>
@@ -85,7 +90,7 @@ export default function CategoryPage() {
               <button
                 key={sub.slug}
                 onClick={() => { const p = new URLSearchParams(searchParams); p.set('subcategory', sub.slug); setSearchParams(p); }}
-                className={`px-4 py-2 rounded-full text-sm ${subcategory === sub.slug ? 'bg-gold text-white' : 'bg-cream hover:bg-gold/10'}`}
+                className={`px-4 py-2 rounded-full text-sm border transition-colors ${subcategory === sub.slug ? 'bg-gold text-white border-gold' : 'bg-cream hover:bg-gold/10 border-gold/10'}`}
               >
                 {sub.name}
               </button>

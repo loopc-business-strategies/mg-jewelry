@@ -12,6 +12,9 @@ import QuickViewModal from '../components/QuickViewModal';
 import Pagination from '../components/Pagination';
 import { SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { categoryShowcase } from '../utils/brandConfig';
+
+const shopCategories = categoryShowcase.slice(0, 8);
 
 export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,13 +67,34 @@ export default function ShopPage() {
         <Breadcrumbs items={[{ label: 'Jewellery' }]} />
         <header className="mb-8 md:mb-10">
           <p className="section-eyebrow mb-2">Collections</p>
-          <h1 className="font-display text-3xl md:text-4xl text-charcoal">Jewellery</h1>
+          <h1 className="font-display text-3xl md:text-4xl text-charcoal">All Collections</h1>
+          <p className="text-muted text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
+            Browse premium gold and diamond jewelry — rings, earrings, necklaces, bracelets and more. Crafted in Uzbekistan for international customers and partners.
+          </p>
           {meta.total && (
-            <p className="text-sm text-muted mt-2">
+            <p className="text-sm text-emerald font-medium mt-2">
               Showing {meta.showing} of {meta.total} designs
             </p>
           )}
         </header>
+
+        <div className="flex flex-wrap gap-2 mb-8 pb-6 border-b border-gold/10">
+          <Link
+            to="/shop"
+            className="px-4 py-2 rounded-full text-sm bg-gold text-white"
+          >
+            All
+          </Link>
+          {shopCategories.map((cat) => (
+            <Link
+              key={cat.slug}
+              to={`/shop/${cat.slug}`}
+              className="px-4 py-2 rounded-full text-sm bg-cream hover:bg-gold/10 border border-gold/10 hover:border-gold/30 transition-colors"
+            >
+              {cat.name}
+            </Link>
+          ))}
+        </div>
 
         <div className="flex gap-8">
           <ProductFilter filters={filters} onChange={updateFilters} />

@@ -11,8 +11,8 @@ export default function ContactCTASection() {
           Contact {brand.legalName} to discuss wholesale orders, custom manufacturing or international partnerships.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/contact?type=quote" className="btn-primary-ink text-xs">Request a Quote</Link>
-          <Link to="/contact" className="btn-outline-elegant text-xs">Contact Us</Link>
+          <Link to="/contact?type=quote" className="btn-primary-gold text-xs">Request a Quote</Link>
+          <Link to="/contact" className="btn-outline-gold text-xs">Contact Us</Link>
         </div>
       </div>
     </section>

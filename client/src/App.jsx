@@ -5,22 +5,25 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { WholesaleCartProvider } from './context/WholesaleCartContext';
+import { MarketProvider } from './context/MarketContext';
 import AppRouter from './routes/AppRouter';
 
 export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <AuthProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <WholesaleCartProvider>
-                <AppRouter />
-                <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
-              </WholesaleCartProvider>
-            </WishlistProvider>
-          </CartProvider>
-        </AuthProvider>
+        <MarketProvider>
+          <AuthProvider>
+            <CartProvider>
+              <WishlistProvider>
+                <WholesaleCartProvider>
+                  <AppRouter />
+                  <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
+                </WholesaleCartProvider>
+              </WishlistProvider>
+            </CartProvider>
+          </AuthProvider>
+        </MarketProvider>
       </BrowserRouter>
     </HelmetProvider>
   );

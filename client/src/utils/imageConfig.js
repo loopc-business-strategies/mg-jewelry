@@ -1,12 +1,10 @@
 const LOCAL = (file) => `/images/products/${file}`;
+const CATEGORY_LIFESTYLE = (slug) => `/images/categories/${slug}.jpg`;
+const EDITORIAL = (file) => `/images/editorial/${file}`;
 
 const UNSPLASH = (id, w = 800) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
 
-export const PRODUCT_IMAGES = Array.from({ length: 32 }, (_, i) =>
-  LOCAL(`product-${String(i + 1).padStart(2, '0')}.jpg`)
-);
-
-export const CATEGORY_FALLBACKS = {
+const PRODUCT_CATEGORY_FALLBACKS = {
   rings: LOCAL('ring-01.jpg'),
   earrings: LOCAL('earring-01.jpg'),
   necklaces: LOCAL('necklace-01.jpg'),
@@ -16,9 +14,30 @@ export const CATEGORY_FALLBACKS = {
   'diamond-jewelry': LOCAL('ring-01.jpg'),
   'custom-jewelry': LOCAL('default-01.jpg'),
   'bridal-jewelry': LOCAL('necklace-01.jpg'),
-  'fashion-jewelry': LOCAL('earring-01.jpg'),
+  'fashion-jewelry': LOCAL('earring-02.jpg'),
   'wholesale-collections': LOCAL('gold-set-01.jpg'),
   bangles: LOCAL('bracelet-01.jpg'),
+  gifting: LOCAL('default-01.jpg'),
+  default: LOCAL('default-01.jpg'),
+};
+
+export const PRODUCT_IMAGES = Array.from({ length: 32 }, (_, i) =>
+  LOCAL(`product-${String(i + 1).padStart(2, '0')}.jpg`)
+);
+
+export const CATEGORY_FALLBACKS = {
+  rings: CATEGORY_LIFESTYLE('rings'),
+  earrings: CATEGORY_LIFESTYLE('earrings'),
+  necklaces: CATEGORY_LIFESTYLE('necklaces'),
+  bracelets: CATEGORY_LIFESTYLE('bracelets'),
+  pendants: CATEGORY_LIFESTYLE('pendants'),
+  'gold-jewelry': CATEGORY_LIFESTYLE('gold-jewelry'),
+  'diamond-jewelry': CATEGORY_LIFESTYLE('diamond-jewelry'),
+  'custom-jewelry': CATEGORY_LIFESTYLE('custom-jewelry'),
+  'bridal-jewelry': CATEGORY_LIFESTYLE('bridal-jewelry'),
+  'fashion-jewelry': CATEGORY_LIFESTYLE('earrings'),
+  'wholesale-collections': CATEGORY_LIFESTYLE('wholesale-collections'),
+  bangles: CATEGORY_LIFESTYLE('bangles'),
   gifting: LOCAL('default-01.jpg'),
   default: LOCAL('default-01.jpg'),
 };
@@ -84,6 +103,11 @@ export const getCategoryFallback = (category, subcategory) => {
   return CATEGORY_FALLBACKS[slug] || CATEGORY_FALLBACKS.default;
 };
 
+export const getProductCategoryFallback = (category, subcategory) => {
+  const slug = resolveCategory(category, subcategory);
+  return PRODUCT_CATEGORY_FALLBACKS[slug] || PRODUCT_CATEGORY_FALLBACKS.default;
+};
+
 export const resolveProductImage = (product, index = 0) => {
   const url = product?.images?.[index];
   if (url && typeof url === 'string' && url.trim()) return url.trim();
@@ -99,25 +123,52 @@ export const getProductAlt = (product, index = 0) => {
   return index > 0 ? `${name} — alternate view` : `${name} — ${cat} by Modern Gold Jewelry`;
 };
 
-export const heroImage = UNSPLASH('1605100804763-247f67b3557e', 1600);
-export const premiumBanner = LOCAL('necklace-01.jpg');
-export const aboutHero = LOCAL('bracelet-01.jpg');
-export const wholesaleHero = LOCAL('ring-01.jpg');
-export const customHero = LOCAL('default-01.jpg');
+const SVG = (file) => `/images/fallbacks/${file}`;
+
+export const CATEGORY_SVG_FALLBACKS = {
+  rings: SVG('product-fallback-ring.svg'),
+  earrings: SVG('product-fallback-earring.svg'),
+  necklaces: SVG('product-fallback-necklace.svg'),
+  bracelets: SVG('product-fallback-bracelet.svg'),
+  pendants: SVG('product-fallback-pendant.svg'),
+  'gold-jewelry': SVG('product-fallback-default.svg'),
+  'diamond-jewelry': SVG('product-fallback-ring.svg'),
+  'custom-jewelry': SVG('product-fallback-default.svg'),
+  'bridal-jewelry': SVG('product-fallback-necklace.svg'),
+  'fashion-jewelry': SVG('product-fallback-earring.svg'),
+  'wholesale-collections': SVG('product-fallback-default.svg'),
+  bangles: SVG('product-fallback-bracelet.svg'),
+  default: SVG('product-fallback-default.svg'),
+};
+
+export function getCategorySvgFallback(category, subcategory) {
+  const slug = resolveCategory(category, subcategory);
+  return CATEGORY_SVG_FALLBACKS[slug] || CATEGORY_SVG_FALLBACKS.default;
+}
+
+export const heroImage = EDITORIAL('hero.jpg');
+export const premiumBanner = EDITORIAL('collection-promo.jpg');
+export const aboutHero = EDITORIAL('about.jpg');
+export const wholesaleHero = EDITORIAL('wholesale.jpg');
+export const customHero = EDITORIAL('custom.jpg');
 
 export const categoryImages = {
-  rings: LOCAL('ring-01.jpg'),
-  earrings: LOCAL('earring-01.jpg'),
-  necklaces: LOCAL('necklace-01.jpg'),
-  bracelets: LOCAL('bracelet-01.jpg'),
-  pendants: LOCAL('pendant-01.jpg'),
-  'gold-jewelry': LOCAL('gold-set-01.jpg'),
-  'diamond-jewelry': LOCAL('ring-01.jpg'),
-  'bridal-jewelry': LOCAL('necklace-02.jpg'),
-  'fashion-jewelry': LOCAL('earring-02.jpg'),
-  'wholesale-collections': LOCAL('gold-set-01.jpg'),
-  bangles: LOCAL('bracelet-01.jpg'),
+  rings: CATEGORY_LIFESTYLE('rings'),
+  earrings: CATEGORY_LIFESTYLE('earrings'),
+  necklaces: CATEGORY_LIFESTYLE('necklaces'),
+  bracelets: CATEGORY_LIFESTYLE('bracelets'),
+  pendants: CATEGORY_LIFESTYLE('pendants'),
+  bangles: CATEGORY_LIFESTYLE('bangles'),
+  'gold-jewelry': CATEGORY_LIFESTYLE('gold-jewelry'),
+  'diamond-jewelry': CATEGORY_LIFESTYLE('diamond-jewelry'),
+  'bridal-jewelry': CATEGORY_LIFESTYLE('bridal-jewelry'),
+  'custom-jewelry': CATEGORY_LIFESTYLE('custom-jewelry'),
+  'wholesale-collections': CATEGORY_LIFESTYLE('wholesale-collections'),
+  'fashion-jewelry': CATEGORY_LIFESTYLE('earrings'),
 };
+
+export const getCategoryImage = (slug) =>
+  categoryImages[slug] || categoryImages['gold-jewelry'] || CATEGORY_FALLBACKS.default;
 
 export const marketAccentColors = [
   'from-coral/20 to-champagne',

@@ -25,7 +25,7 @@ export default function EcommerceMegaMenu({ onClose }) {
           </ul>
           <Link
             to={retail.cta.path}
-            className="inline-flex bg-ink text-white text-xs font-medium px-5 py-2.5 tracking-wide uppercase hover:opacity-90 transition-opacity"
+            className="inline-flex btn-primary-gold text-xs px-5 py-2.5"
             onClick={onClose}
           >
             {retail.cta.label}
