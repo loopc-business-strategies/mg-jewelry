@@ -12,6 +12,8 @@ const {
   isLegacyImagePath,
   isCatalogProductImagePath,
   isValidProductImagePath,
+  CHAIN_CATALOG,
+  BANGLE_CATALOG,
 } = require('../config/productImages');
 
 function isValidStoredProductImage(url) {
@@ -100,14 +102,29 @@ async function fixBrokenImages() {
 }
 
 async function needsCatalogImageMigration() {
-  const products = await Product.find({}).select('images category subcategory sku').lean();
+  const products = await Product.find({}).select('images category sku').lean();
   if (!products.length) return false;
 
+  const primaries = new Set();
   for (const product of products) {
-    const expected = getProductImages(product.category, product.subcategory, product.sku);
     const primary = product.images?.[0];
     if (!isCatalogProductImagePath(primary)) return true;
-    if (primary !== expected[0]) return true;
+    if (primaries.has(primary)) return true;
+    primaries.add(primary);
+  }
+
+  const chainProducts = products
+    .filter((product) => product.category === 'chains')
+    .sort((a, b) => a.sku.localeCompare(b.sku));
+  for (let i = 0; i < chainProducts.length; i += 1) {
+    if (chainProducts[i].images?.[0] !== CHAIN_CATALOG[i % CHAIN_CATALOG.length]) return true;
+  }
+
+  const bangleProducts = products
+    .filter((product) => product.category === 'bangles')
+    .sort((a, b) => a.sku.localeCompare(b.sku));
+  for (let i = 0; i < bangleProducts.length; i += 1) {
+    if (bangleProducts[i].images?.[0] !== BANGLE_CATALOG[i % BANGLE_CATALOG.length]) return true;
   }
 
   const categories = await Category.find({}).select('image slug').lean();
@@ -120,18 +137,30 @@ async function needsCatalogImageMigration() {
 }
 
 async function migrateToCatalogImages() {
-  const products = await Product.find({});
   let productUpdates = 0;
 
-  for (const product of products) {
-    const nextImages = getProductImages(product.category, product.subcategory, product.sku);
+  const chainProducts = await Product.find({ category: 'chains' }).sort({ sku: 1 });
+  for (let i = 0; i < chainProducts.length; i += 1) {
+    const nextImages = [CHAIN_CATALOG[i % CHAIN_CATALOG.length]];
     const same =
-      product.images?.length === nextImages.length &&
-      product.images.every((url, i) => url === nextImages[i]);
-
+      chainProducts[i].images?.length === nextImages.length &&
+      chainProducts[i].images.every((url, idx) => url === nextImages[idx]);
     if (!same) {
-      product.images = nextImages;
-      await product.save();
+      chainProducts[i].images = nextImages;
+      await chainProducts[i].save();
+      productUpdates += 1;
+    }
+  }
+
+  const bangleProducts = await Product.find({ category: 'bangles' }).sort({ sku: 1 });
+  for (let i = 0; i < bangleProducts.length; i += 1) {
+    const nextImages = [BANGLE_CATALOG[i % BANGLE_CATALOG.length]];
+    const same =
+      bangleProducts[i].images?.length === nextImages.length &&
+      bangleProducts[i].images.every((url, idx) => url === nextImages[idx]);
+    if (!same) {
+      bangleProducts[i].images = nextImages;
+      await bangleProducts[i].save();
       productUpdates += 1;
     }
   }

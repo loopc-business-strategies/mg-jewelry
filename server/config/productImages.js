@@ -89,10 +89,10 @@ function getProductImages(category, subcategory, skuOrIndex = 0) {
   const index = parseSkuIndex(skuOrIndex);
   const slug = resolveCategory(category, subcategory);
   if (slug === 'bangles') {
-    const bangleIdx = Math.min(Math.max(index - CHAIN_CATALOG.length, 0), BANGLE_CATALOG.length - 1);
+    const bangleIdx = index % BANGLE_CATALOG.length;
     return [BANGLE_CATALOG[bangleIdx]];
   }
-  const chainIdx = Math.min(index, CHAIN_CATALOG.length - 1);
+  const chainIdx = index % CHAIN_CATALOG.length;
   return [CHAIN_CATALOG[chainIdx]];
 }
 
