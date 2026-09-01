@@ -7,15 +7,17 @@ import { useTranslation } from '../../hooks/useTranslation';
 
 function DualPathCard({ image, imageAlt, eyebrow, title, description, steps, ctaTo, ctaLabel, ctaClass }) {
   return (
-    <div className="dual-path-card relative overflow-hidden rounded-xl border border-border shadow-sm min-h-[480px] flex flex-col">
-      <SafeImage
-        src={image}
-        alt={imageAlt}
-        disableFallback
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/88" />
-      <div className="relative z-10 p-8 flex flex-col flex-1">
+    <div className="dual-path-card flex flex-col overflow-hidden rounded-xl border border-border shadow-sm bg-white">
+      <div className="relative h-44 md:h-52 shrink-0 overflow-hidden">
+        <SafeImage
+          src={image}
+          alt={imageAlt}
+          disableFallback
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white/40 to-transparent" />
+      </div>
+      <div className="p-8 flex flex-col flex-1">
         <p className="section-eyebrow mb-2">{eyebrow}</p>
         <h3 className="text-2xl font-semibold text-charcoal mb-3">{title}</h3>
         <p className="text-muted text-sm mb-6">{description}</p>
