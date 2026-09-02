@@ -23,12 +23,21 @@ export default function OurMGHeroSection() {
           </div>
         </div>
 
-        <div className="flex justify-center animate-reveal">
+        <div className="our-mg-hero-phones animate-reveal" aria-hidden="true">
+          <PhoneMockup
+            screen="products"
+            placeholderName="Products"
+            className="our-mg-hero-phone our-mg-hero-phone--left"
+          />
           <PhoneMockup
             screen="home"
-            placeholderNumber="01"
             placeholderName="Our MG"
-            large
+            className="our-mg-hero-phone our-mg-hero-phone--center"
+          />
+          <PhoneMockup
+            screen="orders"
+            placeholderName="Bookings"
+            className="our-mg-hero-phone our-mg-hero-phone--right"
           />
         </div>
       </div>
