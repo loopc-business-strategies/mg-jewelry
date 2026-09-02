@@ -20,7 +20,7 @@ export default function BlogPostPage() {
       <article className="max-w-3xl mx-auto px-4 py-16">
         <Link to="/blog" className="text-sm text-gold-dark hover:underline mb-4 inline-block">← Back to Blog</Link>
         <span className="text-xs text-gold uppercase tracking-wider">{blog.category}</span>
-        <h1 className="font-semibold text-charcoal text-4xl mt-2 mb-4">{blog.title}</h1>
+        <h1 className="mt-2 mb-4">{blog.title}</h1>
         <p className="text-sm text-muted mb-8">By {blog.author}</p>
         {blog.image && <SafeImage src={blog.image} alt={blog.title} category="rings" className="w-full rounded-xl mb-8" />}
         <div className="prose text-muted leading-relaxed">{blog.content}</div>

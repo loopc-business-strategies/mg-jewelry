@@ -120,7 +120,7 @@ export default function WholesalePage() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categoryIcons.map((cat) => (
               <Link key={cat.slug} to={`/wholesale/shop?category=${cat.slug}`} className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-2">{cat.icon}</div>
+                <div className="text-2xl mb-2">{cat.icon}</div>
                 <span className="text-sm font-medium">{cat.name}</span>
               </Link>
             ))}

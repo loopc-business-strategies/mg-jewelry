@@ -29,7 +29,7 @@ export default function ProfilePage() {
     <>
       <SEOHead title="My Account" path="/profile" />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="font-semibold text-charcoal text-3xl mb-8">My Account</h1>
+        <h1 className="mb-8">My Account</h1>
         <div className="grid md:grid-cols-4 gap-8">
           <nav className="space-y-1">
             {tabs.map(({ id, icon: Icon, label }) => (

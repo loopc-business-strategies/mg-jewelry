@@ -28,7 +28,7 @@ export default function WholesaleShopPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="font-semibold text-charcoal text-3xl">Wholesale Collection</h1>
+            <h1>Wholesale Collection</h1>
             {!showPrices && (
               <p className="text-sm text-muted mt-1">
                 <Link to="/wholesale/register" className="text-gold-dark hover:underline">Register & get approved</Link> to view wholesale pricing

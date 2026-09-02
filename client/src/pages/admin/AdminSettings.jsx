@@ -45,7 +45,7 @@ export default function AdminSettings() {
 
   return (
     <div className="p-8 space-y-8">
-      <h1 className="font-semibold text-charcoal text-3xl">Settings</h1>
+      <h1>Settings</h1>
 
       <div className="bg-white rounded-xl p-6 shadow-sm border max-w-2xl">
         <h2 className="font-semibold text-charcoal text-xl mb-4">Bulk Pricing Tiers</h2>

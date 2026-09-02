@@ -18,7 +18,7 @@ export default function BrandLogo({ variant = 'header', className = '', linkTo =
   if (variant === 'auth') {
     const authContent = (
       <div className={`flex flex-col items-center mb-6 ${className}`}>
-        <span className="font-display text-2xl text-charcoal tracking-wide">{brand.name}</span>
+        <span className="font-display text-lg text-charcoal tracking-wide">{brand.name}</span>
         <span className="text-[10px] tracking-[0.25em] uppercase text-muted mt-1">Fine Jewelry</span>
       </div>
     );

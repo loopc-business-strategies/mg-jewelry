@@ -13,10 +13,10 @@ export default function HeroBanner({ title, subtitle, image, primaryLink = '/sho
       <div className="absolute inset-0 bg-gradient-to-r from-pearl/90 via-cream/75 to-transparent" />
       <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center">
         <div className="max-w-xl text-charcoal animate-fade-in">
-          <h1 className="font-semibold text-charcoal text-4xl md:text-6xl leading-tight mb-4">{title}</h1>
-          <p className="text-lg text-muted mb-8">{subtitle}</p>
+          <h1 className="type-hero-title mb-4">{title}</h1>
+          <p className="type-body mb-8">{subtitle}</p>
           <div className="flex gap-4 flex-wrap">
-            <Link to={primaryLink} className="btn-primary-gold text-xs">
+            <Link to={primaryLink} className="btn-primary-gold">
               Explore Collections
             </Link>
             <Link to={secondaryLink} className="border-2 border-border text-gold-dark hover:bg-gold hover:text-white px-8 py-3 rounded-md text-sm font-medium tracking-wider transition-colors">
@@ -38,7 +38,7 @@ export function ProductCarousel({ products, title }) {
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-semibold text-charcoal text-3xl">{title}</h2>
+        <h2 className="type-section-title">{title}</h2>
         <div className="flex gap-2">
           <button onClick={() => setStart(Math.max(0, start - 1))} className="p-2 border border-border rounded-full hover:border-border transition-colors" disabled={start === 0}>
             <ChevronLeft size={18} />
@@ -76,7 +76,7 @@ export function CategoryCard({ name, slug, image }) {
       />
       <div className="editorial-image-overlay" />
       <div className="absolute bottom-0 left-0 right-0 p-6 text-charcoal bg-gradient-to-t from-pearl/90 via-pearl/40 to-transparent">
-        <h3 className="font-semibold text-charcoal text-2xl mb-2">{name}</h3>
+        <h3 className="type-card-title mb-2">{name}</h3>
         <span className="text-sm flex items-center gap-1 group-hover/card:gap-2 group-hover/card:text-gold-dark transition-all duration-[350ms]">
           View Collection <ArrowRight size={14} />
         </span>

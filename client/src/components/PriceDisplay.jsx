@@ -14,7 +14,7 @@ export function useFormatPrice() {
 export default function PriceDisplay({ price, mrp, size = 'md', showEmi = false }) {
   const formatPrice = useFormatPrice();
   const discount = mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0;
-  const sizes = { sm: 'text-sm', md: 'text-lg', lg: 'text-2xl' };
+  const sizes = { sm: 'text-sm', md: 'text-base', lg: 'text-lg' };
 
   return (
     <div>

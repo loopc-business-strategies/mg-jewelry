@@ -31,7 +31,7 @@ export default function B2BSection() {
           </div>
         </div>
         <div className="bg-white rounded-2xl p-8 border border-border shadow-sm">
-          <h3 className="type-section-title text-xl md:text-2xl mb-4">Discuss Your Collection</h3>
+          <h3 className="type-card-title mb-4">Discuss Your Collection</h3>
           <p className="type-card-desc mb-6">
             Whether you need wholesale collections, private-label jewelry or ongoing manufacturing partnerships — our team in Namangan is ready to support your business.
           </p>

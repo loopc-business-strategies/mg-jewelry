@@ -25,7 +25,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="p-8">
-      <h1 className="font-semibold text-charcoal text-3xl mb-8">Dashboard</h1>
+      <h1 className="mb-8">Dashboard</h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map(({ label, value, icon: Icon }) => (
           <div key={label} className="bg-white rounded-xl p-5 shadow-sm border">
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
               <span className="text-sm text-muted">{label}</span>
               <Icon size={18} className="text-gold" />
             </div>
-            <p className="text-2xl font-semibold">{value}</p>
+            <p className="type-stat">{value}</p>
           </div>
         ))}
       </div>

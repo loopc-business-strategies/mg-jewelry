@@ -24,7 +24,7 @@ export default function AdminOrders() {
 
   return (
     <div className="p-8">
-      <h1 className="font-semibold text-charcoal text-3xl mb-8">Orders</h1>
+      <h1 className="mb-8">Orders</h1>
       <div className="space-y-4">
         {orders.map((o) => (
           <div key={o._id} className="bg-white rounded-xl p-4 shadow-sm border">

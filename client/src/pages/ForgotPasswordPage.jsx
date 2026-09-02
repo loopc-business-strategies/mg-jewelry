@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
       <div className="min-h-[60vh] flex items-center justify-center px-4 py-16 bg-white">
         <div className="w-full max-w-md text-center">
           <BrandLogo variant="auth" linkTo={null} />
-          <h1 className="font-semibold text-charcoal text-3xl mb-4">Reset Password</h1>
+          <h1 className="mb-4">Reset Password</h1>
           {sent ? (
             <p className="text-muted mb-6">Check your email for a reset link. It expires in 1 hour.</p>
           ) : (

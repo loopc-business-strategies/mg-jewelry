@@ -78,7 +78,7 @@ export default function GoldBuyingPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-16">
         <div>
-          <h2 className="type-card-title text-xl mb-6">How It Works</h2>
+          <h2 className="type-card-title mb-6">How It Works</h2>
           <ol className="space-y-3">
             {(Array.isArray(steps) ? steps : goldBuyingSteps).map((step, i) => (
               <li key={step} className="flex gap-3 type-body-sm text-charcoal">
@@ -93,7 +93,7 @@ export default function GoldBuyingPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white border border-border p-6 md:p-8 rounded-xl space-y-4 shadow-sm">
-          <h2 className="type-card-title text-xl mb-2">Request Gold Valuation</h2>
+          <h2 className="type-card-title mb-2">Request Gold Valuation</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
               <label className="type-form-label">Full Name *</label>

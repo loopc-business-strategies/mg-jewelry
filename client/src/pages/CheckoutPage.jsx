@@ -114,7 +114,7 @@ export default function CheckoutPage() {
     <>
       <SEOHead title="Checkout" path="/checkout" />
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="font-semibold text-charcoal text-3xl mb-8 text-center">Checkout</h1>
+        <h1 className="mb-8 text-center">Checkout</h1>
 
         <div className="flex justify-between mb-10">
           {steps.map((s, i) => (
@@ -192,7 +192,7 @@ export default function CheckoutPage() {
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
               <Check size={32} className="text-green-600" />
             </div>
-            <h2 className="font-semibold text-charcoal text-2xl">Order Confirmed!</h2>
+            <h2 className="type-card-title">Order Confirmed!</h2>
             <p className="text-muted">Order #{order.orderNumber}</p>
             <p className="text-sm">Total: {formatPrice(order.total)}</p>
             <Link to="/shop" className="inline-block btn-primary-gold text-xs mt-4">Continue Shopping</Link>

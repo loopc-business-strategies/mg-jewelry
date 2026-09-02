@@ -74,7 +74,7 @@ export default function OurPresenceSection() {
 
         <div className="section-cream rounded-xl border border-border p-8 md:p-10 mb-10">
           <div className="presence-gradient-accent w-12 h-1 rounded-full mb-5" />
-          <h3 className="type-section-title text-xl md:text-2xl mb-3">{t('presence.trustTitle')}</h3>
+          <h3 className="type-card-title mb-3">{t('presence.trustTitle')}</h3>
           <p className="type-section-desc max-w-3xl">{t('presence.trustDesc')}</p>
         </div>
 
@@ -82,7 +82,7 @@ export default function OurPresenceSection() {
           <LocationVisual />
           <div>
             <p className="section-eyebrow mb-1">{t('presence.locationEyebrow')}</p>
-            <p className="type-card-title text-lg md:text-xl">{t('presence.location')}</p>
+            <p className="type-card-title">{t('presence.location')}</p>
           </div>
         </div>
       </div>

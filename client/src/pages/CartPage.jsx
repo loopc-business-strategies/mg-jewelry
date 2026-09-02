@@ -57,7 +57,7 @@ export default function CartPage() {
       <SEOHead title="Shopping Cart" path="/cart" />
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
         <Breadcrumbs items={[{ label: 'Cart' }]} />
-        <h1 className="font-semibold text-charcoal text-3xl md:text-4xl mb-8">Shopping Cart</h1>
+        <h1 className="mb-8">Shopping Cart</h1>
 
         {!cart.items?.length ? (
           <EmptyState

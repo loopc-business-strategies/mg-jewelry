@@ -16,7 +16,7 @@ export default function CustomJewelryPage() {
       />
       <section className="relative py-24 px-4 section-cream">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-semibold text-charcoal text-4xl md:text-5xl mb-4">Custom Jewelry Manufacturing</h1>
+          <h1 className="mb-4">Custom Jewelry Manufacturing</h1>
           <p className="text-muted text-lg leading-relaxed">
             Partner with {brand.name} for bespoke designs, private-label jewelry and tailored production runs built to your brand specifications.
           </p>

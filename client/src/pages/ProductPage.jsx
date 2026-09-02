@@ -120,7 +120,7 @@ export default function ProductPage() {
           <ProductGallery product={product} />
 
           <div>
-            <h1 className="type-card-title text-xl md:text-2xl mb-2">{product.name}</h1>
+            <h1 className="type-card-title mb-2">{product.name}</h1>
             <div className="mb-3">
               <StarRating rating={product.rating} reviewCount={product.reviewCount} />
             </div>
@@ -264,7 +264,7 @@ export default function ProductPage() {
 
         {similar.length > 0 && (
           <section className="mt-16">
-            <h2 className="type-section-title text-xl md:text-2xl mb-6">You May Also Like</h2>
+            <h2 className="type-section-title mb-6">You May Also Like</h2>
             <ProductGrid products={similar} />
           </section>
         )}

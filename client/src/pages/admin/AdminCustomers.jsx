@@ -10,7 +10,7 @@ export default function AdminCustomers() {
 
   return (
     <div className="p-8">
-      <h1 className="font-semibold text-charcoal text-3xl mb-8">Customers</h1>
+      <h1 className="mb-8">Customers</h1>
       <div className="bg-white rounded-xl shadow-sm border overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-50">

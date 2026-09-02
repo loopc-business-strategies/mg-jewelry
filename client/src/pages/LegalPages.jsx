@@ -7,7 +7,7 @@ export default function LegalPage({ title, content }) {
     <>
       <SEOHead title={title} path={`/${title.toLowerCase().replace(/\s+/g, '-')}`} />
       <div className="max-w-3xl mx-auto px-4 py-16">
-        <h1 className="font-semibold text-charcoal text-4xl mb-8">{title}</h1>
+        <h1 className="mb-8">{title}</h1>
         <div className="text-muted leading-relaxed space-y-4 text-sm">{content}</div>
       </div>
     </>

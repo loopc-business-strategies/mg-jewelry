@@ -15,7 +15,7 @@ export default function BlogPage() {
     <>
       <SEOHead title="Blog" description="Jewellery guides, buying tips, and fashion trends." path="/blog" />
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <h1 className="font-semibold text-charcoal text-4xl text-center mb-12">Jewellery Journal</h1>
+        <h1 className="text-center mb-12">Jewellery Journal</h1>
         <div className="grid md:grid-cols-3 gap-8">
           {blogs.map((blog) => (
             <Link key={blog._id} to={`/blog/${blog.slug}`} className="group">

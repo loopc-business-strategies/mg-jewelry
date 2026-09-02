@@ -118,7 +118,7 @@ export default function ContactPage() {
 
           <div className="space-y-6">
             <div className="bg-white rounded-2xl p-8 border border-border">
-              <h2 className="type-section-title text-xl md:text-2xl mb-4">{brand.legalName}</h2>
+              <h2 className="type-section-title mb-4">{brand.legalName}</h2>
               <div className="flex gap-4">
                 <MapPin size={20} className="text-gold shrink-0 mt-1" />
                 <address className="type-body-sm not-italic leading-relaxed">
