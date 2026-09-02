@@ -966,10 +966,6 @@ h5, h6 {
   }
 }
 
-.our-mg-gold-visual {
-  position: relative;
-}
-
 .our-mg-step-row {
   display: grid;
   grid-template-columns: 1fr;
