@@ -227,6 +227,11 @@ export const marketAccentColors = [
   'from-burgundy/10 to-champagne',
 ];
 
+export const ourMgEditorial = {
+  buyGold: dualPathImages.buyGold,
+  sellGold: dualPathImages.sellGold,
+};
+
 export const ourMgScreens = {
   login: '/images/our-mg/login.png',
   home: '/images/our-mg/home.png',
@@ -236,10 +241,9 @@ export const ourMgScreens = {
   orders: '/images/our-mg/orders.png',
 };
 
-export const ourMgShowcaseScreens = [
-  { id: 'login', labelKey: 'login', number: '01' },
-  { id: 'home', labelKey: 'dashboard', number: '02' },
-  { id: 'products', labelKey: 'products', number: '03' },
-  { id: 'orders', labelKey: 'orders', number: '04' },
-  { id: 'profile', labelKey: 'profile', number: '05' },
+export const ourMgAppExperienceScreens = [
+  { id: 'home', number: '01', name: 'Our MG' },
+  { id: 'products', number: '02', name: 'Products' },
+  { id: 'orders', number: '03', name: 'Orders' },
+  { id: 'profile', number: '04', name: 'Profile' },
 ];

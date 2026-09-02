@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
+import SafeImage from '../../SafeImage';
 import PhoneMockup from '../../our-mg/PhoneMockup';
+import { dualPathImages } from '../../../utils/imageConfig';
 import { useTranslation } from '../../../hooks/useTranslation';
 
 export default function OurMGHeroSection() {
@@ -13,7 +15,7 @@ export default function OurMGHeroSection() {
           <h1 className="type-hero-title mb-5">{t('ourMg.hero.title')}</h1>
           <p className="type-hero-desc prose-hero mb-8">{t('ourMg.hero.description')}</p>
           <div className="flex flex-wrap items-center gap-3">
-            <a href="#download" className="btn-primary-gold">
+            <a href="#about" className="btn-primary-gold">
               {t('ourMg.hero.primaryCta')}
             </a>
             <Link to="/" className="btn-outline-gold">
@@ -22,25 +24,22 @@ export default function OurMGHeroSection() {
           </div>
         </div>
 
-        <div className="our-mg-hero-phones relative mx-auto lg:mx-0 w-full max-w-[360px] lg:max-w-none h-[420px] md:h-[480px] animate-reveal">
-          <PhoneMockup
-            screen="login"
-            placeholderNumber="01"
-            placeholderName="Login"
-            className="our-mg-hero-phone our-mg-hero-phone--back"
-          />
-          <PhoneMockup
-            screen="products"
-            placeholderNumber="03"
-            placeholderName="Products"
-            className="our-mg-hero-phone our-mg-hero-phone--mid"
-          />
-          <PhoneMockup
-            screen="home"
-            placeholderNumber="02"
-            placeholderName="Home"
-            className="our-mg-hero-phone our-mg-hero-phone--front"
-          />
+        <div className="relative animate-reveal">
+          <div className="our-mg-gold-visual rounded-2xl overflow-hidden border border-border shadow-[var(--shadow-soft)] mb-6 lg:mb-0 lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[55%] lg:z-0">
+            <SafeImage
+              src={dualPathImages.buyGold}
+              alt="Gold products — Modern Gold"
+              className="w-full aspect-[4/3] object-cover"
+            />
+          </div>
+          <div className="flex justify-center lg:justify-end relative z-[1] lg:pt-8">
+            <PhoneMockup
+              screen="home"
+              placeholderNumber="01"
+              placeholderName="Our MG"
+              large
+            />
+          </div>
         </div>
       </div>
     </section>

@@ -1,11 +1,12 @@
 import SEOHead from '../components/SEOHead';
 import OurMGHeroSection from '../components/sections/our-mg/OurMGHeroSection';
 import OurMGAboutSection from '../components/sections/our-mg/OurMGAboutSection';
+import OurMGBuyGoldSection from '../components/sections/our-mg/OurMGBuyGoldSection';
+import OurMGSellGoldSection from '../components/sections/our-mg/OurMGSellGoldSection';
+import OurMGCollectionCentersSection from '../components/sections/our-mg/OurMGCollectionCentersSection';
 import OurMGWhySection from '../components/sections/our-mg/OurMGWhySection';
-import OurMGFeaturesSection from '../components/sections/our-mg/OurMGFeaturesSection';
-import OurMGShowcaseSection from '../components/sections/our-mg/OurMGShowcaseSection';
-import OurMGDifferentSection from '../components/sections/our-mg/OurMGDifferentSection';
-import OurMGDownloadSection from '../components/sections/our-mg/OurMGDownloadSection';
+import OurMGConnectSection from '../components/sections/our-mg/OurMGConnectSection';
+import OurMGAppExperienceSection from '../components/sections/our-mg/OurMGAppExperienceSection';
 import OurMGFinalCTASection from '../components/sections/our-mg/OurMGFinalCTASection';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -21,11 +22,12 @@ export default function OurMGPage() {
       />
       <OurMGHeroSection />
       <OurMGAboutSection />
+      <OurMGBuyGoldSection />
+      <OurMGSellGoldSection />
+      <OurMGCollectionCentersSection />
       <OurMGWhySection />
-      <OurMGFeaturesSection />
-      <OurMGShowcaseSection />
-      <OurMGDifferentSection />
-      <OurMGDownloadSection />
+      <OurMGConnectSection />
+      <OurMGAppExperienceSection />
       <OurMGFinalCTASection />
     </>
   );

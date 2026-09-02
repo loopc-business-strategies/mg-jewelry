@@ -144,98 +144,94 @@ export const translations = {
     ourMg: {
       seo: {
         description:
-          'Our MG is Modern Gold\'s official mobile application — a convenient digital way to connect, access services and manage your relationship with Modern Gold from your device.',
+          'Our MG is Modern Gold\'s digital gold platform — buy and book gold when you are ready, collect through collection centers, and sell gold through the same connected ecosystem.',
       },
       hero: {
         eyebrow: 'OUR MG',
-        title: 'Modern Gold, connected to you.',
+        title: 'Buy Gold. Sell Gold. Stay Connected.',
         description:
-          'Our MG is Modern Gold\'s mobile application, created to provide customers with a convenient digital way to connect with Modern Gold, access available services, explore information and manage their relationship with the company from their mobile device.',
-        primaryCta: 'DOWNLOAD THE APP',
+          'Our MG is Modern Gold\'s digital platform, designed to make buying and selling gold more convenient. Choose the gold you want, book when you are ready, and collect it through Modern Gold collection centers. When you want to sell, check the applicable price and bring your gold to a collection center.',
+        primaryCta: 'EXPLORE OUR MG',
         secondaryCta: 'VISIT OUR MG',
       },
       about: {
         eyebrow: 'GET TO KNOW OUR MG',
-        title: 'A digital connection to Modern Gold.',
+        title: 'A simpler way to connect with gold.',
         description:
-          'Our MG brings Modern Gold closer to customers through a dedicated mobile experience. The application provides a convenient place to access Modern Gold services, information and account features without relying only on the website.',
-        tagline: 'Designed to make staying connected with Modern Gold simpler, more convenient and more accessible.',
+          'Our MG connects customers with Modern Gold through a convenient digital platform. It provides a simple way to choose and book gold when you are ready, while also giving customers a way to sell their gold through Modern Gold\'s collection-center network.',
+        cards: [
+          { title: 'CHOICE', desc: 'Select the gold product that suits your needs.' },
+          { title: 'FLEXIBILITY', desc: 'Book gold when you have funds available and are ready to purchase.' },
+          { title: 'ACCESS', desc: 'Connect your digital gold activity with Modern Gold collection centers across the country.' },
+        ],
+      },
+      buyGold: {
+        eyebrow: 'BUY GOLD',
+        title: 'Choose your gold. Book when you\'re ready.',
+        description:
+          'With Our MG, customers can select an available gold product and book it when they have funds available. Once the booking is completed, the gold can be collected through a designated Modern Gold collection center.',
+        steps: [
+          { title: 'SELECT', desc: 'Choose the gold product you want.' },
+          { title: 'BOOK', desc: 'Book your gold when you are ready.' },
+          { title: 'COLLECT', desc: 'Collect your gold from a Modern Gold collection center.' },
+        ],
+        cta: 'EXPLORE GOLD',
+      },
+      sellGold: {
+        eyebrow: 'SELL GOLD',
+        title: 'When you\'re ready to sell, we\'re here.',
+        description:
+          'Our MG also provides a convenient way to sell gold through Modern Gold. Customers can check the applicable selling price and bring their gold to a designated collection center to complete the process.',
+        steps: [
+          { title: 'CHECK', desc: 'Check the applicable gold price.' },
+          { title: 'BRING', desc: 'Bring your gold to a Modern Gold collection center.' },
+          { title: 'COMPLETE', desc: 'Complete the selling process at the collection center.' },
+        ],
+        cta: 'SELL GOLD',
+      },
+      collectionCenters: {
+        eyebrow: 'COLLECTION CENTERS',
+        title: 'Where digital meets physical.',
+        description:
+          'Our MG connects the digital experience with Modern Gold\'s collection centers across the country. Customers can use the platform to begin their gold journey and complete the relevant process at a designated collection center.',
+        journey: [
+          { label: 'OUR MG', desc: '' },
+          { label: 'SELECT / BOOK OR SELL', desc: '' },
+          { label: 'COLLECTION CENTER', desc: '' },
+          { label: 'COMPLETE', desc: '' },
+        ],
       },
       why: {
         eyebrow: 'WHY OUR MG',
-        title: 'Why choose the Modern Gold app?',
+        title: 'Gold made more convenient.',
         items: [
-          { title: 'EASY ACCESS', desc: 'Access Modern Gold services and information directly from your mobile device.' },
-          { title: 'CONVENIENCE', desc: 'Keep your Modern Gold experience available wherever you are.' },
-          { title: 'ONE PLACE', desc: 'Bring important Modern Gold features and information together in one application.' },
-          { title: 'QUICK ACCESS', desc: 'Reach frequently used features without navigating through the full website.' },
-          { title: 'STAY CONNECTED', desc: 'Stay connected with Modern Gold through a dedicated mobile experience.' },
-          { title: 'MOBILE EXPERIENCE', desc: 'A dedicated mobile interface designed for convenient everyday use.' },
+          { title: 'FLEXIBILITY', desc: 'Book gold when you have funds available and are ready to purchase.' },
+          { title: 'CHOICE', desc: 'Select the gold product that meets your needs.' },
+          { title: 'CONVENIENCE', desc: 'Start your gold journey digitally and complete it through our collection centers.' },
+          { title: 'CONNECTION', desc: 'Stay connected with Modern Gold through one digital platform.' },
         ],
       },
-      features: {
-        eyebrow: 'APP FEATURES',
-        title: 'What you can access with Our MG.',
-        items: [
-          { title: 'ACCOUNT', desc: 'Manage your Modern Gold account and personal information.' },
-          { title: 'DASHBOARD', desc: 'Access important information from one central view.' },
-          { title: 'PRODUCTS', desc: 'Explore Modern Gold products and product information.' },
-          { title: 'ORDERS', desc: 'View your order information and activity.' },
-          { title: 'PROFILE', desc: 'Manage your account details and preferences.' },
-          { title: 'SUPPORT', desc: 'Connect with Modern Gold when you need assistance or information.' },
-        ],
+      connect: {
+        eyebrow: 'THE OUR MG EXPERIENCE',
+        title: 'One platform. Two ways to transact.',
+        buyTitle: 'BUY GOLD',
+        buySteps: ['Select', 'Book', 'Collect'],
+        sellTitle: 'SELL GOLD',
+        sellSteps: ['Check Price', 'Bring Gold', 'Complete'],
       },
-      showcase: {
-        eyebrow: 'INSIDE OUR MG',
-        title: 'A simple experience, designed for mobile.',
-        labels: {
-          login: 'Login',
-          dashboard: 'Dashboard',
-          products: 'Products',
-          orders: 'Orders',
-          profile: 'Profile',
-        },
-        captions: {
-          login: 'A simple entry point to the application.',
-          dashboard: 'Important information at a glance.',
-          products: 'Explore available products and information.',
-          orders: 'Access order information and activity.',
-          profile: 'Manage your account.',
-        },
-        screenNames: {
-          login: 'Login',
-          home: 'Dashboard',
-          products: 'Products',
-          productDetail: 'Product Detail',
-          profile: 'Profile',
-          orders: 'Orders',
-        },
-      },
-      different: {
-        eyebrow: 'THE MODERN GOLD EXPERIENCE',
-        title: 'More convenient. More connected.',
+      appExperience: {
+        eyebrow: 'THE DIGITAL EXPERIENCE',
+        title: 'Modern Gold, in your hands.',
         description:
-          'Our MG brings Modern Gold closer to you through a dedicated mobile experience designed for convenient access, simple navigation and better digital communication.',
-        points: [
-          { title: 'ACCESS', desc: 'Keep Modern Gold within reach from your mobile device.' },
-          { title: 'CONVENIENCE', desc: 'Access available features without depending entirely on a desktop or website experience.' },
-          { title: 'CONNECTION', desc: 'Stay closer to Modern Gold through a dedicated digital platform.' },
-        ],
-      },
-      download: {
-        eyebrow: 'GET OUR MG',
-        title: 'Take Modern Gold with you.',
-        description:
-          'Download the Our MG mobile application and enjoy a convenient, connected way to access Modern Gold from your mobile device.',
-        primaryCta: 'DOWNLOAD THE APP',
-        secondaryCta: 'VISIT OUR MG',
-        comingSoon: 'COMING SOON',
-        scanToDownload: 'SCAN TO DOWNLOAD',
+          'Our MG brings Modern Gold closer through a dedicated digital experience designed to make buying and selling gold more accessible and convenient.',
+        cta: 'VISIT OUR MG',
       },
       final: {
-        title: 'Modern Gold, wherever you go.',
-        description: 'Stay connected with Modern Gold through Our MG.',
-        primaryCta: 'DOWNLOAD OUR MG',
+        eyebrow: 'GET STARTED WITH OUR MG',
+        title: 'Your gold journey starts with Modern Gold.',
+        description:
+          'Whether you are looking to buy gold or sell gold, Our MG provides a convenient digital connection to Modern Gold and our collection centers.',
+        primaryCta: 'EXPLORE OUR MG',
         secondaryCta: 'VISIT OUR MG',
       },
     },
@@ -385,98 +381,94 @@ export const translations = {
     ourMg: {
       seo: {
         description:
-          'Our MG — официальное мобильное приложение Modern Gold для удобного цифрового доступа к сервисам и управления отношениями с компанией.',
+          'Our MG — цифровая золотая платформа Modern Gold: покупайте и бронируйте золото, когда готовы, забирайте через центры сбора и продавайте золото в той же связанной экосистеме.',
       },
       hero: {
         eyebrow: 'OUR MG',
-        title: 'Modern Gold на связи с вами.',
+        title: 'Покупайте золото. Продавайте золото. Оставайтесь на связи.',
         description:
-          'Our MG — мобильное приложение Modern Gold, созданное для удобного цифрового доступа клиентов к компании, сервисам, информации и управлению отношениями с Modern Gold с мобильного устройства.',
-        primaryCta: 'СКАЧАТЬ ПРИЛОЖЕНИЕ',
+          'Our MG — цифровая платформа Modern Gold, созданная для удобной покупки и продажи золота. Выберите нужное золото, забронируйте, когда будете готовы, и заберите его в центрах сбора Modern Gold. Когда захотите продать — проверьте актуальную цену и принесите золото в центр сбора.',
+        primaryCta: 'ИЗУЧИТЬ OUR MG',
         secondaryCta: 'ПОСЕТИТЬ OUR MG',
       },
       about: {
         eyebrow: 'ПОЗНАКОМЬТЕСЬ С OUR MG',
-        title: 'Цифровая связь с Modern Gold.',
+        title: 'Более простой способ связаться с золотом.',
         description:
-          'Our MG приближает Modern Gold к клиентам через выделенный мобильный опыт. Приложение — удобное место для доступа к сервисам, информации и функциям аккаунта без зависимости только от сайта.',
-        tagline: 'Создано для того, чтобы оставаться на связи с Modern Gold было проще, удобнее и доступнее.',
+          'Our MG связывает клиентов с Modern Gold через удобную цифровую платформу. Это простой способ выбрать и забронировать золото, когда вы готовы, а также продать золото через сеть центров сбора Modern Gold.',
+        cards: [
+          { title: 'ВЫБОР', desc: 'Выберите золотой продукт, который подходит вашим потребностям.' },
+          { title: 'ГИБКОСТЬ', desc: 'Бронируйте золото, когда у вас есть средства и вы готовы к покупке.' },
+          { title: 'ДОСТУП', desc: 'Связывайте цифровую активность с золотом с центрами сбора Modern Gold по всей стране.' },
+        ],
+      },
+      buyGold: {
+        eyebrow: 'КУПИТЬ ЗОЛОТО',
+        title: 'Выберите золото. Забронируйте, когда будете готовы.',
+        description:
+          'С Our MG клиенты могут выбрать доступный золотой продукт и забронировать его, когда у них есть средства. После завершения бронирования золото можно забрать в назначенном центре сбора Modern Gold.',
+        steps: [
+          { title: 'ВЫБРАТЬ', desc: 'Выберите нужный золотой продукт.' },
+          { title: 'ЗАБРОНИРОВАТЬ', desc: 'Забронируйте золото, когда будете готовы.' },
+          { title: 'ЗАБРАТЬ', desc: 'Заберите золото в центре сбора Modern Gold.' },
+        ],
+        cta: 'ИЗУЧИТЬ ЗОЛОТО',
+      },
+      sellGold: {
+        eyebrow: 'ПРОДАТЬ ЗОЛОТО',
+        title: 'Когда вы готовы продать — мы рядом.',
+        description:
+          'Our MG также предоставляет удобный способ продать золото через Modern Gold. Клиенты могут проверить актуальную цену продажи и принести золото в назначенный центр сбора для завершения процесса.',
+        steps: [
+          { title: 'ПРОВЕРИТЬ', desc: 'Проверьте актуальную цену золота.' },
+          { title: 'ПРИНЕСТИ', desc: 'Принесите золото в центр сбора Modern Gold.' },
+          { title: 'ЗАВЕРШИТЬ', desc: 'Завершите процесс продажи в центре сбора.' },
+        ],
+        cta: 'ПРОДАТЬ ЗОЛОТО',
+      },
+      collectionCenters: {
+        eyebrow: 'ЦЕНТРЫ СБОРА',
+        title: 'Где цифровое встречается с физическим.',
+        description:
+          'Our MG связывает цифровой опыт с центрами сбора Modern Gold по всей стране. Клиенты могут начать путь с золотом на платформе и завершить соответствующий процесс в назначенном центре сбора.',
+        journey: [
+          { label: 'OUR MG', desc: '' },
+          { label: 'ВЫБРАТЬ / ЗАБРОНИРОВАТЬ ИЛИ ПРОДАТЬ', desc: '' },
+          { label: 'ЦЕНТР СБОРА', desc: '' },
+          { label: 'ЗАВЕРШИТЬ', desc: '' },
+        ],
       },
       why: {
         eyebrow: 'ЗАЧЕМ OUR MG',
-        title: 'Почему стоит выбрать приложение Modern Gold?',
+        title: 'Золото стало удобнее.',
         items: [
-          { title: 'ЛЁГКИЙ ДОСТУП', desc: 'Получайте доступ к сервисам и информации Modern Gold прямо с мобильного устройства.' },
-          { title: 'УДОБСТВО', desc: 'Держите опыт Modern Gold доступным, где бы вы ни находились.' },
-          { title: 'ОДНО МЕСТО', desc: 'Объединяйте важные функции и информацию Modern Gold в одном приложении.' },
-          { title: 'БЫСТРЫЙ ДОСТУП', desc: 'Быстро открывайте часто используемые функции без навигации по всему сайту.' },
-          { title: 'НА СВЯЗИ', desc: 'Оставайтесь на связи с Modern Gold через выделенный мобильный опыт.' },
-          { title: 'МОБИЛЬНЫЙ ОПЫТ', desc: 'Выделенный мобильный интерфейс для удобного ежедневного использования.' },
+          { title: 'ГИБКОСТЬ', desc: 'Бронируйте золото, когда у вас есть средства и вы готовы к покупке.' },
+          { title: 'ВЫБОР', desc: 'Выберите золотой продукт, который соответствует вашим потребностям.' },
+          { title: 'УДОБСТВО', desc: 'Начните путь с золотом в цифровом формате и завершите его в наших центрах сбора.' },
+          { title: 'СВЯЗЬ', desc: 'Оставайтесь на связи с Modern Gold через одну цифровую платформу.' },
         ],
       },
-      features: {
-        eyebrow: 'ФУНКЦИИ ПРИЛОЖЕНИЯ',
-        title: 'Что доступно в Our MG.',
-        items: [
-          { title: 'АККАУНТ', desc: 'Управляйте аккаунтом Modern Gold и личной информацией.' },
-          { title: 'ПАНЕЛЬ', desc: 'Доступ к важной информации с одного центрального экрана.' },
-          { title: 'ПРОДУКТЫ', desc: 'Просматривайте продукты и информацию Modern Gold.' },
-          { title: 'ЗАКАЗЫ', desc: 'Просматривайте информацию о заказах и активность.' },
-          { title: 'ПРОФИЛЬ', desc: 'Управляйте данными аккаунта и настройками.' },
-          { title: 'ПОДДЕРЖКА', desc: 'Свяжитесь с Modern Gold при необходимости помощи или информации.' },
-        ],
+      connect: {
+        eyebrow: 'ОПЫТ OUR MG',
+        title: 'Одна платформа. Два способа совершать сделки.',
+        buyTitle: 'КУПИТЬ ЗОЛОТО',
+        buySteps: ['Выбрать', 'Забронировать', 'Забрать'],
+        sellTitle: 'ПРОДАТЬ ЗОЛОТО',
+        sellSteps: ['Проверить цену', 'Принести золото', 'Завершить'],
       },
-      showcase: {
-        eyebrow: 'ВНУТРИ OUR MG',
-        title: 'Простой опыт, созданный для мобильных устройств.',
-        labels: {
-          login: 'Вход',
-          dashboard: 'Панель',
-          products: 'Продукты',
-          orders: 'Заказы',
-          profile: 'Профиль',
-        },
-        captions: {
-          login: 'Простая точка входа в приложение.',
-          dashboard: 'Важная информация с первого взгляда.',
-          products: 'Просмотр доступных продуктов и информации.',
-          orders: 'Доступ к информации о заказах и активности.',
-          profile: 'Управление аккаунтом.',
-        },
-        screenNames: {
-          login: 'Вход',
-          home: 'Панель',
-          products: 'Продукты',
-          productDetail: 'Детали продукта',
-          profile: 'Профиль',
-          orders: 'Заказы',
-        },
-      },
-      different: {
-        eyebrow: 'ОПЫТ MODERN GOLD',
-        title: 'Удобнее. Ближе.',
+      appExperience: {
+        eyebrow: 'ЦИФРОВОЙ ОПЫТ',
+        title: 'Modern Gold в ваших руках.',
         description:
-          'Our MG приближает Modern Gold к вам через выделенный мобильный опыт с удобным доступом, простой навигацией и лучшей цифровой связью.',
-        points: [
-          { title: 'ДОСТУП', desc: 'Modern Gold всегда под рукой на вашем мобильном устройстве.' },
-          { title: 'УДОБСТВО', desc: 'Доступ к функциям без полной зависимости от настольного или веб-опыта.' },
-          { title: 'СВЯЗЬ', desc: 'Ближе к Modern Gold через выделенную цифровую платформу.' },
-        ],
-      },
-      download: {
-        eyebrow: 'ПОЛУЧИТЬ OUR MG',
-        title: 'Берите Modern Gold с собой.',
-        description:
-          'Скачайте мобильное приложение Our MG и получите удобный связанный доступ к Modern Gold с вашего устройства.',
-        primaryCta: 'СКАЧАТЬ ПРИЛОЖЕНИЕ',
-        secondaryCta: 'ПОСЕТИТЬ OUR MG',
-        comingSoon: 'СКОРО',
-        scanToDownload: 'СКАНИРУЙТЕ ДЛЯ СКАЧИВАНИЯ',
+          'Our MG приближает Modern Gold через выделенный цифровой опыт, созданный для более доступной и удобной покупки и продажи золота.',
+        cta: 'ПОСЕТИТЬ OUR MG',
       },
       final: {
-        title: 'Modern Gold — куда бы вы ни отправились.',
-        description: 'Оставайтесь на связи с Modern Gold через Our MG.',
-        primaryCta: 'СКАЧАТЬ OUR MG',
+        eyebrow: 'НАЧНИТЕ С OUR MG',
+        title: 'Ваш путь с золотом начинается с Modern Gold.',
+        description:
+          'Хотите ли вы купить или продать золото — Our MG обеспечивает удобную цифровую связь с Modern Gold и нашими центрами сбора.',
+        primaryCta: 'ИЗУЧИТЬ OUR MG',
         secondaryCta: 'ПОСЕТИТЬ OUR MG',
       },
     },
@@ -626,98 +618,94 @@ export const translations = {
     ourMg: {
       seo: {
         description:
-          'Our MG — Modern Gold rasmiy mobil ilovasi. Xizmatlarga qulay raqamli kirish va kompaniya bilan munosabatlarni boshqarish uchun.',
+          'Our MG — Modern Gold raqamli oltin platformasi: tayyor bo\'lganda oltin sotib oling va band qiling, yig\'ish markazlari orqali oling va xuddi shu bog\'langan ekotizim orqali oltin soting.',
       },
       hero: {
         eyebrow: 'OUR MG',
-        title: 'Modern Gold siz bilan bog\'langan.',
+        title: 'Oltin sotib oling. Oltin soting. Bog\'lanib turing.',
         description:
-          'Our MG — Modern Gold mobil ilovasi. Mijozlarga Modern Gold bilan bog\'lanish, mavjud xizmatlarga kirish, ma\'lumotlarni ko\'rish va kompaniya bilan munosabatlarini mobil qurilmadan boshqarish uchun yaratilgan.',
-        primaryCta: 'ILOVANI YUKLAB OLISH',
+          'Our MG — oltin sotib olish va sotishni qulayroq qilish uchun yaratilgan Modern Gold raqamli platformasi. Kerakli oltinni tanlang, tayyor bo\'lganda band qiling va Modern Gold yig\'ish markazlari orqali oling. Sotmoqchi bo\'lsangiz — amaldagi narxni tekshiring va oltiningizni yig\'ish markaziga olib keling.',
+        primaryCta: 'OUR MG NI O\'RGANING',
         secondaryCta: 'OUR MG GA TASHRIF',
       },
       about: {
         eyebrow: 'OUR MG NI TANISHING',
-        title: 'Modern Gold bilan raqamli aloqa.',
+        title: 'Oltin bilan bog\'lanishning oddiyroq yo\'li.',
         description:
-          'Our MG mijozlarga maxsus mobil tajriba orqali Modern Goldni yaqinlashtiradi. Ilova — xizmatlar, ma\'lumot va akkaunt funksiyalariga faqat veb-saytga tayanmasdan kirish uchun qulay joy.',
-        tagline: 'Modern Gold bilan bog\'lanishni oddiyroq, qulayroq va ochiqroq qilish uchun yaratilgan.',
+          'Our MG mijozlarni qulay raqamli platforma orqali Modern Gold bilan bog\'laydi. Tayyor bo\'lganda oltin tanlash va band qilishning oddiy usulini taqdim etadi, shuningdek Modern Gold yig\'ish markazlari tarmog\'i orqali oltin sotish imkonini beradi.',
+        cards: [
+          { title: 'TANLOV', desc: 'Ehtiyojingizga mos oltin mahsulotini tanlang.' },
+          { title: 'MOSLIK', desc: 'Mablag\'ingiz bo\'lganda va sotib olishga tayyor bo\'lganda oltinni band qiling.' },
+          { title: 'KIRISH', desc: 'Raqamli oltin faolligingizni mamlakat bo\'ylab Modern Gold yig\'ish markazlari bilan bog\'lang.' },
+        ],
+      },
+      buyGold: {
+        eyebrow: 'OLTIN SOTIB OLISH',
+        title: 'Oltiningizni tanlang. Tayyor bo\'lganda band qiling.',
+        description:
+          'Our MG bilan mijozlar mavjud oltin mahsulotini tanlashi va mablag\'i bo\'lganda band qilishi mumkin. Band qilish tugallangach, oltin belgilangan Modern Gold yig\'ish markazidan olinadi.',
+        steps: [
+          { title: 'TANLASH', desc: 'Kerakli oltin mahsulotini tanlang.' },
+          { title: 'BAND QILISH', desc: 'Tayyor bo\'lganda oltiningizni band qiling.' },
+          { title: 'OLISH', desc: 'Oltiningizni Modern Gold yig\'ish markazidan oling.' },
+        ],
+        cta: 'OLTINNI O\'RGANING',
+      },
+      sellGold: {
+        eyebrow: 'OLTIN SOTISH',
+        title: 'Sotishga tayyor bo\'lsangiz — biz yoningizdamiz.',
+        description:
+          'Our MG Modern Gold orqali oltin sotishning qulay usulini ham taqdim etadi. Mijozlar amaldagi sotish narxini tekshirishi va jarayonni yakunlash uchun oltinini belgilangan yig\'ish markaziga olib kelishi mumkin.',
+        steps: [
+          { title: 'TEKSHIRISH', desc: 'Amaldagi oltin narxini tekshiring.' },
+          { title: 'OLIB KELISH', desc: 'Oltiningizni Modern Gold yig\'ish markaziga olib keling.' },
+          { title: 'YAKUNLASH', desc: 'Sotish jarayonini yig\'ish markazida yakunlang.' },
+        ],
+        cta: 'OLTIN SOTISH',
+      },
+      collectionCenters: {
+        eyebrow: 'YIG\'ISH MARKAZLARI',
+        title: 'Raqamli va jismoniy uchrashadigan joy.',
+        description:
+          'Our MG raqamli tajribani mamlakat bo\'ylab Modern Gold yig\'ish markazlari bilan bog\'laydi. Mijozlar platformada oltin yo\'lini boshlashi va tegishli jarayonni belgilangan yig\'ish markazida yakunlashi mumkin.',
+        journey: [
+          { label: 'OUR MG', desc: '' },
+          { label: 'TANLASH / BAND QILISH YOKI SOTISH', desc: '' },
+          { label: 'YIG\'ISH MARKAZI', desc: '' },
+          { label: 'YAKUNLASH', desc: '' },
+        ],
       },
       why: {
         eyebrow: 'NEGA OUR MG',
-        title: 'Nega Modern Gold ilovasini tanlash kerak?',
+        title: 'Oltin yanada qulayroq.',
         items: [
-          { title: 'OSON KIRISH', desc: 'Modern Gold xizmatlari va ma\'lumotlariga to\'g\'ridan-to\'g\'ri mobil qurilmangizdan kiring.' },
-          { title: 'QULAYLIK', desc: 'Modern Gold tajribangiz qayerda bo\'lsangiz ham mavjud bo\'lsin.' },
-          { title: 'BITTA JOY', desc: 'Muhim Modern Gold funksiyalari va ma\'lumotlarini bitta ilovada birlashtiring.' },
-          { title: 'TEZ KIRISH', desc: 'To\'liq veb-sayt bo\'ylab navigatsiya qilmasdan tez-tez ishlatiladigan funksiyalarga kiring.' },
-          { title: 'ALOQADA BO\'LING', desc: 'Maxsus mobil tajriba orqali Modern Gold bilan bog\'laning.' },
-          { title: 'MOBIL TAJRIBA', desc: 'Kundalik qulay foydalanish uchun yaratilgan maxsus mobil interfeys.' },
+          { title: 'MOSLIK', desc: 'Mablag\'ingiz bo\'lganda va sotib olishga tayyor bo\'lganda oltinni band qiling.' },
+          { title: 'TANLOV', desc: 'Ehtiyojingizga mos oltin mahsulotini tanlang.' },
+          { title: 'QULAYLIK', desc: 'Oltin yo\'lingizni raqamli boshlang va yig\'ish markazlarimiz orqali yakunlang.' },
+          { title: 'ALOQA', desc: 'Bitta raqamli platforma orqali Modern Gold bilan bog\'lanib turing.' },
         ],
       },
-      features: {
-        eyebrow: 'ILOVA FUNKSIYALARI',
-        title: 'Our MG orqali nimalarga kirish mumkin.',
-        items: [
-          { title: 'AKKAUNT', desc: 'Modern Gold akkauntingiz va shaxsiy ma\'lumotlaringizni boshqaring.' },
-          { title: 'BOSHQARUV PANELI', desc: 'Muhim ma\'lumotlarga markaziy ko\'rinishdan kiring.' },
-          { title: 'MAHSULOTLAR', desc: 'Modern Gold mahsulotlari va mahsulot ma\'lumotlarini ko\'ring.' },
-          { title: 'BUYURTMALAR', desc: 'Buyurtma ma\'lumotlari va faolligingizni ko\'ring.' },
-          { title: 'PROFIL', desc: 'Akkaunt ma\'lumotlari va sozlamalaringizni boshqaring.' },
-          { title: 'YORDAM', desc: 'Yordam yoki ma\'lumot kerak bo\'lganda Modern Gold bilan bog\'laning.' },
-        ],
+      connect: {
+        eyebrow: 'OUR MG TAJRIBASI',
+        title: 'Bitta platforma. Ikki xil operatsiya.',
+        buyTitle: 'OLTIN SOTIB OLISH',
+        buySteps: ['Tanlash', 'Band qilish', 'Olish'],
+        sellTitle: 'OLTIN SOTISH',
+        sellSteps: ['Narxni tekshirish', 'Oltin olib kelish', 'Yakunlash'],
       },
-      showcase: {
-        eyebrow: 'OUR MG ICHIDA',
-        title: 'Mobil uchun yaratilgan oddiy tajriba.',
-        labels: {
-          login: 'Kirish',
-          dashboard: 'Boshqaruv paneli',
-          products: 'Mahsulotlar',
-          orders: 'Buyurtmalar',
-          profile: 'Profil',
-        },
-        captions: {
-          login: 'Ilovaga oddiy kirish nuqtasi.',
-          dashboard: 'Muhim ma\'lumot bir nazarada.',
-          products: 'Mavjud mahsulotlar va ma\'lumotlarni ko\'ring.',
-          orders: 'Buyurtma ma\'lumotlari va faolligiga kiring.',
-          profile: 'Akkauntingizni boshqaring.',
-        },
-        screenNames: {
-          login: 'Kirish',
-          home: 'Boshqaruv paneli',
-          products: 'Mahsulotlar',
-          productDetail: 'Mahsulot tafsilotlari',
-          profile: 'Profil',
-          orders: 'Buyurtmalar',
-        },
-      },
-      different: {
-        eyebrow: 'MODERN GOLD TAJRIBASI',
-        title: 'Qulayroq. Yaqinroq.',
+      appExperience: {
+        eyebrow: 'RAQAMLI TAJRIBA',
+        title: 'Modern Gold qo\'lingizda.',
         description:
-          'Our MG qulay kirish, oddiy navigatsiya va yaxshiroq raqamli aloqa uchun yaratilgan maxsus mobil tajriba orqali Modern Goldni sizga yaqinlashtiradi.',
-        points: [
-          { title: 'KIRISH', desc: 'Modern Gold mobil qurilmangizdan qo\'lingiz ostida.' },
-          { title: 'QULAYLIK', desc: 'To\'liq veb yoki kompyuter tajribasiga tayanmasdan funksiyalarga kiring.' },
-          { title: 'ALOQA', desc: 'Maxsus raqamli platforma orqali Modern Goldga yaqinroq bo\'ling.' },
-        ],
-      },
-      download: {
-        eyebrow: 'OUR MG NI OLING',
-        title: 'Modern Goldni o\'zingiz bilan oling.',
-        description:
-          'Our MG mobil ilovasini yuklab oling va mobil qurilmangizdan Modern Goldga qulay, bog\'langan kirishdan bahramand bo\'ling.',
-        primaryCta: 'ILOVANI YUKLAB OLISH',
-        secondaryCta: 'OUR MG GA TASHRIF',
-        comingSoon: 'TEZ ORADA',
-        scanToDownload: 'YUKLAB OLISH UCHUN SKANERLANG',
+          'Our MG oltin sotib olish va sotishni yanada ochiq va qulay qilish uchun yaratilgan maxsus raqamli tajriba orqali Modern Goldni yaqinlashtiradi.',
+        cta: 'OUR MG GA TASHRIF',
       },
       final: {
-        title: 'Modern Gold — qayerga borsangiz ham.',
-        description: 'Our MG orqali Modern Gold bilan bog\'laning.',
-        primaryCta: 'OUR MG NI YUKLAB OLISH',
+        eyebrow: 'OUR MG BILAN BOSHLANG',
+        title: 'Oltin yo\'lingiz Modern Gold bilan boshlanadi.',
+        description:
+          'Oltin sotib olmoqchi yoki sotmoqchi bo\'lsangiz ham, Our MG Modern Gold va yig\'ish markazlarimizga qulay raqamli aloqa taqdim etadi.',
+        primaryCta: 'OUR MG NI O\'RGANING',
         secondaryCta: 'OUR MG GA TASHRIF',
       },
     },
@@ -867,98 +855,94 @@ export const translations = {
     ourMg: {
       seo: {
         description:
-          'Our MG هو التطبيق الرسمي لـ Modern Gold — طريقة رقمية مريحة للتواصل والوصول إلى الخدمات وإدارة علاقتك مع الشركة من جهازك.',
+          'Our MG هي منصة Modern Gold الرقمية للذهب — اشترِ واحجز الذهب عندما تكون مستعداً، واستلمه عبر مراكز التجميع، وبيع الذهب عبر نفس النظام البيئي المتصل.',
       },
       hero: {
         eyebrow: 'OUR MG',
-        title: 'Modern Gold متصل بك.',
+        title: 'اشترِ الذهب. بِع الذهب. ابقَ على اتصال.',
         description:
-          'Our MG هو تطبيق Modern Gold المحمول، أُنشئ ليمنح العملاء طريقة رقمية مريحة للتواصل مع Modern Gold والوصول إلى الخدمات المتاحة واستكشاف المعلومات وإدارة علاقتهم مع الشركة من أجهزتهم المحمولة.',
-        primaryCta: 'تحميل التطبيق',
+          'Our MG هي المنصة الرقمية لـ Modern Gold، مصممة لتسهيل شراء وبيع الذهب. اختر الذهب الذي تريده، واحجزه عندما تكون مستعداً، واستلمه عبر مراكز تجميع Modern Gold. عندما تريد البيع، تحقق من السعر المعمول به وأحضر ذهبك إلى مركز التجميع.',
+        primaryCta: 'استكشف OUR MG',
         secondaryCta: 'زيارة OUR MG',
       },
       about: {
         eyebrow: 'تعرّف على OUR MG',
-        title: 'اتصال رقمي بـ Modern Gold.',
+        title: 'طريقة أبسط للتواصل مع الذهب.',
         description:
-          'Our MG يقرب Modern Gold من العملاء من خلال تجربة محمولة مخصصة. يوفر التطبيق مكاناً مريحاً للوصول إلى خدمات Modern Gold ومعلوماتها وميزات الحساب دون الاعتماد على الموقع فقط.',
-        tagline: 'مصمم لجعل البقاء على اتصال مع Modern Gold أبسط وأكثر راحة وأسهل وصولاً.',
+          'Our MG يربط العملاء بـ Modern Gold من خلال منصة رقمية مريحة. يوفر طريقة بسيطة لاختيار الذهب وحجزه عندما تكون مستعداً، كما يمنح العملاء طريقة لبيع الذهب عبر شبكة مراكز التجميع لـ Modern Gold.',
+        cards: [
+          { title: 'الاختيار', desc: 'اختر منتج الذهب الذي يناسب احتياجاتك.' },
+          { title: 'المرونة', desc: 'احجز الذهب عندما تتوفر لديك الأموال وتكون مستعداً للشراء.' },
+          { title: 'الوصول', desc: 'اربط نشاطك الرقمي مع الذهب بمراكز تجميع Modern Gold في جميع أنحاء البلاد.' },
+        ],
+      },
+      buyGold: {
+        eyebrow: 'شراء الذهب',
+        title: 'اختر ذهبك. احجز عندما تكون مستعداً.',
+        description:
+          'مع Our MG، يمكن للعملاء اختيار منتج ذهب متاح وحجزه عندما تتوفر لديهم الأموال. بمجرد اكتمال الحجز، يمكن استلام الذهب من مركز تجميع Modern Gold المعين.',
+        steps: [
+          { title: 'اختر', desc: 'اختر منتج الذهب الذي تريده.' },
+          { title: 'احجز', desc: 'احجز ذهبك عندما تكون مستعداً.' },
+          { title: 'استلم', desc: 'استلم ذهبك من مركز تجميع Modern Gold.' },
+        ],
+        cta: 'استكشف الذهب',
+      },
+      sellGold: {
+        eyebrow: 'بيع الذهب',
+        title: 'عندما تكون مستعداً للبيع، نحن هنا.',
+        description:
+          'يوفر Our MG أيضاً طريقة مريحة لبيع الذهب عبر Modern Gold. يمكن للعملاء التحقق من سعر البيع المعمول به وإحضار ذهبهم إلى مركز التجميع المعين لإكمال العملية.',
+        steps: [
+          { title: 'تحقق', desc: 'تحقق من سعر الذهب المعمول به.' },
+          { title: 'أحضر', desc: 'أحضر ذهبك إلى مركز تجميع Modern Gold.' },
+          { title: 'أكمل', desc: 'أكمل عملية البيع في مركز التجميع.' },
+        ],
+        cta: 'بيع الذهب',
+      },
+      collectionCenters: {
+        eyebrow: 'مراكز التجميع',
+        title: 'حيث يلتقي الرقمي بالمادي.',
+        description:
+          'Our MG يربط التجربة الرقمية بمراكز تجميع Modern Gold في جميع أنحاء البلاد. يمكن للعملاء استخدام المنصة لبدء رحلتهم مع الذهب وإكمال العملية ذات الصلة في مركز التجميع المعين.',
+        journey: [
+          { label: 'OUR MG', desc: '' },
+          { label: 'اختر / احجز أو بِع', desc: '' },
+          { label: 'مركز التجميع', desc: '' },
+          { label: 'أكمل', desc: '' },
+        ],
       },
       why: {
         eyebrow: 'لماذا OUR MG',
-        title: 'لماذا تختار تطبيق Modern Gold؟',
+        title: 'الذهب أصبح أكثر راحة.',
         items: [
-          { title: 'وصول سهل', desc: 'الوصول إلى خدمات ومعلومات Modern Gold مباشرة من جهازك المحمول.' },
-          { title: 'راحة', desc: 'اجعل تجربة Modern Gold متاحة أينما كنت.' },
-          { title: 'مكان واحد', desc: 'اجمع ميزات ومعلومات Modern Gold المهمة في تطبيق واحد.' },
-          { title: 'وصول سريع', desc: 'الوصول إلى الميزات المستخدمة بكثرة دون التنقل عبر الموقع بالكامل.' },
-          { title: 'ابق على اتصال', desc: 'ابق على تواصل مع Modern Gold من خلال تجربة محمولة مخصصة.' },
-          { title: 'تجربة محمولة', desc: 'واجهة محمولة مخصصة مصممة للاستخدام اليومي المريح.' },
+          { title: 'المرونة', desc: 'احجز الذهب عندما تتوفر لديك الأموال وتكون مستعداً للشراء.' },
+          { title: 'الاختيار', desc: 'اختر منتج الذهب الذي يلبي احتياجاتك.' },
+          { title: 'الراحة', desc: 'ابدأ رحلتك مع الذهب رقمياً وأكملها عبر مراكز التجميع لدينا.' },
+          { title: 'الاتصال', desc: 'ابق على اتصال مع Modern Gold من خلال منصة رقمية واحدة.' },
         ],
       },
-      features: {
-        eyebrow: 'ميزات التطبيق',
-        title: 'ما يمكنك الوصول إليه عبر Our MG.',
-        items: [
-          { title: 'الحساب', desc: 'إدارة حساب Modern Gold ومعلوماتك الشخصية.' },
-          { title: 'لوحة التحكم', desc: 'الوصول إلى المعلومات المهمة من عرض مركزي واحد.' },
-          { title: 'المنتجات', desc: 'استكشف منتجات ومعلومات Modern Gold.' },
-          { title: 'الطلبات', desc: 'عرض معلومات طلباتك ونشاطك.' },
-          { title: 'الملف الشخصي', desc: 'إدارة تفاصيل حسابك وتفضيلاتك.' },
-          { title: 'الدعم', desc: 'تواصل مع Modern Gold عند الحاجة للمساعدة أو المعلومات.' },
-        ],
+      connect: {
+        eyebrow: 'تجربة OUR MG',
+        title: 'منصة واحدة. طريقتان للتعامل.',
+        buyTitle: 'شراء الذهب',
+        buySteps: ['اختر', 'احجز', 'استلم'],
+        sellTitle: 'بيع الذهب',
+        sellSteps: ['تحقق من السعر', 'أحضر الذهب', 'أكمل'],
       },
-      showcase: {
-        eyebrow: 'داخل OUR MG',
-        title: 'تجربة بسيطة، مصممة للهاتف المحمول.',
-        labels: {
-          login: 'تسجيل الدخول',
-          dashboard: 'لوحة التحكم',
-          products: 'المنتجات',
-          orders: 'الطلبات',
-          profile: 'الملف الشخصي',
-        },
-        captions: {
-          login: 'نقطة دخول بسيطة إلى التطبيق.',
-          dashboard: 'معلومات مهمة في لمحة.',
-          products: 'استكشف المنتجات والمعلومات المتاحة.',
-          orders: 'الوصول إلى معلومات الطلبات والنشاط.',
-          profile: 'إدارة حسابك.',
-        },
-        screenNames: {
-          login: 'تسجيل الدخول',
-          home: 'لوحة التحكم',
-          products: 'المنتجات',
-          productDetail: 'تفاصيل المنتج',
-          profile: 'الملف الشخصي',
-          orders: 'الطلبات',
-        },
-      },
-      different: {
-        eyebrow: 'تجربة MODERN GOLD',
-        title: 'أكثر راحة. أكثر اتصالاً.',
+      appExperience: {
+        eyebrow: 'التجربة الرقمية',
+        title: 'Modern Gold في يديك.',
         description:
-          'يجلب Our MG Modern Gold أقرب إليك من خلال تجربة محمولة مخصصة مصممة للوصول المريح والتنقل البسيط والتواصل الرقمي الأفضل.',
-        points: [
-          { title: 'الوصول', desc: 'Modern Gold في متناول يدك من جهازك المحمول.' },
-          { title: 'الراحة', desc: 'الوصول إلى الميزات المتاحة دون الاعتماد بالكامل على تجربة سطح المكتب أو الموقع.' },
-          { title: 'الاتصال', desc: 'ابق أقرب إلى Modern Gold من خلال منصة رقمية مخصصة.' },
-        ],
-      },
-      download: {
-        eyebrow: 'احصل على OUR MG',
-        title: 'خذ Modern Gold معك.',
-        description:
-          'حمّل تطبيق Our MG المحمول واستمتع بطريقة متصلة ومريحة للوصول إلى Modern Gold من جهازك المحمول.',
-        primaryCta: 'تحميل التطبيق',
-        secondaryCta: 'زيارة OUR MG',
-        comingSoon: 'قريباً',
-        scanToDownload: 'امسح للتحميل',
+          'Our MG يقرب Modern Gold منك من خلال تجربة رقمية مخصصة مصممة لجعل شراء وبيع الذهب أكثر سهولة وراحة.',
+        cta: 'زيارة OUR MG',
       },
       final: {
-        title: 'Modern Gold أينما ذهبت.',
-        description: 'ابق على اتصال مع Modern Gold من خلال Our MG.',
-        primaryCta: 'تحميل OUR MG',
+        eyebrow: 'ابدأ مع OUR MG',
+        title: 'رحلتك مع الذهب تبدأ مع Modern Gold.',
+        description:
+          'سواء كنت تبحث عن شراء الذهب أو بيعه، يوفر Our MG اتصالاً رقمياً مريحاً بـ Modern Gold ومراكز التجميع لدينا.',
+        primaryCta: 'استكشف OUR MG',
         secondaryCta: 'زيارة OUR MG',
       },
     },
@@ -1108,98 +1092,94 @@ export const translations = {
     ourMg: {
       seo: {
         description:
-          'Our MG, Modern Gold\'un resmi mobil uygulamasıdır — cihazınızdan hizmetlere dijital erişim ve şirketle ilişkinizi yönetme imkânı sunar.',
+          'Our MG, Modern Gold\'un dijital altın platformudur — hazır olduğunuzda altın satın alın ve rezerve edin, toplama merkezlerinden teslim alın ve aynı bağlantılı ekosistem üzerinden altın satın.',
       },
       hero: {
         eyebrow: 'OUR MG',
-        title: 'Modern Gold sizinle bağlantıda.',
+        title: 'Altın Alın. Altın Satın. Bağlantıda Kalın.',
         description:
-          'Our MG, Modern Gold\'un mobil uygulamasıdır. Müşterilere Modern Gold ile bağlantı kurma, mevcut hizmetlere erişme, bilgi keşfetme ve şirketle ilişkilerini mobil cihazlarından yönetme imkânı sunmak için oluşturulmuştur.',
-        primaryCta: 'UYGULAMAYI İNDİR',
+          'Our MG, altın alım satımını daha kolay hale getirmek için tasarlanmış Modern Gold\'un dijital platformudur. İstediğiniz altını seçin, hazır olduğunuzda rezerve edin ve Modern Gold toplama merkezlerinden teslim alın. Satmak istediğinizde geçerli fiyatı kontrol edin ve altınınızı bir toplama merkezine getirin.',
+        primaryCta: 'OUR MG\'Yİ KEŞFET',
         secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
       },
       about: {
         eyebrow: 'OUR MG\'Yİ TANIYIN',
-        title: 'Modern Gold ile dijital bağlantı.',
+        title: 'Altınla bağlantı kurmanın daha basit yolu.',
         description:
-          'Our MG, özel mobil deneyim aracılığıyla Modern Gold\'u müşterilere yakınlaştırır. Uygulama, yalnızca web sitesine bağımlı kalmadan hizmetlere, bilgilere ve hesap özelliklerine erişim için pratik bir yer sunar.',
-        tagline: 'Modern Gold ile bağlantıda kalmayı daha basit, daha pratik ve daha erişilebilir kılmak için tasarlandı.',
+          'Our MG, müşterileri Modern Gold ile uygun bir dijital platform aracılığıyla bağlar. Hazır olduğunuzda altın seçip rezerve etmenin basit bir yolunu sunarken, müşterilere Modern Gold toplama merkezi ağı üzerinden altın satma imkânı da verir.',
+        cards: [
+          { title: 'SEÇİM', desc: 'İhtiyaçlarınıza uygun altın ürününü seçin.' },
+          { title: 'ESNEKLİK', desc: 'Paranız olduğunda ve satın almaya hazır olduğunuzda altını rezerve edin.' },
+          { title: 'ERİŞİM', desc: 'Dijital altın aktivitenizi ülke genelindeki Modern Gold toplama merkezleriyle bağlayın.' },
+        ],
+      },
+      buyGold: {
+        eyebrow: 'ALTIN AL',
+        title: 'Altınınızı seçin. Hazır olduğunuzda rezerve edin.',
+        description:
+          'Our MG ile müşteriler mevcut bir altın ürününü seçebilir ve paraları olduğunda rezerve edebilir. Rezervasyon tamamlandığında altın, belirlenen bir Modern Gold toplama merkezinden teslim alınabilir.',
+        steps: [
+          { title: 'SEÇ', desc: 'İstediğiniz altın ürününü seçin.' },
+          { title: 'REZERVE ET', desc: 'Hazır olduğunuzda altınınızı rezerve edin.' },
+          { title: 'TESLİM AL', desc: 'Altınınızı bir Modern Gold toplama merkezinden teslim alın.' },
+        ],
+        cta: 'ALTINI KEŞFET',
+      },
+      sellGold: {
+        eyebrow: 'ALTIN SAT',
+        title: 'Satmaya hazır olduğunuzda yanınızdayız.',
+        description:
+          'Our MG ayrıca Modern Gold aracılığıyla altın satmanın pratik bir yolunu sunar. Müşteriler geçerli satış fiyatını kontrol edebilir ve süreci tamamlamak için altınlarını belirlenen bir toplama merkezine getirebilir.',
+        steps: [
+          { title: 'KONTROL ET', desc: 'Geçerli altın fiyatını kontrol edin.' },
+          { title: 'GETİR', desc: 'Altınınızı bir Modern Gold toplama merkezine getirin.' },
+          { title: 'TAMAMLA', desc: 'Satış sürecini toplama merkezinde tamamlayın.' },
+        ],
+        cta: 'ALTIN SAT',
+      },
+      collectionCenters: {
+        eyebrow: 'TOPLAMA MERKEZLERİ',
+        title: 'Dijital ile fizikselin buluştuğu yer.',
+        description:
+          'Our MG, dijital deneyimi ülke genelindeki Modern Gold toplama merkezleriyle bağlar. Müşteriler platformu kullanarak altın yolculuklarına başlayabilir ve ilgili süreci belirlenen bir toplama merkezinde tamamlayabilir.',
+        journey: [
+          { label: 'OUR MG', desc: '' },
+          { label: 'SEÇ / REZERVE ET VEYA SAT', desc: '' },
+          { label: 'TOPLAMA MERKEZİ', desc: '' },
+          { label: 'TAMAMLA', desc: '' },
+        ],
       },
       why: {
         eyebrow: 'NEDEN OUR MG',
-        title: 'Neden Modern Gold uygulamasını seçmelisiniz?',
+        title: 'Altın daha pratik hale geldi.',
         items: [
-          { title: 'KOLAY ERİŞİM', desc: 'Modern Gold hizmet ve bilgilerine doğrudan mobil cihazınızdan erişin.' },
-          { title: 'KOLAYLIK', desc: 'Modern Gold deneyiminiz nerede olursanız olun elinizin altında olsun.' },
-          { title: 'TEK YER', desc: 'Önemli Modern Gold özelliklerini ve bilgilerini tek uygulamada bir araya getirin.' },
-          { title: 'HIZLI ERİŞİM', desc: 'Tüm web sitesinde gezinmeden sık kullanılan özelliklere ulaşın.' },
-          { title: 'BAĞLANTIDA KALIN', desc: 'Özel mobil deneyim aracılığıyla Modern Gold ile iletişimde kalın.' },
-          { title: 'MOBİL DENEYİM', desc: 'Günlük kullanım için tasarlanmış özel mobil arayüz.' },
+          { title: 'ESNEKLİK', desc: 'Paranız olduğunda ve satın almaya hazır olduğunuzda altını rezerve edin.' },
+          { title: 'SEÇİM', desc: 'İhtiyaçlarınıza uygun altın ürününü seçin.' },
+          { title: 'KOLAYLIK', desc: 'Altın yolculuğunuza dijital olarak başlayın ve toplama merkezlerimizde tamamlayın.' },
+          { title: 'BAĞLANTI', desc: 'Tek bir dijital platform aracılığıyla Modern Gold ile bağlantıda kalın.' },
         ],
       },
-      features: {
-        eyebrow: 'UYGULAMA ÖZELLİKLERİ',
-        title: 'Our MG ile neler erişilebilir.',
-        items: [
-          { title: 'HESAP', desc: 'Modern Gold hesabınızı ve kişisel bilgilerinizi yönetin.' },
-          { title: 'KONTROL PANELİ', desc: 'Önemli bilgilere tek merkezi görünümden erişin.' },
-          { title: 'ÜRÜNLER', desc: 'Modern Gold ürünlerini ve ürün bilgilerini keşfedin.' },
-          { title: 'SİPARİŞLER', desc: 'Sipariş bilgilerinizi ve aktivitenizi görüntüleyin.' },
-          { title: 'PROFİL', desc: 'Hesap detaylarınızı ve tercihlerinizi yönetin.' },
-          { title: 'DESTEK', desc: 'Yardım veya bilgi gerektiğinde Modern Gold ile iletişime geçin.' },
-        ],
+      connect: {
+        eyebrow: 'OUR MG DENEYİMİ',
+        title: 'Tek platform. İki işlem yolu.',
+        buyTitle: 'ALTIN AL',
+        buySteps: ['Seç', 'Rezerve Et', 'Teslim Al'],
+        sellTitle: 'ALTIN SAT',
+        sellSteps: ['Fiyatı Kontrol Et', 'Altını Getir', 'Tamamla'],
       },
-      showcase: {
-        eyebrow: 'OUR MG İÇİNDE',
-        title: 'Mobil için tasarlanmış basit bir deneyim.',
-        labels: {
-          login: 'Giriş',
-          dashboard: 'Kontrol Paneli',
-          products: 'Ürünler',
-          orders: 'Siparişler',
-          profile: 'Profil',
-        },
-        captions: {
-          login: 'Uygulamaya basit bir giriş noktası.',
-          dashboard: 'Önemli bilgiler bir bakışta.',
-          products: 'Mevcut ürünleri ve bilgileri keşfedin.',
-          orders: 'Sipariş bilgilerine ve aktiviteye erişin.',
-          profile: 'Hesabınızı yönetin.',
-        },
-        screenNames: {
-          login: 'Giriş',
-          home: 'Kontrol Paneli',
-          products: 'Ürünler',
-          productDetail: 'Ürün Detayı',
-          profile: 'Profil',
-          orders: 'Siparişler',
-        },
-      },
-      different: {
-        eyebrow: 'MODERN GOLD DENEYİMİ',
-        title: 'Daha pratik. Daha bağlantılı.',
+      appExperience: {
+        eyebrow: 'DİJİTAL DENEYİM',
+        title: 'Modern Gold avucunuzda.',
         description:
-          'Our MG, kolay erişim, basit navigasyon ve daha iyi dijital iletişim için tasarlanmış özel mobil deneyim aracılığıyla Modern Gold\'u size yakınlaştırır.',
-        points: [
-          { title: 'ERİŞİM', desc: 'Modern Gold mobil cihazınızdan elinizin altında.' },
-          { title: 'KOLAYLIK', desc: 'Tamamen masaüstü veya web deneyimine bağımlı kalmadan özelliklere erişin.' },
-          { title: 'BAĞLANTI', desc: 'Özel dijital platform aracılığıyla Modern Gold\'a daha yakın kalın.' },
-        ],
-      },
-      download: {
-        eyebrow: 'OUR MG\'Yİ EDİNİN',
-        title: 'Modern Gold\'u yanınızda taşıyın.',
-        description:
-          'Our MG mobil uygulamasını indirin ve mobil cihazınızdan Modern Gold\'a pratik, bağlantılı erişimin keyfini çıkarın.',
-        primaryCta: 'UYGULAMAYI İNDİR',
-        secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
-        comingSoon: 'YAKINDA',
-        scanToDownload: 'İNDİRMEK İÇİN TARAYIN',
+          'Our MG, altın alım satımını daha erişilebilir ve pratik hale getirmek için tasarlanmış özel dijital deneyim aracılığıyla Modern Gold\'u size yakınlaştırır.',
+        cta: 'OUR MG\'Yİ ZİYARET ET',
       },
       final: {
-        title: 'Modern Gold, nereye giderseniz gidin.',
-        description: 'Our MG aracılığıyla Modern Gold ile bağlantıda kalın.',
-        primaryCta: 'OUR MG\'Yİ İNDİR',
+        eyebrow: 'OUR MG İLE BAŞLAYIN',
+        title: 'Altın yolculuğunuz Modern Gold ile başlar.',
+        description:
+          'Altın almak veya satmak isteseniz de, Our MG Modern Gold ve toplama merkezlerimize pratik bir dijital bağlantı sağlar.',
+        primaryCta: 'OUR MG\'Yİ KEŞFET',
         secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
       },
     },
