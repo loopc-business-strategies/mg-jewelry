@@ -8,12 +8,14 @@ import CartItem from '../components/CartItem';
 import EmptyState from '../components/EmptyState';
 import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function CartPage() {
   const { cart, updateQuantity, removeItem, subtotal, fetchCart } = useCart();
   const [couponCode, setCouponCode] = useState('');
   const [couponDiscount, setCouponDiscount] = useState(0);
   const [applying, setApplying] = useState(false);
+  const { t } = useTranslation();
 
   const shipping = subtotal >= 5000 ? 0 : 99;
   const afterCoupon = Math.max(0, subtotal - couponDiscount);
@@ -31,10 +33,10 @@ export default function CartPage() {
     try {
       const { data } = await api.post('/cart/apply-coupon', { code: couponCode });
       setCouponDiscount(data.couponDiscount || 0);
-      toast.success('Coupon applied!');
+      toast.success(t('cart.couponApplied'));
       fetchCart();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Invalid coupon');
+      toast.error(err.response?.data?.message || t('cart.couponInvalid'));
     } finally {
       setApplying(false);
     }
@@ -45,25 +47,25 @@ export default function CartPage() {
       await api.delete('/cart/coupon');
       setCouponCode('');
       setCouponDiscount(0);
-      toast.success('Coupon removed');
+      toast.success(t('cart.couponRemoved'));
       fetchCart();
     } catch {
-      toast.error('Failed to remove coupon');
+      toast.error(t('cart.couponRemoveFailed'));
     }
   };
 
   return (
     <>
-      <SEOHead title="Shopping Cart" path="/cart" />
+      <SEOHead title={t('cart.seoTitle')} path="/cart" />
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
-        <Breadcrumbs items={[{ label: 'Cart' }]} />
-        <h1 className="mb-8">Shopping Cart</h1>
+        <Breadcrumbs items={[{ label: t('cart.title') }]} />
+        <h1 className="mb-8">{t('cart.title')}</h1>
 
         {!cart.items?.length ? (
           <EmptyState
-            title="Your cart is empty"
-            description="Discover our beautiful jewellery collection."
-            action={<Link to="/shop" className="inline-block btn-primary-ink text-xs">Continue Shopping</Link>}
+            title={t('cart.emptyTitle')}
+            description={t('cart.emptyDesc')}
+            action={<Link to="/shop" className="inline-block btn-primary-ink text-xs">{t('cart.continueShopping')}</Link>}
           />
         ) : (
           <div className="grid lg:grid-cols-3 gap-8">
@@ -73,26 +75,26 @@ export default function CartPage() {
               ))}
             </div>
             <div className="card-elegant p-6 h-fit sticky top-24">
-              <h3 className="font-semibold text-charcoal text-xl mb-4">Order Summary</h3>
+              <h3 className="font-semibold text-charcoal text-xl mb-4">{t('cart.orderSummary')}</h3>
               <div className="flex gap-2 mb-4">
-                <input value={couponCode} onChange={(e) => setCouponCode(e.target.value.toUpperCase())} placeholder="Coupon code" className="input-elegant flex-1 text-sm" />
-                <button onClick={applyCoupon} disabled={applying} className="btn-primary-gold text-xs px-3">{applying ? '...' : 'Apply'}</button>
+                <input value={couponCode} onChange={(e) => setCouponCode(e.target.value.toUpperCase())} placeholder={t('cart.couponPlaceholder')} className="input-elegant flex-1 text-sm" />
+                <button onClick={applyCoupon} disabled={applying} className="btn-primary-gold text-xs px-3">{applying ? '...' : t('cart.apply')}</button>
               </div>
               {couponDiscount > 0 && (
-                <button onClick={removeCoupon} className="text-xs text-red-600 mb-3 hover:underline">Remove coupon</button>
+                <button onClick={removeCoupon} className="text-xs text-red-600 mb-3 hover:underline">{t('cart.removeCoupon')}</button>
               )}
               <dl className="space-y-3 text-sm">
-                <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
-                {discount > 0 && <div className="flex justify-between text-green-600"><dt>Product savings</dt><dd>-{formatPrice(discount)}</dd></div>}
-                {couponDiscount > 0 && <div className="flex justify-between text-green-600"><dt>Coupon</dt><dd>-{formatPrice(couponDiscount)}</dd></div>}
-                <div className="flex justify-between"><dt>Shipping</dt><dd>{shipping ? formatPrice(shipping) : 'Free'}</dd></div>
-                <div className="flex justify-between"><dt>Tax (3%)</dt><dd>{formatPrice(tax)}</dd></div>
-                <div className="flex justify-between font-semibold text-lg pt-3 border-t"><dt>Total</dt><dd>{formatPrice(total)}</dd></div>
+                <div className="flex justify-between"><dt>{t('cart.subtotal')}</dt><dd>{formatPrice(subtotal)}</dd></div>
+                {discount > 0 && <div className="flex justify-between text-green-600"><dt>{t('cart.savings')}</dt><dd>-{formatPrice(discount)}</dd></div>}
+                {couponDiscount > 0 && <div className="flex justify-between text-green-600"><dt>{t('cart.coupon')}</dt><dd>-{formatPrice(couponDiscount)}</dd></div>}
+                <div className="flex justify-between"><dt>{t('cart.shipping')}</dt><dd>{shipping ? formatPrice(shipping) : t('cart.free')}</dd></div>
+                <div className="flex justify-between"><dt>{t('cart.tax')}</dt><dd>{formatPrice(tax)}</dd></div>
+                <div className="flex justify-between font-semibold text-lg pt-3 border-t"><dt>{t('cart.total')}</dt><dd>{formatPrice(total)}</dd></div>
               </dl>
               <Link to="/checkout" className="block w-full text-center btn-primary-ink justify-center text-xs mt-6">
-                Proceed to Checkout
+                {t('cart.checkout')}
               </Link>
-              <Link to="/shop" className="block text-center text-sm text-gold-dark mt-4 hover:underline">Continue Shopping</Link>
+              <Link to="/shop" className="block text-center text-sm text-gold-dark mt-4 hover:underline">{t('cart.continueShopping')}</Link>
             </div>
           </div>
         )}

@@ -1,3 +1,5 @@
+import { siteTranslations } from './siteTranslations';
+
 export const translations = {
   en: {
     nav: {
@@ -1229,6 +1231,10 @@ function getNested(obj, path) {
 }
 
 export function translate(lang, key, fallback = '') {
-  const value = getNested(translations[lang], key) ?? getNested(translations.en, key);
+  const value =
+    getNested(translations[lang], key) ??
+    getNested(siteTranslations[lang], key) ??
+    getNested(translations.en, key) ??
+    getNested(siteTranslations.en, key);
   return value ?? fallback ?? key;
 }

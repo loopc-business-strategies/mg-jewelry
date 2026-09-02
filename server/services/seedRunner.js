@@ -98,6 +98,15 @@ function buildProducts() {
       tags: [category, metal],
       seoTitle: `${name} | Modern Gold Jewelry`,
       seoDescription: `Shop ${name} — premium ${metal} ${category} from Modern Gold Jewelry Manufacturing, Uzbekistan.`,
+      translations: {
+        en: {
+          name,
+          description: `The ${name} is precision-crafted at our Namangan facility for international jewelry partners and discerning customers worldwide.`,
+          shortDescription: `Premium ${metal} ${category.replace(/-/g, ' ')} — manufactured by Modern Gold Jewelry.`,
+          seoTitle: `${name} | Modern Gold Jewelry`,
+          seoDescription: `Shop ${name} — premium ${metal} ${category} from Modern Gold Jewelry Manufacturing, Uzbekistan.`,
+        },
+      },
       isDemo: true,
     };
   });

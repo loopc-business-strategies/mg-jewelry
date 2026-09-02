@@ -8,6 +8,17 @@ const diamondDetailsSchema = new mongoose.Schema({
   hasDiamond: { type: Boolean, default: false },
 });
 
+const localeSchema = new mongoose.Schema(
+  {
+    name: String,
+    description: String,
+    shortDescription: String,
+    seoTitle: String,
+    seoDescription: String,
+  },
+  { _id: false }
+);
+
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -52,6 +63,13 @@ const productSchema = new mongoose.Schema(
     seoTitle: String,
     seoDescription: String,
     seoKeywords: [String],
+    translations: {
+      en: localeSchema,
+      ru: localeSchema,
+      uz: localeSchema,
+      ar: localeSchema,
+      tr: localeSchema,
+    },
   },
   { timestamps: true }
 );

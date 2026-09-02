@@ -5,31 +5,30 @@ import { brand } from '../utils/brandConfig';
 import { customHero } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 import SafeImage from '../components/SafeImage';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function CustomJewelryPage() {
+  const { t } = useTranslation();
+  const cards = t('customJewelry.cards') || [];
+
   return (
     <>
       <SEOHead
-        title="Custom Jewelry Manufacturing"
-        description="Custom jewelry manufacturing, private-label collections and bespoke production from Modern Gold Jewelry Manufacturing FE LLC in Uzbekistan."
+        title={t('customJewelry.seoTitle')}
+        description={`${t('customJewelry.desc')} ${brand.legalName} in Uzbekistan.`}
         path="/custom-jewelry"
       />
       <section className="relative py-24 px-4 section-cream">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="mb-4">Custom Jewelry Manufacturing</h1>
+          <h1 className="mb-4">{t('customJewelry.title')}</h1>
           <p className="text-muted text-lg leading-relaxed">
-            Partner with {brand.name} for bespoke designs, private-label jewelry and tailored production runs built to your brand specifications.
+            {t('customJewelry.desc')}
           </p>
         </div>
       </section>
       <CustomManufacturingSection />
       <section className="py-16 px-4 max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
-        {[
-          { title: 'Custom Designs', desc: 'Bring your concepts to life with our design and development team.' },
-          { title: 'Private Label', desc: 'Manufacture jewelry under your brand with consistent quality and production scale.' },
-          { title: 'Wholesale Collections', desc: 'Curated collections ready for international wholesale distribution.' },
-          { title: 'Product Development', desc: 'From prototype to production — full development support for new lines.' },
-        ].map((item) => (
+        {Array.isArray(cards) && cards.map((item) => (
           <div
             key={item.title}
             id={item.title === 'Private Label' ? 'private-label' : undefined}
@@ -46,7 +45,7 @@ export default function CustomJewelryPage() {
       <B2BSection />
       <div className="text-center pb-16">
         <Link to="/contact?type=quote" className="btn-primary-gold text-xs">
-          Discuss Your Collection
+          {t('customJewelry.cta')}
         </Link>
       </div>
     </>

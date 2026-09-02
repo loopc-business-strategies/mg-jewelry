@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import SafeImage from '../components/SafeImage';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     api.get('/blog').then(({ data }) => setBlogs(data)).catch(() => {});
@@ -13,9 +15,9 @@ export default function BlogPage() {
 
   return (
     <>
-      <SEOHead title="Blog" description="Jewellery guides, buying tips, and fashion trends." path="/blog" />
+      <SEOHead title={t('blog.seoTitle')} description={t('blog.seoDesc')} path="/blog" />
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <h1 className="text-center mb-12">Jewellery Journal</h1>
+        <h1 className="text-center mb-12">{t('blog.title')}</h1>
         <div className="grid md:grid-cols-3 gap-8">
           {blogs.map((blog) => (
             <Link key={blog._id} to={`/blog/${blog.slug}`} className="group">

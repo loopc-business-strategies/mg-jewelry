@@ -1,13 +1,29 @@
 import axios from 'axios';
+import { STORAGE_KEY, defaultPrefs } from '../utils/marketConfig';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
+function getStoredLanguage() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return { ...defaultPrefs, ...JSON.parse(stored) }.language || 'en';
+  } catch { /* ignore */ }
+  return defaultPrefs.language;
+}
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
+
+  const lang = getStoredLanguage();
+  const url = config.url || '';
+  if (url.includes('/products') || url.includes('/search')) {
+    config.params = { ...config.params, lang };
+  }
+
   return config;
 });
 

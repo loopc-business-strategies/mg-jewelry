@@ -5,8 +5,10 @@ import ProductImage from './ProductImage';
 import { formatPrice } from '../utils/formatPrice';
 import { categoryImages } from '../utils/imageConfig';
 import SafeImage from './SafeImage';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function HeroBanner({ title, subtitle, image, primaryLink = '/shop', secondaryLink = '/wholesale', compact = false }) {
+  const { t } = useTranslation();
   return (
     <section className={`relative overflow-hidden ${compact ? 'h-[40vh]' : 'h-[70vh] min-h-[500px]'}`}>
       <img src={image} alt={`${title} — Modern Gold Jewelry editorial collection`} className="absolute inset-0 w-full h-full object-cover" />
@@ -17,10 +19,10 @@ export default function HeroBanner({ title, subtitle, image, primaryLink = '/sho
           <p className="type-body mb-8">{subtitle}</p>
           <div className="flex gap-4 flex-wrap">
             <Link to={primaryLink} className="btn-primary-gold">
-              Explore Collections
+              {t('heroBanner.explore')}
             </Link>
             <Link to={secondaryLink} className="border-2 border-border text-gold-dark hover:bg-gold hover:text-white px-8 py-3 rounded-md text-sm font-medium tracking-wider transition-colors">
-              Partner With Us
+              {t('heroBanner.partner')}
             </Link>
           </div>
         </div>
@@ -64,21 +66,23 @@ export function ProductCarousel({ products, title }) {
 }
 
 export function CategoryCard({ name, slug, image }) {
+  const { t } = useTranslation();
   const src = image || categoryImages[slug] || categoryImages.chains;
+  const displayName = t(`categories.${slug}`) || name;
   return (
     <Link to={`/shop/${slug}`} className="group/card editorial-image-card relative rounded-xl overflow-hidden border border-border bg-white hover:border-border transition-colors duration-[350ms]">
       <SafeImage
         src={src}
-        alt={`${name} — luxury gold jewelry editorial by Modern Gold Jewelry`}
+        alt={`${displayName} — luxury gold jewelry editorial by Modern Gold Jewelry`}
         category={slug}
         className="w-full h-full object-cover"
         loading="lazy"
       />
       <div className="editorial-image-overlay" />
       <div className="absolute bottom-0 left-0 right-0 p-6 text-charcoal bg-gradient-to-t from-pearl/90 via-pearl/40 to-transparent">
-        <h3 className="type-card-title mb-2">{name}</h3>
+        <h3 className="type-card-title mb-2">{displayName}</h3>
         <span className="text-sm flex items-center gap-1 group-hover/card:gap-2 group-hover/card:text-gold-dark transition-all duration-[350ms]">
-          View Collection <ArrowRight size={14} />
+          {t('heroBanner.viewCollection')} <ArrowRight size={14} />
         </span>
       </div>
     </Link>

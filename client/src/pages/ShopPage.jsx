@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -11,8 +11,8 @@ import EmptyState from '../components/EmptyState';
 import QuickViewModal from '../components/QuickViewModal';
 import Pagination from '../components/Pagination';
 import { SlidersHorizontal } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { categoryShowcase } from '../utils/brandConfig';
+import { useTranslation } from '../hooks/useTranslation';
 
 const shopCategories = categoryShowcase;
 
@@ -23,6 +23,7 @@ export default function ShopPage() {
   const [loading, setLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(false);
   const [quickView, setQuickView] = useState(null);
+  const { t, tf, lang } = useTranslation();
 
   const sort = searchParams.get('sort') || 'featured';
   const page = searchParams.get('page') || '1';
@@ -57,23 +58,23 @@ export default function ShopPage() {
       .then(({ data }) => { setProducts(data.products); setMeta(data); })
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
-  }, [searchParams]);
+  }, [searchParams, lang]);
 
   return (
     <>
-      <SEOHead title="Shop Chains & Bangles" description="Browse premium gold chains and bangles manufactured in Uzbekistan." path="/shop" />
+      <SEOHead title={t('shop.seoTitle')} description={t('shop.seoDesc')} path="/shop" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-14 bg-white">
-        <Breadcrumbs items={[{ label: 'Jewellery' }]} />
+        <Breadcrumbs items={[{ label: t('categories.jewellery') }]} />
         <header className="mb-8 md:mb-10">
-          <p className="section-eyebrow">Collections</p>
-          <h1>Chains & Bangles</h1>
+          <p className="section-eyebrow">{t('shop.eyebrow')}</p>
+          <h1>{t('shop.title')}</h1>
           <p className="type-section-desc prose-section mt-3">
-            Premium gold chains and bangles — our specialty. Crafted in Namangan for retail customers and international partners.
+            {t('shop.desc')}
           </p>
           {meta.total && (
             <p className="type-body-sm font-medium text-gold mt-2">
-              Showing {meta.showing} of {meta.total} designs
+              {tf('shop.showing', { from: meta.showing, total: meta.total })}
             </p>
           )}
         </header>
@@ -83,7 +84,7 @@ export default function ShopPage() {
             to="/shop"
             className="px-4 py-2 rounded-md text-sm bg-gold text-white font-medium"
           >
-            All
+            {t('categories.all')}
           </Link>
           {shopCategories.map((cat) => (
             <Link
@@ -91,7 +92,7 @@ export default function ShopPage() {
               to={`/shop/${cat.slug}`}
               className="px-4 py-2 rounded-md text-sm bg-white hover:bg-cream border border-border hover:border-gold transition-colors text-charcoal"
             >
-              {cat.name}
+              {t(`categories.${cat.slug}`) || cat.name}
             </Link>
           ))}
         </div>
@@ -105,7 +106,7 @@ export default function ShopPage() {
                 className="lg:hidden flex items-center gap-2 border border-gold/20 bg-white px-3 py-2 text-sm"
                 onClick={() => setFilterOpen(true)}
               >
-                <SlidersHorizontal size={16} /> Filters
+                <SlidersHorizontal size={16} /> {t('filters.title')}
               </button>
               <ProductSort value={sort} onChange={(v) => {
                 const params = new URLSearchParams(searchParams);
@@ -131,9 +132,9 @@ export default function ShopPage() {
               </>
             ) : (
               <EmptyState
-                title="No products found"
-                description="Try adjusting your filters or browse all jewellery."
-                action={<Link to="/shop" className="text-gold-dark hover:underline">View All Products</Link>}
+                title={t('search.emptyTitle')}
+                description={t('search.emptyDesc')}
+                action={<Link to="/shop" className="text-gold-dark hover:underline">{t('common.viewAll')}</Link>}
               />
             )}
           </div>

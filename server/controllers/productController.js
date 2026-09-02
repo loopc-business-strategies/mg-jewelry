@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const { resolveLang, localizeProduct, localizeProducts, buildTranslationsFromBody } = require('../utils/localizeProduct');
 
 const buildProductQuery = (query) => {
   const filter = { isActive: true };
@@ -39,6 +40,7 @@ const getProducts = async (req, res) => {
   const filter = buildProductQuery(req.query);
   const sort = getSortOption(req.query.sort);
   const skip = (page - 1) * limit;
+  const lang = resolveLang(req);
 
   const [products, total] = await Promise.all([
     Product.find(filter).sort(sort).skip(skip).limit(limit),
@@ -46,7 +48,7 @@ const getProducts = async (req, res) => {
   ]);
 
   res.json({
-    products,
+    products: localizeProducts(products, lang),
     page,
     pages: Math.ceil(total / limit),
     total,
@@ -55,21 +57,28 @@ const getProducts = async (req, res) => {
 };
 
 const getProductById = async (req, res) => {
+  const lang = resolveLang(req);
   const product = await Product.findById(req.params.id);
   if (product) {
-    res.json(product);
+    res.json(localizeProduct(product, lang));
   } else {
     res.status(404).json({ message: 'Product not found' });
   }
 };
 
 const createProduct = async (req, res) => {
-  const product = await Product.create(req.body);
+  const payload = { ...req.body };
+  payload.translations = buildTranslationsFromBody(payload);
+  const product = await Product.create(payload);
   res.status(201).json(product);
 };
 
 const updateProduct = async (req, res) => {
-  const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  const payload = { ...req.body };
+  if (payload.translations) {
+    payload.translations = buildTranslationsFromBody(payload);
+  }
+  const product = await Product.findByIdAndUpdate(req.params.id, payload, { new: true });
   if (product) res.json(product);
   else res.status(404).json({ message: 'Product not found' });
 };

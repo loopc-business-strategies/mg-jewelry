@@ -12,6 +12,7 @@ import Pagination from '../components/Pagination';
 import SafeImage from '../components/SafeImage';
 import { SlidersHorizontal } from 'lucide-react';
 import { getCategoryImage } from '../utils/imageConfig';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function CategoryPage() {
   const { slug } = useParams();
@@ -22,6 +23,7 @@ export default function CategoryPage() {
   const [loading, setLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(false);
   const [quickView, setQuickView] = useState(null);
+  const { t, tf, lang } = useTranslation();
 
   const sort = searchParams.get('sort') || 'featured';
   const page = searchParams.get('page') || '1';
@@ -50,9 +52,9 @@ export default function CategoryPage() {
       .then(({ data }) => { setProducts(data.products); setMeta(data); })
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
-  }, [slug, searchParams]);
+  }, [slug, searchParams, lang]);
 
-  const title = category?.name || slug?.replace(/-/g, ' ');
+  const title = category?.name || t(`categories.${slug}`) || slug?.replace(/-/g, ' ');
   const heroImage = getCategoryImage(slug);
   const heroAlt = `${title} — luxury gold jewelry editorial by Modern Gold Jewelry`;
 
@@ -72,7 +74,7 @@ export default function CategoryPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <Breadcrumbs items={[{ label: 'Shop', path: '/shop' }, { label: title }]} />
+        <Breadcrumbs items={[{ label: t('common.shop'), path: '/shop' }, { label: title }]} />
 
         {category?.description && (
           <p className="type-section-desc prose-section mb-6">{category.description}</p>
@@ -84,7 +86,7 @@ export default function CategoryPage() {
               onClick={() => { const p = new URLSearchParams(searchParams); p.delete('subcategory'); setSearchParams(p); }}
               className={`px-4 py-2 rounded-md text-sm border transition-colors ${!subcategory ? 'bg-gold text-white border-border' : 'bg-white hover:bg-gold/10 border-border'}`}
             >
-              All
+              {t('categories.all')}
             </button>
             {category.subcategories.map((sub) => (
               <button
@@ -107,10 +109,10 @@ export default function CategoryPage() {
 
           <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
-              <p className="text-sm text-muted">{meta.total ? `Showing ${meta.showing} of ${meta.total} designs` : ''}</p>
+              <p className="text-sm text-muted">{meta.total ? tf('shop.showing', { from: meta.showing, total: meta.total }) : ''}</p>
               <div className="flex gap-3">
                 <button className="lg:hidden flex items-center gap-2 border rounded-lg px-3 py-2 text-sm" onClick={() => setFilterOpen(true)}>
-                  <SlidersHorizontal size={16} /> Filters
+                  <SlidersHorizontal size={16} /> {t('filters.title')}
                 </button>
                 <ProductSort value={sort} onChange={(v) => { const p = new URLSearchParams(searchParams); p.set('sort', v); setSearchParams(p); }} />
               </div>

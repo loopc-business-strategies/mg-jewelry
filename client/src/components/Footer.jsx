@@ -16,10 +16,10 @@ export default function Footer() {
     if (!email.trim()) return;
     try {
       await api.post('/newsletter', { email });
-      toast.success('Thank you for subscribing!');
+      toast.success(t('footer.subscribeSuccess'));
       setEmail('');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Subscription failed');
+      toast.error(err.response?.data?.message || t('footer.subscribeFailed'));
     }
   };
 
@@ -36,7 +36,7 @@ export default function Footer() {
               ))}
             </address>
             <p className="type-body-sm leading-relaxed mb-4 max-w-xs">
-              {brand.tagline}
+              {t('brand.tagline')}
             </p>
             <div className="flex gap-2.5">
               {socialLinks.map((social) => {
@@ -66,7 +66,7 @@ export default function Footer() {
                 {links.map((l) => (
                   <li key={l.path + l.label}>
                     <Link to={l.path} className="type-body-sm hover:text-gold transition-colors">
-                      {l.label}
+                      {l.key ? t(l.key) : l.label}
                     </Link>
                   </li>
                 ))}
@@ -74,15 +74,15 @@ export default function Footer() {
             </div>
           ))}
           <div className="col-span-2 md:col-span-1">
-            <h4 className="text-sm font-semibold text-charcoal mb-1">Newsletter</h4>
+            <h4 className="text-sm font-semibold text-charcoal mb-1">{t('footer.newsletter')}</h4>
             <div className="section-title-line mb-4" />
-            <p className="type-body-sm mb-4">Receive updates on new collections and exclusive offers.</p>
+            <p className="type-body-sm mb-4">{t('footer.newsletterDesc')}</p>
             <form onSubmit={handleNewsletter} className="flex border border-border bg-white rounded-md overflow-hidden">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email"
+                placeholder={t('footer.emailPlaceholder')}
                 className="flex-1 px-3 py-2.5 type-body-sm bg-transparent focus:outline-none text-charcoal placeholder:text-[#999999]"
                 required
               />

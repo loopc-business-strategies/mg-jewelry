@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { categoryImages } from '../utils/imageConfig';
 import SafeImage from './SafeImage';
+import { useTranslation } from '../hooks/useTranslation';
 
 function CategoryCard({ name, slug }) {
+  const { t } = useTranslation();
+  const displayName = t(`categories.${slug}`) || name;
   return (
     <Link
       to={`/shop/${slug}`}
@@ -13,7 +16,7 @@ function CategoryCard({ name, slug }) {
       <div className="category-carousel-image editorial-image-card relative bg-white">
         <SafeImage
           src={categoryImages[slug] || categoryImages.chains}
-          alt={`${name} — luxury gold jewelry editorial by Modern Gold Jewelry`}
+          alt={`${displayName} — luxury gold jewelry editorial by Modern Gold Jewelry`}
           category={slug}
           className="w-full h-full object-cover"
         />
@@ -21,9 +24,9 @@ function CategoryCard({ name, slug }) {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-[350ms] pointer-events-none" />
       </div>
       <div className="p-4 text-center bg-white border-t border-border">
-        <p className="text-xs tracking-wide uppercase text-charcoal mb-1 font-semibold">{name}</p>
+        <p className="text-xs tracking-wide uppercase text-charcoal mb-1 font-semibold">{displayName}</p>
         <span className="text-[11px] text-gold group-hover/card:font-medium transition-all duration-200 inline-flex items-center gap-1">
-          Explore Now →
+          {t('heroBanner.exploreNow')}
         </span>
       </div>
     </Link>

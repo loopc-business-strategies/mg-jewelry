@@ -12,9 +12,11 @@ import B2BSection from '../components/sections/B2BSection';
 import CustomManufacturingSection from '../components/sections/CustomManufacturingSection';
 import ContactCTASection from '../components/sections/ContactCTASection';
 import { brand } from '../utils/brandConfig';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function HomePage() {
   const [bestSellers, setBestSellers] = useState([]);
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     api.get('/products?sort=best_selling&limit=4')
@@ -22,7 +24,7 @@ export default function HomePage() {
       .catch(() => {
         api.get('/products?featured=true&limit=4').then(({ data }) => setBestSellers(data.products || [])).catch(() => {});
       });
-  }, []);
+  }, [lang]);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -31,7 +33,7 @@ export default function HomePage() {
     alternateName: brand.name,
     url: brand.siteUrl,
     logo: `${brand.siteUrl}${brand.logo}`,
-    description: `${brand.legalName} — ${brand.tagline}. Local gold buying and international jewellery manufacturing from Namangan, Uzbekistan.`,
+    description: `${brand.legalName} — ${t('brand.tagline')}. Local gold buying and international jewellery manufacturing from Namangan, Uzbekistan.`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: '242 Girvonbulok Street',
@@ -44,8 +46,8 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="Gold Manufacturer Uzbekistan | Sell Gold & Wholesale Jewellery"
-        description={`${brand.name} — connecting Central Asian gold to global markets through mining, refinery operations, jewelry manufacturing and international trade.`}
+        title={t('seo.homeTitle')}
+        description={t('seo.homeDesc')}
         path="/"
         schema={schema}
       />

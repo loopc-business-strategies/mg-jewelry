@@ -9,19 +9,15 @@ import SEOHead from '../components/SEOHead';
 import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { Check } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
-
-const steps = ['Login', 'Address', 'Delivery', 'Payment', 'Confirmation'];
-const paymentMethods = [
-  { id: 'stripe', label: 'Card / UPI (Stripe)' },
-  { id: 'cod', label: 'Cash on Delivery' },
-];
 
 function StripeForm({ order, onSuccess }) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
+  const { t, tf } = useTranslation();
 
   const handlePay = async (e) => {
     e.preventDefault();
@@ -52,7 +48,7 @@ function StripeForm({ order, onSuccess }) {
     <form onSubmit={handlePay} className="space-y-4">
       <PaymentElement />
       <button type="submit" disabled={!stripe || loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
-        {loading ? 'Processing...' : `Pay ${formatPrice(order.total)}`}
+        {loading ? t('checkout.processing') : tf('checkout.pay', { amount: formatPrice(order.total) })}
       </button>
     </form>
   );
@@ -62,6 +58,8 @@ export default function CheckoutPage() {
   const { user } = useAuth();
   const { cart, subtotal, fetchCart } = useCart();
   const navigate = useNavigate();
+  const { t, tf } = useTranslation();
+  const steps = t('checkout.steps') || [];
   const [step, setStep] = useState(user ? 1 : 0);
   const [order, setOrder] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);
@@ -72,6 +70,11 @@ export default function CheckoutPage() {
   const shipping = subtotal >= 5000 ? 0 : 99;
   const tax = Math.round(subtotal * 0.03);
   const total = subtotal + shipping + tax;
+
+  const paymentMethods = [
+    { id: 'stripe', label: t('checkout.stripe') },
+    { id: 'cod', label: t('checkout.cod') },
+  ];
 
   const placeOrder = async () => {
     setLoading(true);
@@ -85,10 +88,10 @@ export default function CheckoutPage() {
         setOrder(data.order || data);
         setStep(4);
         fetchCart();
-        toast.success('Order placed successfully!');
+        toast.success(t('checkout.orderPlaced'));
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to place order');
+      toast.error(err.response?.data?.message || t('checkout.orderFailed'));
     } finally {
       setLoading(false);
     }
@@ -98,26 +101,26 @@ export default function CheckoutPage() {
     setOrder(confirmedOrder);
     setStep(4);
     fetchCart();
-    toast.success('Payment successful!');
+    toast.success(t('checkout.paymentSuccess'));
   };
 
   if (!cart.items?.length && !order) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <p className="text-muted mb-4">Your cart is empty</p>
-        <Link to="/shop" className="text-gold-dark hover:underline">Continue Shopping</Link>
+        <p className="text-muted mb-4">{t('checkout.empty')}</p>
+        <Link to="/shop" className="text-gold-dark hover:underline">{t('cart.continueShopping')}</Link>
       </div>
     );
   }
 
   return (
     <>
-      <SEOHead title="Checkout" path="/checkout" />
+      <SEOHead title={t('checkout.seoTitle')} path="/checkout" />
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="mb-8 text-center">Checkout</h1>
+        <h1 className="mb-8 text-center">{t('checkout.title')}</h1>
 
         <div className="flex justify-between mb-10">
-          {steps.map((s, i) => (
+          {Array.isArray(steps) && steps.map((s, i) => (
             <div key={s} className={`flex items-center gap-2 text-xs ${i <= step ? 'text-gold' : 'text-muted'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${i <= step ? 'bg-gold text-white' : 'bg-gray-100'}`}>
                 {i < step ? <Check size={14} /> : i + 1}
@@ -129,9 +132,9 @@ export default function CheckoutPage() {
 
         {step === 0 && (
           <div className="text-center space-y-4">
-            <p>Please login or continue as guest</p>
-            <Link to="/login" className="inline-block btn-primary-gold text-xs">Login</Link>
-            <button onClick={() => setStep(1)} className="block mx-auto text-sm text-gold-dark hover:underline">Continue as Guest</button>
+            <p>{t('checkout.loginPrompt')}</p>
+            <Link to="/login" className="inline-block btn-primary-gold text-xs">{t('checkout.login')}</Link>
+            <button onClick={() => setStep(1)} className="block mx-auto text-sm text-gold-dark hover:underline">{t('checkout.guest')}</button>
           </div>
         )}
 
@@ -139,7 +142,7 @@ export default function CheckoutPage() {
           <div className="space-y-4">
             {['name', 'phone', 'email', 'line1', 'city', 'state', 'pincode'].map((field) => (
               <div key={field}>
-                <label className="text-sm font-medium capitalize block mb-1">{field === 'line1' ? 'Address' : field}</label>
+                <label className="text-sm font-medium capitalize block mb-1">{field === 'line1' ? t('checkout.address') : t(`form.${field}`) || field}</label>
                 <input
                   required
                   value={address[field]}
@@ -148,21 +151,21 @@ export default function CheckoutPage() {
                 />
               </div>
             ))}
-            <button onClick={() => setStep(2)} className="w-full btn-primary-gold justify-center text-xs">Continue to Delivery</button>
+            <button onClick={() => setStep(2)} className="w-full btn-primary-gold justify-center text-xs">{t('checkout.continueDelivery')}</button>
           </div>
         )}
 
         {step === 2 && (
           <div className="text-center space-y-4">
-            <p className="text-muted">Standard delivery: 3-5 business days</p>
-            <p className="font-semibold">Shipping: {shipping ? formatPrice(shipping) : 'Free'}</p>
-            <button onClick={() => setStep(3)} className="w-full btn-primary-gold justify-center text-xs">Continue to Payment</button>
+            <p className="text-muted">{t('checkout.deliveryNote')}</p>
+            <p className="font-semibold">{t('cart.shipping')}: {shipping ? formatPrice(shipping) : t('cart.free')}</p>
+            <button onClick={() => setStep(3)} className="w-full btn-primary-gold justify-center text-xs">{t('checkout.continuePayment')}</button>
           </div>
         )}
 
         {step === 3 && (
           <div className="space-y-4">
-            <p className="text-sm text-muted mb-4">Select payment method</p>
+            <p className="text-sm text-muted mb-4">{t('checkout.selectPayment')}</p>
             {paymentMethods.map((pm) => (
               <label key={pm.id} className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer ${paymentMethod === pm.id ? 'border-border bg-gold/5' : ''}`}>
                 <input type="radio" name="payment" checked={paymentMethod === pm.id} onChange={() => setPaymentMethod(pm.id)} className="accent-gold" />
@@ -170,17 +173,17 @@ export default function CheckoutPage() {
               </label>
             ))}
             <div className="bg-cream p-4 rounded-xl text-sm">
-              <div className="flex justify-between"><span>Total</span><strong>{formatPrice(total)}</strong></div>
+              <div className="flex justify-between"><span>{t('cart.total')}</span><strong>{formatPrice(total)}</strong></div>
             </div>
             <button onClick={placeOrder} disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
-              {loading ? 'Placing Order...' : paymentMethod === 'cod' ? 'Place Order' : 'Continue to Payment'}
+              {loading ? t('checkout.placing') : paymentMethod === 'cod' ? t('checkout.placeOrder') : t('checkout.continueToPay')}
             </button>
           </div>
         )}
 
         {step === 3.5 && clientSecret && order && (
           <div className="space-y-4">
-            <p className="text-sm text-muted">Complete your payment securely via Stripe</p>
+            <p className="text-sm text-muted">{t('checkout.stripeNote')}</p>
             <Elements stripe={stripePromise} options={{ clientSecret }}>
               <StripeForm order={order} onSuccess={onPaymentSuccess} />
             </Elements>
@@ -192,10 +195,10 @@ export default function CheckoutPage() {
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
               <Check size={32} className="text-green-600" />
             </div>
-            <h2 className="type-card-title">Order Confirmed!</h2>
+            <h2 className="type-card-title">{t('checkout.orderConfirmed')}</h2>
             <p className="text-muted">Order #{order.orderNumber}</p>
-            <p className="text-sm">Total: {formatPrice(order.total)}</p>
-            <Link to="/shop" className="inline-block btn-primary-gold text-xs mt-4">Continue Shopping</Link>
+            <p className="text-sm">{t('cart.total')}: {formatPrice(order.total)}</p>
+            <Link to="/shop" className="inline-block btn-primary-gold text-xs mt-4">{t('cart.continueShopping')}</Link>
           </div>
         )}
       </div>

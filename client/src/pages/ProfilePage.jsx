@@ -5,11 +5,13 @@ import { useAuth } from '../context/AuthContext';
 import SEOHead from '../components/SEOHead';
 import { formatPrice } from '../utils/formatPrice';
 import { User, Package, Heart, MapPin, LogOut } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function ProfilePage() {
   const { user, logout, loading: authLoading } = useAuth();
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('orders');
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) api.get('/orders').then(({ data }) => setOrders(data)).catch(() => {});
@@ -19,17 +21,17 @@ export default function ProfilePage() {
   if (!user) return <Navigate to="/login" replace />;
 
   const tabs = [
-    { id: 'orders', icon: Package, label: 'Orders' },
-    { id: 'wishlist', icon: Heart, label: 'Wishlist' },
-    { id: 'addresses', icon: MapPin, label: 'Addresses' },
-    { id: 'profile', icon: User, label: 'Profile' },
+    { id: 'orders', icon: Package, label: t('auth.orders') },
+    { id: 'wishlist', icon: Heart, label: t('wishlist.title') },
+    { id: 'addresses', icon: MapPin, label: t('auth.addresses') },
+    { id: 'profile', icon: User, label: t('auth.profile') },
   ];
 
   return (
     <>
-      <SEOHead title="My Account" path="/profile" />
+      <SEOHead title={t('auth.profileTitle')} path="/profile" />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="mb-8">My Account</h1>
+        <h1 className="mb-8">{t('auth.profileTitle')}</h1>
         <div className="grid md:grid-cols-4 gap-8">
           <nav className="space-y-1">
             {tabs.map(({ id, icon: Icon, label }) => (
@@ -38,14 +40,14 @@ export default function ProfilePage() {
               </button>
             ))}
             <button onClick={logout} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-red-500 hover:bg-red-50">
-              <LogOut size={18} /> Logout
+              <LogOut size={18} /> {t('auth.logout')}
             </button>
           </nav>
 
           <div className="md:col-span-3">
             {tab === 'orders' && (
               <div>
-                <h2 className="font-semibold text-charcoal text-xl mb-4">My Orders</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">{t('auth.myOrders')}</h2>
                 {orders.length ? orders.map((order) => (
                   <div key={order._id} className="border rounded-xl p-4 mb-4">
                     <div className="flex justify-between mb-2">
@@ -54,33 +56,33 @@ export default function ProfilePage() {
                     </div>
                     <p className="text-sm text-muted">{order.items?.length} items · {formatPrice(order.total)}</p>
                   </div>
-                )) : <p className="text-muted">No orders yet. <Link to="/shop" className="text-gold-dark hover:underline">Start shopping</Link></p>}
+                )) : <p className="text-muted">{t('auth.noOrders')} <Link to="/shop" className="text-gold-dark hover:underline">{t('auth.startShopping')}</Link></p>}
               </div>
             )}
             {tab === 'wishlist' && (
               <div>
-                <h2 className="font-semibold text-charcoal text-xl mb-4">Wishlist</h2>
-                <Link to="/wishlist" className="text-gold-dark hover:underline">View full wishlist →</Link>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">{t('wishlist.title')}</h2>
+                <Link to="/wishlist" className="text-gold-dark hover:underline">{t('auth.viewWishlist')}</Link>
               </div>
             )}
             {tab === 'addresses' && (
               <div>
-                <h2 className="font-semibold text-charcoal text-xl mb-4">Saved Addresses</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">{t('auth.savedAddresses')}</h2>
                 {user.addresses?.length ? user.addresses.map((addr, i) => (
                   <div key={i} className="border rounded-xl p-4 mb-3 text-sm">
                     <p className="font-medium">{addr.name}</p>
                     <p className="text-muted">{addr.line1}, {addr.city}, {addr.state} - {addr.pincode}</p>
                   </div>
-                )) : <p className="text-muted">No saved addresses</p>}
+                )) : <p className="text-muted">{t('auth.noAddresses')}</p>}
               </div>
             )}
             {tab === 'profile' && (
               <div>
-                <h2 className="font-semibold text-charcoal text-xl mb-4">Profile Details</h2>
+                <h2 className="font-semibold text-charcoal text-xl mb-4">{t('auth.profileDetails')}</h2>
                 <dl className="space-y-3 text-sm">
-                  <div><dt className="text-muted">Name</dt><dd className="font-medium">{user.name}</dd></div>
-                  <div><dt className="text-muted">Email</dt><dd className="font-medium">{user.email}</dd></div>
-                  <div><dt className="text-muted">Phone</dt><dd className="font-medium">{user.phone}</dd></div>
+                  <div><dt className="text-muted">{t('auth.name')}</dt><dd className="font-medium">{user.name}</dd></div>
+                  <div><dt className="text-muted">{t('form.email')}</dt><dd className="font-medium">{user.email}</dd></div>
+                  <div><dt className="text-muted">{t('form.phone')}</dt><dd className="font-medium">{user.phone}</dd></div>
                 </dl>
               </div>
             )}
