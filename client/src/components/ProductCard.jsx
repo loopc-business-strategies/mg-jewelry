@@ -12,7 +12,7 @@ function slugToLabel(slug) {
 
 function ProductCardActions({ productId, onAddToCart }) {
   return (
-    <div className="product-card-actions-inner overlay-cream px-3 py-2.5">
+    <div className="product-card-actions-inner overlay-cream px-2 py-2">
       <div className="product-card-actions">
         <Link to={`/product/${productId}`} className="btn-card-view">
           View Product
