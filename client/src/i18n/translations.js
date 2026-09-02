@@ -8,6 +8,7 @@ export const translations = {
       retail: 'Retail',
       wholesale: 'Wholesale',
       contact: 'Contact',
+      ourMg: 'Our MG',
     },
     retailMenu: {
       title: 'Retail',
@@ -140,6 +141,100 @@ export const translations = {
       help: 'Help',
       newsletter: 'Newsletter',
     },
+    ourMg: {
+      seo: {
+        description:
+          'Our MG is Modern Gold\'s official mobile application — a convenient way to stay connected and access available services from your device.',
+      },
+      hero: {
+        eyebrow: 'OUR MG',
+        title: 'Modern Gold, in your hands.',
+        description:
+          'Our MG brings the Modern Gold experience to your mobile device, giving customers a simple and convenient way to stay connected with Modern Gold and access available services wherever they are.',
+        primaryCta: 'DOWNLOAD THE APP',
+        secondaryCta: 'VISIT OUR MG',
+      },
+      about: {
+        eyebrow: 'ABOUT OUR MG',
+        title: 'Your connection to Modern Gold.',
+        description:
+          'Our MG is the official Modern Gold mobile application, designed to make it easier for customers to stay connected with Modern Gold and access the services and information available through the platform.',
+        tagline: 'One app. A simpler way to connect with Modern Gold.',
+      },
+      why: {
+        eyebrow: 'WHY OUR MG',
+        title: 'Why use the Our MG app?',
+        items: [
+          { title: 'EASY ACCESS', desc: 'Access Modern Gold services and information directly from your mobile device.' },
+          { title: 'CONVENIENT', desc: 'Stay connected with Modern Gold without needing to visit the website every time.' },
+          { title: 'ALL IN ONE PLACE', desc: 'Keep important Modern Gold information and available services accessible from one application.' },
+          { title: 'FASTER ACCESS', desc: 'Quickly access the features you use most.' },
+          { title: 'STAY CONNECTED', desc: 'Keep in touch with Modern Gold through a dedicated mobile experience.' },
+          { title: 'MOBILE EXPERIENCE', desc: 'Enjoy a simple experience designed specifically for mobile users.' },
+        ],
+      },
+      features: {
+        eyebrow: 'KEY FEATURES',
+        title: 'Everything you need, in one app.',
+        items: [
+          { title: 'ACCOUNT', desc: 'Manage your Modern Gold account from your mobile device.' },
+          { title: 'PRODUCTS', desc: 'Explore available Modern Gold products and information.' },
+          { title: 'PRODUCT DETAILS', desc: 'View detailed product information on your device.' },
+          { title: 'ORDERS', desc: 'View your order information and activity.' },
+          { title: 'PROFILE', desc: 'Manage your personal information and preferences.' },
+          { title: 'WISHLIST', desc: 'Save and revisit products you are interested in.' },
+          { title: 'CART', desc: 'Review items and manage your shopping cart.' },
+          { title: 'SEARCH', desc: 'Find products quickly from the app.' },
+          { title: 'CONTACT', desc: 'Reach Modern Gold when you need support or information.' },
+        ],
+      },
+      showcase: {
+        eyebrow: 'THE APP EXPERIENCE',
+        title: 'Designed for a simple mobile experience.',
+        labels: {
+          simpleLogin: 'Simple Login',
+          clearHome: 'Clear Home',
+          productExperience: 'Product Experience',
+          accountManagement: 'Account Management',
+          orderActivity: 'Order Activity',
+        },
+        screenNames: {
+          login: 'Login',
+          home: 'Home',
+          products: 'Products',
+          productDetail: 'Product Detail',
+          profile: 'Profile',
+          orders: 'Orders',
+        },
+      },
+      different: {
+        title: 'Modern Gold, wherever you are.',
+        description:
+          'Our MG brings Modern Gold closer to you through a dedicated mobile experience designed for convenient access, simple navigation and better digital communication.',
+        points: [
+          { title: 'ACCESS', desc: 'Modern Gold services at your fingertips.' },
+          { title: 'CONVENIENCE', desc: 'A simple experience built for mobile.' },
+          { title: 'CONNECTION', desc: 'Stay closer to Modern Gold wherever you are.' },
+        ],
+      },
+      download: {
+        eyebrow: 'GET OUR MG',
+        title: 'Take Modern Gold with you.',
+        description:
+          'Download the Our MG mobile application and enjoy a convenient way to stay connected with Modern Gold.',
+        primaryCta: 'DOWNLOAD THE APP',
+        secondaryCta: 'VISIT OUR MG',
+        comingSoon: 'COMING SOON',
+        scanToDownload: 'SCAN TO DOWNLOAD',
+      },
+      final: {
+        title: 'Stay connected with Modern Gold.',
+        description:
+          'Discover the convenience of Our MG and keep Modern Gold within reach.',
+        primaryCta: 'DOWNLOAD OUR MG',
+        secondaryCta: 'VISIT OUR MG',
+      },
+    },
   },
   ru: {
     nav: {
@@ -150,6 +245,7 @@ export const translations = {
       retail: 'Розница',
       wholesale: 'Опт',
       contact: 'Контакты',
+      ourMg: 'Our MG',
     },
     retailMenu: {
       title: 'Розница',
@@ -282,6 +378,100 @@ export const translations = {
       help: 'Помощь',
       newsletter: 'Рассылка',
     },
+    ourMg: {
+      seo: {
+        description:
+          'Our MG — официальное мобильное приложение Modern Gold для удобного доступа к сервисам и связи с компанией.',
+      },
+      hero: {
+        eyebrow: 'OUR MG',
+        title: 'Modern Gold у вас в руках.',
+        description:
+          'Our MG переносит опыт Modern Gold на ваше мобильное устройство — простой и удобный способ оставаться на связи и получать доступ к доступным сервисам где бы вы ни были.',
+        primaryCta: 'СКАЧАТЬ ПРИЛОЖЕНИЕ',
+        secondaryCta: 'ПОСЕТИТЬ OUR MG',
+      },
+      about: {
+        eyebrow: 'О OUR MG',
+        title: 'Ваша связь с Modern Gold.',
+        description:
+          'Our MG — официальное мобильное приложение Modern Gold, созданное для того, чтобы клиентам было проще оставаться на связи и получать доступ к сервисам и информации платформы.',
+        tagline: 'Одно приложение. Проще оставаться на связи с Modern Gold.',
+      },
+      why: {
+        eyebrow: 'ЗАЧЕМ OUR MG',
+        title: 'Почему стоит использовать Our MG?',
+        items: [
+          { title: 'ЛЁГКИЙ ДОСТУП', desc: 'Получайте доступ к сервисам и информации Modern Gold прямо с мобильного устройства.' },
+          { title: 'УДОБСТВО', desc: 'Оставайтесь на связи с Modern Gold без необходимости каждый раз заходить на сайт.' },
+          { title: 'ВСЁ В ОДНОМ МЕСТЕ', desc: 'Важная информация и доступные сервисы Modern Gold — в одном приложении.' },
+          { title: 'БЫСТРЫЙ ДОСТУП', desc: 'Быстро открывайте функции, которыми вы пользуетесь чаще всего.' },
+          { title: 'НА СВЯЗИ', desc: 'Оставайтесь на связи с Modern Gold через выделенный мобильный опыт.' },
+          { title: 'МОБИЛЬНЫЙ ОПЫТ', desc: 'Простой интерфейс, созданный специально для мобильных пользователей.' },
+        ],
+      },
+      features: {
+        eyebrow: 'КЛЮЧЕВЫЕ ФУНКЦИИ',
+        title: 'Всё необходимое в одном приложении.',
+        items: [
+          { title: 'АККАУНТ', desc: 'Управляйте аккаунтом Modern Gold с мобильного устройства.' },
+          { title: 'ПРОДУКТЫ', desc: 'Просматривайте доступные продукты и информацию Modern Gold.' },
+          { title: 'ДЕТАЛИ ПРОДУКТА', desc: 'Смотрите подробную информацию о продуктах на устройстве.' },
+          { title: 'ЗАКАЗЫ', desc: 'Просматривайте информацию о заказах и активность.' },
+          { title: 'ПРОФИЛЬ', desc: 'Управляйте личными данными и настройками.' },
+          { title: 'ИЗБРАННОЕ', desc: 'Сохраняйте и просматривайте интересующие продукты.' },
+          { title: 'КОРЗИНА', desc: 'Просматривайте товары и управляйте корзиной.' },
+          { title: 'ПОИСК', desc: 'Быстро находите продукты в приложении.' },
+          { title: 'КОНТАКТ', desc: 'Свяжитесь с Modern Gold при необходимости поддержки или информации.' },
+        ],
+      },
+      showcase: {
+        eyebrow: 'ОПЫТ ПРИЛОЖЕНИЯ',
+        title: 'Простой мобильный опыт.',
+        labels: {
+          simpleLogin: 'Простой вход',
+          clearHome: 'Понятный главный экран',
+          productExperience: 'Работа с продуктами',
+          accountManagement: 'Управление аккаунтом',
+          orderActivity: 'Активность заказов',
+        },
+        screenNames: {
+          login: 'Вход',
+          home: 'Главная',
+          products: 'Продукты',
+          productDetail: 'Детали продукта',
+          profile: 'Профиль',
+          orders: 'Заказы',
+        },
+      },
+      different: {
+        title: 'Modern Gold — где бы вы ни были.',
+        description:
+          'Our MG приближает Modern Gold к вам через выделенный мобильный опыт с удобным доступом, простой навигацией и лучшей цифровой связью.',
+        points: [
+          { title: 'ДОСТУП', desc: 'Сервисы Modern Gold под рукой.' },
+          { title: 'УДОБСТВО', desc: 'Простой опыт, созданный для мобильных устройств.' },
+          { title: 'СВЯЗЬ', desc: 'Ближе к Modern Gold — где бы вы ни находились.' },
+        ],
+      },
+      download: {
+        eyebrow: 'ПОЛУЧИТЬ OUR MG',
+        title: 'Берите Modern Gold с собой.',
+        description:
+          'Скачайте мобильное приложение Our MG и оставайтесь на связи с Modern Gold удобным способом.',
+        primaryCta: 'СКАЧАТЬ ПРИЛОЖЕНИЕ',
+        secondaryCta: 'ПОСЕТИТЬ OUR MG',
+        comingSoon: 'СКОРО',
+        scanToDownload: 'СКАНИРУЙТЕ ДЛЯ СКАЧИВАНИЯ',
+      },
+      final: {
+        title: 'Оставайтесь на связи с Modern Gold.',
+        description:
+          'Откройте удобство Our MG и держите Modern Gold под рукой.',
+        primaryCta: 'СКАЧАТЬ OUR MG',
+        secondaryCta: 'ПОСЕТИТЬ OUR MG',
+      },
+    },
   },
   uz: {
     nav: {
@@ -292,6 +482,7 @@ export const translations = {
       retail: 'Chakana',
       wholesale: 'Ulgurji',
       contact: 'Aloqa',
+      ourMg: 'Our MG',
     },
     retailMenu: {
       title: 'Chakana',
@@ -424,6 +615,100 @@ export const translations = {
       help: 'Yordam',
       newsletter: 'Yangiliklar',
     },
+    ourMg: {
+      seo: {
+        description:
+          'Our MG — Modern Gold rasmiy mobil ilovasi. Xizmatlarga qulay kirish va kompaniya bilan aloqada qolish uchun.',
+      },
+      hero: {
+        eyebrow: 'OUR MG',
+        title: 'Modern Gold qo\'lingizda.',
+        description:
+          'Our MG Modern Gold tajribasini mobil qurilmangizga olib keladi — qayerda bo\'lsangiz ham Modern Gold bilan bog\'lanish va mavjud xizmatlarga kirishning oddiy va qulay usuli.',
+        primaryCta: 'ILOVANI YUKLAB OLISH',
+        secondaryCta: 'OUR MG GA TASHRIF',
+      },
+      about: {
+        eyebrow: 'OUR MG HAQIDA',
+        title: 'Modern Gold bilan aloqangiz.',
+        description:
+          'Our MG — Modern Gold rasmiy mobil ilovasi. Mijozlar uchun platforma xizmatlari va ma\'lumotlariga kirish hamda Modern Gold bilan bog\'lanishni osonlashtirish uchun yaratilgan.',
+        tagline: 'Bitta ilova. Modern Gold bilan bog\'lanishning oddiy yo\'li.',
+      },
+      why: {
+        eyebrow: 'NEGA OUR MG',
+        title: 'Nega Our MG ilovasidan foydalanish kerak?',
+        items: [
+          { title: 'OSON KIRISH', desc: 'Modern Gold xizmatlari va ma\'lumotlariga to\'g\'ridan-to\'g\'ri mobil qurilmangizdan kiring.' },
+          { title: 'QULAY', desc: 'Har safar veb-saytga tashrif buyurmasdan Modern Gold bilan bog\'laning.' },
+          { title: 'HAMMASI BIR JOYDA', desc: 'Muhim ma\'lumot va mavjud xizmatlar bitta ilovada.' },
+          { title: 'TEZ KIRISH', desc: 'Eng ko\'p ishlatadigan funksiyalaringizga tezda kiring.' },
+          { title: 'ALoqada BO\'LING', desc: 'Maxsus mobil tajriba orqali Modern Gold bilan bog\'laning.' },
+          { title: 'MOBIL TAJRIBA', desc: 'Mobil foydalanuvchilar uchun yaratilgan oddiy tajriba.' },
+        ],
+      },
+      features: {
+        eyebrow: 'ASOSIY FUNKSIYALAR',
+        title: 'Kerakli hamma narsa bitta ilovada.',
+        items: [
+          { title: 'AKKAUNT', desc: 'Modern Gold akkauntingizni mobil qurilmadan boshqaring.' },
+          { title: 'MAHSULOTLAR', desc: 'Mavjud Modern Gold mahsulotlari va ma\'lumotlarini ko\'ring.' },
+          { title: 'MAHSULOT TAFSILOTLARI', desc: 'Mahsulot haqida batafsil ma\'lumotni qurilmangizda ko\'ring.' },
+          { title: 'BUYURTMALAR', desc: 'Buyurtma ma\'lumotlari va faolligingizni ko\'ring.' },
+          { title: 'PROFIL', desc: 'Shaxsiy ma\'lumot va sozlamalaringizni boshqaring.' },
+          { title: 'SEVIMLILAR', desc: 'Qiziqarli mahsulotlarni saqlang va qayta ko\'ring.' },
+          { title: 'SAVAT', desc: 'Mahsulotlarni ko\'rib chiqing va savatni boshqaring.' },
+          { title: 'QIDIRUV', desc: 'Ilovada mahsulotlarni tez toping.' },
+          { title: 'ALOQA', desc: 'Yordam yoki ma\'lumot kerak bo\'lganda Modern Gold bilan bog\'laning.' },
+        ],
+      },
+      showcase: {
+        eyebrow: 'ILOVA TAJRIBASI',
+        title: 'Oddiy mobil tajriba uchun yaratilgan.',
+        labels: {
+          simpleLogin: 'Oddiy kirish',
+          clearHome: 'Aniq bosh sahifa',
+          productExperience: 'Mahsulot tajribasi',
+          accountManagement: 'Akkaunt boshqaruvi',
+          orderActivity: 'Buyurtma faolligi',
+        },
+        screenNames: {
+          login: 'Kirish',
+          home: 'Bosh sahifa',
+          products: 'Mahsulotlar',
+          productDetail: 'Mahsulot tafsilotlari',
+          profile: 'Profil',
+          orders: 'Buyurtmalar',
+        },
+      },
+      different: {
+        title: 'Modern Gold — qayerda bo\'lsangiz ham.',
+        description:
+          'Our MG qulay kirish, oddiy navigatsiya va yaxshiroq raqamli aloqa uchun yaratilgan maxsus mobil tajriba orqali Modern Goldni sizga yaqinlashtiradi.',
+        points: [
+          { title: 'KIRISH', desc: 'Modern Gold xizmatlari qo\'lingizda.' },
+          { title: 'QULAYLIK', desc: 'Mobil uchun yaratilgan oddiy tajriba.' },
+          { title: 'ALOQA', desc: 'Qayerda bo\'lsangiz ham Modern Goldga yaqinroq bo\'ling.' },
+        ],
+      },
+      download: {
+        eyebrow: 'OUR MG NI OLING',
+        title: 'Modern Goldni o\'zingiz bilan oling.',
+        description:
+          'Our MG mobil ilovasini yuklab oling va Modern Gold bilan qulay tarzda bog\'laning.',
+        primaryCta: 'ILOVANI YUKLAB OLISH',
+        secondaryCta: 'OUR MG GA TASHRIF',
+        comingSoon: 'TEZ ORADA',
+        scanToDownload: 'YUKLAB OLISH UCHUN SKANERLANG',
+      },
+      final: {
+        title: 'Modern Gold bilan bog\'laning.',
+        description:
+          'Our MG qulayligini kashf eting va Modern Goldni qo\'lingizda saqlang.',
+        primaryCta: 'OUR MG NI YUKLAB OLISH',
+        secondaryCta: 'OUR MG GA TASHRIF',
+      },
+    },
   },
   ar: {
     nav: {
@@ -434,6 +719,7 @@ export const translations = {
       retail: 'التجزئة',
       wholesale: 'الجملة',
       contact: 'اتصل بنا',
+      ourMg: 'Our MG',
     },
     retailMenu: {
       title: 'التجزئة',
@@ -566,6 +852,100 @@ export const translations = {
       help: 'المساعدة',
       newsletter: 'النشرة الإخبارية',
     },
+    ourMg: {
+      seo: {
+        description:
+          'Our MG هو التطبيق الرسمي لـ Modern Gold — طريقة مريحة للبقاء على اتصال والوصول إلى الخدمات المتاحة من جهازك.',
+      },
+      hero: {
+        eyebrow: 'OUR MG',
+        title: 'Modern Gold في يدك.',
+        description:
+          'يجلب Our MG تجربة Modern Gold إلى جهازك المحمول، مما يمنح العملاء طريقة بسيطة ومريحة للبقاء على اتصال مع Modern Gold والوصول إلى الخدمات المتاحة أينما كنت.',
+        primaryCta: 'تحميل التطبيق',
+        secondaryCta: 'زيارة OUR MG',
+      },
+      about: {
+        eyebrow: 'حول OUR MG',
+        title: 'اتصالك بـ Modern Gold.',
+        description:
+          'Our MG هو التطبيق الرسمي لـ Modern Gold، مصمم لتسهيل بقاء العملاء على اتصال مع Modern Gold والوصول إلى الخدمات والمعلومات المتاحة عبر المنصة.',
+        tagline: 'تطبيق واحد. طريقة أبسط للتواصل مع Modern Gold.',
+      },
+      why: {
+        eyebrow: 'لماذا OUR MG',
+        title: 'لماذا تستخدم تطبيق Our MG؟',
+        items: [
+          { title: 'وصول سهل', desc: 'الوصول إلى خدمات ومعلومات Modern Gold مباشرة من جهازك المحمول.' },
+          { title: 'مريح', desc: 'ابق على اتصال مع Modern Gold دون الحاجة لزيارة الموقع في كل مرة.' },
+          { title: 'كل شيء في مكان واحد', desc: 'معلومات Modern Gold المهمة والخدمات المتاحة في تطبيق واحد.' },
+          { title: 'وصول أسرع', desc: 'الوصول بسرعة إلى الميزات التي تستخدمها أكثر.' },
+          { title: 'ابق على اتصال', desc: 'ابق على تواصل مع Modern Gold من خلال تجربة محمولة مخصصة.' },
+          { title: 'تجربة محمولة', desc: 'استمتع بتجربة بسيطة مصممة خصيصاً لمستخدمي الهاتف.' },
+        ],
+      },
+      features: {
+        eyebrow: 'الميزات الرئيسية',
+        title: 'كل ما تحتاجه في تطبيق واحد.',
+        items: [
+          { title: 'الحساب', desc: 'إدارة حساب Modern Gold من جهازك المحمول.' },
+          { title: 'المنتجات', desc: 'استكشف منتجات ومعلومات Modern Gold المتاحة.' },
+          { title: 'تفاصيل المنتج', desc: 'عرض معلومات تفصيلية عن المنتجات على جهازك.' },
+          { title: 'الطلبات', desc: 'عرض معلومات طلباتك ونشاطك.' },
+          { title: 'الملف الشخصي', desc: 'إدارة معلوماتك الشخصية وتفضيلاتك.' },
+          { title: 'قائمة الأمنيات', desc: 'احفظ المنتجات التي تهمك وارجع إليها.' },
+          { title: 'السلة', desc: 'راجع العناصر وأدر سلة التسوق.' },
+          { title: 'البحث', desc: 'ابحث عن المنتجات بسرعة من التطبيق.' },
+          { title: 'اتصل بنا', desc: 'تواصل مع Modern Gold عند الحاجة للدعم أو المعلومات.' },
+        ],
+      },
+      showcase: {
+        eyebrow: 'تجربة التطبيق',
+        title: 'مصمم لتجربة محمولة بسيطة.',
+        labels: {
+          simpleLogin: 'تسجيل دخول بسيط',
+          clearHome: 'شاشة رئيسية واضحة',
+          productExperience: 'تجربة المنتجات',
+          accountManagement: 'إدارة الحساب',
+          orderActivity: 'نشاط الطلبات',
+        },
+        screenNames: {
+          login: 'تسجيل الدخول',
+          home: 'الرئيسية',
+          products: 'المنتجات',
+          productDetail: 'تفاصيل المنتج',
+          profile: 'الملف الشخصي',
+          orders: 'الطلبات',
+        },
+      },
+      different: {
+        title: 'Modern Gold أينما كنت.',
+        description:
+          'يجلب Our MG Modern Gold أقرب إليك من خلال تجربة محمولة مخصصة مصممة للوصول المريح والتنقل البسيط والتواصل الرقمي الأفضل.',
+        points: [
+          { title: 'الوصول', desc: 'خدمات Modern Gold في متناول يدك.' },
+          { title: 'الراحة', desc: 'تجربة بسيطة مصممة للهاتف المحمول.' },
+          { title: 'الاتصال', desc: 'ابق أقرب إلى Modern Gold أينما كنت.' },
+        ],
+      },
+      download: {
+        eyebrow: 'احصل على OUR MG',
+        title: 'خذ Modern Gold معك.',
+        description:
+          'حمّل تطبيق Our MG المحمول واستمتع بطريقة مريحة للبقاء على اتصال مع Modern Gold.',
+        primaryCta: 'تحميل التطبيق',
+        secondaryCta: 'زيارة OUR MG',
+        comingSoon: 'قريباً',
+        scanToDownload: 'امسح للتحميل',
+      },
+      final: {
+        title: 'ابق على اتصال مع Modern Gold.',
+        description:
+          'اكتشف راحة Our MG وابق Modern Gold في متناول يدك.',
+        primaryCta: 'تحميل OUR MG',
+        secondaryCta: 'زيارة OUR MG',
+      },
+    },
   },
   tr: {
     nav: {
@@ -576,6 +956,7 @@ export const translations = {
       retail: 'Perakende',
       wholesale: 'Toptan',
       contact: 'İletişim',
+      ourMg: 'Our MG',
     },
     retailMenu: {
       title: 'Perakende',
@@ -707,6 +1088,100 @@ export const translations = {
       about: 'Hakkımızda',
       help: 'Yardım',
       newsletter: 'Bülten',
+    },
+    ourMg: {
+      seo: {
+        description:
+          'Our MG, Modern Gold\'un resmi mobil uygulamasıdır — cihazınızdan hizmetlere kolay erişim ve bağlantıda kalma imkânı sunar.',
+      },
+      hero: {
+        eyebrow: 'OUR MG',
+        title: 'Modern Gold avucunuzda.',
+        description:
+          'Our MG, Modern Gold deneyimini mobil cihazınıza taşır — nerede olursanız olun Modern Gold ile bağlantıda kalmanın ve mevcut hizmetlere erişmenin basit ve pratik yolu.',
+        primaryCta: 'UYGULAMAYI İNDİR',
+        secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
+      },
+      about: {
+        eyebrow: 'OUR MG HAKKINDA',
+        title: 'Modern Gold ile bağlantınız.',
+        description:
+          'Our MG, müşterilerin Modern Gold ile bağlantıda kalmasını ve platform üzerinden sunulan hizmet ve bilgilere erişmesini kolaylaştırmak için tasarlanmış resmi mobil uygulamadır.',
+        tagline: 'Tek uygulama. Modern Gold ile bağlantının daha basit yolu.',
+      },
+      why: {
+        eyebrow: 'NEDEN OUR MG',
+        title: 'Neden Our MG uygulamasını kullanmalısınız?',
+        items: [
+          { title: 'KOLAY ERİŞİM', desc: 'Modern Gold hizmet ve bilgilerine doğrudan mobil cihazınızdan erişin.' },
+          { title: 'PRATİK', desc: 'Her seferinde web sitesini ziyaret etmeden Modern Gold ile bağlantıda kalın.' },
+          { title: 'HEPSİ TEK YERDE', desc: 'Önemli Modern Gold bilgileri ve mevcut hizmetler tek uygulamada.' },
+          { title: 'HIZLI ERİŞİM', desc: 'En çok kullandığınız özelliklere hızla ulaşın.' },
+          { title: 'BAĞLANTIDA KALIN', desc: 'Özel mobil deneyim aracılığıyla Modern Gold ile iletişimde kalın.' },
+          { title: 'MOBİL DENEYİM', desc: 'Mobil kullanıcılar için özel tasarlanmış basit bir deneyim.' },
+        ],
+      },
+      features: {
+        eyebrow: 'TEMEL ÖZELLİKLER',
+        title: 'İhtiyacınız olan her şey tek uygulamada.',
+        items: [
+          { title: 'HESAP', desc: 'Modern Gold hesabınızı mobil cihazınızdan yönetin.' },
+          { title: 'ÜRÜNLER', desc: 'Mevcut Modern Gold ürünlerini ve bilgilerini keşfedin.' },
+          { title: 'ÜRÜN DETAYLARI', desc: 'Ürün bilgilerini cihazınızda detaylı görüntüleyin.' },
+          { title: 'SİPARİŞLER', desc: 'Sipariş bilgilerinizi ve aktivitenizi görüntüleyin.' },
+          { title: 'PROFİL', desc: 'Kişisel bilgilerinizi ve tercihlerinizi yönetin.' },
+          { title: 'İSTEK LİSTESİ', desc: 'İlgilendiğiniz ürünleri kaydedin ve tekrar görüntüleyin.' },
+          { title: 'SEPET', desc: 'Ürünleri inceleyin ve alışveriş sepetinizi yönetin.' },
+          { title: 'ARAMA', desc: 'Uygulamadan ürünleri hızla bulun.' },
+          { title: 'İLETİŞİM', desc: 'Destek veya bilgi gerektiğinde Modern Gold ile iletişime geçin.' },
+        ],
+      },
+      showcase: {
+        eyebrow: 'UYGULAMA DENEYİMİ',
+        title: 'Basit mobil deneyim için tasarlandı.',
+        labels: {
+          simpleLogin: 'Basit Giriş',
+          clearHome: 'Net Ana Ekran',
+          productExperience: 'Ürün Deneyimi',
+          accountManagement: 'Hesap Yönetimi',
+          orderActivity: 'Sipariş Aktivitesi',
+        },
+        screenNames: {
+          login: 'Giriş',
+          home: 'Ana Sayfa',
+          products: 'Ürünler',
+          productDetail: 'Ürün Detayı',
+          profile: 'Profil',
+          orders: 'Siparişler',
+        },
+      },
+      different: {
+        title: 'Modern Gold, nerede olursanız olun.',
+        description:
+          'Our MG, kolay erişim, basit navigasyon ve daha iyi dijital iletişim için tasarlanmış özel mobil deneyim aracılığıyla Modern Gold\'u size yakınlaştırır.',
+        points: [
+          { title: 'ERİŞİM', desc: 'Modern Gold hizmetleri parmaklarınızın ucunda.' },
+          { title: 'KOLAYLIK', desc: 'Mobil için oluşturulmuş basit bir deneyim.' },
+          { title: 'BAĞLANTI', desc: 'Nerede olursanız olun Modern Gold\'a daha yakın kalın.' },
+        ],
+      },
+      download: {
+        eyebrow: 'OUR MG\'Yİ EDİNİN',
+        title: 'Modern Gold\'u yanınızda taşıyın.',
+        description:
+          'Our MG mobil uygulamasını indirin ve Modern Gold ile bağlantıda kalmanın pratik yolunu keşfedin.',
+        primaryCta: 'UYGULAMAYI İNDİR',
+        secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
+        comingSoon: 'YAKINDA',
+        scanToDownload: 'İNDİRMEK İÇİN TARAYIN',
+      },
+      final: {
+        title: 'Modern Gold ile bağlantıda kalın.',
+        description:
+          'Our MG\'nin kolaylığını keşfedin ve Modern Gold\'u elinizin altında tutun.',
+        primaryCta: 'OUR MG\'Yİ İNDİR',
+        secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
+      },
     },
   },
 };

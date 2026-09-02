@@ -38,8 +38,16 @@ export const navLinks = [
   { label: 'Collections', path: '/shop', menu: 'collections', key: 'nav.collections' },
   { label: 'Retail', path: '/shop', menu: 'retail', key: 'nav.retail' },
   { label: 'Wholesale', path: '/wholesale', menu: 'wholesale', key: 'nav.wholesale' },
+  { label: 'Our MG', path: '/our-mg', key: 'nav.ourMg' },
   { label: 'Contact', path: '/contact', key: 'nav.contact' },
 ];
+
+export const ourMgApp = {
+  playStoreUrl: '',
+  appStoreUrl: '',
+  webUrl: '/',
+  published: false,
+};
 
 export const sellGoldCta = {
   label: 'Sell Gold',
@@ -297,6 +305,7 @@ export const footerColumns = {
   ],
   about: [
     { label: 'About', path: '/about' },
+    { label: 'Our MG', path: '/our-mg' },
     { label: 'Collections', path: '/shop' },
     { label: 'Custom Jewelry', path: '/custom-jewelry' },
     { label: 'Contact', path: '/contact' },

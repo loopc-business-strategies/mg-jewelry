@@ -226,3 +226,20 @@ export const marketAccentColors = [
   'from-rose-gold/20 to-ivory',
   'from-burgundy/10 to-champagne',
 ];
+
+export const ourMgScreens = {
+  login: '/images/our-mg/login.png',
+  home: '/images/our-mg/home.png',
+  products: '/images/our-mg/products.png',
+  productDetail: '/images/our-mg/product-detail.png',
+  profile: '/images/our-mg/profile.png',
+  orders: '/images/our-mg/orders.png',
+};
+
+export const ourMgShowcaseScreens = [
+  { id: 'login', labelKey: 'simpleLogin', number: '01' },
+  { id: 'home', labelKey: 'clearHome', number: '02' },
+  { id: 'products', labelKey: 'productExperience', number: '03' },
+  { id: 'profile', labelKey: 'accountManagement', number: '04' },
+  { id: 'orders', labelKey: 'orderActivity', number: '05' },
+];

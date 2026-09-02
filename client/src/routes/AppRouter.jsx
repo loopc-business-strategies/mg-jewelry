@@ -18,6 +18,7 @@ import SearchPage from '../pages/SearchPage';
 import GoldBuyingPage from '../pages/GoldBuyingPage';
 import CustomJewelryPage from '../pages/CustomJewelryPage';
 import AboutPage from '../pages/AboutPage';
+import OurMGPage from '../pages/OurMGPage';
 import ContactPage from '../pages/ContactPage';
 import BlogPage from '../pages/BlogPage';
 import BlogPostPage from '../pages/BlogPostPage';
@@ -59,6 +60,7 @@ export default function AppRouter() {
         <Route path="gold-buying" element={<GoldBuyingPage />} />
         <Route path="manufacturing" element={<Navigate to="/custom-jewelry" replace />} />
         <Route path="custom-jewelry" element={<CustomJewelryPage />} />
+        <Route path="our-mg" element={<OurMGPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog/:slug" element={<BlogPostPage />} />
