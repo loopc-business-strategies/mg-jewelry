@@ -25,7 +25,6 @@ import WholesalePage from '../pages/WholesalePage';
 import WholesaleRegisterPage from '../pages/WholesaleRegisterPage';
 import WholesaleShopPage from '../pages/WholesaleShopPage';
 import WholesaleDashboardPage from '../pages/WholesaleDashboardPage';
-import MGConnectPage from '../pages/MGConnectPage';
 import {
   PrivacyPage, TermsPage, RefundPage, ShippingPolicyPage,
   FAQPage, ShippingPage, ReturnsPage, TrackOrderPage,
@@ -60,7 +59,6 @@ export default function AppRouter() {
         <Route path="gold-buying" element={<GoldBuyingPage />} />
         <Route path="manufacturing" element={<Navigate to="/custom-jewelry" replace />} />
         <Route path="custom-jewelry" element={<CustomJewelryPage />} />
-        <Route path="mg-connect" element={<MGConnectPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog/:slug" element={<BlogPostPage />} />

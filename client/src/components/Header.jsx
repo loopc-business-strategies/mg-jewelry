@@ -1,24 +1,47 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Heart, User, ShoppingBag, Menu, X } from 'lucide-react';
+import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
 import {
   navLinks,
+  retailMenu,
+  wholesaleMenu,
   sellGoldCta,
-  becomeBuyerCta,
   isNavLinkActive,
 } from '../utils/brandConfig';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
+import MegaMenu from './MegaMenu';
+import RetailMegaMenu from './RetailMegaMenu';
+import WholesaleMegaMenu from './WholesaleMegaMenu';
 import MarketSelector from './MarketSelector';
 import BrandLogo from './BrandLogo';
 import SearchBar from './SearchBar';
+
+function MobileAccordion({ title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="border-b border-border">
+      <button
+        type="button"
+        className="flex items-center justify-between w-full py-3 type-body-sm font-medium text-left"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        {title}
+        <ChevronDown size={16} className={`text-muted transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && <div className="pb-3 pl-3">{children}</div>}
+    </div>
+  );
+}
 
 export default function Header() {
   const [sticky, setSticky] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
   const { pathname } = useLocation();
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
@@ -32,6 +55,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    setOpenMenu(null);
     setMobileOpen(false);
   }, [pathname]);
 
@@ -39,6 +63,17 @@ export default function Header() {
     const active = isNavLinkActive(pathname, link);
     return `nav-link-elegant ${active ? 'active' : ''}`;
   };
+
+  const renderDropdown = (menu) => {
+    if (openMenu !== menu) return null;
+    const close = () => setOpenMenu(null);
+    if (menu === 'collections') return <MegaMenu onClose={close} />;
+    if (menu === 'retail') return <RetailMegaMenu onClose={close} />;
+    if (menu === 'wholesale') return <WholesaleMegaMenu onClose={close} />;
+    return null;
+  };
+
+  const directMobileLinks = navLinks.filter((link) => !link.menu);
 
   return (
     <header className={`sticky top-0 z-50 bg-white transition-all duration-300 border-b border-border ${sticky ? 'shadow-[var(--shadow-soft)]' : ''}`}>
@@ -50,26 +85,29 @@ export default function Header() {
 
           <BrandLogo variant="header" />
 
-          <nav className="hidden xl:flex items-center gap-5 2xl:gap-7 flex-1 justify-center">
+          <nav className="hidden lg:flex items-center gap-8 flex-1 justify-center">
             {navLinks.map((link) => (
-              <Link
+              <div
                 key={link.path + (link.key || link.label)}
-                to={link.path}
-                className={navClass(link)}
+                className="relative"
+                onMouseEnter={() => link.menu && setOpenMenu(link.menu)}
+                onMouseLeave={() => link.menu && setOpenMenu(null)}
               >
-                {link.key ? t(link.key) : link.label}
-              </Link>
+                <Link to={link.path} className={`${navClass(link)} inline-flex items-center gap-1`}>
+                  {link.key ? t(link.key) : link.label}
+                  {link.menu && <ChevronDown size={12} className="opacity-50" />}
+                </Link>
+                {link.menu && renderDropdown(link.menu)}
+              </div>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
-            <Link to={sellGoldCta.path} className="btn-primary-gold-sm">
-              {t(sellGoldCta.key)}
-            </Link>
-            <Link to={becomeBuyerCta.path} className="btn-outline-gold-sm">
-              {t(becomeBuyerCta.key)}
-            </Link>
-          </div>
+          <Link
+            to={sellGoldCta.path}
+            className="hidden lg:inline-flex btn-primary-gold-sm shrink-0"
+          >
+            {t(sellGoldCta.key)}
+          </Link>
 
           <div className="flex items-center gap-1 shrink-0">
             <div className="hidden md:block">
@@ -113,7 +151,7 @@ export default function Header() {
             <div className="mb-4 md:hidden">
               <MarketSelector />
             </div>
-            {navLinks.map((link) => (
+            {directMobileLinks.map((link) => (
               <Link
                 key={link.path + (link.key || link.label)}
                 to={link.path}
@@ -123,6 +161,37 @@ export default function Header() {
                 {link.key ? t(link.key) : link.label}
               </Link>
             ))}
+            <Link to="/shop" className="type-body-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
+              {t('nav.collections')}
+            </Link>
+            <MobileAccordion title={t('nav.retail')}>
+              <div className="space-y-1">
+                {retailMenu.links.map((link) => (
+                  <Link
+                    key={link.path + (link.key || link.label)}
+                    to={link.path}
+                    className="block type-body-sm text-muted hover:text-gold py-1.5"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.key ? t(link.key) : link.label}
+                  </Link>
+                ))}
+              </div>
+            </MobileAccordion>
+            <MobileAccordion title={t('nav.wholesale')}>
+              <div className="space-y-1">
+                {wholesaleMenu.links.map((link) => (
+                  <Link
+                    key={link.path + (link.key || link.label)}
+                    to={link.path}
+                    className="block type-body-sm text-muted hover:text-gold py-1.5"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.key ? t(link.key) : link.label}
+                  </Link>
+                ))}
+              </div>
+            </MobileAccordion>
             <Link to="/wishlist" className="type-body-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
             <Link to={user ? '/profile' : '/login'} className="type-body-sm py-3" onClick={() => setMobileOpen(false)}>
               {user ? 'My Account' : 'Login'}
@@ -133,13 +202,6 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
             >
               {t(sellGoldCta.key)}
-            </Link>
-            <Link
-              to={becomeBuyerCta.path}
-              className="btn-outline-gold-sm w-full justify-center py-2.5 mt-2"
-              onClick={() => setMobileOpen(false)}
-            >
-              {t(becomeBuyerCta.key)}
             </Link>
           </nav>
         </div>
