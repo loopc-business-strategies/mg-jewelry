@@ -7,6 +7,7 @@ export default function OurMGDifferentSection() {
   return (
     <section className="section-cream py-16 md:py-20 px-4">
       <div className="max-w-4xl mx-auto text-center">
+        <p className="section-eyebrow">{t('ourMg.different.eyebrow')}</p>
         <h2 className="type-section-title mb-4">{t('ourMg.different.title')}</h2>
         <p className="type-section-desc prose-section mx-auto mb-10">{t('ourMg.different.description')}</p>
         <div className="grid sm:grid-cols-3 gap-6 text-left">

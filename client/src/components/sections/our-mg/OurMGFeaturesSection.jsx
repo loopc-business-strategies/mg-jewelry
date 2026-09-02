@@ -1,16 +1,14 @@
 import {
   User,
+  LayoutDashboard,
   ShoppingBag,
-  Package,
   ClipboardList,
-  Heart,
-  Search,
+  UserCircle,
   Mail,
-  Tag,
 } from 'lucide-react';
 import { useTranslation } from '../../../hooks/useTranslation';
 
-const featureIcons = [User, ShoppingBag, Tag, ClipboardList, User, Heart, Package, Search, Mail];
+const featureIcons = [User, LayoutDashboard, ShoppingBag, ClipboardList, UserCircle, Mail];
 
 export default function OurMGFeaturesSection() {
   const { t } = useTranslation();

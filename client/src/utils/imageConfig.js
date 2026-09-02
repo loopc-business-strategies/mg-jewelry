@@ -237,9 +237,9 @@ export const ourMgScreens = {
 };
 
 export const ourMgShowcaseScreens = [
-  { id: 'login', labelKey: 'simpleLogin', number: '01' },
-  { id: 'home', labelKey: 'clearHome', number: '02' },
-  { id: 'products', labelKey: 'productExperience', number: '03' },
-  { id: 'profile', labelKey: 'accountManagement', number: '04' },
-  { id: 'orders', labelKey: 'orderActivity', number: '05' },
+  { id: 'login', labelKey: 'login', number: '01' },
+  { id: 'home', labelKey: 'dashboard', number: '02' },
+  { id: 'products', labelKey: 'products', number: '03' },
+  { id: 'orders', labelKey: 'orders', number: '04' },
+  { id: 'profile', labelKey: 'profile', number: '05' },
 ];

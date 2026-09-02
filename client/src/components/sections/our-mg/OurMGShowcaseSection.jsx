@@ -5,6 +5,7 @@ import { useTranslation } from '../../../hooks/useTranslation';
 export default function OurMGShowcaseSection() {
   const { t } = useTranslation();
   const labels = t('ourMg.showcase.labels');
+  const captions = t('ourMg.showcase.captions');
   const screenNames = t('ourMg.showcase.screenNames');
 
   return (
@@ -25,6 +26,11 @@ export default function OurMGShowcaseSection() {
               <p className="type-body-sm font-medium text-charcoal mt-4 text-center">
                 {labels[screen.labelKey]}
               </p>
+              {captions?.[screen.labelKey] && (
+                <p className="type-body-sm text-muted mt-1 text-center max-w-[220px]">
+                  {captions[screen.labelKey]}
+                </p>
+              )}
             </div>
           ))}
         </div>
