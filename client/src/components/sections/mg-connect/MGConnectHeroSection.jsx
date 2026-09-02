@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import PhoneMockup from '../../mg-connect/PhoneMockup';
 import { useTranslation } from '../../../hooks/useTranslation';
 
@@ -14,26 +12,32 @@ export default function MGConnectHeroSection() {
           <h1 className="type-hero-title mb-5">{t('mgConnect.hero.title')}</h1>
           <p className="type-hero-desc prose-hero mb-8">{t('mgConnect.hero.description')}</p>
           <div className="flex flex-wrap items-center gap-3">
-            <a href="#app-access" className="btn-primary-gold">
-              {t('mgConnect.hero.primaryCta')} <ArrowRight size={14} />
+            <a href="#download" className="btn-primary-gold">
+              {t('mgConnect.hero.primaryCta')}
             </a>
-            <Link to="/wholesale/register" className="btn-outline-gold">
+            <a href="#about-the-app" className="btn-outline-gold">
               {t('mgConnect.hero.secondaryCta')}
-            </Link>
+            </a>
           </div>
         </div>
 
-        <div className="mg-connect-hero-phones relative mx-auto lg:mx-0 w-full max-w-[320px] lg:max-w-none h-[380px] md:h-[420px] animate-reveal">
+        <div className="mg-connect-hero-phones relative mx-auto lg:mx-0 w-full max-w-[360px] lg:max-w-none h-[420px] md:h-[480px] animate-reveal">
           <PhoneMockup
             screen="login"
+            placeholderNumber="01"
+            placeholderName="Login"
             className="mg-connect-hero-phone mg-connect-hero-phone--back"
           />
           <PhoneMockup
-            screen="goldBuying"
+            screen="products"
+            placeholderNumber="03"
+            placeholderName="Products"
             className="mg-connect-hero-phone mg-connect-hero-phone--mid"
           />
           <PhoneMockup
-            screen="dashboard"
+            screen="home"
+            placeholderNumber="02"
+            placeholderName="Home"
             className="mg-connect-hero-phone mg-connect-hero-phone--front"
           />
         </div>

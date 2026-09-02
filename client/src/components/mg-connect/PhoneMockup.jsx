@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { mgConnectScreens } from '../../utils/imageConfig';
-import AppScreenWireframe from './AppScreenWireframe';
+import AppScreenshotPlaceholder from './AppScreenshotPlaceholder';
 
-export default function PhoneMockup({ screen = 'login', label, className = '', style }) {
+export default function PhoneMockup({
+  screen = 'login',
+  label,
+  placeholderNumber = '01',
+  placeholderName,
+  className = '',
+  style,
+}) {
   const [imgFailed, setImgFailed] = useState(false);
   const src = mgConnectScreens[screen];
-  const showWireframe = !src || imgFailed;
+  const showPlaceholder = !src || imgFailed;
+  const screenLabel = placeholderName || label || screen;
 
   return (
     <div className={`phone-mockup ${className}`} style={style}>
@@ -14,13 +22,13 @@ export default function PhoneMockup({ screen = 'login', label, className = '', s
           <span className="phone-mockup-notch" />
         </div>
         <div className="phone-mockup-screen">
-          {showWireframe ? (
-            <AppScreenWireframe screen={screen} />
+          {showPlaceholder ? (
+            <AppScreenshotPlaceholder number={placeholderNumber} screenName={screenLabel} />
           ) : (
             <img
               src={src}
-              alt={label || screen}
-              className="w-full h-full object-cover object-top"
+              alt={label || screenLabel}
+              className="w-full h-full object-contain object-top bg-white"
               onError={() => setImgFailed(true)}
             />
           )}

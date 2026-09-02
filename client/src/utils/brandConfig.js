@@ -293,6 +293,12 @@ export const categoryShowcase = [
   { name: 'Bangles', slug: 'bangles' },
 ];
 
+export const mgConnectApp = {
+  playStoreUrl: '',
+  appStoreUrl: '',
+  published: false,
+};
+
 export const footerColumns = {
   shop: [
     { label: 'Home', path: '/' },

@@ -148,84 +148,80 @@ export const translations = {
     mgConnect: {
       seo: {
         description:
-          'MG Connect is Modern Gold\'s digital platform for gold buying, business accounts, quotations, orders and international buyer relationships.',
+          'Download MG Connect — the official Modern Gold mobile app for account access, products, orders and staying connected with Modern Gold.',
       },
       hero: {
-        eyebrow: 'THE MODERN GOLD DIGITAL EXPERIENCE',
+        eyebrow: 'THE MODERN GOLD APP',
         title: 'Meet MG Connect',
         description:
-          'One connected platform for managing your relationship with Modern Gold—from gold buying and business enquiries to quotations, orders and account management.',
-        primaryCta: 'OPEN MG CONNECT',
-        secondaryCta: 'BECOME A BUYER',
+          'A simple and connected way to stay in touch with Modern Gold, manage your account and access our services from your mobile device.',
+        primaryCta: 'DOWNLOAD THE APP',
+        secondaryCta: 'LEARN MORE',
       },
-      intro: {
-        eyebrow: 'ONE CONNECTED PLATFORM',
-        title: 'One platform. One Modern Gold relationship.',
+      about: {
+        eyebrow: 'ABOUT THE APP',
+        title: 'Modern Gold, now in your pocket.',
         description:
-          'MG Connect brings Modern Gold\'s services into one convenient digital experience. Customers and business partners can connect with our team, manage enquiries and follow their business activities through a professional digital platform.',
-        features: [
-          { title: 'GOLD BUYING', desc: 'Submit and manage your gold-selling enquiry.' },
-          { title: 'BUSINESS ACCOUNT', desc: 'Create and manage your Modern Gold business profile.' },
-          { title: 'QUOTATIONS', desc: 'Request and review quotations from our team.' },
-          { title: 'ORDERS', desc: 'Track wholesale orders and business activity.' },
+          'MG Connect brings the Modern Gold experience directly to your mobile device. The app provides a convenient way for customers to access their account, stay connected with Modern Gold and manage available services from one place.',
+        badge: 'MG CONNECT MOBILE APP',
+      },
+      features: {
+        eyebrow: 'APP FEATURES',
+        title: 'Everything you need, in one app.',
+        items: [
+          { title: 'ACCOUNT', desc: 'Manage your Modern Gold account.' },
+          { title: 'HOME', desc: 'View important information at a glance.' },
+          { title: 'PRODUCTS', desc: 'Explore available products and information.' },
+          { title: 'ORDERS', desc: 'View and manage your orders.' },
+          { title: 'PROFILE', desc: 'Manage your personal information.' },
         ],
       },
       showcase: {
-        eyebrow: 'INSIDE MG CONNECT',
-        title: 'Everything you need, in one place.',
-        screens: {
+        eyebrow: 'EXPLORE MG CONNECT',
+        title: 'Designed for a simple mobile experience.',
+        screenNames: {
           login: 'Login',
-          dashboard: 'Dashboard',
-          goldBuying: 'Gold Buying',
+          home: 'Home',
           products: 'Products',
-          quotation: 'Quotation',
+          productDetail: 'Product Detail',
+          profile: 'Profile',
           orders: 'Orders',
         },
-      },
-      journeys: {
-        title: 'Built around the way Modern Gold does business.',
-        sell: {
-          eyebrow: 'For local customers',
-          title: 'SELL GOLD',
-          description:
-            'Connect with Modern Gold to submit your gold-selling enquiry and begin the evaluation process.',
-          steps: ['Submit Gold Enquiry', 'Appointment', 'Evaluation', 'Valuation'],
-          cta: 'SELL GOLD',
-        },
-        buy: {
-          eyebrow: 'For International Buyers',
-          title: 'BUY FROM MODERN GOLD',
-          description:
-            'Manage your business relationship with Modern Gold and source manufactured gold chains and bangles.',
-          steps: ['Register', 'Business Verification', 'Request Quote', 'Order'],
-          cta: 'BECOME A BUYER',
-        },
-      },
-      benefits: {
-        eyebrow: 'WHY MG CONNECT',
-        title: 'A simpler way to stay connected with Modern Gold.',
-        items: [
-          { title: 'CONNECTED', desc: 'Stay connected with Modern Gold wherever you do business.' },
-          { title: 'TRANSPARENT', desc: 'Keep enquiries, quotations and orders organized.' },
-          { title: 'EFFICIENT', desc: 'Reduce unnecessary back-and-forth communication.' },
-          { title: 'BUSINESS READY', desc: 'Built for customers, wholesalers and international business partners.' },
+        steps: [
+          { number: '01', title: 'EASY LOGIN', desc: 'Access your Modern Gold account quickly.' },
+          { number: '02', title: 'SIMPLE HOME', desc: 'See important information in one place.' },
+          { number: '03', title: 'PRODUCTS', desc: 'Explore available products through the app.' },
+          { number: '04', title: 'PRODUCT DETAILS', desc: 'View product information on your device.' },
+          { number: '05', title: 'ACCOUNT MANAGEMENT', desc: 'Manage your account and preferences.' },
+          { number: '06', title: 'YOUR ORDERS', desc: 'View and track your orders.' },
         ],
       },
-      access: {
-        title: 'Your Modern Gold account, wherever business takes you.',
+      howItWorks: {
+        eyebrow: 'HOW IT WORKS',
+        title: 'A simple experience from the moment you open the app.',
+        steps: [
+          { title: 'DOWNLOAD', desc: 'Download MG Connect on your mobile device.' },
+          { title: 'SIGN IN', desc: 'Sign in or create your Modern Gold account.' },
+          { title: 'CONNECT', desc: 'Access available Modern Gold services directly from your phone.' },
+        ],
+      },
+      experience: {
+        title: 'Modern Gold, wherever you are.',
         description:
-          'Access your Modern Gold services through MG Connect and stay connected with our team.',
-        note: 'Mobile app availability will be announced when ready.',
-        downloadCta: 'DOWNLOAD APP',
+          'Stay connected with Modern Gold through a mobile experience designed to make everyday access simple and convenient.',
+      },
+      download: {
+        eyebrow: 'GET MG CONNECT',
+        title: 'Take Modern Gold with you.',
+        description:
+          'Download the MG Connect mobile app and experience a simple, convenient way to stay connected with Modern Gold.',
         comingSoon: 'COMING SOON',
-        portalCta: 'OPEN WEB PORTAL',
+        note: 'App store availability will be announced when the app is published.',
       },
       final: {
-        title: 'Stay connected with Modern Gold.',
-        description:
-          'From gold buying to international wholesale, MG Connect keeps your Modern Gold relationship within reach.',
-        sellCta: 'SELL GOLD',
-        buyerCta: 'BECOME A BUYER',
+        title: 'Your Modern Gold experience, wherever you go.',
+        description: 'Stay connected with Modern Gold through MG Connect.',
+        cta: 'DOWNLOAD MG CONNECT',
       },
     },
   },
@@ -378,80 +374,80 @@ export const translations = {
     mgConnect: {
       seo: {
         description:
-          'MG Connect — цифровая платформа Modern Gold для покупки золота, бизнес-аккаунтов, котировок, заказов и международных партнёрских отношений.',
+          'Скачайте MG Connect — официальное мобильное приложение Modern Gold для доступа к аккаунту, продуктам, заказам и связи с Modern Gold.',
       },
       hero: {
-        eyebrow: 'ЦИФРОВОЙ ОПЫТ MODERN GOLD',
+        eyebrow: 'ПРИЛОЖЕНИЕ MODERN GOLD',
         title: 'MG Connect',
         description:
-          'Единая платформа для управления отношениями с Modern Gold — от покупки золота и деловых запросов до котировок, заказов и управления аккаунтом.',
-        primaryCta: 'ОТКРЫТЬ MG CONNECT',
-        secondaryCta: 'СТАТЬ ПОКУПАТЕЛЕМ',
+          'Простой и удобный способ оставаться на связи с Modern Gold, управлять аккаунтом и получать доступ к нашим услугам с мобильного устройства.',
+        primaryCta: 'СКАЧАТЬ ПРИЛОЖЕНИЕ',
+        secondaryCta: 'УЗНАТЬ БОЛЬШЕ',
       },
-      intro: {
-        eyebrow: 'ЕДИНАЯ ПЛАТФОРМА',
-        title: 'Одна платформа. Одни отношения с Modern Gold.',
+      about: {
+        eyebrow: 'О ПРИЛОЖЕНИИ',
+        title: 'Modern Gold теперь в вашем кармане.',
         description:
-          'MG Connect объединяет услуги Modern Gold в удобном цифровом формате. Клиенты и партнёры могут связаться с нашей командой, управлять запросами и отслеживать деловую активность.',
-        features: [
-          { title: 'ПОКУПКА ЗОЛОТА', desc: 'Подайте и управляйте запросом на продажу золота.' },
-          { title: 'БИЗНЕС-АККАУНТ', desc: 'Создайте и управляйте бизнес-профилем Modern Gold.' },
-          { title: 'КОТИРОВКИ', desc: 'Запрашивайте и просматривайте котировки от нашей команды.' },
-          { title: 'ЗАКАЗЫ', desc: 'Отслеживайте оптовые заказы и деловую активность.' },
+          'MG Connect переносит опыт Modern Gold прямо на ваше мобильное устройство. Приложение позволяет клиентам получать доступ к аккаунту, оставаться на связи с Modern Gold и управлять доступными услугами из одного места.',
+        badge: 'МОБИЛЬНОЕ ПРИЛОЖЕНИЕ MG CONNECT',
+      },
+      features: {
+        eyebrow: 'ФУНКЦИИ ПРИЛОЖЕНИЯ',
+        title: 'Всё необходимое в одном приложении.',
+        items: [
+          { title: 'АККАУНТ', desc: 'Управляйте аккаунтом Modern Gold.' },
+          { title: 'ГЛАВНАЯ', desc: 'Просматривайте важную информацию с первого взгляда.' },
+          { title: 'ПРОДУКЦИЯ', desc: 'Изучайте доступные продукты и информацию.' },
+          { title: 'ЗАКАЗЫ', desc: 'Просматривайте и управляйте заказами.' },
+          { title: 'ПРОФИЛЬ', desc: 'Управляйте личной информацией.' },
         ],
       },
       showcase: {
-        eyebrow: 'ВНУТРИ MG CONNECT',
-        title: 'Всё необходимое в одном месте.',
-        screens: {
+        eyebrow: 'ИССЛЕДУЙТЕ MG CONNECT',
+        title: 'Создано для простого мобильного опыта.',
+        screenNames: {
           login: 'Вход',
-          dashboard: 'Панель',
-          goldBuying: 'Покупка золота',
+          home: 'Главная',
           products: 'Продукция',
-          quotation: 'Котировка',
+          productDetail: 'Детали продукта',
+          profile: 'Профиль',
           orders: 'Заказы',
         },
-      },
-      journeys: {
-        title: 'Создано под бизнес-модель Modern Gold.',
-        sell: {
-          eyebrow: 'Для местных клиентов',
-          title: 'ПРОДАТЬ ЗОЛОТО',
-          description: 'Свяжитесь с Modern Gold, чтобы подать запрос на продажу золота и начать процесс оценки.',
-          steps: ['Запрос на продажу', 'Встреча', 'Оценка', 'Оценка стоимости'],
-          cta: 'ПРОДАТЬ ЗОЛОТО',
-        },
-        buy: {
-          eyebrow: 'Для международных покупателей',
-          title: 'ПОКУПАТЬ У MODERN GOLD',
-          description: 'Управляйте деловыми отношениями с Modern Gold и закупайте производимые золотые цепи и браслеты.',
-          steps: ['Регистрация', 'Верификация', 'Запрос котировки', 'Заказ'],
-          cta: 'СТАТЬ ПОКУПАТЕЛЕМ',
-        },
-      },
-      benefits: {
-        eyebrow: 'ПОЧЕМУ MG CONNECT',
-        title: 'Проще оставаться на связи с Modern Gold.',
-        items: [
-          { title: 'СВЯЗЬ', desc: 'Оставайтесь на связи с Modern Gold, где бы вы ни работали.' },
-          { title: 'ПРОЗРАЧНОСТЬ', desc: 'Держите запросы, котировки и заказы организованными.' },
-          { title: 'ЭФФЕКТИВНОСТЬ', desc: 'Сократите лишнюю переписку.' },
-          { title: 'ДЛЯ БИЗНЕСА', desc: 'Создано для клиентов, оптовиков и международных партнёров.' },
+        steps: [
+          { number: '01', title: 'БЫСТРЫЙ ВХОД', desc: 'Быстро получите доступ к аккаунту Modern Gold.' },
+          { number: '02', title: 'ПРОСТАЯ ГЛАВНАЯ', desc: 'Вся важная информация в одном месте.' },
+          { number: '03', title: 'ПРОДУКЦИЯ', desc: 'Изучайте доступные продукты через приложение.' },
+          { number: '04', title: 'ДЕТАЛИ ПРОДУКТА', desc: 'Просматривайте информацию о продуктах на устройстве.' },
+          { number: '05', title: 'УПРАВЛЕНИЕ АККАУНТОМ', desc: 'Управляйте аккаунтом и настройками.' },
+          { number: '06', title: 'ВАШИ ЗАКАЗЫ', desc: 'Просматривайте и отслеживайте заказы.' },
         ],
       },
-      access: {
-        title: 'Ваш аккаунт Modern Gold — где бы вы ни работали.',
-        description: 'Получайте доступ к услугам Modern Gold через MG Connect и оставайтесь на связи с нашей командой.',
-        note: 'О доступности мобильного приложения будет объявлено позже.',
-        downloadCta: 'СКАЧАТЬ ПРИЛОЖЕНИЕ',
+      howItWorks: {
+        eyebrow: 'КАК ЭТО РАБОТАЕТ',
+        title: 'Простой опыт с момента открытия приложения.',
+        steps: [
+          { title: 'СКАЧАТЬ', desc: 'Скачайте MG Connect на мобильное устройство.' },
+          { title: 'ВОЙТИ', desc: 'Войдите или создайте аккаунт Modern Gold.' },
+          { title: 'ПОДКЛЮЧИТЬСЯ', desc: 'Получайте доступ к услугам Modern Gold прямо с телефона.' },
+        ],
+      },
+      experience: {
+        title: 'Modern Gold — где бы вы ни были.',
+        description:
+          'Оставайтесь на связи с Modern Gold через мобильный опыт, созданный для простого и удобного ежедневного доступа.',
+      },
+      download: {
+        eyebrow: 'ПОЛУЧИТЬ MG CONNECT',
+        title: 'Берите Modern Gold с собой.',
+        description:
+          'Скачайте мобильное приложение MG Connect и получите простой, удобный способ оставаться на связи с Modern Gold.',
         comingSoon: 'СКОРО',
-        portalCta: 'ОТКРЫТЬ ВЕБ-ПОРТАЛ',
+        note: 'Доступность в магазинах приложений будет объявлена после публикации.',
       },
       final: {
-        title: 'Оставайтесь на связи с Modern Gold.',
-        description: 'От покупки золота до международного опта — MG Connect держит ваши отношения с Modern Gold под рукой.',
-        sellCta: 'ПРОДАТЬ ЗОЛОТО',
-        buyerCta: 'СТАТЬ ПОКУПАТЕЛЕМ',
+        title: 'Ваш опыт Modern Gold — где бы вы ни были.',
+        description: 'Оставайтесь на связи с Modern Gold через MG Connect.',
+        cta: 'СКАЧАТЬ MG CONNECT',
       },
     },
   },
@@ -604,80 +600,80 @@ export const translations = {
     mgConnect: {
       seo: {
         description:
-          'MG Connect — Modern Gold raqamli platformasi: oltin sotib olish, biznes hisoblar, narxlar, buyurtmalar va xalqaro hamkorlik.',
+          'MG Connect ni yuklab oling — Modern Gold rasmiy mobil ilovasi: hisob, mahsulotlar, buyurtmalar va Modern Gold bilan aloqa.',
       },
       hero: {
-        eyebrow: 'MODERN GOLD RAQAMLI TAJRIBASI',
+        eyebrow: 'MODERN GOLD ILOVASI',
         title: 'MG Connect bilan tanishing',
         description:
-          'Modern Gold bilan munosabatlaringizni boshqarish uchun yagona platforma — oltin sotishdan biznes so\'rovlarigacha, narxlar, buyurtmalar va hisob boshqaruvi.',
-        primaryCta: 'MG CONNECT OCHISH',
-        secondaryCta: 'XARIDOR BO\'LISH',
+          'Modern Gold bilan aloqada qolish, hisobingizni boshqarish va xizmatlarimizga mobil qurilmangizdan kirishning oddiy va qulay usuli.',
+        primaryCta: 'ILOVANI YUKLAB OLISH',
+        secondaryCta: 'BATAFSIL',
       },
-      intro: {
-        eyebrow: 'YAGONA PLATFORM',
-        title: 'Bitta platforma. Bitta Modern Gold munosabati.',
+      about: {
+        eyebrow: 'ILOVA HAQIDA',
+        title: 'Modern Gold endi cho\'ntagingizda.',
         description:
-          'MG Connect Modern Gold xizmatlarini qulay raqamli tajribada birlashtiradi. Mijozlar va hamkorlar jamoamiz bilan bog\'lanish, so\'rovlarni boshqarish va biznes faoliyatini kuzatish imkoniyatiga ega.',
-        features: [
-          { title: 'OLTIN SOTIB OLISH', desc: 'Oltin sotish so\'rovingizni yuboring va boshqaring.' },
-          { title: 'BIZNES HISOB', desc: 'Modern Gold biznes profilingizni yarating va boshqaring.' },
-          { title: 'NARXLAR', desc: 'Jamoamizdan narx so\'rovlari va ko\'rib chiqish.' },
-          { title: 'BUYURTMALAR', desc: 'Ulgurji buyurtmalar va biznes faoliyatini kuzating.' },
+          'MG Connect Modern Gold tajribasini to\'g\'ridan-to\'g\'ri mobil qurilmangizga olib keladi. Ilova mijozlarga hisobga kirish, Modern Gold bilan bog\'lanish va mavjud xizmatlarni bir joydan boshqarish imkonini beradi.',
+        badge: 'MG CONNECT MOBIL ILOVA',
+      },
+      features: {
+        eyebrow: 'ILOVA XUSUSIYATLARI',
+        title: 'Kerakli hamma narsa bitta ilovada.',
+        items: [
+          { title: 'HISOB', desc: 'Modern Gold hisobingizni boshqaring.' },
+          { title: 'BOSH SAHIFA', desc: 'Muhim ma\'lumotlarni bir nazar bilan ko\'ring.' },
+          { title: 'MAHSULOTLAR', desc: 'Mavjud mahsulotlar va ma\'lumotlarni o\'rganing.' },
+          { title: 'BUYURTMALAR', desc: 'Buyurtmalaringizni ko\'ring va boshqaring.' },
+          { title: 'PROFIL', desc: 'Shaxsiy ma\'lumotlaringizni boshqaring.' },
         ],
       },
       showcase: {
-        eyebrow: 'MG CONNECT ICHIDA',
-        title: 'Kerakli hamma narsa bir joyda.',
-        screens: {
+        eyebrow: 'MG CONNECT NI KASHF ETING',
+        title: 'Oddiy mobil tajriba uchun yaratilgan.',
+        screenNames: {
           login: 'Kirish',
-          dashboard: 'Boshqaruv paneli',
-          goldBuying: 'Oltin sotish',
+          home: 'Bosh sahifa',
           products: 'Mahsulotlar',
-          quotation: 'Narx',
+          productDetail: 'Mahsulot tafsiloti',
+          profile: 'Profil',
           orders: 'Buyurtmalar',
         },
-      },
-      journeys: {
-        title: 'Modern Gold biznes modeliga moslashtirilgan.',
-        sell: {
-          eyebrow: 'Mahalliy mijozlar uchun',
-          title: 'OLTIN SOTISH',
-          description: 'Oltin sotish so\'rovingizni yuborish va baholash jarayonini boshlash uchun Modern Gold bilan bog\'laning.',
-          steps: ['So\'rov yuborish', 'Uchrashuv', 'Baholash', 'Qiymatlash'],
-          cta: 'OLTIN SOTISH',
-        },
-        buy: {
-          eyebrow: 'Xalqaro xaridorlar uchun',
-          title: 'MODERN GOLD DAN SOTIB OLISH',
-          description: 'Modern Gold bilan biznes munosabatlarini boshqaring va ishlab chiqarilgan oltin zanjir va bilakuzuklarni manba qiling.',
-          steps: ['Ro\'yxatdan o\'tish', 'Tasdiqlash', 'Narx so\'rash', 'Buyurtma'],
-          cta: 'XARIDOR BO\'LISH',
-        },
-      },
-      benefits: {
-        eyebrow: 'NIMA UCHUN MG CONNECT',
-        title: 'Modern Gold bilan bog\'lanish osonroq.',
-        items: [
-          { title: 'BOG\'LANISH', desc: 'Qayerda ishlasangiz ham Modern Gold bilan bog\'laning.' },
-          { title: 'SHAFFOFLIK', desc: 'So\'rovlar, narxlar va buyurtmalarni tartibli saqlang.' },
-          { title: 'SAMARADORLIK', desc: 'Keraksiz yozishmalarni kamaytiring.' },
-          { title: 'BIZNES UCHUN', desc: 'Mijozlar, ulgurji sotuvchilar va xalqaro hamkorlar uchun.' },
+        steps: [
+          { number: '01', title: 'OSON KIRISH', desc: 'Modern Gold hisobingizga tez kiring.' },
+          { number: '02', title: 'ODDIY BOSH SAHIFA', desc: 'Muhim ma\'lumotlar bir joyda.' },
+          { number: '03', title: 'MAHSULOTLAR', desc: 'Ilova orqali mahsulotlarni o\'rganing.' },
+          { number: '04', title: 'MAHSULOT TAFSILOTI', desc: 'Mahsulot ma\'lumotlarini qurilmangizda ko\'ring.' },
+          { number: '05', title: 'HISOB BOSHQARUVI', desc: 'Hisobingiz va sozlamalaringizni boshqaring.' },
+          { number: '06', title: 'BUYURTMALARINGIZ', desc: 'Buyurtmalaringizni ko\'ring va kuzating.' },
         ],
       },
-      access: {
-        title: 'Modern Gold hisobingiz — biznes qayerga olib borsa ham.',
-        description: 'MG Connect orqali Modern Gold xizmatlariga kiring va jamoamiz bilan bog\'laning.',
-        note: 'Mobil ilova mavjudligi e\'lon qilinadi.',
-        downloadCta: 'ILOVANI YUKLAB OLISH',
+      howItWorks: {
+        eyebrow: 'QANDAY ISHLAYDI',
+        title: 'Ilovani ochganingizdan boshlab oddiy tajriba.',
+        steps: [
+          { title: 'YUKLAB OLISH', desc: 'MG Connect ni mobil qurilmangizga yuklab oling.' },
+          { title: 'KIRISH', desc: 'Modern Gold hisobingizga kiring yoki yarating.' },
+          { title: 'ULANISH', desc: 'Modern Gold xizmatlariga to\'g\'ridan-to\'g\'ri telefoningizdan kiring.' },
+        ],
+      },
+      experience: {
+        title: 'Modern Gold — qayerda bo\'lsangiz ham.',
+        description:
+          'Modern Gold bilan kundalik kirishni oddiy va qulay qilish uchun mo\'ljallangan mobil tajriba orqali bog\'laning.',
+      },
+      download: {
+        eyebrow: 'MG CONNECT OLING',
+        title: 'Modern Gold ni o\'zingiz bilan oling.',
+        description:
+          'MG Connect mobil ilovasini yuklab oling va Modern Gold bilan bog\'lanishning oddiy, qulay usulidan foydalaning.',
         comingSoon: 'TEZ ORADA',
-        portalCta: 'VEB-PORTAL OCHISH',
+        note: 'Ilova do\'konlarida mavjudligi e\'lon qilinadi.',
       },
       final: {
-        title: 'Modern Gold bilan bog\'laning.',
-        description: 'Oltin sotishdan xalqaro ulgurjigacha — MG Connect Modern Gold munosabatingizni yaqin tutadi.',
-        sellCta: 'OLTIN SOTISH',
-        buyerCta: 'XARIDOR BO\'LISH',
+        title: 'Modern Gold tajribasi — qayerga borsangiz ham.',
+        description: 'MG Connect orqali Modern Gold bilan bog\'laning.',
+        cta: 'MG CONNECT YUKLAB OLISH',
       },
     },
   },
@@ -830,80 +826,80 @@ export const translations = {
     mgConnect: {
       seo: {
         description:
-          'MG Connect هي المنصة الرقمية لـ Modern Gold لشراء الذهب وحسابات الأعمال والعروض والطلبات وعلاقات المشترين الدوليين.',
+          'حمّل MG Connect — تطبيق Modern Gold الرسمي للوصول إلى حسابك والمنتجات والطلبات والبقاء على تواصل مع Modern Gold.',
       },
       hero: {
-        eyebrow: 'التجربة الرقمية لـ MODERN GOLD',
+        eyebrow: 'تطبيق MODERN GOLD',
         title: 'تعرّف على MG Connect',
         description:
-          'منصة واحدة لإدارة علاقتك مع Modern Gold — من شراء الذهب واستفسارات الأعمال إلى العروض والطلبات وإدارة الحساب.',
-        primaryCta: 'فتح MG CONNECT',
-        secondaryCta: 'كن مشترياً',
+          'طريقة بسيطة ومتصلة للبقاء على تواصل مع Modern Gold وإدارة حسابك والوصول إلى خدماتنا من جهازك المحمول.',
+        primaryCta: 'تحميل التطبيق',
+        secondaryCta: 'اعرف المزيد',
       },
-      intro: {
-        eyebrow: 'منصة واحدة متصلة',
-        title: 'منصة واحدة. علاقة واحدة مع Modern Gold.',
+      about: {
+        eyebrow: 'عن التطبيق',
+        title: 'Modern Gold الآن في جيبك.',
         description:
-          'تجمع MG Connect خدمات Modern Gold في تجربة رقمية مريحة. يمكن للعملاء والشركاء التواصل مع فريقنا وإدارة الاستفسارات ومتابعة أنشطتهم التجارية.',
-        features: [
-          { title: 'شراء الذهب', desc: 'قدّم وأدر استفسار بيع الذهب.' },
-          { title: 'حساب الأعمال', desc: 'أنشئ وأدر ملف Modern Gold التجاري.' },
-          { title: 'العروض', desc: 'اطلب وراجع العروض من فريقنا.' },
-          { title: 'الطلبات', desc: 'تتبع طلبات الجملة والنشاط التجاري.' },
+          'تجلب MG Connect تجربة Modern Gold مباشرة إلى جهازك المحمول. يوفر التطبيق طريقة مريحة للعملاء للوصول إلى حسابهم والبقاء على تواصل مع Modern Gold وإدارة الخدمات المتاحة من مكان واحد.',
+        badge: 'تطبيق MG CONNECT المحمول',
+      },
+      features: {
+        eyebrow: 'ميزات التطبيق',
+        title: 'كل ما تحتاجه في تطبيق واحد.',
+        items: [
+          { title: 'الحساب', desc: 'أدر حساب Modern Gold الخاص بك.' },
+          { title: 'الرئيسية', desc: 'اعرض المعلومات المهمة بنظرة واحدة.' },
+          { title: 'المنتجات', desc: 'استكشف المنتجات والمعلومات المتاحة.' },
+          { title: 'الطلبات', desc: 'اعرض وأدر طلباتك.' },
+          { title: 'الملف الشخصي', desc: 'أدر معلوماتك الشخصية.' },
         ],
       },
       showcase: {
-        eyebrow: 'داخل MG CONNECT',
-        title: 'كل ما تحتاجه في مكان واحد.',
-        screens: {
+        eyebrow: 'استكشف MG CONNECT',
+        title: 'مصمم لتجربة محمولة بسيطة.',
+        screenNames: {
           login: 'تسجيل الدخول',
-          dashboard: 'لوحة التحكم',
-          goldBuying: 'شراء الذهب',
+          home: 'الرئيسية',
           products: 'المنتجات',
-          quotation: 'عرض السعر',
+          productDetail: 'تفاصيل المنتج',
+          profile: 'الملف الشخصي',
           orders: 'الطلبات',
         },
-      },
-      journeys: {
-        title: 'مصممة وفق طريقة عمل Modern Gold.',
-        sell: {
-          eyebrow: 'للعملاء المحليين',
-          title: 'بيع الذهب',
-          description: 'تواصل مع Modern Gold لتقديم استفسار بيع الذهب وبدء عملية التقييم.',
-          steps: ['تقديم الاستفسار', 'موعد', 'تقييم', 'تقدير القيمة'],
-          cta: 'بيع الذهب',
-        },
-        buy: {
-          eyebrow: 'للمشترين الدوليين',
-          title: 'الشراء من MODERN GOLD',
-          description: 'أدر علاقتك التجارية مع Modern Gold واستورد سلاسل وأساور ذهبية مصنّعة.',
-          steps: ['التسجيل', 'التحقق', 'طلب عرض', 'الطلب'],
-          cta: 'كن مشترياً',
-        },
-      },
-      benefits: {
-        eyebrow: 'لماذا MG CONNECT',
-        title: 'طريقة أبسط للبقاء على تواصل مع Modern Gold.',
-        items: [
-          { title: 'متصل', desc: 'ابق على تواصل مع Modern Gold أينما كنت.' },
-          { title: 'شفاف', desc: 'نظّم الاستفسارات والعروض والطلبات.' },
-          { title: 'فعّال', desc: 'قلّل المراسلات غير الضرورية.' },
-          { title: 'جاهز للأعمال', desc: 'مصمم للعملاء وتجار الجملة والشركاء الدوليين.' },
+        steps: [
+          { number: '01', title: 'دخول سهل', desc: 'الوصول إلى حساب Modern Gold بسرعة.' },
+          { number: '02', title: 'صفحة رئيسية بسيطة', desc: 'المعلومات المهمة في مكان واحد.' },
+          { number: '03', title: 'المنتجات', desc: 'استكشف المنتجات المتاحة عبر التطبيق.' },
+          { number: '04', title: 'تفاصيل المنتج', desc: 'اعرض معلومات المنتج على جهازك.' },
+          { number: '05', title: 'إدارة الحساب', desc: 'أدر حسابك وتفضيلاتك.' },
+          { number: '06', title: 'طلباتك', desc: 'اعرض وتتبع طلباتك.' },
         ],
       },
-      access: {
-        title: 'حساب Modern Gold أينما ذهب بك العمل.',
-        description: 'الوصول إلى خدمات Modern Gold عبر MG Connect والبقاء على تواصل مع فريقنا.',
-        note: 'سيتم الإعلان عن توفر التطبيق لاحقاً.',
-        downloadCta: 'تحميل التطبيق',
+      howItWorks: {
+        eyebrow: 'كيف يعمل',
+        title: 'تجربة بسيطة منذ لحظة فتح التطبيق.',
+        steps: [
+          { title: 'تحميل', desc: 'حمّل MG Connect على جهازك المحمول.' },
+          { title: 'تسجيل الدخول', desc: 'سجّل الدخول أو أنشئ حساب Modern Gold.' },
+          { title: 'اتصل', desc: 'الوصول إلى خدمات Modern Gold مباشرة من هاتفك.' },
+        ],
+      },
+      experience: {
+        title: 'Modern Gold أينما كنت.',
+        description:
+          'ابق على تواصل مع Modern Gold من خلال تجربة محمولة مصممة لجعل الوصول اليومي بسيطاً ومريحاً.',
+      },
+      download: {
+        eyebrow: 'احصل على MG CONNECT',
+        title: 'خذ Modern Gold معك.',
+        description:
+          'حمّل تطبيق MG Connect المحمول واستمتع بطريقة بسيطة ومريحة للبقاء على تواصل مع Modern Gold.',
         comingSoon: 'قريباً',
-        portalCta: 'فتح البوابة الإلكترونية',
+        note: 'سيتم الإعلان عن توفر التطبيق في المتاجر عند النشر.',
       },
       final: {
-        title: 'ابق على تواصل مع Modern Gold.',
-        description: 'من شراء الذهب إلى الجملة الدولية — MG Connect يبقي علاقتك مع Modern Gold في متناول يدك.',
-        sellCta: 'بيع الذهب',
-        buyerCta: 'كن مشترياً',
+        title: 'تجربة Modern Gold أينما ذهبت.',
+        description: 'ابق على تواصل مع Modern Gold عبر MG Connect.',
+        cta: 'تحميل MG CONNECT',
       },
     },
   },
@@ -1056,80 +1052,80 @@ export const translations = {
     mgConnect: {
       seo: {
         description:
-          'MG Connect, Modern Gold\'un altın alımı, iş hesapları, teklifler, siparişler ve uluslararası alıcı ilişkileri için dijital platformudur.',
+          'MG Connect\'i indirin — Modern Gold resmi mobil uygulaması: hesap, ürünler, siparişler ve Modern Gold ile bağlantı.',
       },
       hero: {
-        eyebrow: 'MODERN GOLD DİJİTAL DENEYİMİ',
+        eyebrow: 'MODERN GOLD UYGULAMASI',
         title: 'MG Connect ile Tanışın',
         description:
-          'Modern Gold ile ilişkinizi yönetmek için tek bağlantılı platform — altın alımından iş taleplerine, teklifler, siparişler ve hesap yönetimine kadar.',
-        primaryCta: 'MG CONNECT AÇ',
-        secondaryCta: 'ALICI OL',
+          'Modern Gold ile iletişimde kalmanın, hesabınızı yönetmenin ve hizmetlerimize mobil cihazınızdan erişmenin basit ve bağlantılı yolu.',
+        primaryCta: 'UYGULAMAYI İNDİR',
+        secondaryCta: 'DAHA FAZLA BİLGİ',
       },
-      intro: {
-        eyebrow: 'TEK BAĞLANTILI PLATFORM',
-        title: 'Tek platform. Tek Modern Gold ilişkisi.',
+      about: {
+        eyebrow: 'UYGULAMA HAKKINDA',
+        title: 'Modern Gold artık cebinizde.',
         description:
-          'MG Connect, Modern Gold hizmetlerini kullanışlı bir dijital deneyimde bir araya getirir. Müşteriler ve iş ortakları ekibimizle iletişim kurabilir, talepleri yönetebilir ve iş faaliyetlerini takip edebilir.',
-        features: [
-          { title: 'ALTIN ALIMI', desc: 'Altın satış talebinizi gönderin ve yönetin.' },
-          { title: 'İŞ HESABI', desc: 'Modern Gold iş profilinizi oluşturun ve yönetin.' },
-          { title: 'TEKLİFLER', desc: 'Ekibimizden teklif isteyin ve inceleyin.' },
-          { title: 'SİPARİŞLER', desc: 'Toptan siparişleri ve iş faaliyetini takip edin.' },
+          'MG Connect, Modern Gold deneyimini doğrudan mobil cihazınıza getirir. Uygulama, müşterilerin hesaplarına erişmesi, Modern Gold ile bağlantıda kalması ve mevcut hizmetleri tek yerden yönetmesi için uygun bir yol sunar.',
+        badge: 'MG CONNECT MOBİL UYGULAMA',
+      },
+      features: {
+        eyebrow: 'UYGULAMA ÖZELLİKLERİ',
+        title: 'İhtiyacınız olan her şey tek uygulamada.',
+        items: [
+          { title: 'HESAP', desc: 'Modern Gold hesabınızı yönetin.' },
+          { title: 'ANA SAYFA', desc: 'Önemli bilgileri bir bakışta görün.' },
+          { title: 'ÜRÜNLER', desc: 'Mevcut ürünleri ve bilgileri keşfedin.' },
+          { title: 'SİPARİŞLER', desc: 'Siparişlerinizi görüntüleyin ve yönetin.' },
+          { title: 'PROFİL', desc: 'Kişisel bilgilerinizi yönetin.' },
         ],
       },
       showcase: {
-        eyebrow: 'MG CONNECT İÇİNDE',
-        title: 'İhtiyacınız olan her şey tek yerde.',
-        screens: {
+        eyebrow: 'MG CONNECT\'İ KEŞFEDİN',
+        title: 'Basit bir mobil deneyim için tasarlandı.',
+        screenNames: {
           login: 'Giriş',
-          dashboard: 'Panel',
-          goldBuying: 'Altın Alımı',
+          home: 'Ana Sayfa',
           products: 'Ürünler',
-          quotation: 'Teklif',
+          productDetail: 'Ürün Detayı',
+          profile: 'Profil',
           orders: 'Siparişler',
         },
-      },
-      journeys: {
-        title: 'Modern Gold\'un iş yapma biçimine göre tasarlandı.',
-        sell: {
-          eyebrow: 'Yerel müşteriler için',
-          title: 'ALTIN SAT',
-          description: 'Altın satış talebinizi göndermek ve değerlendirme sürecini başlatmak için Modern Gold ile iletişime geçin.',
-          steps: ['Talep Gönder', 'Randevu', 'Değerlendirme', 'Değerleme'],
-          cta: 'ALTIN SAT',
-        },
-        buy: {
-          eyebrow: 'Uluslararası Alıcılar için',
-          title: 'MODERN GOLD\'DAN SATIN AL',
-          description: 'Modern Gold ile iş ilişkinizi yönetin ve üretilmiş altın zincir ve bilezikler tedarik edin.',
-          steps: ['Kayıt', 'İş Doğrulama', 'Teklif İste', 'Sipariş'],
-          cta: 'ALICI OL',
-        },
-      },
-      benefits: {
-        eyebrow: 'NEDEN MG CONNECT',
-        title: 'Modern Gold ile bağlantıda kalmanın daha kolay yolu.',
-        items: [
-          { title: 'BAĞLI', desc: 'Nerede iş yaparsanız yapın Modern Gold ile bağlantıda kalın.' },
-          { title: 'ŞEFFAF', desc: 'Talepleri, teklifleri ve siparişleri düzenli tutun.' },
-          { title: 'VERİMLİ', desc: 'Gereksiz yazışmaları azaltın.' },
-          { title: 'İŞ HAZIR', desc: 'Müşteriler, toptancılar ve uluslararası iş ortakları için.' },
+        steps: [
+          { number: '01', title: 'KOLAY GİRİŞ', desc: 'Modern Gold hesabınıza hızla erişin.' },
+          { number: '02', title: 'BASİT ANA SAYFA', desc: 'Önemli bilgiler tek yerde.' },
+          { number: '03', title: 'ÜRÜNLER', desc: 'Uygulama üzerinden ürünleri keşfedin.' },
+          { number: '04', title: 'ÜRÜN DETAYI', desc: 'Ürün bilgilerini cihazınızda görüntüleyin.' },
+          { number: '05', title: 'HESAP YÖNETİMİ', desc: 'Hesabınızı ve tercihlerinizi yönetin.' },
+          { number: '06', title: 'SİPARİŞLERİNİZ', desc: 'Siparişlerinizi görüntüleyin ve takip edin.' },
         ],
       },
-      access: {
-        title: 'Modern Gold hesabınız, iş sizi nereye götürürse götürsün.',
-        description: 'MG Connect üzerinden Modern Gold hizmetlerine erişin ve ekibimizle bağlantıda kalın.',
-        note: 'Mobil uygulama kullanılabilirliği duyurulacaktır.',
-        downloadCta: 'UYGULAMAYI İNDİR',
+      howItWorks: {
+        eyebrow: 'NASIL ÇALIŞIR',
+        title: 'Uygulamayı açtığınız andan itibaren basit bir deneyim.',
+        steps: [
+          { title: 'İNDİR', desc: 'MG Connect\'i mobil cihazınıza indirin.' },
+          { title: 'GİRİŞ YAP', desc: 'Modern Gold hesabınıza giriş yapın veya oluşturun.' },
+          { title: 'BAĞLAN', desc: 'Modern Gold hizmetlerine doğrudan telefonunuzdan erişin.' },
+        ],
+      },
+      experience: {
+        title: 'Modern Gold — nerede olursanız olun.',
+        description:
+          'Günlük erişimi basit ve uygun kılmak için tasarlanmış mobil deneyimle Modern Gold ile bağlantıda kalın.',
+      },
+      download: {
+        eyebrow: 'MG CONNECT ALIN',
+        title: 'Modern Gold\'u yanınıza alın.',
+        description:
+          'MG Connect mobil uygulamasını indirin ve Modern Gold ile bağlantıda kalmanın basit, uygun yolunu deneyimleyin.',
         comingSoon: 'YAKINDA',
-        portalCta: 'WEB PORTALI AÇ',
+        note: 'Uygulama mağazalarında kullanılabilirlik yayınlandığında duyurulacaktır.',
       },
       final: {
-        title: 'Modern Gold ile bağlantıda kalın.',
-        description: 'Altın alımından uluslararası toptana kadar — MG Connect Modern Gold ilişkinizi elinizin altında tutar.',
-        sellCta: 'ALTIN SAT',
-        buyerCta: 'ALICI OL',
+        title: 'Modern Gold deneyiminiz — nereye giderseniz gidin.',
+        description: 'MG Connect ile Modern Gold ile bağlantıda kalın.',
+        cta: 'MG CONNECT İNDİR',
       },
     },
   },

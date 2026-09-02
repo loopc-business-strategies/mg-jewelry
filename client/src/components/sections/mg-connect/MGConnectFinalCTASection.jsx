@@ -1,27 +1,26 @@
-import { Link } from 'react-router-dom';
+import PhoneMockup from '../../mg-connect/PhoneMockup';
 import { useTranslation } from '../../../hooks/useTranslation';
 
 export default function MGConnectFinalCTASection() {
   const { t } = useTranslation();
 
   return (
-    <section className="cta-gradient-band py-16 px-4">
-      <div className="max-w-4xl mx-auto text-center p-10 md:p-16">
-        <h2 className="type-section-title text-white mb-4">{t('mgConnect.final.title')}</h2>
-        <p className="type-body text-white/80 mb-8 max-w-xl mx-auto">{t('mgConnect.final.description')}</p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            to="/gold-buying"
-            className="btn-primary-gold bg-white text-charcoal hover:brightness-100"
-          >
-            {t('mgConnect.final.sellCta')}
-          </Link>
-          <Link
-            to="/wholesale/register"
-            className="inline-flex items-center gap-2 border border-white/40 text-white px-5 py-2.5 text-[0.8125rem] font-bold uppercase tracking-[0.02em] rounded-md hover:bg-white/10 transition-colors"
-          >
-            {t('mgConnect.final.buyerCta')}
-          </Link>
+    <section className="section-cream py-16 md:py-20 px-4">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="text-center lg:text-left">
+          <h2 className="type-section-title mb-4">{t('mgConnect.final.title')}</h2>
+          <p className="type-section-desc mb-8 max-w-md mx-auto lg:mx-0">{t('mgConnect.final.description')}</p>
+          <a href="#download" className="btn-primary-gold">
+            {t('mgConnect.final.cta')}
+          </a>
+        </div>
+        <div className="flex justify-center lg:justify-end">
+          <PhoneMockup
+            screen="home"
+            placeholderNumber="02"
+            placeholderName="Home"
+            className="mg-connect-phone-large"
+          />
         </div>
       </div>
     </section>
