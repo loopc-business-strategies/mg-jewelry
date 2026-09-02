@@ -956,6 +956,17 @@ h5, h6 {
   overflow: hidden;
 }
 
+.phone-mockup--device {
+  background: transparent;
+}
+
+.phone-mockup-device-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 28px rgba(26, 26, 26, 0.18));
+}
+
 .our-mg-phone-large {
   width: 260px;
 }
