@@ -35,9 +35,10 @@ const retailCategorySlugs = collectionCategories;
 export const navLinks = [
   { label: 'Home', path: '/', key: 'nav.home' },
   { label: 'About', path: '/about', key: 'nav.about' },
-  { label: 'Collections', path: '/shop', menu: 'collections', key: 'nav.collections' },
-  { label: 'Retail', path: '/shop', menu: 'retail', key: 'nav.retail' },
-  { label: 'Wholesale', path: '/wholesale', menu: 'wholesale', key: 'nav.wholesale' },
+  { label: 'Gold Buying', path: '/gold-buying', key: 'nav.goldBuying' },
+  { label: 'Manufacturing', path: '/custom-jewelry', key: 'nav.manufacturing' },
+  { label: 'Products', path: '/shop', key: 'nav.products' },
+  { label: 'MG Connect', path: '/mg-connect', key: 'nav.mgConnect' },
   { label: 'Contact', path: '/contact', key: 'nav.contact' },
 ];
 
@@ -45,6 +46,12 @@ export const sellGoldCta = {
   label: 'Sell Gold',
   path: '/gold-buying',
   key: 'nav.sellGold',
+};
+
+export const becomeBuyerCta = {
+  label: 'Become a Buyer',
+  path: '/wholesale/register',
+  key: 'nav.becomeBuyer',
 };
 
 export const retailNavLinks = [
@@ -297,6 +304,7 @@ export const footerColumns = {
   ],
   about: [
     { label: 'About', path: '/about' },
+    { label: 'MG Connect', path: '/mg-connect' },
     { label: 'Collections', path: '/shop' },
     { label: 'Custom Jewelry', path: '/custom-jewelry' },
     { label: 'Contact', path: '/contact' },
