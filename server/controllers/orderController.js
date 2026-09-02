@@ -1,76 +1,169 @@
 const Order = require('../models/Order');
 const Cart = require('../models/Cart');
-const Product = require('../models/Product');
+const Coupon = require('../models/Coupon');
+const { buildItemsFromCart, buildOrderItems, calculateTotals } = require('../services/orderService');
+const { reserveStock, confirmStock, releaseStock } = require('../services/inventoryService');
+const { createPaymentIntent } = require('../services/stripeService');
+const { sendOrderConfirmation } = require('../services/emailService');
+const { logAction } = require('../services/auditService');
+const { isAdminRole } = require('../middleware/permissions');
+const ApiError = require('../utils/ApiError');
 
-const createOrder = async (req, res) => {
-  const { items, shippingAddress, paymentMethod, isGuest, guestEmail, guestPhone } = req.body;
-
-  let orderItems = items;
-  if (!orderItems && req.user) {
-    const cart = await Cart.findOne({ userId: req.user._id }).populate('items.productId');
-    if (!cart || !cart.items.length) {
-      return res.status(400).json({ message: 'Cart is empty' });
-    }
-    orderItems = cart.items.map((item) => ({
-      productId: item.productId._id,
-      name: item.productId.name,
-      sku: item.productId.sku,
-      image: item.productId.images?.[0],
-      quantity: item.quantity,
-      size: item.size,
-      price: item.productId.price,
-      mrp: item.productId.mrp,
-    }));
-  }
-
-  const subtotal = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const discount = orderItems.reduce(
-    (sum, item) => sum + (item.mrp - item.price) * item.quantity,
-    0
-  );
-  const shipping = subtotal >= 5000 ? 0 : 99;
-  const tax = Math.round(subtotal * 0.03);
-  const total = subtotal + shipping + tax;
-
-  for (const item of orderItems) {
-    await Product.findByIdAndUpdate(item.productId, { $inc: { stock: -item.quantity } });
-  }
-
-  const order = await Order.create({
-    userId: req.user?._id,
-    items: orderItems,
-    shippingAddress,
-    paymentMethod,
-    isGuest: isGuest || !req.user,
-    guestEmail,
-    guestPhone,
-    subtotal,
-    discount,
-    shipping,
-    tax,
-    total,
-    status: 'confirmed',
+const addStatusHistory = (order, to, userId, note) => {
+  order.statusHistory.push({
+    from: order.status,
+    to,
+    changedBy: userId,
+    note,
+    at: new Date(),
   });
+  order.status = to;
+};
 
-  if (req.user) {
-    await Cart.findOneAndUpdate({ userId: req.user._id }, { items: [] });
+const createOrder = async (req, res, next) => {
+  try {
+    const { items, shippingAddress, paymentMethod, isGuest, guestEmail, guestPhone } = req.body;
+    let orderItems = items;
+    const cart = req.user ? await Cart.findOne({ userId: req.user._id }) : null;
+    const couponCode = cart?.couponCode;
+
+    if (!orderItems?.length) {
+      if (!req.user) throw new ApiError('Cart is empty', 400, 'EMPTY_CART');
+      orderItems = await buildItemsFromCart(req.user._id);
+    } else {
+      orderItems = await buildOrderItems(orderItems);
+    }
+
+    const totals = await calculateTotals(orderItems, couponCode);
+    const isCod = paymentMethod === 'cod';
+    const initialStatus = isCod ? 'confirmed' : 'pending_payment';
+
+    const order = await Order.create({
+      userId: req.user?._id,
+      items: orderItems,
+      shippingAddress,
+      paymentMethod: paymentMethod || 'cod',
+      paymentStatus: isCod ? 'pending' : 'pending',
+      status: initialStatus,
+      isGuest: isGuest || !req.user,
+      guestEmail: guestEmail || shippingAddress?.email,
+      guestPhone: guestPhone || shippingAddress?.phone,
+      ...totals,
+      statusHistory: [{ from: null, to: initialStatus, note: 'Order created', at: new Date() }],
+    });
+
+    await reserveStock(orderItems, order._id);
+
+    if (couponCode) {
+      await Coupon.findOneAndUpdate({ code: couponCode }, { $inc: { usedCount: 1 } });
+    }
+
+    if (isCod) {
+      await confirmStock(orderItems, order._id);
+      order.paymentStatus = 'pending';
+      await order.save();
+      const email = req.user?.email || shippingAddress?.email;
+      if (email) await sendOrderConfirmation(email, order);
+      if (req.user) await Cart.findOneAndUpdate({ userId: req.user._id }, { items: [], couponCode: null });
+      return res.status(201).json({ success: true, data: order });
+    }
+
+    if (req.user) await Cart.findOneAndUpdate({ userId: req.user._id }, { items: [], couponCode: null });
+
+    let paymentIntent = null;
+    try {
+      paymentIntent = await createPaymentIntent({
+        amount: totals.total,
+        currency: 'inr',
+        metadata: { orderId: order._id.toString(), orderNumber: order.orderNumber },
+      });
+      order.stripePaymentIntentId = paymentIntent.id;
+      await order.save();
+    } catch {
+      await releaseStock(orderItems, order._id);
+      order.status = 'payment_failed';
+      await order.save();
+      throw new ApiError('Payment gateway unavailable. Try COD or configure Stripe.', 503, 'PAYMENT_UNAVAILABLE');
+    }
+
+    res.status(201).json({
+      success: true,
+      data: {
+        order,
+        clientSecret: paymentIntent.client_secret,
+      },
+    });
+  } catch (err) {
+    next(err);
   }
-
-  res.status(201).json(order);
 };
 
 const getMyOrders = async (req, res) => {
   const orders = await Order.find({ userId: req.user._id }).sort({ createdAt: -1 });
-  res.json(orders);
+  res.json({ success: true, data: orders });
 };
 
-const getOrderById = async (req, res) => {
-  const order = await Order.findById(req.params.id);
-  if (!order) return res.status(404).json({ message: 'Order not found' });
-  if (req.user && order.userId?.toString() !== req.user._id.toString() && !['admin', 'super_admin'].includes(req.user.role)) {
-    return res.status(403).json({ message: 'Not authorized' });
+const getOrderById = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) throw new ApiError('Order not found', 404, 'NOT_FOUND');
+    const isOwner = req.user && order.userId?.toString() === req.user._id.toString();
+    const isAdmin = req.user && isAdminRole(req.user.role);
+    if (!isOwner && !isAdmin) throw new ApiError('Not authorized', 403, 'FORBIDDEN');
+    res.json({ success: true, data: order });
+  } catch (err) {
+    next(err);
   }
-  res.json(order);
 };
 
-module.exports = { createOrder, getMyOrders, getOrderById };
+const trackOrder = async (req, res, next) => {
+  try {
+    const { orderNumber, email } = req.query;
+    if (!orderNumber || !email) throw new ApiError('Order number and email required', 400, 'VALIDATION_ERROR');
+    const order = await Order.findOne({
+      orderNumber,
+      $or: [{ guestEmail: email }, { 'shippingAddress.email': email }],
+    });
+    if (!order) throw new ApiError('Order not found', 404, 'NOT_FOUND');
+    res.json({
+      success: true,
+      data: {
+        orderNumber: order.orderNumber,
+        status: order.status,
+        paymentStatus: order.paymentStatus,
+        total: order.total,
+        trackingUrl: order.trackingUrl,
+        awbNumber: order.awbNumber,
+        courier: order.courier,
+        estimatedDelivery: order.estimatedDelivery,
+        statusHistory: order.statusHistory,
+        createdAt: order.createdAt,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const confirmPayment = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) throw new ApiError('Order not found', 404, 'NOT_FOUND');
+    if (order.userId?.toString() !== req.user._id.toString()) throw new ApiError('Not authorized', 403, 'FORBIDDEN');
+    if (order.paymentStatus === 'paid') return res.json({ success: true, data: order });
+
+    addStatusHistory(order, 'paid', req.user._id, 'Payment confirmed');
+    order.paymentStatus = 'paid';
+    await confirmStock(order.items, order._id);
+    await order.save();
+
+    const email = req.user.email || order.shippingAddress?.email;
+    if (email) await sendOrderConfirmation(email, order);
+
+    res.json({ success: true, data: order });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createOrder, getMyOrders, getOrderById, trackOrder, confirmPayment };

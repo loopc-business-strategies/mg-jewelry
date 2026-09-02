@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import api from '../services/api';
 import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
 import BrandLogo from './BrandLogo';
 import { socialIconMap } from './ui/SocialIcons';
@@ -10,11 +11,16 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const { t } = useTranslation();
 
-  const handleNewsletter = (e) => {
+  const handleNewsletter = async (e) => {
     e.preventDefault();
     if (!email.trim()) return;
-    toast.success('Thank you for subscribing!');
-    setEmail('');
+    try {
+      await api.post('/newsletter', { email });
+      toast.success('Thank you for subscribing!');
+      setEmail('');
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Subscription failed');
+    }
   };
 
   return (

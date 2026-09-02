@@ -40,6 +40,37 @@ export default function AdminDashboard() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl p-6 shadow-sm border">
+          <h2 className="font-semibold text-charcoal text-xl mb-4">Sales (30 days)</h2>
+          {data.charts?.dailySales?.length ? (
+            <div className="space-y-2">
+              {data.charts.dailySales.slice(-7).map((d) => (
+                <div key={d._id} className="flex items-center gap-3 text-sm">
+                  <span className="w-20 text-muted">{d._id}</span>
+                  <div className="flex-1 bg-cream rounded h-4 overflow-hidden">
+                    <div className="bg-gold h-full" style={{ width: `${Math.min(100, (d.revenue / (data.stats.b2cRevenue || 1)) * 100)}%` }} />
+                  </div>
+                  <span className="w-24 text-right">{formatPrice(d.revenue)}</span>
+                </div>
+              ))}
+            </div>
+          ) : <p className="text-sm text-muted">No sales data yet</p>}
+        </div>
+        <div className="bg-white rounded-xl p-6 shadow-sm border">
+          <h2 className="font-semibold text-charcoal text-xl mb-4">Top Products</h2>
+          {data.charts?.topProducts?.map((p) => (
+            <div key={p._id} className="flex justify-between py-2 border-b text-sm">
+              <span>{p.name}</span>
+              <span>{p.sold} sold</span>
+            </div>
+          ))}
+          {data.charts?.channelSplit && (
+            <p className="text-xs text-muted mt-4">B2C: {data.charts.channelSplit.b2c} · B2B: {data.charts.channelSplit.b2b}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-6 mt-6">
+        <div className="bg-white rounded-xl p-6 shadow-sm border">
           <h2 className="font-semibold text-charcoal text-xl mb-4">Recent B2C Orders</h2>
           {data.recentB2COrders?.map((o) => (
             <div key={o._id} className="flex justify-between py-2 border-b text-sm">

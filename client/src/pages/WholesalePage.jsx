@@ -24,6 +24,12 @@ const bulkTiers = [
   { range: '100+ pieces', label: 'Special Pricing', discount: '20% off' },
 ];
 
+const formatTier = (tier) => ({
+  range: tier.maxQty ? `${tier.minQty}–${tier.maxQty} pieces` : `${tier.minQty}+ pieces`,
+  label: tier.label,
+  discount: `${tier.discountPercent}% off`,
+});
+
 const faqs = [
   { q: 'How do I become a wholesale partner?', a: 'Fill out the registration form and our team will review your application within 2-3 business days.' },
   { q: 'What is the minimum order quantity?', a: 'MOQ varies by product, typically starting at 10 pieces per design.' },
@@ -33,9 +39,13 @@ const faqs = [
 export default function WholesalePage() {
   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
+  const [tiers, setTiers] = useState(bulkTiers);
 
   useEffect(() => {
     api.get('/wholesale/products?limit=8').then(({ data }) => setProducts(data.products?.slice(0, 8) || [])).catch(() => {});
+    api.get('/wholesale/bulk-pricing').then(({ data }) => {
+      if (Array.isArray(data) && data.length) setTiers(data.map(formatTier));
+    }).catch(() => {});
   }, []);
 
   const requestCatalogue = () => {
@@ -136,7 +146,7 @@ export default function WholesalePage() {
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="type-section-title text-center mb-10">Bulk Pricing</h2>
           <div className="grid md:grid-cols-4 gap-4">
-            {bulkTiers.map((tier) => (
+            {tiers.map((tier) => (
               <div key={tier.label} className="card-elegant p-6 text-center hover:border-border transition-colors">
                 <p className="text-gold-dark font-semibold text-charcoal text-xl mb-2">{tier.label}</p>
                 <p className="text-sm text-muted mb-2">{tier.range}</p>

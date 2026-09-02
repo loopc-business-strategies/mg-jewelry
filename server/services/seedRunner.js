@@ -98,6 +98,7 @@ function buildProducts() {
       tags: [category, metal],
       seoTitle: `${name} | Modern Gold Jewelry`,
       seoDescription: `Shop ${name} — premium ${metal} ${category} from Modern Gold Jewelry Manufacturing, Uzbekistan.`,
+      isDemo: true,
     };
   });
 }

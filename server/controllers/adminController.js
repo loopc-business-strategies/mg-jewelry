@@ -5,7 +5,13 @@ const WholesaleCustomer = require('../models/WholesaleCustomer');
 const WholesaleOrder = require('../models/WholesaleOrder');
 const WholesaleInquiry = require('../models/WholesaleInquiry');
 const Settings = require('../models/Settings');
+const AuditLog = require('../models/AuditLog');
 const { DEFAULT_TIERS } = require('../services/bulkPricing');
+const { getGoldRates } = require('../services/goldPricingService');
+const { logAction } = require('../services/auditService');
+const { generateInvoicePdf } = require('../services/invoiceService');
+const { sendEmail } = require('../services/emailService');
+const ApiError = require('../utils/ApiError');
 
 const getDashboard = async (req, res) => {
   const [
@@ -51,7 +57,37 @@ const getDashboard = async (req, res) => {
     },
     recentB2COrders: b2cOrders,
     recentWholesaleOrders: wsOrders,
+    charts: await getDashboardCharts(),
   });
+};
+
+const getDashboardCharts = async () => {
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const dailySales = await Order.aggregate([
+    { $match: { createdAt: { $gte: thirtyDaysAgo }, status: { $nin: ['cancelled', 'payment_failed'] } } },
+    {
+      $group: {
+        _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+        revenue: { $sum: '$total' },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { _id: 1 } },
+  ]);
+
+  const topProducts = await Order.aggregate([
+    { $unwind: '$items' },
+    { $group: { _id: '$items.productId', name: { $first: '$items.name' }, sold: { $sum: '$items.quantity' } } },
+    { $sort: { sold: -1 } },
+    { $limit: 5 },
+  ]);
+
+  const b2bCount = await WholesaleOrder.countDocuments();
+  const b2cCount = await Order.countDocuments();
+
+  return { dailySales, topProducts, channelSplit: { b2c: b2cCount, b2b: b2bCount } };
 };
 
 const getAllOrders = async (req, res) => {
@@ -59,10 +95,41 @@ const getAllOrders = async (req, res) => {
   res.json(orders);
 };
 
-const updateOrderStatus = async (req, res) => {
-  const order = await Order.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
-  if (order) res.json(order);
-  else res.status(404).json({ message: 'Order not found' });
+const updateOrderStatus = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) throw new ApiError('Order not found', 404, 'NOT_FOUND');
+    const prev = order.status;
+    order.status = req.body.status;
+    order.statusHistory.push({
+      from: prev,
+      to: req.body.status,
+      changedBy: req.user._id,
+      note: req.body.note || 'Status updated by admin',
+      at: new Date(),
+    });
+    if (req.body.status === 'shipped') {
+      order.courier = req.body.courier || order.courier;
+      order.awbNumber = req.body.awbNumber || order.awbNumber;
+      order.trackingUrl = req.body.trackingUrl || order.trackingUrl;
+      order.estimatedDelivery = req.body.estimatedDelivery || order.estimatedDelivery;
+      order.shippedAt = new Date();
+      const email = order.shippingAddress?.email || order.guestEmail;
+      if (email) {
+        await sendEmail({
+          to: email,
+          subject: `Your order ${order.orderNumber} has shipped`,
+          html: `<p>Your order is on its way!</p>${order.trackingUrl ? `<p><a href="${order.trackingUrl}">Track shipment</a></p>` : ''}`,
+        });
+      }
+    }
+    if (req.body.status === 'delivered') order.deliveredAt = new Date();
+    await order.save();
+    await logAction(req.user._id, 'order.status_update', 'Order', order._id, { from: prev, to: req.body.status });
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
 };
 
 const getWholesaleApplications = async (req, res) => {
@@ -149,6 +216,55 @@ const getCustomers = async (req, res) => {
   res.json(customers);
 };
 
+const getGoldRatesAdmin = async (req, res) => {
+  const rates = await getGoldRates();
+  res.json(rates);
+};
+
+const updateGoldRates = async (req, res, next) => {
+  try {
+    const GoldRate = require('../models/GoldRate');
+    const rates = await GoldRate.findOneAndUpdate({ key: 'gold_rates' }, req.body, { upsert: true, new: true });
+    await logAction(req.user._id, 'gold_rates.update', 'GoldRate', rates._id, req.body);
+    res.json(rates);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getAuditLogs = async (req, res) => {
+  const logs = await AuditLog.find().sort({ createdAt: -1 }).limit(100).populate('userId', 'name email');
+  res.json(logs);
+};
+
+const deleteDemoProducts = async (req, res) => {
+  const result = await Product.deleteMany({ isDemo: true });
+  await logAction(req.user._id, 'demo.delete_products', 'Product', null, { deleted: result.deletedCount });
+  res.json({ success: true, deleted: result.deletedCount });
+};
+
+const deleteDemoData = async (req, res) => {
+  const [products, orders] = await Promise.all([
+    Product.deleteMany({ isDemo: true }),
+    Order.deleteMany({ isDemo: true }),
+  ]);
+  await logAction(req.user._id, 'demo.delete_all', null, null, { products: products.deletedCount, orders: orders.deletedCount });
+  res.json({ success: true, products: products.deletedCount, orders: orders.deletedCount });
+};
+
+const downloadInvoice = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) throw new ApiError('Order not found', 404, 'NOT_FOUND');
+    const pdf = await generateInvoicePdf(order);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=invoice-${order.orderNumber}.pdf`);
+    res.send(pdf);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getDashboard,
   getAllOrders,
@@ -163,4 +279,10 @@ module.exports = {
   getBulkPricing,
   updateBulkPricing,
   getCustomers,
+  getGoldRatesAdmin,
+  updateGoldRates,
+  getAuditLogs,
+  deleteDemoProducts,
+  deleteDemoData,
+  downloadInvoice,
 };

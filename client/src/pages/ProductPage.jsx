@@ -29,6 +29,8 @@ export default function ProductPage() {
   const [delivery, setDelivery] = useState(null);
   const [tab, setTab] = useState('details');
   const [loading, setLoading] = useState(true);
+  const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
+  const [submittingReview, setSubmittingReview] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -43,7 +45,7 @@ export default function ProductPage() {
       .catch(() => toast.error('Product not found'))
       .finally(() => setLoading(false));
 
-    api.get(`/products/${id}/reviews`).then(({ data }) => setReviews(data)).catch(() => {});
+    api.get(`/products/${id}/reviews`).then(({ data }) => setReviews(Array.isArray(data) ? data : [])).catch(() => {});
   }, [id]);
 
   useEffect(() => {
@@ -69,6 +71,25 @@ export default function ProductPage() {
   const handleBuyNow = () => {
     addToCart(product._id, quantity, size);
     navigate('/checkout');
+  };
+
+  const submitReview = async (e) => {
+    e.preventDefault();
+    if (!user) {
+      toast.error('Please login to leave a review');
+      navigate('/login');
+      return;
+    }
+    setSubmittingReview(true);
+    try {
+      await api.post(`/products/${id}/reviews`, reviewForm);
+      toast.success('Review submitted for moderation');
+      setReviewForm({ rating: 5, comment: '' });
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to submit review');
+    } finally {
+      setSubmittingReview(false);
+    }
   };
 
   if (loading) return <div className="max-w-7xl mx-auto px-4 py-16"><div className="skeleton h-96 rounded-xl" /></div>;
@@ -186,9 +207,9 @@ export default function ProductPage() {
         {/* Tabs */}
         <div className="mt-16">
           <div className="flex border-b gap-8">
-            {['details', 'specs', 'care', 'faq'].map((t) => (
+            {['details', 'specs', 'care', 'reviews', 'faq'].map((t) => (
               <button key={t} onClick={() => setTab(t)} className={`pb-3 text-sm font-medium capitalize ${tab === t ? 'border-b-2 border-border text-gold' : 'text-muted'}`}>
-                {t === 'faq' ? 'FAQ' : t === 'specs' ? 'Specifications' : t === 'care' ? 'Jewellery Care' : 'Product Details'}
+                {t === 'faq' ? 'FAQ' : t === 'specs' ? 'Specifications' : t === 'care' ? 'Jewellery Care' : t === 'reviews' ? `Reviews (${reviews.length})` : 'Product Details'}
               </button>
             ))}
           </div>
@@ -203,6 +224,35 @@ export default function ProductPage() {
               </dl>
             )}
             {tab === 'care' && <p>Store in a dry place. Clean with a soft cloth. Avoid contact with perfumes and chemicals. Professional cleaning recommended annually.</p>}
+            {tab === 'reviews' && (
+              <div className="space-y-6">
+                {reviews.length === 0 ? (
+                  <p>No reviews yet. Be the first to review this product.</p>
+                ) : (
+                  reviews.map((r) => (
+                    <div key={r._id} className="border-b pb-4">
+                      <div className="flex items-center gap-2 mb-1">
+                        <StarRating rating={r.rating} />
+                        <span className="font-medium text-charcoal">{r.userId?.name || 'Customer'}</span>
+                        {r.verifiedPurchase && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Verified Purchase</span>}
+                      </div>
+                      <p>{r.comment}</p>
+                      <p className="text-xs text-muted mt-1">{new Date(r.createdAt).toLocaleDateString()}</p>
+                    </div>
+                  ))
+                )}
+                {user && (
+                  <form onSubmit={submitReview} className="mt-6 space-y-3 border-t pt-6">
+                    <h3 className="font-medium text-charcoal">Write a Review</h3>
+                    <select value={reviewForm.rating} onChange={(e) => setReviewForm({ ...reviewForm, rating: Number(e.target.value) })} className="input-elegant">
+                      {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} stars</option>)}
+                    </select>
+                    <textarea value={reviewForm.comment} onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })} placeholder="Share your experience..." className="input-elegant w-full min-h-[80px]" required />
+                    <button type="submit" disabled={submittingReview} className="btn-primary-gold text-xs">{submittingReview ? 'Submitting...' : 'Submit Review'}</button>
+                  </form>
+                )}
+              </div>
+            )}
             {tab === 'faq' && (
               <div className="space-y-4">
                 <div><strong>Is this BIS hallmarked?</strong><p>Yes, all our gold jewellery is BIS hallmarked.</p></div>

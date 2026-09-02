@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -8,14 +10,53 @@ import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { Check } from 'lucide-react';
 
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
+
 const steps = ['Login', 'Address', 'Delivery', 'Payment', 'Confirmation'];
 const paymentMethods = [
-  { id: 'upi', label: 'UPI' },
-  { id: 'credit_card', label: 'Credit Card' },
-  { id: 'debit_card', label: 'Debit Card' },
-  { id: 'net_banking', label: 'Net Banking' },
+  { id: 'stripe', label: 'Card / UPI (Stripe)' },
   { id: 'cod', label: 'Cash on Delivery' },
 ];
+
+function StripeForm({ order, onSuccess }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+
+  const handlePay = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setLoading(true);
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: { return_url: `${window.location.origin}/checkout?success=true` },
+      redirect: 'if_required',
+    });
+    if (error) {
+      toast.error(error.message);
+      setLoading(false);
+      return;
+    }
+    if (paymentIntent?.status === 'succeeded') {
+      try {
+        await api.post(`/orders/${order._id}/confirm-payment`);
+      } catch {
+        /* webhook may handle */
+      }
+      onSuccess(order);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handlePay} className="space-y-4">
+      <PaymentElement />
+      <button type="submit" disabled={!stripe || loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
+        {loading ? 'Processing...' : `Pay ${formatPrice(order.total)}`}
+      </button>
+    </form>
+  );
+}
 
 export default function CheckoutPage() {
   const { user } = useAuth();
@@ -23,6 +64,7 @@ export default function CheckoutPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(user ? 1 : 0);
   const [order, setOrder] = useState(null);
+  const [clientSecret, setClientSecret] = useState(null);
   const [address, setAddress] = useState({ name: '', phone: '', email: user?.email || '', line1: '', city: '', state: '', pincode: '' });
   const [paymentMethod, setPaymentMethod] = useState('cod');
   const [loading, setLoading] = useState(false);
@@ -35,15 +77,28 @@ export default function CheckoutPage() {
     setLoading(true);
     try {
       const { data } = await api.post('/orders', { shippingAddress: address, paymentMethod });
-      setOrder(data);
-      setStep(4);
-      fetchCart();
-      toast.success('Order placed successfully!');
+      if (data.clientSecret) {
+        setOrder(data.order);
+        setClientSecret(data.clientSecret);
+        setStep(3.5);
+      } else {
+        setOrder(data.order || data);
+        setStep(4);
+        fetchCart();
+        toast.success('Order placed successfully!');
+      }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to place order');
     } finally {
       setLoading(false);
     }
+  };
+
+  const onPaymentSuccess = (confirmedOrder) => {
+    setOrder(confirmedOrder);
+    setStep(4);
+    fetchCart();
+    toast.success('Payment successful!');
   };
 
   if (!cart.items?.length && !order) {
@@ -61,7 +116,6 @@ export default function CheckoutPage() {
       <div className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="font-semibold text-charcoal text-3xl mb-8 text-center">Checkout</h1>
 
-        {/* Steps */}
         <div className="flex justify-between mb-10">
           {steps.map((s, i) => (
             <div key={s} className={`flex items-center gap-2 text-xs ${i <= step ? 'text-gold' : 'text-muted'}`}>
@@ -108,7 +162,7 @@ export default function CheckoutPage() {
 
         {step === 3 && (
           <div className="space-y-4">
-            <p className="text-sm text-muted mb-4">Select payment method (card details are not stored)</p>
+            <p className="text-sm text-muted mb-4">Select payment method</p>
             {paymentMethods.map((pm) => (
               <label key={pm.id} className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer ${paymentMethod === pm.id ? 'border-border bg-gold/5' : ''}`}>
                 <input type="radio" name="payment" checked={paymentMethod === pm.id} onChange={() => setPaymentMethod(pm.id)} className="accent-gold" />
@@ -119,8 +173,17 @@ export default function CheckoutPage() {
               <div className="flex justify-between"><span>Total</span><strong>{formatPrice(total)}</strong></div>
             </div>
             <button onClick={placeOrder} disabled={loading} className="w-full btn-primary-gold justify-center text-xs disabled:opacity-50">
-              {loading ? 'Placing Order...' : 'Place Order'}
+              {loading ? 'Placing Order...' : paymentMethod === 'cod' ? 'Place Order' : 'Continue to Payment'}
             </button>
+          </div>
+        )}
+
+        {step === 3.5 && clientSecret && order && (
+          <div className="space-y-4">
+            <p className="text-sm text-muted">Complete your payment securely via Stripe</p>
+            <Elements stripe={stripePromise} options={{ clientSecret }}>
+              <StripeForm order={order} onSuccess={onPaymentSuccess} />
+            </Elements>
           </div>
         )}
 

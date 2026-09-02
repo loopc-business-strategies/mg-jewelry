@@ -179,6 +179,11 @@ const getWholesaleOrders = async (req, res) => {
   res.json(orders);
 };
 
+const getBulkPricingPublic = async (req, res) => {
+  const tiers = await getBulkPricingTiers();
+  res.json({ success: true, data: tiers });
+};
+
 module.exports = {
   registerWholesale,
   getWholesaleProfile,
@@ -188,4 +193,5 @@ module.exports = {
   createWholesaleOrder,
   submitInquiry,
   getWholesaleOrders,
+  getBulkPricingPublic,
 };

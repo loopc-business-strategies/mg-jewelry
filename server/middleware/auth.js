@@ -41,11 +41,13 @@ const optionalAuth = async (req, res, next) => {
   next();
 };
 
+const { isAdminRole } = require('./permissions');
+
 const adminOnly = (req, res, next) => {
-  if (req.user && ['admin', 'super_admin'].includes(req.user.role)) {
+  if (req.user && isAdminRole(req.user.role)) {
     next();
   } else {
-    res.status(403).json({ message: 'Admin access required' });
+    res.status(403).json({ success: false, message: 'Admin access required', code: 'FORBIDDEN' });
   }
 };
 

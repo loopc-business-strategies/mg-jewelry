@@ -2,7 +2,7 @@ const express = require('express');
 const {
   registerWholesale, getWholesaleProfile, getWholesaleProducts,
   getWholesaleCart, addToWholesaleCart, createWholesaleOrder,
-  submitInquiry, getWholesaleOrders,
+  submitInquiry, getWholesaleOrders, getBulkPricingPublic,
 } = require('../controllers/wholesaleController');
 const { protect, optionalAuth, wholesaleApproved } = require('../middleware/auth');
 
@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.post('/register', registerWholesale);
 router.post('/inquiry', submitInquiry);
+router.get('/bulk-pricing', getBulkPricingPublic);
 router.get('/products', optionalAuth, getWholesaleProducts);
 router.get('/profile', protect, getWholesaleProfile);
 router.get('/cart', protect, wholesaleApproved, getWholesaleCart);

@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
-  const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
+  const isAdmin = ['admin', 'super_admin', 'catalog_manager', 'order_manager', 'sales_manager', 'wholesale_manager', 'content_manager'].includes(user?.role);
   const isWholesaleApproved = user?.wholesaleStatus === 'approved' || user?.role === 'wholesale_customer';
 
   return (

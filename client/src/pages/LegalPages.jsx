@@ -1,4 +1,6 @@
 import SEOHead from '../components/SEOHead';
+import { useState } from 'react';
+import api from '../services/api';
 
 export default function LegalPage({ title, content }) {
   return (
@@ -60,5 +62,59 @@ export function ReturnsPage() {
 }
 
 export function TrackOrderPage() {
-  return <LegalPage title="Track Order" content={<p>Enter your order number and email on the contact page, or check your order status in your account dashboard.</p>} />;
+  const [orderNumber, setOrderNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleTrack = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setOrder(null);
+    try {
+      const { data } = await api.get('/orders/track', { params: { orderNumber, email } });
+      setOrder(data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Order not found');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <SEOHead title="Track Order" path="/track-order" />
+      <div className="max-w-3xl mx-auto px-4 py-16">
+        <h1 className="font-semibold text-charcoal text-4xl mb-8">Track Order</h1>
+        <form onSubmit={handleTrack} className="space-y-4 mb-8">
+          <input type="text" placeholder="Order number" required value={orderNumber} onChange={(e) => setOrderNumber(e.target.value)} className="input-elegant w-full" />
+          <input type="email" placeholder="Email address" required value={email} onChange={(e) => setEmail(e.target.value)} className="input-elegant w-full" />
+          <button type="submit" disabled={loading} className="btn-primary-gold text-xs">{loading ? 'Searching...' : 'Track Order'}</button>
+        </form>
+        {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
+        {order && (
+          <div className="card-elegant p-6 space-y-3 text-sm">
+            <p><strong>Order:</strong> {order.orderNumber}</p>
+            <p><strong>Status:</strong> {order.status}</p>
+            <p><strong>Payment:</strong> {order.paymentStatus}</p>
+            <p><strong>Total:</strong> ₹{order.total?.toLocaleString()}</p>
+            {order.trackingUrl && <p><a href={order.trackingUrl} className="text-gold-dark hover:underline" target="_blank" rel="noreferrer">Track shipment</a></p>}
+            {order.awbNumber && <p><strong>AWB:</strong> {order.awbNumber}</p>}
+            {order.statusHistory?.length > 0 && (
+              <div className="mt-4">
+                <strong>Timeline</strong>
+                <ul className="mt-2 space-y-1 text-muted">
+                  {order.statusHistory.map((h, i) => (
+                    <li key={i}>{new Date(h.at).toLocaleString()} — {h.to || h.note}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </>
+  );
 }

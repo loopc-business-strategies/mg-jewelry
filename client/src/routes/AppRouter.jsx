@@ -11,6 +11,7 @@ import CheckoutPage from '../pages/CheckoutPage';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
 import ProfilePage from '../pages/ProfilePage';
 import WishlistPage from '../pages/WishlistPage';
 import SearchPage from '../pages/SearchPage';
@@ -50,6 +51,7 @@ export default function AppRouter() {
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignupPage />} />
         <Route path="forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="reset-password" element={<ResetPasswordPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="search" element={<SearchPage />} />
