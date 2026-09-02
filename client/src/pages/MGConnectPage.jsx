@@ -1,11 +1,10 @@
 import SEOHead from '../components/SEOHead';
 import MGConnectHeroSection from '../components/sections/mg-connect/MGConnectHeroSection';
-import MGConnectAboutSection from '../components/sections/mg-connect/MGConnectAboutSection';
-import MGConnectFeaturesSection from '../components/sections/mg-connect/MGConnectFeaturesSection';
+import MGConnectIntroSection from '../components/sections/mg-connect/MGConnectIntroSection';
 import MGConnectShowcaseSection from '../components/sections/mg-connect/MGConnectShowcaseSection';
-import MGConnectHowItWorksSection from '../components/sections/mg-connect/MGConnectHowItWorksSection';
-import MGConnectExperienceSection from '../components/sections/mg-connect/MGConnectExperienceSection';
-import MGConnectDownloadSection from '../components/sections/mg-connect/MGConnectDownloadSection';
+import MGConnectJourneysSection from '../components/sections/mg-connect/MGConnectJourneysSection';
+import MGConnectBenefitsSection from '../components/sections/mg-connect/MGConnectBenefitsSection';
+import MGConnectAccessSection from '../components/sections/mg-connect/MGConnectAccessSection';
 import MGConnectFinalCTASection from '../components/sections/mg-connect/MGConnectFinalCTASection';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -20,12 +19,11 @@ export default function MGConnectPage() {
         path="/mg-connect"
       />
       <MGConnectHeroSection />
-      <MGConnectAboutSection />
-      <MGConnectFeaturesSection />
+      <MGConnectIntroSection />
       <MGConnectShowcaseSection />
-      <MGConnectHowItWorksSection />
-      <MGConnectExperienceSection />
-      <MGConnectDownloadSection id="download" />
+      <MGConnectJourneysSection />
+      <MGConnectBenefitsSection />
+      <MGConnectAccessSection id="app-access" />
       <MGConnectFinalCTASection />
     </>
   );

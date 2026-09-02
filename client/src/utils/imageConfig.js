@@ -227,21 +227,21 @@ export const marketAccentColors = [
   'from-burgundy/10 to-champagne',
 ];
 
-/** MG Connect app screenshots — drop PNG/JPG files into public/images/mg-connect/ */
+/** MG Connect app screenshots — drop PNG/JPG files here to replace wireframes */
 export const mgConnectScreens = {
   login: '/images/mg-connect/login.png',
-  home: '/images/mg-connect/home.png',
+  dashboard: '/images/mg-connect/dashboard.png',
+  goldBuying: '/images/mg-connect/gold-buying.png',
   products: '/images/mg-connect/products.png',
-  productDetail: '/images/mg-connect/product-detail.png',
-  profile: '/images/mg-connect/profile.png',
+  quotation: '/images/mg-connect/quotation.png',
   orders: '/images/mg-connect/orders.png',
 };
 
-export const mgConnectShowcaseSteps = [
-  { id: 'login', number: '01' },
-  { id: 'home', number: '02' },
-  { id: 'products', number: '03' },
-  { id: 'productDetail', number: '04' },
-  { id: 'profile', number: '05' },
-  { id: 'orders', number: '06' },
+export const mgConnectShowcaseOrder = [
+  'login',
+  'dashboard',
+  'goldBuying',
+  'products',
+  'quotation',
+  'orders',
 ];
