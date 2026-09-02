@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import OurMGPlatformLink from '../../our-mg/OurMGPlatformLink';
+import { ourMgApp } from '../../../utils/brandConfig';
 import { useTranslation } from '../../../hooks/useTranslation';
 
 export default function OurMGFinalCTASection() {
@@ -14,7 +16,10 @@ export default function OurMGFinalCTASection() {
           <a href="#about" className="btn-primary-gold">
             {t('ourMg.final.primaryCta')}
           </a>
-          <Link to="/" className="btn-outline-gold">
+          <OurMGPlatformLink className="btn-outline-gold">
+            {t('ourMg.final.platformCta')}
+          </OurMGPlatformLink>
+          <Link to={ourMgApp.webUrl} className="btn-outline-gold">
             {t('ourMg.final.secondaryCta')}
           </Link>
         </div>

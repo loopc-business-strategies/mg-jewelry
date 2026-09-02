@@ -46,6 +46,7 @@ export const ourMgApp = {
   playStoreUrl: '',
   appStoreUrl: '',
   webUrl: '/',
+  platformUrl: 'https://www.cliquegold.com/',
   published: false,
 };
 

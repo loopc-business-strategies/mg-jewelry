@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import PhoneMockup from '../../our-mg/PhoneMockup';
+import OurMGPlatformLink from '../../our-mg/OurMGPlatformLink';
 import { ourMgAppExperienceScreens } from '../../../utils/imageConfig';
+import { ourMgApp } from '../../../utils/brandConfig';
 import { useTranslation } from '../../../hooks/useTranslation';
 
 export default function OurMGAppExperienceSection() {
@@ -24,8 +26,11 @@ export default function OurMGAppExperienceSection() {
             />
           ))}
         </div>
-        <div className="text-center mt-10">
-          <Link to="/" className="btn-outline-gold">
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-10">
+          <OurMGPlatformLink className="btn-primary-gold">
+            {t('ourMg.appExperience.platformCta')}
+          </OurMGPlatformLink>
+          <Link to={ourMgApp.webUrl} className="btn-outline-gold">
             {t('ourMg.appExperience.cta')}
           </Link>
         </div>

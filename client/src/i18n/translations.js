@@ -224,6 +224,7 @@ export const translations = {
         title: 'Modern Gold, in your hands.',
         description:
           'Our MG brings Modern Gold closer through a dedicated digital experience designed to make buying and selling gold more accessible and convenient.',
+        platformCta: 'OPEN PLATFORM',
         cta: 'VISIT OUR MG',
       },
       final: {
@@ -232,6 +233,7 @@ export const translations = {
         description:
           'Whether you are looking to buy gold or sell gold, Our MG provides a convenient digital connection to Modern Gold and our collection centers.',
         primaryCta: 'EXPLORE OUR MG',
+        platformCta: 'OPEN PLATFORM',
         secondaryCta: 'VISIT OUR MG',
       },
     },
@@ -461,6 +463,7 @@ export const translations = {
         title: 'Modern Gold в ваших руках.',
         description:
           'Our MG приближает Modern Gold через выделенный цифровой опыт, созданный для более доступной и удобной покупки и продажи золота.',
+        platformCta: 'ОТКРЫТЬ ПЛАТФОРМУ',
         cta: 'ПОСЕТИТЬ OUR MG',
       },
       final: {
@@ -469,6 +472,7 @@ export const translations = {
         description:
           'Хотите ли вы купить или продать золото — Our MG обеспечивает удобную цифровую связь с Modern Gold и нашими центрами сбора.',
         primaryCta: 'ИЗУЧИТЬ OUR MG',
+        platformCta: 'ОТКРЫТЬ ПЛАТФОРМУ',
         secondaryCta: 'ПОСЕТИТЬ OUR MG',
       },
     },
@@ -698,6 +702,7 @@ export const translations = {
         title: 'Modern Gold qo\'lingizda.',
         description:
           'Our MG oltin sotib olish va sotishni yanada ochiq va qulay qilish uchun yaratilgan maxsus raqamli tajriba orqali Modern Goldni yaqinlashtiradi.',
+        platformCta: 'PLATFORMANI OCHISH',
         cta: 'OUR MG GA TASHRIF',
       },
       final: {
@@ -706,6 +711,7 @@ export const translations = {
         description:
           'Oltin sotib olmoqchi yoki sotmoqchi bo\'lsangiz ham, Our MG Modern Gold va yig\'ish markazlarimizga qulay raqamli aloqa taqdim etadi.',
         primaryCta: 'OUR MG NI O\'RGANING',
+        platformCta: 'PLATFORMANI OCHISH',
         secondaryCta: 'OUR MG GA TASHRIF',
       },
     },
@@ -935,6 +941,7 @@ export const translations = {
         title: 'Modern Gold في يديك.',
         description:
           'Our MG يقرب Modern Gold منك من خلال تجربة رقمية مخصصة مصممة لجعل شراء وبيع الذهب أكثر سهولة وراحة.',
+        platformCta: 'فتح المنصة',
         cta: 'زيارة OUR MG',
       },
       final: {
@@ -943,6 +950,7 @@ export const translations = {
         description:
           'سواء كنت تبحث عن شراء الذهب أو بيعه، يوفر Our MG اتصالاً رقمياً مريحاً بـ Modern Gold ومراكز التجميع لدينا.',
         primaryCta: 'استكشف OUR MG',
+        platformCta: 'فتح المنصة',
         secondaryCta: 'زيارة OUR MG',
       },
     },
@@ -1172,6 +1180,7 @@ export const translations = {
         title: 'Modern Gold avucunuzda.',
         description:
           'Our MG, altın alım satımını daha erişilebilir ve pratik hale getirmek için tasarlanmış özel dijital deneyim aracılığıyla Modern Gold\'u size yakınlaştırır.',
+        platformCta: 'PLATFORMU AÇ',
         cta: 'OUR MG\'Yİ ZİYARET ET',
       },
       final: {
@@ -1180,6 +1189,7 @@ export const translations = {
         description:
           'Altın almak veya satmak isteseniz de, Our MG Modern Gold ve toplama merkezlerimize pratik bir dijital bağlantı sağlar.',
         primaryCta: 'OUR MG\'Yİ KEŞFET',
+        platformCta: 'PLATFORMU AÇ',
         secondaryCta: 'OUR MG\'Yİ ZİYARET ET',
       },
     },

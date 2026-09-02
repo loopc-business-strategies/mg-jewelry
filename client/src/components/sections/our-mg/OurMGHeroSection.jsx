@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import SafeImage from '../../SafeImage';
 import PhoneMockup from '../../our-mg/PhoneMockup';
 import { dualPathImages } from '../../../utils/imageConfig';
+import { ourMgApp } from '../../../utils/brandConfig';
 import { useTranslation } from '../../../hooks/useTranslation';
 
 export default function OurMGHeroSection() {
@@ -18,7 +19,7 @@ export default function OurMGHeroSection() {
             <a href="#about" className="btn-primary-gold">
               {t('ourMg.hero.primaryCta')}
             </a>
-            <Link to="/" className="btn-outline-gold">
+            <Link to={ourMgApp.webUrl} className="btn-outline-gold">
               {t('ourMg.hero.secondaryCta')}
             </Link>
           </div>
