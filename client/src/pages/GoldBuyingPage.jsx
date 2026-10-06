@@ -146,7 +146,7 @@ export default function GoldBuyingPage() {
             {loading ? t('common.submitting') : t('goldBuying.submit')}
           </button>
           {error && (
-            <p role="alert" className="type-body-sm text-red-600">
+            <p role="alert" className="text-red-600 text-sm">
               {error}
             </p>
           )}
