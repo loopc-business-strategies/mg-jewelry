@@ -71,7 +71,7 @@ const productSchema = new mongoose.Schema(
       tr: localeSchema,
     },
   },
-  { timestamps: true }
+  { timestamps: true, suppressReservedKeysWarning: true }
 );
 
 productSchema.pre('save', function () {
@@ -83,6 +83,4 @@ productSchema.pre('save', function () {
 
 productSchema.index({ name: 'text', sku: 'text', tags: 'text', category: 'text' });
 productSchema.index({ category: 1, isActive: 1 });
-productSchema.index({ isDemo: 1 });
-
 module.exports = mongoose.model('Product', productSchema);
