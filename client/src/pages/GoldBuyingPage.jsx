@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { MapPin, Phone } from 'lucide-react';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
-import { brand, goldBuyingSteps, seoKeywords, sellGoldCta } from '../utils/brandConfig';
+import { brand, seoKeywords, sellGoldCta } from '../utils/brandConfig';
 import { useTranslation } from '../hooks/useTranslation';
 
 const EMPTY_FORM = { fullName: '', phone: '' };
@@ -16,7 +16,7 @@ function newIdempotencyKey() {
 
 function VisitContactCard({ t }) {
   return (
-    <div className="mt-8 p-6 bg-white border border-border rounded-xl shadow-sm space-y-4">
+    <div className="p-6 bg-white border border-border rounded-xl shadow-sm space-y-4">
       <h2 className="type-card-title">{t('goldBuying.visitTitle')}</h2>
       <p className="type-body-sm text-charcoal">{t('goldBuying.visitCta')}</p>
       <div className="flex gap-3">
@@ -46,7 +46,6 @@ function VisitContactCard({ t }) {
 
 export default function GoldBuyingPage() {
   const { t } = useTranslation();
-  const steps = t('steps.goldBuying');
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
@@ -102,18 +101,6 @@ export default function GoldBuyingPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-16">
         <div>
-          <h2 className="type-card-title mb-6">{t('goldBuying.howItWorks')}</h2>
-          <ol className="space-y-3">
-            {(Array.isArray(steps) ? steps : goldBuyingSteps).map((step, i) => (
-              <li key={step} className="flex gap-3 type-body-sm text-charcoal">
-                <span className="text-gold font-semibold shrink-0 type-micro normal-case">{String(i + 1).padStart(2, '0')}</span>
-                <span>{step}</span>
-              </li>
-            ))}
-          </ol>
-          <p className="type-form-help mt-8 p-4 bg-white border border-border rounded-lg">
-            {t('goldBuying.disclaimer')}
-          </p>
           <VisitContactCard t={t} />
         </div>
 
