@@ -3,9 +3,25 @@ import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import { goldBuyingSteps, seoKeywords, sellGoldCta } from '../utils/brandConfig';
 import { useTranslation } from '../hooks/useTranslation';
-import toast from 'react-hot-toast';
 
-const EMPTY_FORM = { fullName: '', email: '', phone: '' };
+const EMPTY_FORM = {
+  fullName: '',
+  company: '',
+  email: '',
+  phone: '',
+  enquiryType: '',
+  requirement: '',
+  message: '',
+};
+
+const ENQUIRY_TYPES = [
+  { value: 'Sell Gold', key: 'sellGold' },
+  { value: 'Buy Gold / Jewellery', key: 'buyGold' },
+  { value: 'Wholesale / Bulk Order', key: 'wholesale' },
+  { value: 'Custom Jewellery', key: 'custom' },
+  { value: 'Partnership', key: 'partnership' },
+  { value: 'Other', key: 'other' },
+];
 
 function CallUsLine({ label }) {
   if (!sellGoldCta.contactPhone) return null;
@@ -25,15 +41,20 @@ export default function GoldBuyingPage() {
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
+  const [error, setError] = useState('');
+
+  const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
+    const { fullName, ...rest } = form;
     try {
-      await api.post('/gold-buying/leads', form);
+      await api.post('/enquiries', { name: fullName, ...rest });
       setShowSuccess(true);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Submission failed');
+    } catch {
+      setError(t('goldBuying.errorDesc'));
     } finally {
       setLoading(false);
     }
@@ -79,21 +100,56 @@ export default function GoldBuyingPage() {
 
         <form onSubmit={handleSubmit} className="bg-white border border-border p-6 md:p-8 rounded-xl space-y-4 shadow-sm self-start">
           <h2 className="type-card-title mb-2">{t('goldBuying.formTitle')}</h2>
-          <div>
-            <label className="type-form-label">{t('goldBuying.fullName')} *</label>
-            <input required value={form.fullName} onChange={(e) => setForm({ ...form, fullName: e.target.value })} className="input-elegant" />
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="type-form-label">{t('goldBuying.fullName')} *</label>
+              <input required maxLength={120} value={form.fullName} onChange={update('fullName')} className="input-elegant" />
+            </div>
+            <div>
+              <label className="type-form-label">{t('goldBuying.company')}</label>
+              <input maxLength={160} value={form.company} onChange={update('company')} className="input-elegant" />
+            </div>
+            <div>
+              <label className="type-form-label">{t('goldBuying.email')} *</label>
+              <input required type="email" maxLength={200} value={form.email} onChange={update('email')} className="input-elegant" />
+            </div>
+            <div>
+              <label className="type-form-label">{t('goldBuying.phone')} *</label>
+              <input required type="tel" maxLength={40} value={form.phone} onChange={update('phone')} className="input-elegant" />
+            </div>
           </div>
           <div>
-            <label className="type-form-label">{t('goldBuying.email')} *</label>
-            <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-elegant" />
+            <label className="type-form-label">{t('goldBuying.enquiryType')} *</label>
+            <select required value={form.enquiryType} onChange={update('enquiryType')} className="input-elegant">
+              <option value="">{t('goldBuying.selectEnquiryType')}</option>
+              {ENQUIRY_TYPES.map(({ value, key }) => (
+                <option key={value} value={value}>{t(`goldBuying.enquiryTypes.${key}`)}</option>
+              ))}
+            </select>
           </div>
           <div>
-            <label className="type-form-label">{t('goldBuying.phone')} *</label>
-            <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="input-elegant" />
+            <label className="type-form-label">{t('goldBuying.requirement')} *</label>
+            <input
+              required
+              maxLength={1000}
+              value={form.requirement}
+              onChange={update('requirement')}
+              placeholder={t('goldBuying.requirementPlaceholder')}
+              className="input-elegant"
+            />
+          </div>
+          <div>
+            <label className="type-form-label">{t('goldBuying.message')}</label>
+            <textarea rows={4} maxLength={3000} value={form.message} onChange={update('message')} className="input-elegant" />
           </div>
           <button type="submit" disabled={loading} className="btn-primary-gold w-full justify-center disabled:opacity-50">
             {loading ? t('common.submitting') : t('goldBuying.submit')}
           </button>
+          {error && (
+            <p role="alert" className="type-body-sm text-red-600">
+              {error}
+            </p>
+          )}
           <CallUsLine label={t('goldBuying.callUs')} />
         </form>
       </div>

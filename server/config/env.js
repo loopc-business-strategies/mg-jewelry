@@ -27,6 +27,8 @@ module.exports = {
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
   corsOrigins: parseOrigins(),
   wholesalePriceVisibility: process.env.WHOLESALE_PRICE_VISIBILITY || 'approved_only',
+  dashboardApiUrl: (process.env.DASHBOARD_API_URL || '').replace(/\/+$/, ''),
+  websiteEnquiryToken: process.env.WEBSITE_ENQUIRY_TOKEN || '',
   adminEmail: process.env.ADMIN_EMAIL || 'admin@moderngoldjewelry.com',
   adminPassword: process.env.ADMIN_PASSWORD || 'changeme',
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,

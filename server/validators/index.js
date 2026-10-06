@@ -46,6 +46,25 @@ const mongoIdParam = [
   param('id').isMongoId().withMessage('Invalid ID'),
 ];
 
+const ENQUIRY_TYPES = [
+  'Sell Gold',
+  'Buy Gold / Jewellery',
+  'Wholesale / Bulk Order',
+  'Custom Jewellery',
+  'Partnership',
+  'Other',
+];
+
+const enquiryRules = [
+  body('name').trim().notEmpty().withMessage('Full name is required').isLength({ max: 120 }),
+  body('company').optional({ values: 'falsy' }).trim().isLength({ max: 160 }),
+  body('email').trim().isEmail().withMessage('Valid email required').isLength({ max: 200 }),
+  body('phone').trim().matches(/^[0-9+()\-.\s]{5,40}$/).withMessage('Valid phone number required'),
+  body('enquiryType').isIn(ENQUIRY_TYPES).withMessage('Please select an enquiry type'),
+  body('requirement').trim().notEmpty().withMessage('Requirement is required').isLength({ max: 1000 }),
+  body('message').optional({ values: 'falsy' }).trim().isLength({ max: 3000 }),
+];
+
 module.exports = {
   registerRules,
   loginRules,
@@ -56,4 +75,5 @@ module.exports = {
   couponRules,
   newsletterRules,
   mongoIdParam,
+  enquiryRules,
 };

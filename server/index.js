@@ -27,6 +27,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 const goldBuyingRoutes = require('./routes/goldBuyingRoutes');
+const enquiryRoutes = require('./routes/enquiryRoutes');
 const newsletterRoutes = require('./routes/newsletterRoutes');
 const webhookRoutes = require('./routes/webhookRoutes');
 
@@ -122,6 +123,7 @@ app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/wholesale', wholesaleRoutes);
 app.use('/api/gold-buying', goldBuyingRoutes);
+app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin/coupons', couponAdminRoutes);
 app.use('/api/search', searchRoutes);
