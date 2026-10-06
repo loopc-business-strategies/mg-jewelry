@@ -35,9 +35,6 @@ export default function ShopPage() {
     metal: searchParams.get('metal') || '',
     purity: searchParams.get('purity') || '',
     occasion: searchParams.get('occasion') || '',
-    minPrice: searchParams.get('minPrice') || '',
-    maxPrice: searchParams.get('maxPrice') || '',
-    discount: searchParams.get('discount') || '',
     inStock: searchParams.get('inStock') || '',
   };
 

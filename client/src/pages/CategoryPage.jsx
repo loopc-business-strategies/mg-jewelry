@@ -33,9 +33,6 @@ export default function CategoryPage() {
     gender: searchParams.get('gender') || '',
     metal: searchParams.get('metal') || '',
     purity: searchParams.get('purity') || '',
-    minPrice: searchParams.get('minPrice') || '',
-    maxPrice: searchParams.get('maxPrice') || '',
-    discount: searchParams.get('discount') || '',
     inStock: searchParams.get('inStock') || '',
   };
 

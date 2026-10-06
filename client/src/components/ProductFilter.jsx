@@ -19,26 +19,6 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
 
   const content = (
     <div className="space-y-6">
-      <div>
-        <h4 className="font-medium text-sm mb-3 uppercase tracking-wider">{t('filters.price')}</h4>
-        <div className="flex gap-2">
-          <input
-            type="number"
-            placeholder={t('filters.min')}
-            value={filters.minPrice || ''}
-            onChange={(e) => onChange({ ...filters, minPrice: e.target.value })}
-            className="input-elegant"
-          />
-          <input
-            type="number"
-            placeholder={t('filters.max')}
-            value={filters.maxPrice || ''}
-            onChange={(e) => onChange({ ...filters, maxPrice: e.target.value })}
-            className="input-elegant"
-          />
-        </div>
-      </div>
-
       {filterGroups.map((group) => (
         <div key={group.key}>
           <h4 className="font-medium text-sm mb-3 uppercase tracking-wider">{t(group.labelKey)}</h4>
@@ -57,16 +37,6 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
           </div>
         </div>
       ))}
-
-      <label className="flex items-center gap-2 text-sm cursor-pointer">
-        <input
-          type="checkbox"
-          checked={filters.discount === 'true'}
-          onChange={(e) => onChange({ ...filters, discount: e.target.checked ? 'true' : '' })}
-          className="accent-gold"
-        />
-        {t('filters.onDiscount')}
-      </label>
 
       <label className="flex items-center gap-2 text-sm cursor-pointer">
         <input

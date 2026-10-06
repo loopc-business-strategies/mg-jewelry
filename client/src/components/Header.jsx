@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
 import {
   navLinks,
-  retailMenu,
-  wholesaleMenu,
   sellGoldCta,
   isNavLinkActive,
 } from '../utils/brandConfig';
@@ -13,29 +11,9 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
 import MegaMenu from './MegaMenu';
-import RetailMegaMenu from './RetailMegaMenu';
-import WholesaleMegaMenu from './WholesaleMegaMenu';
 import MarketSelector from './MarketSelector';
 import BrandLogo from './BrandLogo';
 import SearchBar from './SearchBar';
-
-function MobileAccordion({ title, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border">
-      <button
-        type="button"
-        className="flex items-center justify-between w-full py-3 type-body-sm font-medium text-left"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-      >
-        {title}
-        <ChevronDown size={16} className={`text-muted transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      {open && <div className="pb-3 pl-3">{children}</div>}
-    </div>
-  );
-}
 
 export default function Header() {
   const [sticky, setSticky] = useState(false);
@@ -68,8 +46,6 @@ export default function Header() {
     if (openMenu !== menu) return null;
     const close = () => setOpenMenu(null);
     if (menu === 'collections') return <MegaMenu onClose={close} />;
-    if (menu === 'retail') return <RetailMegaMenu onClose={close} />;
-    if (menu === 'wholesale') return <WholesaleMegaMenu onClose={close} />;
     return null;
   };
 
@@ -164,34 +140,6 @@ export default function Header() {
             <Link to="/shop" className="type-body-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
               {t('nav.collections')}
             </Link>
-            <MobileAccordion title={t('nav.retail')}>
-              <div className="space-y-1">
-                {retailMenu.links.map((link) => (
-                  <Link
-                    key={link.path + (link.key || link.label)}
-                    to={link.path}
-                    className="block type-body-sm text-muted hover:text-gold py-1.5"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.key ? t(link.key) : link.label}
-                  </Link>
-                ))}
-              </div>
-            </MobileAccordion>
-            <MobileAccordion title={t('nav.wholesale')}>
-              <div className="space-y-1">
-                {wholesaleMenu.links.map((link) => (
-                  <Link
-                    key={link.path + (link.key || link.label)}
-                    to={link.path}
-                    className="block type-body-sm text-muted hover:text-gold py-1.5"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.key ? t(link.key) : link.label}
-                  </Link>
-                ))}
-              </div>
-            </MobileAccordion>
             <Link to="/wishlist" className="type-body-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
             <Link to={user ? '/profile' : '/login'} className="type-body-sm py-3" onClick={() => setMobileOpen(false)}>
               {user ? 'My Account' : 'Login'}

@@ -36,8 +36,7 @@ export const navLinks = [
   { label: 'Home', path: '/', key: 'nav.home' },
   { label: 'About', path: '/about', key: 'nav.about' },
   { label: 'Collections', path: '/shop', menu: 'collections', key: 'nav.collections' },
-  { label: 'Retail', path: '/shop', menu: 'retail', key: 'nav.retail' },
-  { label: 'Wholesale', path: '/wholesale', menu: 'wholesale', key: 'nav.wholesale' },
+  { label: 'Become a Partner', path: '/wholesale/register', key: 'nav.becomePartner' },
   { label: 'Our MG', path: '/our-mg', key: 'nav.ourMg' },
   { label: 'Contact', path: '/contact', key: 'nav.contact' },
 ];
@@ -78,38 +77,6 @@ export const wholesaleNavLinks = [
   { label: 'Wholesale Dashboard', path: '/wholesale/dashboard' },
 ];
 
-export const retailMenu = {
-  title: 'Retail',
-  subtitle: 'Shop jewelry for individual customers',
-  cta: { label: 'Shop Retail', path: '/shop' },
-  links: [
-    { label: 'Shop', path: '/shop', key: 'retailMenu.shop' },
-    { label: 'New Arrivals', path: '/shop?sort=newest', key: 'retailMenu.newArrivals' },
-    { label: 'Best Sellers', path: '/shop?sort=best_selling', key: 'retailMenu.bestSellers' },
-    { label: 'Collections', path: '/shop', key: 'retailMenu.collections' },
-    { label: 'Cart', path: '/cart', key: 'retailMenu.cart' },
-    { label: 'Wishlist', path: '/wishlist', key: 'retailMenu.wishlist' },
-  ],
-};
-
-export const wholesaleMenu = {
-  title: 'Wholesale',
-  subtitle: 'Bulk jewelry solutions for retailers, brands and distributors',
-  cta: { label: 'Wholesale Partnership', path: '/wholesale/register', key: 'wholesaleMenu.partnership' },
-  secondaryCta: { label: 'Wholesale Shop', path: '/wholesale/shop', key: 'wholesaleMenu.shopCta' },
-  links: [
-    { label: 'Wholesale Shop', path: '/wholesale/shop', key: 'wholesaleMenu.shop' },
-    { label: 'Wholesale Collections', path: '/shop/chains', key: 'wholesaleMenu.collections' },
-    { label: 'Bulk Pricing', path: '/wholesale#bulk-pricing', key: 'wholesaleMenu.bulkPricing' },
-    { label: 'Request a Quote', path: '/contact?type=quote', key: 'wholesaleMenu.quote' },
-    { label: 'Become a Partner', path: '/wholesale/register', key: 'wholesaleMenu.becomePartner' },
-    { label: 'Partner Login', path: '/login', key: 'wholesaleMenu.partnerLogin' },
-  ],
-};
-
-/** @deprecated Use retailMenu / wholesaleMenu */
-export const ecommerceMenu = { retail: retailMenu, wholesale: wholesaleMenu };
-
 export function isRetailRoute(pathname) {
   return (
     pathname.startsWith('/product/') ||
@@ -134,8 +101,6 @@ export function isCollectionsRoute(pathname) {
 }
 
 export function isNavLinkActive(pathname, link) {
-  if (link.menu === 'retail') return isRetailRoute(pathname);
-  if (link.menu === 'wholesale') return isWholesaleRoute(pathname);
   if (link.menu === 'collections') return isCollectionsRoute(pathname);
   if (link.path === '/') return pathname === '/';
   return pathname === link.path || pathname.startsWith(`${link.path}/`);
@@ -226,8 +191,6 @@ export const whyChooseUs = trustIndicators;
 export const sortOptions = [
   { value: 'featured', label: 'Featured' },
   { value: 'newest', label: 'Newest' },
-  { value: 'price_asc', label: 'Price: Low to High' },
-  { value: 'price_desc', label: 'Price: High to Low' },
   { value: 'best_selling', label: 'Best Selling' },
 ];
 
