@@ -34,13 +34,13 @@ export default function SearchBar({ onClose }) {
   return (
     <div className="relative" ref={ref}>
       <form onSubmit={handleSubmit} className="relative">
-        <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
+        <Search size={18} className="absolute start-4 top-1/2 -translate-y-1/2 text-muted" />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t('ui.searchPlaceholder')}
-          className="w-full pl-11 pr-4 py-3 border border-border rounded-md min-h-[44px] focus:outline-none focus:border-border text-sm"
+          className="w-full ps-11 pe-4 py-3 border border-border rounded-md min-h-[44px] focus:outline-none focus:border-border text-sm"
           autoFocus
         />
       </form>
@@ -49,7 +49,7 @@ export default function SearchBar({ onClose }) {
           {suggestions.map((s) => (
             <button
               key={s._id}
-              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-cream transition-colors text-left"
+              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-cream transition-colors text-start"
               onClick={() => { navigate(`/product/${s._id}`); onClose?.(); }}
             >
               {s.image && <SafeImage src={s.image} alt="" category={s.category} className="w-10 h-10 rounded object-cover" />}

@@ -6,7 +6,14 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+let requestLanguage = null;
+
+export function setRequestLanguage(language) {
+  requestLanguage = language || null;
+}
+
 function getStoredLanguage() {
+  if (requestLanguage) return requestLanguage;
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) return { ...defaultPrefs, ...JSON.parse(stored) }.language || 'en';

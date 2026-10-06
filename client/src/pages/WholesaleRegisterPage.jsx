@@ -5,6 +5,7 @@ import SEOHead from '../components/SEOHead';
 import { businessTypes, countries } from '../utils/brandConfig';
 import { useTranslation } from '../hooks/useTranslation';
 import toast from 'react-hot-toast';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function WholesaleRegisterPage() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function WholesaleRegisterPage() {
       toast.success(t('wholesaleRegister.submitted'));
       navigate('/wholesale/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.message || t('wholesaleRegister.failed'));
+      toast.error(apiErrorMessage(err, t, 'wholesaleRegister.failed'));
     } finally {
       setLoading(false);
     }

@@ -5,6 +5,7 @@ import SEOHead from '../components/SEOHead';
 import BrandLogo from '../components/BrandLogo';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ export default function ForgotPasswordPage() {
       setSent(true);
       toast.success(t('auth.resetSuccess'));
     } catch (err) {
-      toast.error(err.response?.data?.message || t('auth.resetFailed'));
+      toast.error(apiErrorMessage(err, t, 'auth.resetFailed'));
     } finally {
       setLoading(false);
     }

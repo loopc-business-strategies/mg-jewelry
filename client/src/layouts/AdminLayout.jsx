@@ -22,7 +22,7 @@ export default function AdminLayout() {
   if (!user || !isAdmin) return <Navigate to="/login" replace />;
 
   return (
-    <div className="min-h-screen flex bg-white">
+    <div className="min-h-screen flex bg-white" dir="ltr" lang="en">
       <aside className="w-64 bg-white border-r border-border shrink-0">
         <div className="p-6 border-b border-border">
           <BrandLogo variant="admin" linkTo={null} />

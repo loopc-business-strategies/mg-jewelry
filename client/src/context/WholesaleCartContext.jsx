@@ -3,6 +3,7 @@ import api from '../services/api';
 import { useAuth } from './AuthContext';
 import { useMarket } from './MarketContext';
 import toast from 'react-hot-toast';
+import { apiErrorMessage } from '../utils/apiError';
 
 const WholesaleCartContext = createContext();
 
@@ -33,7 +34,7 @@ export const WholesaleCartProvider = ({ children }) => {
       setCart(data);
       toast.success(t('wholesaleCart.added'));
     } catch (err) {
-      toast.error(err.response?.data?.message || t('wholesaleCart.addFailed'));
+      toast.error(apiErrorMessage(err, t, 'wholesaleCart.addFailed'));
     }
   };
 

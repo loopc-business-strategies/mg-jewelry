@@ -38,7 +38,7 @@ export default function HeroSection() {
           </p>
           <div className="flex flex-wrap items-center gap-3 mb-12 md:mb-14">
             <Link to={heroBanner.primaryCta.path} className="btn-primary-gold">
-              {t('home.hero.primaryCta')} <ArrowRight size={14} />
+              {t('home.hero.primaryCta')} <ArrowRight size={14} className="rtl:-scale-x-100" />
             </Link>
             <Link to={heroBanner.secondaryCta.path} className="btn-outline-gold">
               {t('home.hero.secondaryCta')}

@@ -13,6 +13,7 @@ import SafeImage from '../components/SafeImage';
 import { SlidersHorizontal } from 'lucide-react';
 import { getCategoryImage } from '../utils/imageConfig';
 import { useTranslation } from '../hooks/useTranslation';
+import { categoryIntroText, subcategoryText } from '../utils/displayText';
 
 export default function CategoryPage() {
   const { slug } = useParams();
@@ -54,12 +55,16 @@ export default function CategoryPage() {
   const title = t(`categories.${slug}`) || category?.name || slug?.replace(/-/g, ' ');
   const heroImage = getCategoryImage(slug);
   const heroAlt = tf('alts.categoryEditorial', { title });
+  const isDefaultSeoTitle = !category?.seoTitle || category.seoTitle.startsWith(`${category.name} |`);
+  const seoDescription = category?.seoDescription
+    ? categoryIntroText(t, slug, category.seoDescription)
+    : tf('seo.categoryDesc', { title });
 
   return (
     <>
       <SEOHead
-        title={category?.seoTitle || title}
-        description={category?.seoDescription || tf('seo.categoryDesc', { title })}
+        title={isDefaultSeoTitle ? title : category.seoTitle}
+        description={seoDescription}
         path={`/shop/${slug}`}
       />
 
@@ -74,7 +79,7 @@ export default function CategoryPage() {
         <Breadcrumbs items={[{ label: t('common.shop'), path: '/shop' }, { label: title }]} />
 
         {category?.description && (
-          <p className="type-section-desc prose-section mb-6">{category.description}</p>
+          <p className="type-section-desc prose-section mb-6">{categoryIntroText(t, slug, category.description)}</p>
         )}
 
         {category?.subcategories?.length > 0 && (
@@ -91,7 +96,7 @@ export default function CategoryPage() {
                 onClick={() => { const p = new URLSearchParams(searchParams); p.set('subcategory', sub.slug); setSearchParams(p); }}
                 className={`px-4 py-2 rounded-md text-sm border transition-colors ${subcategory === sub.slug ? 'bg-gold text-white border-border' : 'bg-white hover:bg-gold/10 border-border'}`}
               >
-                {sub.name}
+                {subcategoryText(t, sub)}
               </button>
             ))}
           </div>
@@ -132,7 +137,7 @@ export default function CategoryPage() {
 
             {category?.seoContent && (
               <div className="mt-12 p-6 bg-cream rounded-xl">
-                <p className="text-sm text-muted leading-relaxed">{category.seoContent}</p>
+                <p className="text-sm text-muted leading-relaxed">{categoryIntroText(t, slug, category.seoContent)}</p>
               </div>
             )}
           </div>

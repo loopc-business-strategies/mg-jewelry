@@ -9,6 +9,7 @@ import EmptyState from '../components/EmptyState';
 import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function CartPage() {
   const { cart, updateQuantity, removeItem, subtotal, fetchCart } = useCart();
@@ -36,7 +37,7 @@ export default function CartPage() {
       toast.success(t('cart.couponApplied'));
       fetchCart();
     } catch (err) {
-      toast.error(err.response?.data?.message || t('cart.couponInvalid'));
+      toast.error(apiErrorMessage(err, t, 'cart.couponInvalid'));
     } finally {
       setApplying(false);
     }

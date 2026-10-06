@@ -10,6 +10,7 @@ import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { Check } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
@@ -91,7 +92,7 @@ export default function CheckoutPage() {
         toast.success(t('checkout.orderPlaced'));
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || t('checkout.orderFailed'));
+      toast.error(apiErrorMessage(err, t, 'checkout.orderFailed'));
     } finally {
       setLoading(false);
     }
@@ -107,6 +108,7 @@ export default function CheckoutPage() {
   if (!cart.items?.length && !order) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <SEOHead title={t('checkout.seoTitle')} path="/checkout" />
         <p className="text-muted mb-4">{t('checkout.empty')}</p>
         <Link to="/shop" className="text-gold-dark hover:underline">{t('cart.continueShopping')}</Link>
       </div>

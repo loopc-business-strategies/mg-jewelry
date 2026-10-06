@@ -43,10 +43,10 @@ export function ProductCarousel({ products, title }) {
         <h2 className="type-section-title">{title}</h2>
         <div className="flex gap-2">
           <button onClick={() => setStart(Math.max(0, start - 1))} className="p-2 border border-border rounded-full hover:border-border transition-colors" disabled={start === 0}>
-            <ChevronLeft size={18} />
+            <ChevronLeft size={18} className="rtl:-scale-x-100" />
           </button>
           <button onClick={() => setStart(Math.min(products.length - visible, start + 1))} className="p-2 border border-border rounded-full hover:border-border transition-colors" disabled={start >= products.length - visible}>
-            <ChevronRight size={18} />
+            <ChevronRight size={18} className="rtl:-scale-x-100" />
           </button>
         </div>
       </div>
@@ -82,7 +82,7 @@ export function CategoryCard({ name, slug, image }) {
       <div className="absolute bottom-0 left-0 right-0 p-6 text-charcoal bg-gradient-to-t from-pearl/90 via-pearl/40 to-transparent">
         <h3 className="type-card-title mb-2">{displayName}</h3>
         <span className="text-sm flex items-center gap-1 group-hover/card:gap-2 group-hover/card:text-gold-dark transition-all duration-[350ms]">
-          {t('heroBanner.viewCollection')} <ArrowRight size={14} />
+          {t('heroBanner.viewCollection')} <ArrowRight size={14} className="rtl:-scale-x-100" />
         </span>
       </div>
     </Link>

@@ -3,6 +3,7 @@ import api from '../services/api';
 import { useAuth } from './AuthContext';
 import { useMarket } from './MarketContext';
 import toast from 'react-hot-toast';
+import { apiErrorMessage } from '../utils/apiError';
 
 const WishlistContext = createContext();
 
@@ -30,7 +31,7 @@ export const WishlistProvider = ({ children }) => {
       setWishlist(data);
       toast.success(t('wishlist.added'));
     } catch (err) {
-      toast.error(err.response?.data?.message || t('wishlist.failed'));
+      toast.error(apiErrorMessage(err, t, 'wishlist.failed'));
     }
   };
 

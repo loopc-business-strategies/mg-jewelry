@@ -95,7 +95,7 @@ export default function Header() {
             <Link to="/wishlist" className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label={t('ui.wishlist')}>
               <Heart size={18} strokeWidth={1.5} />
               {wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 end-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {wishlistCount}
                 </span>
               )}
@@ -106,7 +106,7 @@ export default function Header() {
             <Link to="/cart" className="p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label={t('ui.cart')}>
               <ShoppingBag size={18} strokeWidth={1.5} />
               {cartCount > 0 && (
-                <span className="absolute top-1 right-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 end-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}

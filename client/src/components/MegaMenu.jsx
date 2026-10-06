@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { useTranslation } from '../hooks/useTranslation';
+import { subcategoryText } from '../utils/displayText';
 
 export default function MegaMenu({ onClose }) {
   const [categories, setCategories] = useState([]);
@@ -31,7 +32,7 @@ export default function MegaMenu({ onClose }) {
                     className="text-xs text-muted hover:text-gold transition-colors"
                     onClick={onClose}
                   >
-                    {sub.name}
+                    {subcategoryText(t, sub)}
                   </Link>
                 </li>
               ))}

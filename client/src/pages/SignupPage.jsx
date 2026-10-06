@@ -5,6 +5,7 @@ import SEOHead from '../components/SEOHead';
 import BrandLogo from '../components/BrandLogo';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function SignupPage() {
   const { register } = useAuth();
@@ -21,7 +22,7 @@ export default function SignupPage() {
       toast.success(t('auth.accountCreated'));
       navigate('/');
     } catch (err) {
-      toast.error(err.response?.data?.message || t('auth.registrationFailed'));
+      toast.error(apiErrorMessage(err, t, 'auth.registrationFailed'));
     } finally {
       setLoading(false);
     }

@@ -10,6 +10,7 @@ import { wholesaleHero } from '../utils/imageConfig';
 import { CheckCircle, Mail, MessageCircle, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { tierLabelText } from '../utils/displayText';
 
 const bulkTiers = [
   { minQty: 10, maxQty: 24, discountPercent: 5 },
@@ -34,12 +35,11 @@ export default function WholesalePage() {
 
   const benefits = asArray(t('wholesalePage.benefits'));
   const faqs = asArray(t('wholesalePage.faqs'));
-  const tierLabels = asArray(t('wholesalePage.tierLabels'));
   const formatTier = (tier, i) => ({
     range: tier.maxQty
       ? tf('wholesalePage.tierRange', { min: tier.minQty, max: tier.maxQty })
       : tf('wholesalePage.tierRangePlus', { min: tier.minQty }),
-    label: tier.label || tierLabels[i] || '',
+    label: tierLabelText(t, tier.label, i),
     discount: tf('wholesalePage.tierOff', { n: tier.discountPercent }),
   });
 
@@ -71,7 +71,7 @@ export default function WholesalePage() {
       />
 
       <div className="max-w-3xl mx-auto px-4 py-8 text-center">
-        <p className="text-sm text-muted leading-relaxed border-l-2 border-border pl-4 text-left">
+        <p className="text-sm text-muted leading-relaxed border-s-2 border-border ps-4 text-start">
           {t('wholesale.oppositeModel') || oppositeModelCopy}
         </p>
       </div>

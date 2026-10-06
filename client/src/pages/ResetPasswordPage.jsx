@@ -5,6 +5,7 @@ import SEOHead from '../components/SEOHead';
 import BrandLogo from '../components/BrandLogo';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
@@ -31,7 +32,7 @@ export default function ResetPasswordPage() {
       toast.success(t('resetPassword.success'));
       navigate('/login');
     } catch (err) {
-      toast.error(err.response?.data?.message || t('resetPassword.failed'));
+      toast.error(apiErrorMessage(err, t, 'resetPassword.failed'));
     } finally {
       setLoading(false);
     }

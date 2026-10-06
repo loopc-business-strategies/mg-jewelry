@@ -7,6 +7,7 @@ import SEOHead from '../components/SEOHead';
 import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function WholesaleDashboardPage() {
   const { user } = useAuth();
@@ -29,7 +30,7 @@ export default function WholesaleDashboardPage() {
       toast.success(t('wholesaleDashboard.placed'));
       fetchCart();
     } catch (err) {
-      toast.error(err.response?.data?.message || t('wholesaleDashboard.failed'));
+      toast.error(apiErrorMessage(err, t, 'wholesaleDashboard.failed'));
     }
   };
 
@@ -63,7 +64,7 @@ export default function WholesaleDashboardPage() {
         <div className="grid md:grid-cols-4 gap-8">
           <nav className="space-y-1">
             {['overview', 'orders', 'bulk-cart', 'support'].map((key) => (
-              <button key={key} onClick={() => setTab(key)} className={`w-full text-left px-4 py-2 rounded-lg text-sm capitalize ${tab === key ? 'bg-gold text-white' : 'hover:bg-cream'}`}>
+              <button key={key} onClick={() => setTab(key)} className={`w-full text-start px-4 py-2 rounded-lg text-sm capitalize ${tab === key ? 'bg-gold text-white' : 'hover:bg-cream'}`}>
                 {t(`wholesaleDashboard.tabs.${key}`, key.replace('-', ' '))}
               </button>
             ))}

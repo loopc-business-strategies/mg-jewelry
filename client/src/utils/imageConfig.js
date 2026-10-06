@@ -103,10 +103,12 @@ export const resolveProductImage = (product, index = 0) => {
 
 export const getProductImage = resolveProductImage;
 
-export const getProductAlt = (product, index = 0) => {
-  const name = product?.name || 'Jewelry piece';
-  const cat = product?.category ? product.category.replace(/-/g, ' ') : 'jewelry';
-  return index > 0 ? `${name} — alternate view` : `${name} — ${cat} by Modern Gold Jewelry`;
+export const getProductAlt = (product, index = 0, tf) => {
+  const name = product?.name || tf('alts.productFallbackName');
+  const category = product?.category ? tf(`categories.${product.category}`) || product.category.replace(/-/g, ' ') : '';
+  return index > 0
+    ? tf('alts.productAlternate', { name })
+    : tf('alts.productMain', { name, category });
 };
 
 const SVG = (file) => `/images/fallbacks/${file}`;

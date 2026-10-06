@@ -79,7 +79,7 @@ export default function OurPresenceSection() {
           <p className="type-section-desc max-w-3xl">{t('presence.trustDesc')}</p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-center sm:text-start">
           <LocationVisual />
           <div>
             <p className="section-eyebrow mb-1">{t('presence.locationEyebrow')}</p>

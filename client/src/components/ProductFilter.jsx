@@ -60,7 +60,7 @@ export default function ProductFilter({ filters, onChange, mobile = false, onClo
   if (mobile) {
     return (
       <div className="fixed inset-0 z-50 modal-backdrop" onClick={onClose}>
-        <div className="absolute right-0 top-0 bottom-0 w-80 bg-white p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="absolute end-0 top-0 bottom-0 w-80 bg-white p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <div className="flex items-center justify-between mb-6">
             <h3 className="font-semibold text-charcoal text-xl flex items-center gap-2"><SlidersHorizontal size={18} /> {t('filters.title')}</h3>
             <button onClick={onClose} className="text-sm text-muted">{t('filters.close')}</button>

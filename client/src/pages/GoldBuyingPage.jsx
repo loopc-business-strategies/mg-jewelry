@@ -49,7 +49,7 @@ export default function GoldBuyingPage() {
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
   const idempotencyKeyRef = useRef('');
   const submittingRef = useRef(false);
 
@@ -64,7 +64,7 @@ export default function GoldBuyingPage() {
     submittingRef.current = true;
     if (!idempotencyKeyRef.current) idempotencyKeyRef.current = newIdempotencyKey();
     setLoading(true);
-    setError('');
+    setError(false);
     try {
       await api.post(
         '/enquiries',
@@ -75,7 +75,7 @@ export default function GoldBuyingPage() {
       setForm(EMPTY_FORM);
       setShowSuccess(true);
     } catch {
-      setError(t('goldBuying.errorDesc'));
+      setError(true);
     } finally {
       submittingRef.current = false;
       setLoading(false);
@@ -138,7 +138,7 @@ export default function GoldBuyingPage() {
           </button>
           {error && (
             <p role="alert" className="text-red-600 text-sm">
-              {error}
+              {t('goldBuying.errorDesc')}
             </p>
           )}
         </form>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useLayoutEffect, useCallback, useMemo } from 'react';
 import {
   STORAGE_KEY,
   defaultPrefs,
@@ -7,27 +7,37 @@ import {
   getCurrencyForMarket,
 } from '../utils/marketConfig';
 import { translate, languageLocales } from '../i18n/translations';
+import { setRequestLanguage } from '../services/api';
 
 const MarketContext = createContext();
 
 function loadPrefs() {
+  let prefs = defaultPrefs;
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) return { ...defaultPrefs, ...JSON.parse(stored) };
+    if (stored) prefs = { ...defaultPrefs, ...JSON.parse(stored) };
   } catch { /* ignore */ }
-  return defaultPrefs;
+  if (getLanguageByCode(prefs.language).code !== prefs.language) {
+    prefs = { ...prefs, language: defaultPrefs.language };
+  }
+  setRequestLanguage(prefs.language);
+  return prefs;
 }
 
 export function MarketProvider({ children }) {
   const [prefs, setPrefs] = useState(loadPrefs);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  // Must run before children's passive effects that refetch on language change.
+  useLayoutEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    } catch { /* ignore */ }
     document.documentElement.lang = prefs.language || 'en';
     document.documentElement.dir = prefs.language === 'ar' ? 'rtl' : 'ltr';
   }, [prefs]);
 
   const setLanguage = useCallback((language) => {
+    setRequestLanguage(language);
     setPrefs((p) => ({ ...p, language }));
   }, []);
 
@@ -41,6 +51,7 @@ export function MarketProvider({ children }) {
   }, []);
 
   const updatePrefs = useCallback((next) => {
+    if (next.language) setRequestLanguage(next.language);
     setPrefs((p) => ({ ...p, ...next }));
   }, []);
 

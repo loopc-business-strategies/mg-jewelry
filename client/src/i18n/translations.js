@@ -1305,11 +1305,18 @@ function getNested(obj, path) {
   return path.split('.').reduce((acc, key) => acc?.[key], obj);
 }
 
+export function hasTranslation(key) {
+  return getNested(translations.en, key) !== undefined || getNested(siteTranslations.en, key) !== undefined;
+}
+
 export function translate(lang, key, fallback = '') {
   const value =
     getNested(translations[lang], key) ??
     getNested(siteTranslations[lang], key) ??
     getNested(translations.en, key) ??
     getNested(siteTranslations.en, key);
+  if (value === undefined && import.meta.env?.DEV && !fallback) {
+    console.warn(`[i18n] Missing translation key: ${key}`);
+  }
   return value ?? fallback ?? key;
 }

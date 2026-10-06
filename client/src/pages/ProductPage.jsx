@@ -15,6 +15,8 @@ import StarRating from '../components/ui/StarRating';
 import { Truck, Shield, RotateCcw, Award } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
+import { metalText, sizeText } from '../utils/displayText';
+import { apiErrorMessage } from '../utils/apiError';
 
 const TAB_KEYS = {
   details: 'product.tabDetails',
@@ -29,7 +31,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { user } = useAuth();
-  const { t, tf, lang } = useTranslation();
+  const { t, tf, lang, locale } = useTranslation();
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -90,7 +92,7 @@ export default function ProductPage() {
       toast.success(t('product.reviewSubmitted'));
       setReviewForm({ rating: 5, comment: '' });
     } catch (err) {
-      toast.error(err.response?.data?.message || t('product.reviewFailed'));
+      toast.error(apiErrorMessage(err, t, 'product.reviewFailed'));
     } finally {
       setSubmittingReview(false);
     }
@@ -146,7 +148,7 @@ export default function ProductPage() {
             <p className="type-body-sm mt-2">{tf('product.emiFrom', { amount: formatPrice(calcEmi(product.price)) })}</p>
 
             <div className="grid grid-cols-2 gap-4 my-6 p-5 card-elegant type-body-sm">
-              <div><span className="text-muted">{t('product.metal')}:</span> <strong className="text-charcoal font-medium">{product.metal}</strong></div>
+              <div><span className="text-muted">{t('product.metal')}:</span> <strong className="text-charcoal font-medium">{metalText(t, product.metal)}</strong></div>
               <div><span className="text-muted">{t('product.purity')}:</span> <strong className="text-gold font-semibold">{product.purity}</strong></div>
               {product.weight && <div><span className="text-muted">{t('product.weight')}:</span> <strong>{product.weight}</strong></div>}
               {product.diamondDetails?.hasDiamond && (
@@ -164,7 +166,7 @@ export default function ProductPage() {
                 <label className="type-form-label">{t('product.size')}</label>
                 <div className="flex gap-2 flex-wrap">
                   {product.sizes.map((s) => (
-                    <button key={s} onClick={() => setSize(s)} className={`px-4 py-2 border rounded-lg text-sm ${size === s ? 'border-border bg-gold/10' : 'hover:border-border'}`}>{s}</button>
+                    <button key={s} onClick={() => setSize(s)} className={`px-4 py-2 border rounded-lg text-sm ${size === s ? 'border-border bg-gold/10' : 'hover:border-border'}`}>{sizeText(t, s)}</button>
                   ))}
                 </div>
               </div>
@@ -217,7 +219,7 @@ export default function ProductPage() {
             {tab === 'specs' && (
               <dl className="grid grid-cols-2 gap-4">
                 <div><dt className="font-medium text-charcoal">{t('ui.sku')}</dt><dd>{product.sku}</dd></div>
-                <div><dt className="font-medium text-charcoal">{t('product.metal')}</dt><dd>{product.metal}</dd></div>
+                <div><dt className="font-medium text-charcoal">{t('product.metal')}</dt><dd>{metalText(t, product.metal)}</dd></div>
                 <div><dt className="font-medium text-charcoal">{t('product.purity')}</dt><dd>{product.purity}</dd></div>
                 <div><dt className="font-medium text-charcoal">{t('product.weight')}</dt><dd>{product.weight || t('product.na')}</dd></div>
               </dl>
@@ -236,7 +238,7 @@ export default function ProductPage() {
                         {r.verifiedPurchase && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">{t('product.verified')}</span>}
                       </div>
                       <p>{r.comment}</p>
-                      <p className="text-xs text-muted mt-1">{new Date(r.createdAt).toLocaleDateString()}</p>
+                      <p className="text-xs text-muted mt-1">{new Date(r.createdAt).toLocaleDateString(locale)}</p>
                     </div>
                   ))
                 )}

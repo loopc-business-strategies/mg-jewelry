@@ -6,6 +6,7 @@ import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
 import BrandLogo from './BrandLogo';
 import { socialIconMap } from './ui/SocialIcons';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function Footer() {
       toast.success(t('footer.subscribeSuccess'));
       setEmail('');
     } catch (err) {
-      toast.error(err.response?.data?.message || t('footer.subscribeFailed'));
+      toast.error(apiErrorMessage(err, t, 'footer.subscribeFailed'));
     }
   };
 

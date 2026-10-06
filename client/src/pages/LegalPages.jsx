@@ -2,6 +2,7 @@ import SEOHead from '../components/SEOHead';
 import { useState } from 'react';
 import api from '../services/api';
 import { useTranslation } from '../hooks/useTranslation';
+import { apiErrorMessage } from '../utils/apiError';
 
 export default function LegalPage({ title, content }) {
   return (
@@ -72,19 +73,19 @@ export function TrackOrderPage() {
   const [email, setEmail] = useState('');
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const { t } = useTranslation();
+  const [error, setError] = useState(null);
+  const { t, locale } = useTranslation();
 
   const handleTrack = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError(null);
     setOrder(null);
     try {
       const { data } = await api.get('/orders/track', { params: { orderNumber, email } });
       setOrder(data);
     } catch (err) {
-      setError(err.response?.data?.message || t('legal.track.notFound'));
+      setError(err);
     } finally {
       setLoading(false);
     }
@@ -100,13 +101,13 @@ export function TrackOrderPage() {
           <input type="email" placeholder={t('legal.track.email')} required value={email} onChange={(e) => setEmail(e.target.value)} className="input-elegant w-full" />
           <button type="submit" disabled={loading} className="btn-primary-gold text-xs">{loading ? t('legal.track.searching') : t('legal.track.track')}</button>
         </form>
-        {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
+        {error && <p className="text-red-600 text-sm mb-4">{apiErrorMessage(error, t, 'legal.track.notFound')}</p>}
         {order && (
           <div className="card-elegant p-6 space-y-3 text-sm">
             <p><strong>{t('legal.track.order')}:</strong> {order.orderNumber}</p>
             <p><strong>{t('legal.track.status')}:</strong> {t(`status.${order.status}`, order.status)}</p>
             <p><strong>{t('legal.track.payment')}:</strong> {t(`status.${order.paymentStatus}`, order.paymentStatus)}</p>
-            <p><strong>{t('legal.track.total')}:</strong> ₹{order.total?.toLocaleString()}</p>
+            <p><strong>{t('legal.track.total')}:</strong> ₹{order.total?.toLocaleString(locale)}</p>
             {order.trackingUrl && <p><a href={order.trackingUrl} className="text-gold-dark hover:underline" target="_blank" rel="noreferrer">{t('legal.track.trackShipment')}</a></p>}
             {order.awbNumber && <p><strong>{t('legal.track.awb')}:</strong> {order.awbNumber}</p>}
             {order.statusHistory?.length > 0 && (
@@ -114,7 +115,7 @@ export function TrackOrderPage() {
                 <strong>{t('legal.track.timeline')}</strong>
                 <ul className="mt-2 space-y-1 text-muted">
                   {order.statusHistory.map((h, i) => (
-                    <li key={i}>{new Date(h.at).toLocaleString()} — {h.to ? t(`status.${h.to}`, h.to) : h.note}</li>
+                    <li key={i}>{new Date(h.at).toLocaleString(locale)} — {h.to ? t(`status.${h.to}`, h.to) : h.note}</li>
                   ))}
                 </ul>
               </div>

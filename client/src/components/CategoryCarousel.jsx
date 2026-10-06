@@ -33,6 +33,9 @@ function CategoryCard({ name, slug }) {
   );
 }
 
+// RTL tracks report negative scrollLeft; work with the distance from the start edge.
+const isRtl = (track) => getComputedStyle(track).direction === 'rtl';
+
 export default function CategoryCarousel({ categories }) {
   const { t } = useTranslation();
   const trackRef = useRef(null);
@@ -44,9 +47,10 @@ export default function CategoryCarousel({ categories }) {
   const updateArrows = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
-    const { scrollLeft, scrollWidth, clientWidth } = track;
-    setCanPrev(scrollLeft > 4);
-    setCanNext(scrollLeft < scrollWidth - clientWidth - 4);
+    const { scrollWidth, clientWidth } = track;
+    const offset = Math.abs(track.scrollLeft);
+    setCanPrev(offset > 4);
+    setCanNext(offset < scrollWidth - clientWidth - 4);
   }, []);
 
   const scrollByCard = useCallback((direction) => {
@@ -55,7 +59,7 @@ export default function CategoryCarousel({ categories }) {
     const card = track.querySelector('.category-carousel-card');
     const gap = 16;
     const amount = card ? card.offsetWidth + gap : track.clientWidth * 0.75;
-    track.scrollBy({ left: direction * amount, behavior: 'smooth' });
+    track.scrollBy({ left: direction * amount * (isRtl(track) ? -1 : 1), behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -75,7 +79,7 @@ export default function CategoryCarousel({ categories }) {
     const id = setInterval(() => {
       const track = trackRef.current;
       if (!track) return;
-      if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 4) {
+      if (Math.abs(track.scrollLeft) >= track.scrollWidth - track.clientWidth - 4) {
         track.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         scrollByCard(1);
@@ -116,10 +120,10 @@ export default function CategoryCarousel({ categories }) {
         type="button"
         onClick={() => { scrollByCard(-1); setIsPaused(true); setTimeout(() => setIsPaused(false), 3000); }}
         disabled={!canPrev}
-        className="carousel-nav-btn absolute left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-1/2 hidden sm:flex"
+        className="carousel-nav-btn absolute start-0 top-1/2 -translate-y-1/2 z-10 -translate-x-1/2 rtl:translate-x-1/2 hidden sm:flex"
         aria-label={t('ui.prev')}
       >
-        <ChevronLeft size={18} />
+        <ChevronLeft size={18} className="rtl:-scale-x-100" />
       </button>
 
       <div
@@ -139,10 +143,10 @@ export default function CategoryCarousel({ categories }) {
         type="button"
         onClick={() => { scrollByCard(1); setIsPaused(true); setTimeout(() => setIsPaused(false), 3000); }}
         disabled={!canNext}
-        className="carousel-nav-btn absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-1/2 hidden sm:flex"
+        className="carousel-nav-btn absolute end-0 top-1/2 -translate-y-1/2 z-10 translate-x-1/2 rtl:-translate-x-1/2 hidden sm:flex"
         aria-label={t('ui.next')}
       >
-        <ChevronRight size={18} />
+        <ChevronRight size={18} className="rtl:-scale-x-100" />
       </button>
 
       <div className="flex sm:hidden justify-center gap-3 mt-4">
@@ -153,7 +157,7 @@ export default function CategoryCarousel({ categories }) {
           className="carousel-nav-btn flex"
           aria-label={t('ui.prev')}
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft size={18} className="rtl:-scale-x-100" />
         </button>
         <button
           type="button"
@@ -162,7 +166,7 @@ export default function CategoryCarousel({ categories }) {
           className="carousel-nav-btn flex"
           aria-label={t('ui.next')}
         >
-          <ChevronRight size={18} />
+          <ChevronRight size={18} className="rtl:-scale-x-100" />
         </button>
       </div>
     </div>

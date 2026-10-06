@@ -6,6 +6,7 @@ import PriceDisplay from './PriceDisplay';
 import WishlistButton from './WishlistButton';
 import { useCart } from '../context/CartContext';
 import { useTranslation } from '../hooks/useTranslation';
+import { metalText } from '../utils/displayText';
 
 export default function QuickViewModal({ product, onClose }) {
   const { addToCart } = useCart();
@@ -30,7 +31,7 @@ export default function QuickViewModal({ product, onClose }) {
         className="relative bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full hover:bg-cream z-10" aria-label={t('ui.close')}>
+        <button onClick={onClose} className="absolute top-4 end-4 p-2 rounded-full hover:bg-cream z-10" aria-label={t('ui.close')}>
           <X size={20} />
         </button>
         <div className="grid md:grid-cols-2 gap-6 p-6">
@@ -40,7 +41,7 @@ export default function QuickViewModal({ product, onClose }) {
             <p className="text-sm text-muted mb-4 line-clamp-2">{product.shortDescription}</p>
             <PriceDisplay price={product.price} mrp={product.mrp} showEmi />
             <div className="flex gap-2 mt-4 text-sm text-muted">
-              <span>{product.metal}</span>
+              <span>{metalText(t, product.metal)}</span>
               <span>·</span>
               <span>{product.purity}</span>
             </div>

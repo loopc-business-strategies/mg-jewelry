@@ -565,7 +565,7 @@ h5, h6 {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
+  inset-inline-start: 0;
   width: 100%;
   max-width: 2rem;
   height: 2px;
@@ -614,6 +614,10 @@ h5, h6 {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 100%);
 }
 
+[dir='rtl'] .editorial-hero-overlay {
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 100%);
+}
+
 .hero-banner-overlay {
   position: absolute;
   inset: 0;
@@ -625,6 +629,19 @@ h5, h6 {
     rgba(255, 255, 255, 0.2) 72%,
     transparent 100%
   );
+}
+
+@media (min-width: 768px) {
+  [dir='rtl'] .hero-banner-overlay {
+    background: linear-gradient(
+      to left,
+      #ffffff 0%,
+      #ffffff 38%,
+      rgba(255, 255, 255, 0.85) 52%,
+      rgba(255, 255, 255, 0.2) 72%,
+      transparent 100%
+    );
+  }
 }
 
 @media (max-width: 767px) {
@@ -1184,7 +1201,7 @@ h5, h6 {
 
 .our-mg-connect-split__panel--sell {
   background: var(--color-white);
-  border-left: 3px solid var(--color-gold);
+  border-inline-start: 3px solid var(--color-gold);
 }
 
 .our-mg-connect-split__hub {

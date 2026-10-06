@@ -8,6 +8,7 @@ import {
   isCatalogProductImagePath,
   CATEGORY_FALLBACKS,
 } from '../utils/imageConfig';
+import { useTranslation } from '../hooks/useTranslation';
 
 const DEFAULT_JEWELRY = CATEGORY_FALLBACKS.default;
 const DEFAULT_SVG = getCategorySvgFallback();
@@ -20,6 +21,7 @@ export default function ProductImage({
   loading = 'lazy',
   sizes,
 }) {
+  const { tf } = useTranslation();
   const categoryFallback = getCategoryFallback(product?.category, product?.subcategory);
   const svgFallback = getCategorySvgFallback(product?.category, product?.subcategory);
   const catalogImages = getProductImages(product?.category, product?.subcategory, product?.sku);
@@ -65,7 +67,7 @@ export default function ProductImage({
       <img
         key={src}
         src={src}
-        alt={getProductAlt(product, index)}
+        alt={getProductAlt(product, index, tf)}
         className={`w-full h-full ${fitClass} transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}
         loading={loading}
         decoding="async"

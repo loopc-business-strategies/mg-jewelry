@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import ProductImage from './ProductImage';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function ProductGallery({ product }) {
   const count = Math.max(product?.images?.length || 1, 1);
   const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -15,17 +17,17 @@ export default function ProductGallery({ product }) {
         </div>
         <button
           onClick={() => setZoom(!zoom)}
-          className="absolute top-4 right-4 p-2 bg-white/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute top-4 end-4 p-2 bg-white/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
         >
           <ZoomIn size={18} />
         </button>
         {count > 1 && (
           <>
-            <button onClick={() => setActive((active - 1 + count) % count)} className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-white/90 rounded-full">
-              <ChevronLeft size={18} />
+            <button onClick={() => setActive((active - 1 + count) % count)} className="absolute start-3 top-1/2 -translate-y-1/2 p-2 bg-white/90 rounded-full" aria-label={t('ui.prev')}>
+              <ChevronLeft size={18} className="rtl:-scale-x-100" />
             </button>
-            <button onClick={() => setActive((active + 1) % count)} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-white/90 rounded-full">
-              <ChevronRight size={18} />
+            <button onClick={() => setActive((active + 1) % count)} className="absolute end-3 top-1/2 -translate-y-1/2 p-2 bg-white/90 rounded-full" aria-label={t('ui.next')}>
+              <ChevronRight size={18} className="rtl:-scale-x-100" />
             </button>
           </>
         )}

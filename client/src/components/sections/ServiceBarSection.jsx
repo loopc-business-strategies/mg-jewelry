@@ -14,7 +14,7 @@ export default function ServiceBarSection() {
         {Array.isArray(items) && items.map((item, i) => {
           const Icon = icons[i] || Award;
           return (
-            <div key={item.title} className="text-center lg:text-left">
+            <div key={item.title} className="text-center lg:text-start">
               <Icon size={22} className="text-gold mx-auto lg:mx-0 mb-3" strokeWidth={1.25} />
               <h3 className="type-body-sm font-medium text-charcoal mb-1">{item.title}</h3>
               <p className="type-form-help">{item.desc}</p>

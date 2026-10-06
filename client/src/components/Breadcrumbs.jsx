@@ -9,7 +9,7 @@ export default function Breadcrumbs({ items }) {
       <Link to="/" className="hover:text-gold transition-colors">{t('ui.home')}</Link>
       {items.map((item, i) => (
         <span key={i} className="flex items-center gap-1">
-          <ChevronRight size={14} />
+          <ChevronRight size={14} className="rtl:-scale-x-100" />
           {item.path ? (
             <Link to={item.path} className="hover:text-gold transition-colors">{item.label}</Link>
           ) : (

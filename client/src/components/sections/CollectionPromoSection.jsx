@@ -25,7 +25,7 @@ export default function CollectionPromoSection() {
             to="/shop"
             className="inline-flex items-center gap-2 self-start btn-primary-gold"
           >
-            {t('home.collectionPromo.cta')} <ArrowRight size={14} />
+            {t('home.collectionPromo.cta')} <ArrowRight size={14} className="rtl:-scale-x-100" />
           </Link>
         </div>
         <div className="relative md:hidden aspect-video">
