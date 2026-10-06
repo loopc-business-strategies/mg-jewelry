@@ -85,8 +85,8 @@ export default function GoldBuyingPage() {
   return (
     <>
       <SEOHead
-        title="Sell Your Designs"
-        description="Share your designs with Modern Gold in Namangan, Uzbekistan. We could export worldwide. Leave your name and phone number and our Relationship Manager will contact you."
+        title="Sell Your Gold to MG"
+        description="We would like to buy gold and take it across the globe. Partner with Modern Gold in Namangan, Uzbekistan. Share your contact and one of our representatives will contact you."
         path="/gold-buying"
         keywords={[...seoKeywords, 'sell gold', 'sell jewellery designs', 'gold buyer Central Asia', 'sell gold Namangan']}
       />
