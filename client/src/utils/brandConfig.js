@@ -53,6 +53,7 @@ export const sellGoldCta = {
   label: 'Sell Gold',
   path: '/gold-buying',
   key: 'nav.sellGold',
+  contactPhone: '',
 };
 
 export const retailNavLinks = [
