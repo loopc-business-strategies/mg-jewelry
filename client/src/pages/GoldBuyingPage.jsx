@@ -52,6 +52,7 @@ export default function GoldBuyingPage() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [error, setError] = useState('');
   const idempotencyKeyRef = useRef('');
+  const submittingRef = useRef(false);
 
   const update = (field) => (e) => {
     idempotencyKeyRef.current = '';
@@ -60,7 +61,8 @@ export default function GoldBuyingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return;
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     if (!idempotencyKeyRef.current) idempotencyKeyRef.current = newIdempotencyKey();
     setLoading(true);
     setError('');
@@ -76,6 +78,7 @@ export default function GoldBuyingPage() {
     } catch {
       setError(t('goldBuying.errorDesc'));
     } finally {
+      submittingRef.current = false;
       setLoading(false);
     }
   };
