@@ -53,7 +53,8 @@ export const sellGoldCta = {
   label: 'Sell Gold',
   path: '/gold-buying',
   key: 'nav.sellGold',
-  contactPhone: '',
+  // PLACEHOLDER: not a real number. Replace with the client's actual contact number before production.
+  contactPhone: '+998 00 000 00 00',
 };
 
 export const retailNavLinks = [
