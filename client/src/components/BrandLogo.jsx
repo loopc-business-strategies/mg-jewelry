@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { brand } from '../utils/brandConfig';
+import { useTranslation } from '../hooks/useTranslation';
 
 function LogoMark({ className = 'h-10 w-auto' }) {
   if (!brand.logo) return null;
@@ -15,11 +16,12 @@ function LogoMark({ className = 'h-10 w-auto' }) {
 }
 
 export default function BrandLogo({ variant = 'header', className = '', linkTo = '/' }) {
+  const { t } = useTranslation();
   if (variant === 'auth') {
     const authContent = (
       <div className={`flex flex-col items-center mb-6 ${className}`}>
         <span className="font-display text-lg text-charcoal tracking-wide">{brand.name}</span>
-        <span className="text-[10px] tracking-[0.25em] uppercase text-muted mt-1">Fine Jewelry</span>
+        <span className="text-[10px] tracking-[0.25em] uppercase text-muted mt-1">{t('ui.fineJewelry')}</span>
       </div>
     );
     return authContent;

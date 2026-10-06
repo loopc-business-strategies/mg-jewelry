@@ -11,7 +11,7 @@ export default function ProfilePage() {
   const { user, logout, loading: authLoading } = useAuth();
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('orders');
-  const { t } = useTranslation();
+  const { t, tf } = useTranslation();
 
   useEffect(() => {
     if (user) api.get('/orders').then(({ data }) => setOrders(data)).catch(() => {});
@@ -52,9 +52,9 @@ export default function ProfilePage() {
                   <div key={order._id} className="border rounded-xl p-4 mb-4">
                     <div className="flex justify-between mb-2">
                       <span className="font-medium">#{order.orderNumber}</span>
-                      <span className="text-sm capitalize px-2 py-1 bg-cream rounded">{order.status}</span>
+                      <span className="text-sm capitalize px-2 py-1 bg-cream rounded">{t(`status.${order.status}`, order.status)}</span>
                     </div>
-                    <p className="text-sm text-muted">{order.items?.length} items · {formatPrice(order.total)}</p>
+                    <p className="text-sm text-muted">{tf('ui.itemsCount', { n: order.items?.length ?? 0 })} · {formatPrice(order.total)}</p>
                   </div>
                 )) : <p className="text-muted">{t('auth.noOrders')} <Link to="/shop" className="text-gold-dark hover:underline">{t('auth.startShopping')}</Link></p>}
               </div>

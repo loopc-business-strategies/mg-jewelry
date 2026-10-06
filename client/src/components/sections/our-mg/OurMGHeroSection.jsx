@@ -26,17 +26,17 @@ export default function OurMGHeroSection() {
         <div className="our-mg-hero-phones animate-reveal" aria-hidden="true">
           <PhoneMockup
             screen="products"
-            placeholderName="Products"
+            placeholderName={t('ourMgScreens.products')}
             className="our-mg-hero-phone our-mg-hero-phone--left"
           />
           <PhoneMockup
             screen="home"
-            placeholderName="Our MG"
+            placeholderName={t('ourMgScreens.home')}
             className="our-mg-hero-phone our-mg-hero-phone--center"
           />
           <PhoneMockup
             screen="orders"
-            placeholderName="Bookings"
+            placeholderName={t('ourMgScreens.bookings')}
             className="our-mg-hero-phone our-mg-hero-phone--right"
           />
         </div>

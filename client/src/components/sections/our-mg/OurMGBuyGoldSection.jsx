@@ -23,7 +23,7 @@ export default function OurMGBuyGoldSection() {
         <div className="rounded-2xl overflow-hidden border border-border shadow-[var(--shadow-soft)]">
           <SafeImage
             src={ourMgEditorial.buyGold}
-            alt="Gold products available through Modern Gold"
+            alt={t('alts.ourMgBuy')}
             className="w-full aspect-[4/3] object-cover"
           />
         </div>

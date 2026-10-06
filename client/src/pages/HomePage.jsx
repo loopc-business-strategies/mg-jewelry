@@ -33,7 +33,7 @@ export default function HomePage() {
     alternateName: brand.name,
     url: brand.siteUrl,
     logo: `${brand.siteUrl}${brand.logo}`,
-    description: `${brand.legalName} — ${t('brand.tagline')}. Local gold buying and international jewellery manufacturing from Namangan, Uzbekistan.`,
+    description: `${brand.legalName} — ${t('brand.tagline')}. ${t('seo.homeSchemaDesc')}`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: '242 Girvonbulok Street',

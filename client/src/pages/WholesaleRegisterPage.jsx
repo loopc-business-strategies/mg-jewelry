@@ -21,10 +21,10 @@ export default function WholesaleRegisterPage() {
     setLoading(true);
     try {
       await api.post('/wholesale/register', form);
-      toast.success('Application submitted! Pending approval.');
+      toast.success(t('wholesaleRegister.submitted'));
       navigate('/wholesale/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Registration failed');
+      toast.error(err.response?.data?.message || t('wholesaleRegister.failed'));
     } finally {
       setLoading(false);
     }
@@ -41,31 +41,31 @@ export default function WholesaleRegisterPage() {
     { key: 'businessType', labelKey: 'form.businessType', required: true, select: 'businessType' },
     { key: 'gstNumber', labelKey: 'form.taxId' },
     { key: 'website', labelKey: 'form.website' },
-    { key: 'expectedMonthlyPurchase', label: 'Expected Monthly Purchase' },
+    { key: 'expectedMonthlyPurchase', labelKey: 'wholesaleRegister.expectedMonthlyPurchase' },
     { key: 'businessAddress', labelKey: 'form.businessAddress', full: true },
-    { key: 'state', label: 'State / Region' },
-    { key: 'pincode', label: 'Postal Code' },
+    { key: 'state', labelKey: 'wholesaleRegister.state' },
+    { key: 'pincode', labelKey: 'wholesaleRegister.postalCode' },
   ];
 
   return (
     <>
-      <SEOHead title="Wholesale Registration" path="/wholesale/register" />
+      <SEOHead title={t('wholesaleRegister.title')} path="/wholesale/register" />
       <div className="max-w-2xl mx-auto px-4 py-16">
-        <h1 className="text-center mb-2">Wholesale Registration</h1>
-        <p className="text-center type-section-desc prose-section mx-auto mb-8">International jewellers, gold traders and wholesalers — apply to partner with Modern Gold</p>
+        <h1 className="text-center mb-2">{t('wholesaleRegister.title')}</h1>
+        <p className="text-center type-section-desc prose-section mx-auto mb-8">{t('wholesaleRegister.subtitle')}</p>
         <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
-          {fields.map(({ key, labelKey, label, type, required, full, select }) => (
+          {fields.map(({ key, labelKey, type, required, full, select }) => (
             <div key={key} className={full ? 'md:col-span-2' : ''}>
-              <label className="type-form-label">{labelKey ? t(labelKey) : label}{required ? ' *' : ''}</label>
+              <label className="type-form-label">{t(labelKey)}{required ? ' *' : ''}</label>
               {select === 'country' ? (
                 <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="input-elegant">
                   <option value="">{t('common.selectCountry')}</option>
-                  {countries.map((c) => <option key={c} value={c}>{c}</option>)}
+                  {countries.map((c) => <option key={c} value={c}>{t(`countries.${c}`, c)}</option>)}
                 </select>
               ) : select === 'businessType' ? (
                 <select required value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="input-elegant">
                   <option value="">{t('common.selectType')}</option>
-                  {businessTypes.map((bt) => <option key={bt} value={bt}>{bt}</option>)}
+                  {businessTypes.map((bt) => <option key={bt} value={bt}>{t(`businessTypes.${bt}`, bt)}</option>)}
                 </select>
               ) : (
                 <input

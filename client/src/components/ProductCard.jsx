@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import ProductImage from './ProductImage';
 import WishlistButton from './WishlistButton';
+import { useTranslation } from '../hooks/useTranslation';
 
 function slugToLabel(slug) {
   if (!slug) return '';
@@ -8,11 +9,12 @@ function slugToLabel(slug) {
 }
 
 function ProductCardActions({ productId }) {
+  const { t } = useTranslation();
   return (
     <div className="product-card-actions-inner overlay-cream px-2 py-2">
       <div className="product-card-actions">
         <Link to={`/product/${productId}`} className="btn-card-view">
-          View Product
+          {t('ui.viewProduct')}
         </Link>
       </div>
     </div>
@@ -20,6 +22,7 @@ function ProductCardActions({ productId }) {
 }
 
 export default function ProductCard({ product }) {
+  const { t } = useTranslation();
   return (
     <div className="product-card-grid group card-elegant h-full bg-white">
       <div className="product-card-image relative aspect-square bg-white overflow-hidden image-zoom-hover rounded-t-[0.625rem]">
@@ -33,7 +36,7 @@ export default function ProductCard({ product }) {
 
       <div className="product-card-info p-4 md:p-5 flex flex-col flex-1">
         {product.category && (
-          <p className="type-micro mb-1.5">{slugToLabel(product.category)}</p>
+          <p className="type-micro mb-1.5">{t(`categories.${product.category}`, slugToLabel(product.category))}</p>
         )}
         <Link to={`/product/${product._id}`}>
           <h3 className="type-card-title mb-1 line-clamp-1 hover:text-gold transition-colors">

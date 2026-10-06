@@ -11,45 +11,40 @@ import { CheckCircle, Mail, MessageCircle, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
 
-const benefits = [
-  'Competitive wholesale pricing', 'Bulk order discounts', 'Wide product selection',
-  'Reliable supply', 'Fast dispatch', 'Dedicated business support',
-  'Custom orders', 'Retailer-friendly margins',
-];
-
 const bulkTiers = [
-  { range: '10–24 pieces', label: 'Level 1', discount: '5% off' },
-  { range: '25–49 pieces', label: 'Level 2', discount: '10% off' },
-  { range: '50–99 pieces', label: 'Level 3', discount: '15% off' },
-  { range: '100+ pieces', label: 'Special Pricing', discount: '20% off' },
+  { minQty: 10, maxQty: 24, discountPercent: 5 },
+  { minQty: 25, maxQty: 49, discountPercent: 10 },
+  { minQty: 50, maxQty: 99, discountPercent: 15 },
+  { minQty: 100, discountPercent: 20 },
 ];
 
-const formatTier = (tier) => ({
-  range: tier.maxQty ? `${tier.minQty}–${tier.maxQty} pieces` : `${tier.minQty}+ pieces`,
-  label: tier.label,
-  discount: `${tier.discountPercent}% off`,
-});
-
-const faqs = [
-  { q: 'How do I become a wholesale partner?', a: 'Fill out the registration form and our team will review your application within 2-3 business days.' },
-  { q: 'What is the minimum order quantity?', a: 'MOQ varies by product, typically starting at 10 pieces per design.' },
-  { q: 'Do you offer custom designs?', a: 'Yes, we accept custom orders for approved wholesale partners.' },
-];
+const asArray = (value) => (Array.isArray(value) ? value : []);
 
 export default function WholesalePage() {
-  const { t } = useTranslation();
+  const { t, tf } = useTranslation();
   const [products, setProducts] = useState([]);
   const [tiers, setTiers] = useState(bulkTiers);
 
   useEffect(() => {
     api.get('/wholesale/products?limit=8').then(({ data }) => setProducts(data.products?.slice(0, 8) || [])).catch(() => {});
     api.get('/wholesale/bulk-pricing').then(({ data }) => {
-      if (Array.isArray(data) && data.length) setTiers(data.map(formatTier));
+      if (Array.isArray(data) && data.length) setTiers(data);
     }).catch(() => {});
   }, []);
 
+  const benefits = asArray(t('wholesalePage.benefits'));
+  const faqs = asArray(t('wholesalePage.faqs'));
+  const tierLabels = asArray(t('wholesalePage.tierLabels'));
+  const formatTier = (tier, i) => ({
+    range: tier.maxQty
+      ? tf('wholesalePage.tierRange', { min: tier.minQty, max: tier.maxQty })
+      : tf('wholesalePage.tierRangePlus', { min: tier.minQty }),
+    label: tier.label || tierLabels[i] || '',
+    discount: tf('wholesalePage.tierOff', { n: tier.discountPercent }),
+  });
+
   const requestCatalogue = () => {
-    toast.success('Catalogue request submitted! We will email you shortly.');
+    toast.success(t('wholesalePage.catalogueToast'));
   };
 
   const faqSchema = {
@@ -64,10 +59,10 @@ export default function WholesalePage() {
 
   return (
     <>
-      <SEOHead title="Wholesale Jewellery for International Buyers" description="Gold traders, jewellers and wholesalers — source jewellery from Modern Gold, Namangan, Uzbekistan." path="/wholesale" schema={faqSchema} />
+      <SEOHead title={t('wholesalePage.seoTitle')} description={t('wholesalePage.seoDesc')} path="/wholesale" schema={faqSchema} />
 
       <HeroBanner
-        title="Wholesale Jewellery for International Buyers"
+        title={t('wholesalePage.heroTitle')}
         subtitle={t('wholesale.intlSubtitle')}
         image={wholesaleHero}
         primaryLink="/wholesale/register"
@@ -89,21 +84,21 @@ export default function WholesalePage() {
               <span key={line} className="block">{line}</span>
             ))}
           </address>
-          <p className="text-xs text-gold-dark mt-2 uppercase tracking-wider">Central Asia HQ · Namangan, Uzbekistan</p>
+          <p className="text-xs text-gold-dark mt-2 uppercase tracking-wider">{t('wholesalePage.hq')}</p>
         </div>
       </section>
 
       <div className="max-w-4xl mx-auto px-4 -mt-8 relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
         <Link to="/wholesale/register" className="btn-primary-gold text-xs">
-          Become a Wholesale Partner
+          {t('wholesalePage.becomePartner')}
         </Link>
         <Link to="/wholesale/shop" className="btn-outline-gold text-xs">
-          View Wholesale Collection
+          {t('wholesalePage.viewCollection')}
         </Link>
       </div>
 
       <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="type-section-title text-center mb-10">Why Wholesale With Us</h2>
+        <h2 className="type-section-title text-center mb-10">{t('wholesalePage.whyTitle')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {benefits.map((b) => (
             <div key={b} className="flex items-start gap-3 p-4 bg-cream rounded-xl">
@@ -116,12 +111,12 @@ export default function WholesalePage() {
 
       <section className="py-16 bg-ivory">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="type-section-title text-center mb-10">Wholesale Categories</h2>
+          <h2 className="type-section-title text-center mb-10">{t('wholesalePage.categoriesTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categoryIcons.map((cat) => (
               <Link key={cat.slug} to={`/wholesale/shop?category=${cat.slug}`} className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow">
                 <div className="text-2xl mb-2">{cat.icon}</div>
-                <span className="text-sm font-medium">{cat.name}</span>
+                <span className="text-sm font-medium">{t(`categories.${cat.slug}`, cat.name)}</span>
               </Link>
             ))}
           </div>
@@ -130,24 +125,24 @@ export default function WholesalePage() {
 
       {products.length > 0 && (
         <section className="py-16 px-4 max-w-7xl mx-auto">
-          <h2 className="type-section-title text-center mb-10">Wholesale Collections</h2>
+          <h2 className="type-section-title text-center mb-10">{t('wholesalePage.collectionsTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {products.map((p) => (
               <WholesaleProductCard key={p._id} product={p} showPrices={false} />
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link to="/wholesale/shop" className="text-gold-dark font-medium hover:underline">View Full Wholesale Catalogue →</Link>
+            <Link to="/wholesale/shop" className="text-gold-dark font-medium hover:underline">{t('wholesalePage.viewCatalogue')}</Link>
           </div>
         </section>
       )}
 
       <section id="bulk-pricing" className="py-16 bg-white border-y border-border">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="type-section-title text-center mb-10">Bulk Pricing</h2>
+          <h2 className="type-section-title text-center mb-10">{t('wholesalePage.bulkTitle')}</h2>
           <div className="grid md:grid-cols-4 gap-4">
-            {tiers.map((tier) => (
-              <div key={tier.label} className="card-elegant p-6 text-center hover:border-border transition-colors">
+            {tiers.map(formatTier).map((tier, i) => (
+              <div key={i} className="card-elegant p-6 text-center hover:border-border transition-colors">
                 <p className="text-gold-dark font-semibold text-charcoal text-xl mb-2">{tier.label}</p>
                 <p className="text-sm text-muted mb-2">{tier.range}</p>
                 <p className="font-semibold text-charcoal">{tier.discount}</p>
@@ -159,30 +154,30 @@ export default function WholesalePage() {
 
       <section className="py-16 px-4 max-w-3xl mx-auto text-center">
         <Download size={32} className="text-gold mx-auto mb-4" />
-        <h2 className="type-section-title mb-4">Download Wholesale Catalogue</h2>
-        <p className="text-muted mb-6">Request our complete wholesale catalogue with pricing, MOQ details, and product specifications.</p>
+        <h2 className="type-section-title mb-4">{t('wholesalePage.catalogueTitle')}</h2>
+        <p className="text-muted mb-6">{t('wholesalePage.catalogueDesc')}</p>
         <button onClick={requestCatalogue} className="btn-primary-gold text-xs">
-          REQUEST CATALOGUE
+          {t('wholesalePage.catalogueCta')}
         </button>
       </section>
 
       <section className="py-16 px-4 max-w-3xl mx-auto">
-        <h2 className="type-section-title text-center mb-8">Request Wholesale Pricing</h2>
+        <h2 className="type-section-title text-center mb-8">{t('wholesalePage.pricingTitle')}</h2>
         <WholesaleInquiryForm />
       </section>
 
       <section className="py-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="type-section-title mb-6">Dedicated Wholesale Support</h2>
+          <h2 className="type-section-title mb-6">{t('wholesalePage.supportTitle')}</h2>
           <div className="flex flex-wrap justify-center gap-8 text-sm">
-            <Link to="/contact?type=quote" className="flex items-center gap-2 text-gold-dark hover:underline"><Mail size={16} className="text-gold" /> Request a quote via contact form</Link>
-            <Link to="/contact?type=business" className="flex items-center gap-2 text-gold hover:underline"><MessageCircle size={16} className="text-gold" /> Business inquiry</Link>
+            <Link to="/contact?type=quote" className="flex items-center gap-2 text-gold-dark hover:underline"><Mail size={16} className="text-gold" /> {t('wholesalePage.supportQuote')}</Link>
+            <Link to="/contact?type=business" className="flex items-center gap-2 text-gold hover:underline"><MessageCircle size={16} className="text-gold" /> {t('wholesalePage.supportBusiness')}</Link>
           </div>
         </div>
       </section>
 
       <section id="faq" className="py-16 px-4 max-w-3xl mx-auto">
-        <h2 className="type-section-title text-center mb-8">Wholesale FAQ</h2>
+        <h2 className="type-section-title text-center mb-8">{t('wholesalePage.faqTitle')}</h2>
         <div className="space-y-4">
           {faqs.map((faq) => (
             <div key={faq.q} className="border rounded-xl p-4">

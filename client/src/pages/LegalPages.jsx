@@ -104,8 +104,8 @@ export function TrackOrderPage() {
         {order && (
           <div className="card-elegant p-6 space-y-3 text-sm">
             <p><strong>{t('legal.track.order')}:</strong> {order.orderNumber}</p>
-            <p><strong>{t('legal.track.status')}:</strong> {order.status}</p>
-            <p><strong>{t('legal.track.payment')}:</strong> {order.paymentStatus}</p>
+            <p><strong>{t('legal.track.status')}:</strong> {t(`status.${order.status}`, order.status)}</p>
+            <p><strong>{t('legal.track.payment')}:</strong> {t(`status.${order.paymentStatus}`, order.paymentStatus)}</p>
             <p><strong>{t('legal.track.total')}:</strong> ₹{order.total?.toLocaleString()}</p>
             {order.trackingUrl && <p><a href={order.trackingUrl} className="text-gold-dark hover:underline" target="_blank" rel="noreferrer">{t('legal.track.trackShipment')}</a></p>}
             {order.awbNumber && <p><strong>{t('legal.track.awb')}:</strong> {order.awbNumber}</p>}
@@ -114,7 +114,7 @@ export function TrackOrderPage() {
                 <strong>{t('legal.track.timeline')}</strong>
                 <ul className="mt-2 space-y-1 text-muted">
                   {order.statusHistory.map((h, i) => (
-                    <li key={i}>{new Date(h.at).toLocaleString()} — {h.to || h.note}</li>
+                    <li key={i}>{new Date(h.at).toLocaleString()} — {h.to ? t(`status.${h.to}`, h.to) : h.note}</li>
                   ))}
                 </ul>
               </div>

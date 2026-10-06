@@ -6,9 +6,11 @@ import { useWholesaleCart } from '../context/WholesaleCartContext';
 import SEOHead from '../components/SEOHead';
 import { formatPrice } from '../utils/formatPrice';
 import toast from 'react-hot-toast';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function WholesaleDashboardPage() {
   const { user } = useAuth();
+  const { t, tf } = useTranslation();
   const { cart, fetchCart } = useWholesaleCart();
   const [profile, setProfile] = useState(null);
   const [orders, setOrders] = useState([]);
@@ -24,10 +26,10 @@ export default function WholesaleDashboardPage() {
   const placeOrder = async () => {
     try {
       await api.post('/wholesale/orders', { shippingAddress: { businessName: profile?.businessName } });
-      toast.success('Wholesale order placed!');
+      toast.success(t('wholesaleDashboard.placed'));
       fetchCart();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed');
+      toast.error(err.response?.data?.message || t('wholesaleDashboard.failed'));
     }
   };
 
@@ -42,9 +44,9 @@ export default function WholesaleDashboardPage() {
 
   return (
     <>
-      <SEOHead title="Wholesale Dashboard" path="/wholesale/dashboard" />
+      <SEOHead title={t('wholesaleDashboard.title')} path="/wholesale/dashboard" />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="mb-8">Wholesale Dashboard</h1>
+        <h1 className="mb-8">{t('wholesaleDashboard.title')}</h1>
 
         {profile && (
           <div className="bg-cream rounded-xl p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -53,16 +55,16 @@ export default function WholesaleDashboardPage() {
               <p className="text-sm text-muted">{profile.email}</p>
             </div>
             <span className={`px-3 py-1 rounded-full text-sm capitalize ${statusColors[profile.status]}`}>
-              {profile.status}
+              {t(`status.${profile.status}`, profile.status)}
             </span>
           </div>
         )}
 
         <div className="grid md:grid-cols-4 gap-8">
           <nav className="space-y-1">
-            {['overview', 'orders', 'bulk-cart', 'support'].map((t) => (
-              <button key={t} onClick={() => setTab(t)} className={`w-full text-left px-4 py-2 rounded-lg text-sm capitalize ${tab === t ? 'bg-gold text-white' : 'hover:bg-cream'}`}>
-                {t.replace('-', ' ')}
+            {['overview', 'orders', 'bulk-cart', 'support'].map((key) => (
+              <button key={key} onClick={() => setTab(key)} className={`w-full text-left px-4 py-2 rounded-lg text-sm capitalize ${tab === key ? 'bg-gold text-white' : 'hover:bg-cream'}`}>
+                {t(`wholesaleDashboard.tabs.${key}`, key.replace('-', ' '))}
               </button>
             ))}
           </nav>
@@ -70,10 +72,10 @@ export default function WholesaleDashboardPage() {
           <div className="md:col-span-3">
             {tab === 'overview' && profile && (
               <dl className="grid grid-cols-2 gap-4 text-sm">
-                <div><dt className="text-muted">Business Type</dt><dd>{profile.businessType}</dd></div>
-                <div><dt className="text-muted">GST</dt><dd>{profile.gstNumber || 'N/A'}</dd></div>
-                <div><dt className="text-muted">City</dt><dd>{profile.city}</dd></div>
-                <div><dt className="text-muted">Expected Purchase</dt><dd>{profile.expectedMonthlyPurchase}</dd></div>
+                <div><dt className="text-muted">{t('wholesaleDashboard.businessType')}</dt><dd>{t(`businessTypes.${profile.businessType}`, profile.businessType)}</dd></div>
+                <div><dt className="text-muted">{t('wholesaleDashboard.gst')}</dt><dd>{profile.gstNumber || t('wholesaleDashboard.na')}</dd></div>
+                <div><dt className="text-muted">{t('wholesaleDashboard.city')}</dt><dd>{profile.city}</dd></div>
+                <div><dt className="text-muted">{t('wholesaleDashboard.expectedPurchase')}</dt><dd>{profile.expectedMonthlyPurchase}</dd></div>
               </dl>
             )}
 
@@ -83,11 +85,11 @@ export default function WholesaleDashboardPage() {
                   <div key={o._id} className="border rounded-xl p-4 mb-3">
                     <div className="flex justify-between">
                       <span className="font-medium">#{o.orderNumber}</span>
-                      <span className="text-sm capitalize">{o.status}</span>
+                      <span className="text-sm capitalize">{t(`status.${o.status}`, o.status)}</span>
                     </div>
-                    <p className="text-sm text-muted">{o.items?.length} items · {formatPrice(o.total)}</p>
+                    <p className="text-sm text-muted">{tf('ui.itemsCount', { n: o.items?.length ?? 0 })} · {formatPrice(o.total)}</p>
                   </div>
-                )) : <p className="text-muted">No wholesale orders yet</p>}
+                )) : <p className="text-muted">{t('wholesaleDashboard.noOrders')}</p>}
               </div>
             )}
 
@@ -102,24 +104,24 @@ export default function WholesaleDashboardPage() {
                       </div>
                     ))}
                     <div className="flex justify-between font-semibold mt-4">
-                      <span>Total</span>
+                      <span>{t('wholesaleDashboard.total')}</span>
                       <span>{formatPrice(cart.total)}</span>
                     </div>
                     {profile?.status === 'approved' && (
-                      <button onClick={placeOrder} className="mt-4 btn-primary-gold text-xs">Place Wholesale Order</button>
+                      <button onClick={placeOrder} className="mt-4 btn-primary-gold text-xs">{t('wholesaleDashboard.placeOrder')}</button>
                     )}
                   </>
                 ) : (
-                  <p className="text-muted">Bulk cart is empty. <Link to="/wholesale/shop" className="text-gold-dark hover:underline">Browse collection</Link></p>
+                  <p className="text-muted">{t('wholesaleDashboard.cartEmpty')} <Link to="/wholesale/shop" className="text-gold-dark hover:underline">{t('wholesaleDashboard.browse')}</Link></p>
                 )}
               </div>
             )}
 
             {tab === 'support' && (
               <div className="text-sm space-y-2">
-                <p>Phone: +91 98765 43210</p>
-                <p><Link to="/contact?type=quote" className="text-gold-dark hover:underline">Submit a business enquiry via our contact form</Link></p>
-                <p>Hours: Mon – Sat, 10 AM – 8 PM</p>
+                <p>{tf('wholesaleDashboard.phone', { phone: '+91 98765 43210' })}</p>
+                <p><Link to="/contact?type=quote" className="text-gold-dark hover:underline">{t('wholesaleDashboard.enquiryLink')}</Link></p>
+                <p>{t('wholesaleDashboard.hours')}</p>
               </div>
             )}
           </div>

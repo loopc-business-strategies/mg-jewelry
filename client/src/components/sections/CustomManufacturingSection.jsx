@@ -11,7 +11,7 @@ export default function CustomManufacturingSection() {
     <section className="section-cream py-20 px-4">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div className="rounded-2xl overflow-hidden shadow-xl border border-border order-2 lg:order-1">
-          <SafeImage src={customHero} alt="Woman wearing luxury gold jewelry set — custom jewelry editorial" category="custom-jewelry" className="w-full aspect-[4/3] object-cover" />
+          <SafeImage src={customHero} alt={t('alts.customHero')} category="custom-jewelry" className="w-full aspect-[4/3] object-cover" />
         </div>
         <div className="order-1 lg:order-2">
           <p className="section-eyebrow">{t('home.customManufacturing.eyebrow')}</p>

@@ -1,4 +1,7 @@
+import { useTranslation } from '../hooks/useTranslation';
+
 export default function Pagination({ page, pages, onChange }) {
+  const { t } = useTranslation();
   if (pages <= 1) return null;
 
   const visible = [];
@@ -14,7 +17,7 @@ export default function Pagination({ page, pages, onChange }) {
         onClick={() => onChange(page - 1)}
         className="px-3 py-2 border rounded-lg text-sm disabled:opacity-40 hover:border-gold"
       >
-        Prev
+        {t('ui.prev')}
       </button>
       {visible.map((p, i) =>
         p === '...' ? (
@@ -34,7 +37,7 @@ export default function Pagination({ page, pages, onChange }) {
         onClick={() => onChange(page + 1)}
         className="px-3 py-2 border rounded-lg text-sm disabled:opacity-40 hover:border-gold"
       >
-        Next
+        {t('ui.next')}
       </button>
     </div>
   );

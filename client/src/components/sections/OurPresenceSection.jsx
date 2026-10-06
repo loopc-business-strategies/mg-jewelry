@@ -3,6 +3,7 @@ import { presenceImages } from '../../utils/imageConfig';
 import { useTranslation } from '../../hooks/useTranslation';
 
 function PresenceCard({ item, featured }) {
+  const { t } = useTranslation();
   return (
     <article
       className={`presence-card group relative overflow-hidden rounded-[10px] border border-border bg-white shadow-[var(--shadow-soft)] ${
@@ -12,17 +13,17 @@ function PresenceCard({ item, featured }) {
       <div className="relative h-full min-h-[240px] md:min-h-0">
         <SafeImage
           src={item.image}
-          alt={item.alt}
+          alt={t(`presenceCards.${item.id}.alt`, item.alt)}
           disableFallback
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
         />
         <div className="presence-card-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10" />
         <div className="absolute inset-x-0 bottom-0 z-10 p-4 md:p-5">
           <h3 className="presence-card-title type-card-title text-white mb-1.5">
-            {item.title}
+            {t(`presenceCards.${item.id}.title`, item.title)}
           </h3>
           <p className="type-body-sm text-white/90 leading-relaxed max-w-md">
-            {item.description}
+            {t(`presenceCards.${item.id}.description`, item.description)}
           </p>
         </div>
       </div>

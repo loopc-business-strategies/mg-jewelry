@@ -34,7 +34,7 @@ export default function AboutPage() {
       <SEOHead title={t('seo.aboutTitle')} description={t('seo.aboutDesc')} path="/about" schema={schema} />
 
       <div className="relative h-64 md:h-80 overflow-hidden bg-white">
-        <SafeImage src={aboutHero} alt="Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial" className="w-full h-full object-cover" />
+        <SafeImage src={aboutHero} alt={t('alts.aboutHero')} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-pearl/85 to-cream/50 flex items-center justify-center px-4">
           <h1 className="headline-editorial text-center">{t('about.hero')}</h1>
         </div>
@@ -68,10 +68,10 @@ export default function AboutPage() {
         <section>
           <h2 className="mb-4">{t('about.missionTitle')}</h2>
           <p className="type-body mb-4">
-            <strong className="text-charcoal font-semibold">Mission:</strong> {t('about.mission')}
+            <strong className="text-charcoal font-semibold">{t('ui.mission')}</strong> {t('about.mission')}
           </p>
           <p className="type-body">
-            <strong className="text-charcoal font-semibold">Vision:</strong> {t('about.vision')}
+            <strong className="text-charcoal font-semibold">{t('ui.vision')}</strong> {t('about.vision')}
           </p>
         </section>
 

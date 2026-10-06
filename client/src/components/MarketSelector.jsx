@@ -23,7 +23,7 @@ function RadioOption({ name, value, checked, onChange, label, flag }) {
 }
 
 export default function MarketSelector({ compact = false }) {
-  const { prefs, market, language, updatePrefs } = useMarket();
+  const { prefs, market, language, updatePrefs, t } = useMarket();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState(prefs);
 
@@ -40,7 +40,8 @@ export default function MarketSelector({ compact = false }) {
     };
   }, [open]);
 
-  const draftT = (key) => translate(draft.language, key);
+  const draftT = (key, fallback) => translate(draft.language, key, fallback);
+  const marketLabel = t(`markets.${market.id}`, market.label);
 
   const handleContinue = () => {
     updatePrefs(draft);
@@ -52,13 +53,13 @@ export default function MarketSelector({ compact = false }) {
       type="button"
       onClick={() => setOpen(true)}
       className="flex items-center gap-1.5 text-xs text-charcoal hover:text-gold transition-colors px-2 py-1 border border-border rounded-full bg-white"
-      aria-label="Select market and language"
+      aria-label={t('ui.selectMarketLanguage')}
     >
       <Globe size={14} className="text-gold" />
       <span className="hidden sm:inline">{language.short}</span>
       <span className="text-muted hidden sm:inline">|</span>
       <span>{market.flag}</span>
-      <span className="hidden md:inline max-w-[100px] truncate">{market.label}</span>
+      <span className="hidden md:inline max-w-[100px] truncate">{marketLabel}</span>
     </button>
   ) : (
     <button
@@ -67,7 +68,7 @@ export default function MarketSelector({ compact = false }) {
       className="w-full flex items-center gap-2 px-4 py-3 text-sm text-left border border-border bg-white rounded-md hover:border-gold transition-colors"
     >
       <Globe size={16} className="text-gold shrink-0" />
-      <span>{language.short} | {market.flag} {market.label}</span>
+      <span>{language.short} | {market.flag} {marketLabel}</span>
     </button>
   );
 
@@ -114,7 +115,7 @@ export default function MarketSelector({ compact = false }) {
                   value={m.id}
                   checked={draft.market === m.id}
                   onChange={() => setDraft((d) => ({ ...d, market: m.id, currency: m.currency }))}
-                  label={m.label}
+                  label={draftT(`markets.${m.id}`, m.label)}
                   flag={m.flag}
                 />
               ))}
@@ -131,7 +132,7 @@ export default function MarketSelector({ compact = false }) {
                   value={c.code}
                   checked={draft.currency === c.code}
                   onChange={() => setDraft((d) => ({ ...d, currency: c.code }))}
-                  label={c.label}
+                  label={draftT(`currencies.${c.code}`, c.label)}
                 />
               ))}
             </div>

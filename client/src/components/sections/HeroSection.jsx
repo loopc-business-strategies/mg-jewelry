@@ -16,7 +16,7 @@ export default function HeroSection() {
       <div className="absolute inset-0" aria-hidden="true">
         <SafeImage
           src={heroImage}
-          alt="Gold refinery operations — molten gold pour at Modern Gold"
+          alt={t('alts.hero')}
           disableFallback
           className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-right"
           loading="eager"

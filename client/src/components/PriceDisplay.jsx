@@ -1,5 +1,6 @@
 import { formatPrice as formatPriceBase } from '../utils/formatPrice';
 import { useMarket } from '../context/MarketContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 export function useFormatPrice() {
   const { prefs, locale } = useMarket();
@@ -13,6 +14,7 @@ export function useFormatPrice() {
 
 export default function PriceDisplay({ price, mrp, size = 'md', showEmi = false }) {
   const formatPrice = useFormatPrice();
+  const { tf } = useTranslation();
   const discount = mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0;
   const sizes = { sm: 'text-sm', md: 'text-base', lg: 'text-lg' };
 
@@ -25,14 +27,14 @@ export default function PriceDisplay({ price, mrp, size = 'md', showEmi = false 
             <span className="text-muted line-through text-sm">{formatPrice(mrp)}</span>
             {discount > 0 && (
               <span className="badge-subtle">
-                {discount}% off
+                {tf('ui.percentOff', { n: discount })}
               </span>
             )}
           </>
         )}
       </div>
       {showEmi && price > 5000 && (
-        <p className="text-xs text-muted mt-1">EMI from {formatPrice(Math.round(price / 12))}/mo</p>
+        <p className="text-xs text-muted mt-1">{tf('ui.emiFrom', { amount: formatPrice(Math.round(price / 12)) })}</p>
       )}
     </div>
   );

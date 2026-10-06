@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, Heart } from 'lucide-react';
 import ProductImage from './ProductImage';
 import { formatPrice } from '../utils/formatPrice';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function CartItem({ item, onUpdate, onRemove }) {
+  const { tf } = useTranslation();
   const product = item.productId;
   if (!product) return null;
 
@@ -14,7 +16,7 @@ export default function CartItem({ item, onUpdate, onRemove }) {
       </Link>
       <div className="flex-1">
         <Link to={`/product/${product._id}`} className="font-semibold text-charcoal text-lg hover:text-gold transition-colors">{product.name}</Link>
-        <p className="text-sm text-muted">{product.sku} {item.size && `· Size ${item.size}`}</p>
+        <p className="text-sm text-muted">{product.sku} {item.size && `· ${tf('ui.sizeLabel', { size: item.size })}`}</p>
         <p className="font-semibold mt-1">{formatPrice(product.price)}</p>
         <div className="flex items-center gap-4 mt-3">
           <div className="flex items-center border rounded-lg">

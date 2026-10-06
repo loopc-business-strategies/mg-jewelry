@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
 import { useAuth } from './AuthContext';
+import { useMarket } from './MarketContext';
 import toast from 'react-hot-toast';
 
 const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const { user } = useAuth();
+  const { t } = useMarket();
   const [wishlist, setWishlist] = useState({ products: [] });
 
   const fetchWishlist = useCallback(async () => {
@@ -22,20 +24,20 @@ export const WishlistProvider = ({ children }) => {
   useEffect(() => { fetchWishlist(); }, [fetchWishlist]);
 
   const addToWishlist = async (productId) => {
-    if (!user) { toast.error('Please login to save wishlist'); return; }
+    if (!user) { toast.error(t('wishlist.loginToSave')); return; }
     try {
       const { data } = await api.post('/wishlist', { productId });
       setWishlist(data);
-      toast.success('Added to wishlist');
+      toast.success(t('wishlist.added'));
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed');
+      toast.error(err.response?.data?.message || t('wishlist.failed'));
     }
   };
 
   const removeFromWishlist = async (productId) => {
     const { data } = await api.delete(`/wishlist/${productId}`);
     setWishlist(data);
-    toast.success('Removed from wishlist');
+    toast.success(t('wishlist.removed'));
   };
 
   const isInWishlist = (productId) =>

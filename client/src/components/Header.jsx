@@ -55,7 +55,7 @@ export default function Header() {
     <header className={`sticky top-0 z-50 bg-white transition-all duration-300 border-b border-border ${sticky ? 'shadow-[var(--shadow-soft)]' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between gap-4 h-[60px] md:h-[68px] lg:h-[72px]">
-          <button className="lg:hidden p-2 shrink-0" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
+          <button className="lg:hidden p-2 shrink-0" onClick={() => setMobileOpen(!mobileOpen)} aria-label={t('ui.menu')}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
@@ -89,10 +89,10 @@ export default function Header() {
             <div className="hidden md:block">
               <MarketSelector compact />
             </div>
-            <button onClick={() => setSearchOpen(!searchOpen)} className="p-2.5 text-charcoal hover:text-gold transition-colors" aria-label="Search">
+            <button onClick={() => setSearchOpen(!searchOpen)} className="p-2.5 text-charcoal hover:text-gold transition-colors" aria-label={t('ui.search')}>
               <Search size={18} strokeWidth={1.5} />
             </button>
-            <Link to="/wishlist" className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label="Wishlist">
+            <Link to="/wishlist" className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label={t('ui.wishlist')}>
               <Heart size={18} strokeWidth={1.5} />
               {wishlistCount > 0 && (
                 <span className="absolute top-1 right-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
@@ -100,10 +100,10 @@ export default function Header() {
                 </span>
               )}
             </Link>
-            <Link to={user ? '/profile' : '/login'} className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors" aria-label="Account">
+            <Link to={user ? '/profile' : '/login'} className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors" aria-label={t('ui.account')}>
               <User size={18} strokeWidth={1.5} />
             </Link>
-            <Link to="/cart" className="p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label="Cart">
+            <Link to="/cart" className="p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label={t('ui.cart')}>
               <ShoppingBag size={18} strokeWidth={1.5} />
               {cartCount > 0 && (
                 <span className="absolute top-1 right-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
@@ -140,9 +140,9 @@ export default function Header() {
             <Link to="/shop" className="type-body-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
               {t('nav.collections')}
             </Link>
-            <Link to="/wishlist" className="type-body-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>Wishlist</Link>
+            <Link to="/wishlist" className="type-body-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>{t('ui.wishlist')}</Link>
             <Link to={user ? '/profile' : '/login'} className="type-body-sm py-3" onClick={() => setMobileOpen(false)}>
-              {user ? 'My Account' : 'Login'}
+              {user ? t('ui.myAccount') : t('ui.login')}
             </Link>
             <Link
               to={sellGoldCta.path}

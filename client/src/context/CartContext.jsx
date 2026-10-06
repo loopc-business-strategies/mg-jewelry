@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
 import { useAuth } from './AuthContext';
+import { useMarket } from './MarketContext';
 import toast from 'react-hot-toast';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
+  const { t } = useMarket();
   const [cart, setCart] = useState({ items: [] });
   const [loading, setLoading] = useState(false);
 
@@ -31,15 +33,15 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productId, quantity = 1, size = 'Standard') => {
     if (!user) {
-      toast.error('Please login to add items to cart');
+      toast.error(t('cart.loginToAdd'));
       return;
     }
     try {
       const { data } = await api.post('/cart', { productId, quantity, size });
       setCart(data);
-      toast.success('Added to cart');
+      toast.success(t('cart.added'));
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to add to cart');
+      toast.error(err.response?.data?.message || t('cart.addFailed'));
     }
   };
 
@@ -51,7 +53,7 @@ export const CartProvider = ({ children }) => {
   const removeItem = async (itemId) => {
     const { data } = await api.delete(`/cart/${itemId}`);
     setCart(data);
-    toast.success('Item removed');
+    toast.success(t('cart.removed'));
   };
 
   const cartCount = cart.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;

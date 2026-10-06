@@ -5,6 +5,7 @@ import { useTranslation } from '../../hooks/useTranslation';
 export default function OurManufacturingSection() {
   const { t } = useTranslation();
   const stepLabels = t('manufacturing.steps') || [];
+  const stepAlts = t('manufacturing.alts') || [];
 
   return (
     <section className="section-white py-16 md:py-20 px-4 md:px-8">
@@ -16,7 +17,7 @@ export default function OurManufacturingSection() {
               <div className="w-full aspect-square rounded-xl overflow-hidden">
                 <SafeImage
                   src={src}
-                  alt={alt}
+                  alt={(Array.isArray(stepAlts) && stepAlts[i]) || alt}
                   disableFallback
                   className="w-full h-full object-cover"
                 />

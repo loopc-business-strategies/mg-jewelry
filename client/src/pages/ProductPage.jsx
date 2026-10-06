@@ -68,7 +68,7 @@ export default function ProductPage() {
 
   const checkDelivery = () => {
     if (pincode.length === 6) {
-      setDelivery({ date: '3-5 business days', available: true });
+      setDelivery({ available: true });
     } else {
       toast.error(t('product.invalidPincode'));
     }
@@ -191,7 +191,7 @@ export default function ProductPage() {
                 <input type="text" placeholder={t('product.enterPincode')} maxLength={6} value={pincode} onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))} className="flex-1 input-elegant" />
                 <button onClick={checkDelivery} className="bg-gold text-white px-4 py-2 rounded-lg text-sm">{t('product.check')}</button>
               </div>
-              {delivery && <p className="text-sm text-green-600 mt-2">✓ {tf('product.deliveryIn', { date: delivery.date })}</p>}
+              {delivery && <p className="text-sm text-green-600 mt-2">✓ {tf('product.deliveryIn', { date: t('ui.deliveryDays') })}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-sm">
@@ -216,7 +216,7 @@ export default function ProductPage() {
             {tab === 'details' && <p>{product.description}</p>}
             {tab === 'specs' && (
               <dl className="grid grid-cols-2 gap-4">
-                <div><dt className="font-medium text-charcoal">SKU</dt><dd>{product.sku}</dd></div>
+                <div><dt className="font-medium text-charcoal">{t('ui.sku')}</dt><dd>{product.sku}</dd></div>
                 <div><dt className="font-medium text-charcoal">{t('product.metal')}</dt><dd>{product.metal}</dd></div>
                 <div><dt className="font-medium text-charcoal">{t('product.purity')}</dt><dd>{product.purity}</dd></div>
                 <div><dt className="font-medium text-charcoal">{t('product.weight')}</dt><dd>{product.weight || t('product.na')}</dd></div>

@@ -6,7 +6,7 @@ import SafeImage from './SafeImage';
 import { useTranslation } from '../hooks/useTranslation';
 
 function CategoryCard({ name, slug }) {
-  const { t } = useTranslation();
+  const { t, tf } = useTranslation();
   const displayName = t(`categories.${slug}`) || name;
   return (
     <Link
@@ -16,7 +16,7 @@ function CategoryCard({ name, slug }) {
       <div className="category-carousel-image editorial-image-card relative bg-white">
         <SafeImage
           src={categoryImages[slug] || categoryImages.chains}
-          alt={`${displayName} — luxury gold jewelry editorial by Modern Gold Jewelry`}
+          alt={tf('alts.categoryEditorial', { title: displayName })}
           category={slug}
           className="w-full h-full object-cover"
         />
@@ -34,6 +34,7 @@ function CategoryCard({ name, slug }) {
 }
 
 export default function CategoryCarousel({ categories }) {
+  const { t } = useTranslation();
   const trackRef = useRef(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
@@ -116,7 +117,7 @@ export default function CategoryCarousel({ categories }) {
         onClick={() => { scrollByCard(-1); setIsPaused(true); setTimeout(() => setIsPaused(false), 3000); }}
         disabled={!canPrev}
         className="carousel-nav-btn absolute left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-1/2 hidden sm:flex"
-        aria-label="Previous categories"
+        aria-label={t('ui.prev')}
       >
         <ChevronLeft size={18} />
       </button>
@@ -139,7 +140,7 @@ export default function CategoryCarousel({ categories }) {
         onClick={() => { scrollByCard(1); setIsPaused(true); setTimeout(() => setIsPaused(false), 3000); }}
         disabled={!canNext}
         className="carousel-nav-btn absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-1/2 hidden sm:flex"
-        aria-label="Next categories"
+        aria-label={t('ui.next')}
       >
         <ChevronRight size={18} />
       </button>
@@ -150,7 +151,7 @@ export default function CategoryCarousel({ categories }) {
           onClick={() => scrollByCard(-1)}
           disabled={!canPrev}
           className="carousel-nav-btn flex"
-          aria-label="Previous categories"
+          aria-label={t('ui.prev')}
         >
           <ChevronLeft size={18} />
         </button>
@@ -159,7 +160,7 @@ export default function CategoryCarousel({ categories }) {
           onClick={() => scrollByCard(1)}
           disabled={!canNext}
           className="carousel-nav-btn flex"
-          aria-label="Next categories"
+          aria-label={t('ui.next')}
         >
           <ChevronRight size={18} />
         </button>

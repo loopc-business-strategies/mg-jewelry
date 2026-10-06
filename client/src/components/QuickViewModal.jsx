@@ -5,9 +5,11 @@ import ProductImage from './ProductImage';
 import PriceDisplay from './PriceDisplay';
 import WishlistButton from './WishlistButton';
 import { useCart } from '../context/CartContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function QuickViewModal({ product, onClose }) {
   const { addToCart } = useCart();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -28,7 +30,7 @@ export default function QuickViewModal({ product, onClose }) {
         className="relative bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full hover:bg-cream z-10" aria-label="Close">
+        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full hover:bg-cream z-10" aria-label={t('ui.close')}>
           <X size={20} />
         </button>
         <div className="grid md:grid-cols-2 gap-6 p-6">
@@ -47,12 +49,12 @@ export default function QuickViewModal({ product, onClose }) {
                 onClick={() => { addToCart(product._id); onClose(); }}
                 className="btn-card-cart py-2 px-4 text-[10px]"
               >
-                <ShoppingBag size={12} /> Add to Cart
+                <ShoppingBag size={12} /> {t('ui.addToCart')}
               </button>
               <WishlistButton productId={product._id} />
             </div>
             <Link to={`/product/${product._id}`} onClick={onClose} className="text-center text-sm text-gold-dark mt-4 hover:underline">
-              View Full Details →
+              {t('ui.viewFullDetails')}
             </Link>
           </div>
         </div>

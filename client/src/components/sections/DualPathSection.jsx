@@ -67,7 +67,7 @@ export default function DualPathSection() {
             variant="sell"
             icon={Users}
             image={dualPathImages.sellGold}
-            imageAlt="Hands holding polished gold chains — sell your gold at Modern Gold"
+            imageAlt={t('alts.sellGoldPath')}
             title={t('dualPath.localTitle')}
             description={t('dualPath.localDesc')}
             ctaTo="/gold-buying"
@@ -78,7 +78,7 @@ export default function DualPathSection() {
             variant="buy"
             icon={Globe2}
             image={dualPathImages.buyGold}
-            imageAlt="Business handshake — become a wholesale buyer with Modern Gold"
+            imageAlt={t('alts.buyerPath')}
             title={t('dualPath.intlTitle')}
             description={t('dualPath.intlDesc')}
             ctaTo="/wholesale/register"

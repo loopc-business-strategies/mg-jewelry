@@ -1,9 +1,9 @@
 export const languages = [
   { code: 'en', label: 'English', short: 'EN' },
-  { code: 'uz', label: 'Uzbek', short: 'UZ' },
-  { code: 'ar', label: 'Arabic', short: 'AR' },
-  { code: 'ru', label: 'Russian', short: 'RU' },
-  { code: 'tr', label: 'Turkish', short: 'TR' },
+  { code: 'uz', label: 'Oʻzbekcha', short: 'UZ' },
+  { code: 'ar', label: 'العربية', short: 'AR' },
+  { code: 'ru', label: 'Русский', short: 'RU' },
+  { code: 'tr', label: 'Türkçe', short: 'TR' },
 ];
 
 export const markets = [

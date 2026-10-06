@@ -22,7 +22,7 @@ export default function AboutPreviewSection() {
           <Link to="/about" className="type-body-sm font-medium text-gold hover:underline">{t('home.aboutPreview.link')}</Link>
         </div>
         <div className="rounded-2xl overflow-hidden shadow-lg border border-border">
-          <SafeImage src={aboutHero} alt="Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial" className="w-full aspect-[4/3] object-cover" />
+          <SafeImage src={aboutHero} alt={t('alts.aboutHero')} className="w-full aspect-[4/3] object-cover" />
         </div>
       </div>
     </section>

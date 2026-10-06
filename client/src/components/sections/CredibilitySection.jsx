@@ -11,7 +11,7 @@ export default function CredibilitySection() {
         <div className="text-center mb-10">
           <p className="section-eyebrow">{t('credibility.eyebrow')}</p>
           <h2 className="type-section-title mb-2">{t('credibility.title')}</h2>
-          <p className="type-body-sm">{brand.legalName} · {brand.location}</p>
+          <p className="type-body-sm">{brand.legalName} · {t('ui.location', brand.location)}</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border border border-border rounded-xl overflow-hidden">
           {(Array.isArray(points) ? points : credibilityPoints).map((point, i) => (

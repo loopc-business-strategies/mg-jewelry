@@ -118,6 +118,10 @@ export const translations = {
       businessType: 'Business Type',
       taxId: 'Tax ID / Registration No.',
       businessAddress: 'Business Address',
+      name: 'Full Name',
+      state: 'State / Region',
+      pincode: 'Postal Code',
+      website: 'Website',
     },
     steps: {
       goldBuying: [
@@ -372,6 +376,10 @@ export const translations = {
       businessType: 'Тип бизнеса',
       taxId: 'ИНН / Рег. номер',
       businessAddress: 'Адрес компании',
+      name: 'Полное имя',
+      state: 'Область / Регион',
+      pincode: 'Почтовый индекс',
+      website: 'Веб-сайт',
     },
     steps: {
       goldBuying: [
@@ -626,6 +634,10 @@ export const translations = {
       businessType: 'Biznes turi',
       taxId: 'Soliq ID / Ro\'yxat raqami',
       businessAddress: 'Biznes manzili',
+      name: 'To\'liq ism',
+      state: 'Viloyat / Hudud',
+      pincode: 'Pochta indeksi',
+      website: 'Veb-sayt',
     },
     steps: {
       goldBuying: [
@@ -880,6 +892,10 @@ export const translations = {
       businessType: 'نوع النشاط',
       taxId: 'الرقم الضريبي / رقم التسجيل',
       businessAddress: 'عنوان الشركة',
+      name: 'الاسم الكامل',
+      state: 'الولاية / المنطقة',
+      pincode: 'الرمز البريدي',
+      website: 'الموقع الإلكتروني',
     },
     steps: {
       goldBuying: [
@@ -1134,6 +1150,10 @@ export const translations = {
       businessType: 'İş Türü',
       taxId: 'Vergi No / Kayıt No',
       businessAddress: 'İş Adresi',
+      name: 'Ad Soyad',
+      state: 'Eyalet / Bölge',
+      pincode: 'Posta Kodu',
+      website: 'Web Sitesi',
     },
     steps: {
       goldBuying: [

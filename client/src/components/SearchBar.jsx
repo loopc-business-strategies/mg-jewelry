@@ -4,8 +4,10 @@ import { Search } from 'lucide-react';
 import api from '../services/api';
 import { formatPrice } from '../utils/formatPrice';
 import SafeImage from './SafeImage';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function SearchBar({ onClose }) {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ export default function SearchBar({ onClose }) {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search jewellery, categories, metals..."
+          placeholder={t('ui.searchPlaceholder')}
           className="w-full pl-11 pr-4 py-3 border border-border rounded-md min-h-[44px] focus:outline-none focus:border-border text-sm"
           autoFocus
         />
@@ -53,7 +55,7 @@ export default function SearchBar({ onClose }) {
               {s.image && <SafeImage src={s.image} alt="" category={s.category} className="w-10 h-10 rounded object-cover" />}
               <div>
                 <p className="text-sm font-medium">{s.name}</p>
-                <p className="text-xs text-muted">{s.category} · {formatPrice(s.price)}</p>
+                <p className="text-xs text-muted">{t(`categories.${s.category}`, s.category)} · {formatPrice(s.price)}</p>
               </div>
             </button>
           ))}

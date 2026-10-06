@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import api from '../services/api';
 import ProductGrid from './ProductGrid';
 import LoadingSkeleton from './LoadingSkeleton';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function RecentlyViewed({ excludeId }) {
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function RecentlyViewed({ excludeId }) {
 
   return (
     <section className="mt-16">
-      <h2 className="type-card-title mb-6">Recently Viewed</h2>
+      <h2 className="type-card-title mb-6">{t('ui.recentlyViewed')}</h2>
       <ProductGrid products={products} />
     </section>
   );

@@ -22,7 +22,7 @@ export default function OurMGAppExperienceSection() {
               key={screen.id}
               screen={screen.id}
               placeholderNumber={screen.number}
-              placeholderName={screen.name}
+              placeholderName={t(`ourMgScreens.${screen.id}`, screen.name)}
             />
           ))}
         </div>

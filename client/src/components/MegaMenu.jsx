@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function MegaMenu({ onClose }) {
   const [categories, setCategories] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     api.get('/categories').then(({ data }) => setCategories(data.slice(0, 11))).catch(() => {});
@@ -19,7 +21,7 @@ export default function MegaMenu({ onClose }) {
               className="text-lg font-semibold text-charcoal hover:text-gold transition-colors mb-2 block"
               onClick={onClose}
             >
-              {cat.name}
+              {t(`categories.${cat.slug}`, cat.name)}
             </Link>
             <ul className="space-y-1">
               {cat.subcategories?.slice(0, 6).map((sub) => (
@@ -39,7 +41,7 @@ export default function MegaMenu({ onClose }) {
       </div>
       <div className="mt-4 pt-4 border-t border-border flex justify-center">
         <Link to="/shop" className="text-sm text-gold font-medium hover:underline" onClick={onClose}>
-          View All Jewellery →
+          {t('ui.viewAllJewellery')}
         </Link>
       </div>
     </div>

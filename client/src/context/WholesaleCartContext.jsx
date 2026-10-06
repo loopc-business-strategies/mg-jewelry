@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
 import { useAuth } from './AuthContext';
+import { useMarket } from './MarketContext';
 import toast from 'react-hot-toast';
 
 const WholesaleCartContext = createContext();
 
 export const WholesaleCartProvider = ({ children }) => {
   const { user, isWholesaleApproved } = useAuth();
+  const { t } = useMarket();
   const [cart, setCart] = useState({ items: [], subtotal: 0, total: 0 });
   const [loading, setLoading] = useState(false);
 
@@ -29,9 +31,9 @@ export const WholesaleCartProvider = ({ children }) => {
     try {
       const { data } = await api.post('/wholesale/cart', { productId, quantity });
       setCart(data);
-      toast.success('Added to bulk order');
+      toast.success(t('wholesaleCart.added'));
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to add');
+      toast.error(err.response?.data?.message || t('wholesaleCart.addFailed'));
     }
   };
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ourMgScreens } from '../../utils/imageConfig';
 import AppScreenshotPlaceholder from './AppScreenshotPlaceholder';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export default function PhoneMockup({
   screen,
@@ -10,6 +11,7 @@ export default function PhoneMockup({
   large = false,
 }) {
   const [failed, setFailed] = useState(false);
+  const { t, tf } = useTranslation();
   const src = ourMgScreens[screen];
   const showPlaceholder = !src || failed;
 
@@ -34,7 +36,7 @@ export default function PhoneMockup({
         </div>
         <div className="phone-mockup-screen">
           <AppScreenshotPlaceholder
-            label={placeholderNumber ? `APP SCREENSHOT ${placeholderNumber}` : 'APP SCREENSHOT'}
+            label={placeholderNumber ? tf('ui.appScreenshotN', { n: placeholderNumber }) : t('ui.appScreenshot')}
             name={placeholderName}
           />
         </div>

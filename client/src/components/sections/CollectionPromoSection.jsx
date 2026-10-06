@@ -11,7 +11,7 @@ export default function CollectionPromoSection() {
     <section className="section-cream overflow-hidden border-y border-border">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 min-h-[420px]">
         <div className="relative hidden md:block">
-          <SafeImage src={premiumBanner} alt="Woman wearing premium gold jewelry — Modern Glamour Collection editorial" className="w-full h-full object-cover" />
+          <SafeImage src={premiumBanner} alt={t('alts.collectionPromo')} className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col justify-center px-8 md:px-16 py-16 md:py-20">
           <p className="section-eyebrow">{t('home.collectionPromo.eyebrow')}</p>
@@ -29,7 +29,7 @@ export default function CollectionPromoSection() {
           </Link>
         </div>
         <div className="relative md:hidden aspect-video">
-          <SafeImage src={premiumBanner} alt="Woman wearing premium gold jewelry — Modern Glamour Collection editorial" className="w-full h-full object-cover" />
+          <SafeImage src={premiumBanner} alt={t('alts.collectionPromo')} className="w-full h-full object-cover" />
         </div>
       </div>
     </section>

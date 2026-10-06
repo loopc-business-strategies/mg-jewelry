@@ -14,7 +14,7 @@ export default function OurMGSellGoldSection() {
         <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-border shadow-[var(--shadow-soft)]">
           <SafeImage
             src={ourMgEditorial.sellGold}
-            alt="Sell gold through Modern Gold"
+            alt={t('alts.ourMgSell')}
             className="w-full aspect-[4/3] object-cover"
           />
         </div>

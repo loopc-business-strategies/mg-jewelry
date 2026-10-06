@@ -51,15 +51,15 @@ export default function CategoryPage() {
       .finally(() => setLoading(false));
   }, [slug, searchParams, lang]);
 
-  const title = category?.name || t(`categories.${slug}`) || slug?.replace(/-/g, ' ');
+  const title = t(`categories.${slug}`) || category?.name || slug?.replace(/-/g, ' ');
   const heroImage = getCategoryImage(slug);
-  const heroAlt = `${title} — luxury gold jewelry editorial by Modern Gold Jewelry`;
+  const heroAlt = tf('alts.categoryEditorial', { title });
 
   return (
     <>
       <SEOHead
         title={category?.seoTitle || title}
-        description={category?.seoDescription || `Shop premium ${title} from Modern Gold Jewelry — international jewelry manufacturer.`}
+        description={category?.seoDescription || tf('seo.categoryDesc', { title })}
         path={`/shop/${slug}`}
       />
 

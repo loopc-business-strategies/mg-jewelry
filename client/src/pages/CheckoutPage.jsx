@@ -196,7 +196,7 @@ export default function CheckoutPage() {
               <Check size={32} className="text-green-600" />
             </div>
             <h2 className="type-card-title">{t('checkout.orderConfirmed')}</h2>
-            <p className="text-muted">Order #{order.orderNumber}</p>
+            <p className="text-muted">{tf('ui.orderNumber', { n: order.orderNumber })}</p>
             <p className="text-sm">{t('cart.total')}: {formatPrice(order.total)}</p>
             <Link to="/shop" className="inline-block btn-primary-gold text-xs mt-4">{t('cart.continueShopping')}</Link>
           </div>

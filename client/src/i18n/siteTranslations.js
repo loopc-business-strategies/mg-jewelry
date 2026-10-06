@@ -1,3 +1,8 @@
+import ru from './site/ru.js';
+import uz from './site/uz.js';
+import ar from './site/ar.js';
+import tr from './site/tr.js';
+
 /** Site-wide UI translations merged into translate() lookup */
 export const siteTranslations = {
   en: {
@@ -7,6 +12,11 @@ export const siteTranslations = {
       homeDesc: 'Modern Gold Jewelry — connecting Central Asian gold to global markets through mining, refinery operations, jewelry manufacturing and international trade.',
       aboutTitle: 'About Us',
       aboutDesc: 'Modern Gold Jewelry Manufacturing FE LLC — jewelry manufacturing from Namangan, Uzbekistan, serving international markets.',
+      defaultSuffix: 'International Jewelry Manufacturing',
+      defaultDesc: 'Crafted in Uzbekistan. Connected to the World. An integrated gold company — from mining and refinery operations to precision jewelry manufacturing.',
+      goldBuyingDesc: 'We would like to buy gold and take it across the globe. Partner with Modern Gold in Namangan, Uzbekistan. Share your contact and one of our representatives will contact you.',
+      homeSchemaDesc: 'Local gold buying and international jewellery manufacturing from Namangan, Uzbekistan.',
+      categoryDesc: 'Shop premium {title} from Modern Gold Jewelry — international jewelry manufacturer.',
     },
     home: {
       hero: {
@@ -86,6 +96,13 @@ export const siteTranslations = {
     manufacturing: {
       title: 'Our Manufacturing',
       steps: ['Melting & Refining', 'Chain Making', 'Bangle Making', 'Polishing', 'Quality Control'],
+      alts: [
+        'Molten metal being poured during refining',
+        'Jeweler crafting a gold chain in the workshop',
+        'Artisan making bangles at a jewelry workbench',
+        'Jeweler inspecting jewelry quality at a workbench',
+        'Jeweler packing finished jewelry into a gift box',
+      ],
     },
     categories: { chains: 'Chains', bangles: 'Bangles', jewellery: 'Jewellery', all: 'All' },
     shop: {
@@ -130,6 +147,7 @@ export const siteTranslations = {
       removeCoupon: 'Remove coupon', subtotal: 'Subtotal', savings: 'Product savings', coupon: 'Coupon', shipping: 'Shipping',
       tax: 'Tax (3%)', total: 'Total', free: 'Free', checkout: 'Proceed to Checkout',
       couponApplied: 'Coupon applied!', couponInvalid: 'Invalid coupon', couponRemoved: 'Coupon removed', couponRemoveFailed: 'Failed to remove coupon',
+      loginToAdd: 'Please login to add items to cart', added: 'Added to cart', addFailed: 'Failed to add to cart', removed: 'Item removed',
     },
     checkout: {
       seoTitle: 'Checkout', title: 'Checkout', empty: 'Your cart is empty',
@@ -142,7 +160,10 @@ export const siteTranslations = {
       processing: 'Processing...', pay: 'Pay {amount}', orderConfirmed: 'Order Confirmed!', orderPlaced: 'Order placed successfully!',
       paymentSuccess: 'Payment successful!', orderFailed: 'Failed to place order',
     },
-    wishlist: { seoTitle: 'Wishlist', eyebrow: 'Saved', title: 'My Wishlist', emptyTitle: 'Your wishlist is empty', emptyDesc: 'Save your favourite jewellery pieces here.', explore: 'Explore Jewellery' },
+    wishlist: {
+      seoTitle: 'Wishlist', eyebrow: 'Saved', title: 'My Wishlist', emptyTitle: 'Your wishlist is empty', emptyDesc: 'Save your favourite jewellery pieces here.', explore: 'Explore Jewellery',
+      loginToSave: 'Please login to save wishlist', added: 'Added to wishlist', removed: 'Removed from wishlist', failed: 'Failed',
+    },
     search: { seoTitle: 'Search: {q}', seoDesc: 'Search results for {q}', eyebrow: 'Search', title: 'Search Results', showing: 'Showing results for "{q}"', enterTerm: 'Enter a search term', emptyTitle: 'No results found', emptyDesc: 'Try different keywords.', browseAll: 'Browse All' },
     contact: {
       seoDesc: 'Contact Modern Gold Jewelry Manufacturing FE LLC for wholesale orders, custom manufacturing and international partnerships.',
@@ -197,234 +218,136 @@ export const siteTranslations = {
         { title: 'Product Development', desc: 'From prototype to production — full development support for new lines.' },
       ],
       cta: 'Discuss Your Collection',
+      seoSuffix: '{company} in Uzbekistan.',
     },
     blog: { seoTitle: 'Blog', seoDesc: 'Jewellery guides, buying tips, and fashion trends.', title: 'Jewellery Journal' },
     wholesaleShop: { seoTitle: 'Wholesale Shop', title: 'Wholesale Collection', registerNote: 'Register & get approved', registerNoteSuffix: 'to view wholesale pricing', bulkCart: 'Bulk Cart' },
     common: { shop: 'Shop', free: 'Free', loading: 'Loading...', viewAll: 'View All Products', submitting: 'Submitting...' },
+    ui: {
+      menu: 'Menu', search: 'Search', wishlist: 'Wishlist', account: 'Account', myAccount: 'My Account', login: 'Login', cart: 'Cart', close: 'Close',
+      selectMarketLanguage: 'Select market and language',
+      viewAllJewellery: 'View All Jewellery →', viewProduct: 'View Product', addToCart: 'Add to Cart', viewFullDetails: 'View Full Details →',
+      searchPlaceholder: 'Search jewellery, categories, metals...', prev: 'Prev', next: 'Next', sizeLabel: 'Size {size}',
+      recentlyViewed: 'Recently Viewed', percentOff: '{n}% off', emiFrom: 'EMI from {amount}/mo', fineJewelry: 'Fine Jewelry',
+      home: 'Home', breadcrumb: 'Breadcrumb', addToWishlist: 'Add to wishlist', removeFromWishlist: 'Remove from wishlist',
+      appScreenshot: 'APP SCREENSHOT', appScreenshotN: 'APP SCREENSHOT {n}',
+      itemsCount: '{n} items', orderNumber: 'Order #{n}', sku: 'SKU', deliveryDays: '3-5 business days',
+      mission: 'Mission:', vision: 'Vision:', backToBlog: '← Back to Blog', byAuthor: 'By {author}', location: 'Namangan, Uzbekistan',
+    },
+    wholesaleCard: {
+      sku: 'SKU: {sku}', retail: 'Retail:', wholesale: 'Wholesale:', loginForPricing: 'Login for wholesale pricing',
+      moqStock: 'MOQ: {moq} pieces · Stock: {stock}', addToBulk: 'Add to Bulk Order',
+    },
+    wholesaleInquiry: {
+      success: 'Inquiry submitted! We will contact you soon.', failed: 'Failed to submit inquiry',
+      businessName: 'Business Name', contactPerson: 'Contact Person', email: 'Email', phone: 'Phone', city: 'City', state: 'State',
+      businessType: 'Business Type', gstNumber: 'GST Number', categoryInterested: 'Category Interested In',
+      expectedMonthlyQuantity: 'Expected Monthly Quantity', message: 'Message', submit: 'REQUEST WHOLESALE PRICING',
+    },
+    wholesalePage: {
+      seoTitle: 'Wholesale Jewellery for International Buyers',
+      seoDesc: 'Gold traders, jewellers and wholesalers — source jewellery from Modern Gold, Namangan, Uzbekistan.',
+      heroTitle: 'Wholesale Jewellery for International Buyers',
+      hq: 'Central Asia HQ · Namangan, Uzbekistan',
+      becomePartner: 'Become a Wholesale Partner', viewCollection: 'View Wholesale Collection',
+      whyTitle: 'Why Wholesale With Us',
+      benefits: ['Competitive wholesale pricing', 'Bulk order discounts', 'Wide product selection', 'Reliable supply', 'Fast dispatch', 'Dedicated business support', 'Custom orders', 'Retailer-friendly margins'],
+      categoriesTitle: 'Wholesale Categories', collectionsTitle: 'Wholesale Collections', viewCatalogue: 'View Full Wholesale Catalogue →',
+      bulkTitle: 'Bulk Pricing', tierRange: '{min}–{max} pieces', tierRangePlus: '{min}+ pieces', tierOff: '{n}% off',
+      tierLabels: ['Level 1', 'Level 2', 'Level 3', 'Special Pricing'],
+      catalogueTitle: 'Download Wholesale Catalogue',
+      catalogueDesc: 'Request our complete wholesale catalogue with pricing, MOQ details, and product specifications.',
+      catalogueCta: 'REQUEST CATALOGUE', catalogueToast: 'Catalogue request submitted! We will email you shortly.',
+      pricingTitle: 'Request Wholesale Pricing', supportTitle: 'Dedicated Wholesale Support',
+      supportQuote: 'Request a quote via contact form', supportBusiness: 'Business inquiry',
+      faqTitle: 'Wholesale FAQ',
+      faqs: [
+        { q: 'How do I become a wholesale partner?', a: 'Fill out the registration form and our team will review your application within 2-3 business days.' },
+        { q: 'What is the minimum order quantity?', a: 'MOQ varies by product, typically starting at 10 pieces per design.' },
+        { q: 'Do you offer custom designs?', a: 'Yes, we accept custom orders for approved wholesale partners.' },
+      ],
+    },
+    wholesaleDashboard: {
+      title: 'Wholesale Dashboard', placed: 'Wholesale order placed!', failed: 'Failed',
+      tabs: { overview: 'Overview', orders: 'Orders', 'bulk-cart': 'Bulk Cart', support: 'Support' },
+      businessType: 'Business Type', gst: 'GST', na: 'N/A', city: 'City', expectedPurchase: 'Expected Purchase',
+      noOrders: 'No wholesale orders yet', total: 'Total', placeOrder: 'Place Wholesale Order',
+      cartEmpty: 'Bulk cart is empty.', browse: 'Browse collection',
+      phone: 'Phone: {phone}', enquiryLink: 'Submit a business enquiry via our contact form', hours: 'Hours: Mon – Sat, 10 AM – 8 PM',
+    },
+    wholesaleRegister: {
+      title: 'Wholesale Registration',
+      subtitle: 'International jewellers, gold traders and wholesalers — apply to partner with Modern Gold',
+      expectedMonthlyPurchase: 'Expected Monthly Purchase', state: 'State / Region', postalCode: 'Postal Code',
+      submitted: 'Application submitted! Pending approval.', failed: 'Registration failed',
+    },
+    resetPassword: {
+      title: 'Set New Password', newPassword: 'New password', confirmPassword: 'Confirm password',
+      updating: 'Updating...', update: 'Update Password', mismatch: 'Passwords do not match', invalidLink: 'Invalid reset link',
+      success: 'Password updated! Please login.', failed: 'Failed to reset password',
+    },
+    wholesaleCart: { added: 'Added to bulk order', addFailed: 'Failed to add' },
+    status: {
+      pending_payment: 'Pending payment', payment_failed: 'Payment failed', paid: 'Paid', pending: 'Pending', confirmed: 'Confirmed',
+      processing: 'Processing', quality_check: 'Quality check', packed: 'Packed', shipped: 'Shipped', delivered: 'Delivered',
+      cancelled: 'Cancelled', return_requested: 'Return requested', returned: 'Returned', refund_pending: 'Refund pending', refunded: 'Refunded',
+      failed: 'Failed', approved: 'Approved', rejected: 'Rejected', suspended: 'Suspended',
+    },
+    presenceCards: {
+      showroom: { title: 'SHOWROOM & OFFICE', description: 'A professional space for welcoming customers, partners and international business visitors.', alt: 'Showroom and business office — demo corporate photography' },
+      manufacturing: { title: 'MANUFACTURING', description: 'Skilled craftsmanship and production processes supporting our gold jewellery operations.', alt: 'Gold jewellery manufacturing workshop — demo photography' },
+      team: { title: 'OUR PEOPLE', description: 'Experienced professionals working across production, quality, business development and customer relationships.', alt: 'Professional business team in meeting — demo corporate photography' },
+      quality: { title: 'QUALITY & OPERATIONS', description: 'Careful inspection, weighing and quality-focused processes across our gold operations.', alt: 'Gold quality inspection and weighing — demo photography' },
+    },
+    ourMgScreens: { home: 'Our MG', products: 'Products', orders: 'Orders', profile: 'Profile', bookings: 'Bookings' },
+    alts: {
+      hero: 'Gold refinery operations — molten gold pour at Modern Gold',
+      sellGoldPath: 'Hands holding polished gold chains — sell your gold at Modern Gold',
+      buyerPath: 'Business handshake — become a wholesale buyer with Modern Gold',
+      aboutHero: 'Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial',
+      customHero: 'Woman wearing luxury gold jewelry set — custom jewelry editorial',
+      collectionPromo: 'Woman wearing premium gold jewelry — Modern Glamour Collection editorial',
+      ourMgSell: 'Sell gold through Modern Gold',
+      ourMgBuy: 'Gold products available through Modern Gold',
+      editorial: '{title} — Modern Gold Jewelry editorial collection',
+      categoryEditorial: '{title} — luxury gold jewelry editorial by Modern Gold Jewelry',
+    },
+    markets: {
+      uzbekistan: 'Uzbekistan', 'central-asia': 'Central Asia', russia: 'Russia', 'united-kingdom': 'United Kingdom', singapore: 'Singapore',
+      malaysia: 'Malaysia', 'hong-kong': 'Hong Kong', 'united-states': 'United States', 'dubai-uae': 'Dubai / UAE',
+    },
+    currencies: {
+      UZS: 'Uzbek Som (UZS)', USD: 'US Dollar (USD)', RUB: 'Russian Ruble (RUB)', GBP: 'British Pound (GBP)', SGD: 'Singapore Dollar (SGD)',
+      MYR: 'Malaysian Ringgit (MYR)', HKD: 'Hong Kong Dollar (HKD)', AED: 'UAE Dirham (AED)', INR: 'Indian Rupee (INR)',
+    },
+    countries: {
+      Uzbekistan: 'Uzbekistan', Kazakhstan: 'Kazakhstan', Kyrgyzstan: 'Kyrgyzstan', Tajikistan: 'Tajikistan', Turkmenistan: 'Turkmenistan',
+      Russia: 'Russia', 'United Kingdom': 'United Kingdom', 'United States': 'United States', 'United Arab Emirates': 'United Arab Emirates',
+      Singapore: 'Singapore', Malaysia: 'Malaysia', 'Hong Kong': 'Hong Kong', India: 'India', Turkey: 'Turkey', Germany: 'Germany',
+      France: 'France', Italy: 'Italy', China: 'China', Other: 'Other',
+    },
+    businessTypes: {
+      Jeweller: 'Jeweller', 'Gold Trader': 'Gold Trader', Wholesaler: 'Wholesaler', Distributor: 'Distributor',
+      Manufacturer: 'Manufacturer', Retailer: 'Retailer', Other: 'Other',
+    },
   },
 };
 
-// Mirror EN structure for other locales with proper translations
-const mirror = (en, map) => {
-  const out = JSON.parse(JSON.stringify(en));
-  const walk = (obj, path = '') => {
-    for (const k of Object.keys(obj)) {
-      const p = path ? `${path}.${k}` : k;
-      if (map[p] !== undefined) obj[k] = map[p];
-      else if (typeof obj[k] === 'object' && obj[k] !== null && !Array.isArray(obj[k])) walk(obj[k], p);
-    }
-  };
-  walk(out);
+// Each locale file mirrors the EN structure; deep-merging over EN keeps any missed key in English instead of blank.
+const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+
+const deepMerge = (base, override) => {
+  const out = { ...base };
+  for (const [key, value] of Object.entries(override || {})) {
+    out[key] = isPlainObject(value) && isPlainObject(base?.[key]) ? deepMerge(base[key], value) : value;
+  }
   return out;
 };
 
-// Russian
-siteTranslations.ru = mirror(siteTranslations.en, {
-  'brand.tagline': 'Создано в Узбекистане. Связано с миром.',
-  'seo.homeTitle': 'Производитель золота Узбекистан | Продажа золота и оптовые украшения',
-  'seo.homeDesc': 'Modern Gold Jewelry — соединяем центральноазиатское золото с мировыми рынками через добычу, переработку, производство украшений и международную торговлю.',
-  'seo.aboutTitle': 'О компании',
-  'seo.aboutDesc': 'Modern Gold Jewelry Manufacturing FE LLC — производство ювелирных изделий в Намангане, Узбекистан, для международных рынков.',
-  'home.hero.eyebrow': 'СОЕДИНЯЕМ',
-  'home.hero.headlineBefore': 'ЦЕНТРАЛЬНОАЗИАТСКОЕ',
-  'home.hero.headlineHighlight': 'ЗОЛОТО',
-  'home.hero.headlineAfter': 'С МИРОВЫМИ РЫНКАМИ',
-  'home.hero.description': 'Modern Gold — ведущая золотая компания Центральной Азии, специализирующаяся на добыче, переработке, производстве украшений и международной торговле.',
-  'home.hero.primaryCta': 'Продать золото',
-  'home.hero.secondaryCta': 'Стать покупателем',
-  'home.productShowcase.eyebrow': 'Хиты продаж',
-  'home.productShowcase.title': 'Наши самые популярные изделия',
-  'home.productShowcase.viewAll': 'Смотреть все товары',
-  'home.collectionPromo.eyebrow': 'Новая коллекция',
-  'home.collectionPromo.title': 'Коллекция Modern Glamour',
-  'home.collectionPromo.desc': 'Изысканные золотые и бриллиантовые изделия для взыскательных клиентов.',
-  'home.collectionPromo.cta': 'Открыть коллекцию',
-  'home.aboutPreview.eyebrow': 'О компании',
-  'home.aboutPreview.title': 'Создано в Узбекистане. Связано с миром.',
-  'home.aboutPreview.link': 'Читать полную историю →',
-  'home.customManufacturing.eyebrow': 'Индивидуальные украшения',
-  'home.customManufacturing.title': 'Индивидуальное производство',
-  'home.customManufacturing.cta': 'Обсудить коллекцию',
-  'home.contactCta.eyebrow': 'Связаться',
-  'home.contactCta.title': 'Готовы к партнёрству?',
-  'home.contactCta.quote': 'Запросить предложение',
-  'home.contactCta.contact': 'Связаться с нами',
-  'home.categoryShowcase.eyebrow': 'Коллекции',
-  'home.categoryShowcase.title': 'Покупка по категориям',
-  'home.categoryShowcase.subtitle': 'Золотые цепи и браслеты из Намангана.',
-  'home.categoryShowcase.viewAll': 'Смотреть все',
-  'home.trust.title': 'Почему партнёры выбирают нас',
-  'home.b2b.eyebrow': 'Опт',
-  'home.b2b.title': 'Для глобального ювелирного бизнеса',
-  'home.b2b.quote': 'Запросить предложение',
-  'home.b2b.cardTitle': 'Обсудите вашу коллекцию',
-  'home.b2b.cardLink': 'Оптовые возможности →',
-  'about.hero': 'Создано в Намангане, Узбекистан',
-  'about.storyTitle': 'Наша история',
-  'about.howTitle': 'Как мы работаем',
-  'about.missionTitle': 'Миссия и видение',
-  'about.offerTitle': 'Что мы предлагаем',
-  'about.trustTitle': 'Почему нам доверяют партнёры',
-  'manufacturing.title': 'Наше производство',
-  'categories.chains': 'Цепи',
-  'categories.bangles': 'Браслеты',
-  'categories.jewellery': 'Украшения',
-  'categories.all': 'Все',
-  'shop.seoTitle': 'Магазин цепей и браслетов',
-  'shop.eyebrow': 'Коллекции',
-  'shop.title': 'Цепи и браслеты',
-  'filters.title': 'Фильтры',
-  'filters.close': 'Закрыть',
-  'filters.price': 'Цена',
-  'filters.clearAll': 'Сбросить фильтры',
-  'cart.title': 'Корзина',
-  'cart.emptyTitle': 'Ваша корзина пуста',
-  'cart.checkout': 'Оформить заказ',
-  'checkout.title': 'Оформление заказа',
-  'wishlist.title': 'Избранное',
-  'search.title': 'Результаты поиска',
-  'contact.eyebrow': 'Контакты',
-  'auth.welcomeBack': 'С возвращением',
-  'auth.createAccount': 'Создать аккаунт',
-  'footer.newsletterDesc': 'Получайте новости о коллекциях и эксклюзивных предложениях.',
-  'footer.emailPlaceholder': 'Ваш email',
-  'heroBanner.explore': 'Смотреть коллекции',
-  'heroBanner.partner': 'Стать партнёром',
-  'heroBanner.viewCollection': 'Смотреть коллекцию',
-  'product.addToCart': 'В корзину',
-  'product.buyNow': 'Купить сейчас',
-  'legal.privacy.title': 'Политика конфиденциальности',
-  'legal.terms.title': 'Условия использования',
-  'legal.track.title': 'Отследить заказ',
-});
-
-// Uzbek
-siteTranslations.uz = mirror(siteTranslations.en, {
-  'brand.tagline': 'O\'zbekistonda yaratilgan. Dunyo bilan bog\'langan.',
-  'seo.homeTitle': 'O\'zbekiston oltin ishlab chiqaruvchi | Oltin sotish va ulgurji zargarlik',
-  'home.hero.eyebrow': 'BOG\'LAYMIZ',
-  'home.hero.headlineBefore': 'MARKAZIY OSIYO',
-  'home.hero.headlineHighlight': 'OLTININI',
-  'home.hero.headlineAfter': 'GLOBAL BOZORLARGA',
-  'home.hero.primaryCta': 'Oltin sotish',
-  'home.hero.secondaryCta': 'Xaridor bo\'lish',
-  'home.productShowcase.title': 'Eng sevimli buyumlarimiz',
-  'home.aboutPreview.title': 'O\'zbekistonda yaratilgan. Dunyo bilan bog\'langan.',
-  'home.contactCta.title': 'Hamkorlikka tayyormisiz?',
-  'about.hero': 'Namanganda, O\'zbekistonda yaratilgan',
-  'about.storyTitle': 'Bizning hikoyamiz',
-  'categories.chains': 'Zanjirlar',
-  'categories.bangles': 'Bangl',
-  'categories.all': 'Hammasi',
-  'shop.title': 'Zanjirlar va bangl',
-  'filters.title': 'Filtrlar',
-  'cart.title': 'Savat',
-  'checkout.title': 'Buyurtma',
-  'wishlist.title': 'Sevimlilar',
-  'search.title': 'Qidiruv natijalari',
-  'contact.eyebrow': 'Aloqa',
-  'auth.welcomeBack': 'Xush kelibsiz',
-  'auth.createAccount': 'Hisob yaratish',
-  'product.addToCart': 'Savatga qo\'shish',
-  'product.buyNow': 'Hozir sotib olish',
-  'footer.newsletterDesc': 'Yangi kolleksiyalar va maxsus takliflar haqida xabar oling.',
-  'heroBanner.explore': 'Kolleksiyalarni ko\'rish',
-  'legal.privacy.title': 'Maxfiylik siyosati',
-  'legal.track.title': 'Buyurtmani kuzatish',
-});
-
-// Arabic
-siteTranslations.ar = mirror(siteTranslations.en, {
-  'brand.tagline': 'مصنوع في أوزبكستان. متصل بالعالم.',
-  'seo.homeTitle': 'مصنع الذهب أوزبكستان | بيع الذهب والمجوهرات بالجملة',
-  'home.hero.eyebrow': 'نربط',
-  'home.hero.headlineBefore': 'ذهب',
-  'home.hero.headlineHighlight': 'آسيا الوسطى',
-  'home.hero.headlineAfter': 'بالأسواق العالمية',
-  'home.hero.primaryCta': 'بيع الذهب',
-  'home.hero.secondaryCta': 'كن مشترياً',
-  'home.productShowcase.title': 'قطعنا الأكثر حباً',
-  'home.aboutPreview.title': 'مصنوع في أوزبكستان. متصل بالعالم.',
-  'home.contactCta.title': 'هل أنت مستعد للشراكة؟',
-  'about.hero': 'مصنوع في نامangan، أوزبكستان',
-  'about.storyTitle': 'قصتنا',
-  'categories.chains': 'سلاسل',
-  'categories.bangles': 'أساور',
-  'categories.all': 'الكل',
-  'shop.title': 'سلاسل وأساور',
-  'filters.title': 'الفلاتر',
-  'cart.title': 'سلة التسوق',
-  'checkout.title': 'الدفع',
-  'wishlist.title': 'قائمة الأمنيات',
-  'search.title': 'نتائج البحث',
-  'contact.eyebrow': 'اتصل بنا',
-  'auth.welcomeBack': 'مرحباً بعودتك',
-  'auth.createAccount': 'إنشاء حساب',
-  'product.addToCart': 'أضف إلى السلة',
-  'product.buyNow': 'اشتر الآن',
-  'footer.newsletterDesc': 'احصل على تحديثات حول المجموعات الجديدة والعروض الحصرية.',
-  'heroBanner.explore': 'استكشف المجموعات',
-  'legal.privacy.title': 'سياسة الخصوصية',
-  'legal.track.title': 'تتبع الطلب',
-});
-
-// Turkish
-siteTranslations.tr = mirror(siteTranslations.en, {
-  'brand.tagline': 'Özbekistan\'da üretildi. Dünyaya bağlı.',
-  'seo.homeTitle': 'Özbekistan Altın Üreticisi | Altın Satış ve Toptan Mücevher',
-  'home.hero.eyebrow': 'BAĞLIYORUZ',
-  'home.hero.headlineBefore': 'ORTA ASYA',
-  'home.hero.headlineHighlight': 'ALTININI',
-  'home.hero.headlineAfter': 'KÜRESEL PAZARLARA',
-  'home.hero.primaryCta': 'Altın Sat',
-  'home.hero.secondaryCta': 'Alıcı Ol',
-  'home.productShowcase.title': 'En Sevilen Parçalarımız',
-  'home.aboutPreview.title': 'Özbekistan\'da üretildi. Dünyaya bağlı.',
-  'home.contactCta.title': 'Ortaklığa hazır mısınız?',
-  'about.hero': 'Namangan, Özbekistan\'da üretildi',
-  'about.storyTitle': 'Hikayemiz',
-  'categories.chains': 'Zincirler',
-  'categories.bangles': 'Bilezikler',
-  'categories.all': 'Tümü',
-  'shop.title': 'Zincirler ve Bilezikler',
-  'filters.title': 'Filtreler',
-  'cart.title': 'Alışveriş Sepeti',
-  'checkout.title': 'Ödeme',
-  'wishlist.title': 'İstek Listem',
-  'search.title': 'Arama Sonuçları',
-  'contact.eyebrow': 'İletişim',
-  'auth.welcomeBack': 'Tekrar Hoş Geldiniz',
-  'auth.createAccount': 'Hesap Oluştur',
-  'product.addToCart': 'Sepete Ekle',
-  'product.buyNow': 'Hemen Al',
-  'footer.newsletterDesc': 'Yeni koleksiyonlar ve özel teklifler hakkında güncellemeler alın.',
-  'heroBanner.explore': 'Koleksiyonları Keşfet',
-  'legal.privacy.title': 'Gizlilik Politikası',
-  'legal.track.title': 'Siparişi Takip Et',
-});
-
-// Deep override arrays for key locales
-siteTranslations.ru.home.hero.features = siteTranslations.en.home.hero.features.map((f, i) => [
-  { title: 'Доверие международных партнёров', desc: 'Долгосрочные партнёрства в Центральной Азии и мире.' },
-  { title: 'Премиальное качество золота', desc: 'Переработка по международным стандартам.' },
-  { title: 'Современное производство', desc: 'Интегрированное производство ювелирных изделий.' },
-  { title: 'Глобальная сеть', desc: 'Соединяем поставщиков и покупателей золота по всему миру.' },
-][i]);
-
-siteTranslations.ru.home.serviceBar = [
-  { title: 'Лёгкий возврат', desc: '15 дней на возврат розничных заказов.' },
-  { title: 'Безопасная оплата', desc: 'Шифрованная оплата и надёжные методы.' },
-  { title: 'Исключительное качество', desc: 'Строгий контроль на каждом этапе.' },
-  { title: 'Персональная поддержка', desc: 'Индивидуальная помощь каждому клиенту.' },
-];
-
-siteTranslations.ru.manufacturing.steps = ['Плавка и рафинирование', 'Изготовление цепей', 'Изготовление браслетов', 'Полировка', 'Контроль качества'];
-
-siteTranslations.uz.home.serviceBar = siteTranslations.ru.home.serviceBar; // placeholder - use EN for now
-siteTranslations.uz.manufacturing.steps = ['Eritish va tozalash', 'Zanjir yasash', 'Bangl yasash', 'Polirovka', 'Sifat nazorati'];
-
-siteTranslations.ar.manufacturing.steps = ['الصهر والتكرير', 'صنع السلاسل', 'صنع الأساور', 'التلميع', 'مراقبة الجودة'];
-siteTranslations.tr.manufacturing.steps = ['Eritme ve Arıtma', 'Zincir Yapımı', 'Bilezik Yapımı', 'Cilalama', 'Kalite Kontrol'];
+siteTranslations.ru = deepMerge(siteTranslations.en, ru);
+siteTranslations.uz = deepMerge(siteTranslations.en, uz);
+siteTranslations.ar = deepMerge(siteTranslations.en, ar);
+siteTranslations.tr = deepMerge(siteTranslations.en, tr);
 
 /** Replace {key} placeholders in translated strings */
 export function formatTranslation(str, vars = {}) {

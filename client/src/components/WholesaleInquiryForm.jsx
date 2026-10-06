@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function WholesaleInquiryForm() {
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     businessName: '', contactPerson: '', email: '', phone: '',
     city: '', state: '', businessType: '', gstNumber: '',
@@ -15,33 +17,33 @@ export default function WholesaleInquiryForm() {
     setLoading(true);
     try {
       await api.post('/wholesale/inquiry', form);
-      toast.success('Inquiry submitted! We will contact you soon.');
+      toast.success(t('wholesaleInquiry.success'));
       setForm({ businessName: '', contactPerson: '', email: '', phone: '', city: '', state: '', businessType: '', gstNumber: '', categoryInterested: '', expectedMonthlyQuantity: '', message: '' });
     } catch {
-      toast.error('Failed to submit inquiry');
+      toast.error(t('wholesaleInquiry.failed'));
     } finally {
       setLoading(false);
     }
   };
 
   const fields = [
-    { name: 'businessName', label: 'Business Name', required: true },
-    { name: 'contactPerson', label: 'Contact Person', required: true },
-    { name: 'email', label: 'Email', type: 'email', required: true },
-    { name: 'phone', label: 'Phone', required: true },
-    { name: 'city', label: 'City' },
-    { name: 'state', label: 'State' },
-    { name: 'businessType', label: 'Business Type' },
-    { name: 'gstNumber', label: 'GST Number' },
-    { name: 'categoryInterested', label: 'Category Interested In' },
-    { name: 'expectedMonthlyQuantity', label: 'Expected Monthly Quantity' },
+    { name: 'businessName', required: true },
+    { name: 'contactPerson', required: true },
+    { name: 'email', type: 'email', required: true },
+    { name: 'phone', required: true },
+    { name: 'city' },
+    { name: 'state' },
+    { name: 'businessType' },
+    { name: 'gstNumber' },
+    { name: 'categoryInterested' },
+    { name: 'expectedMonthlyQuantity' },
   ];
 
   return (
     <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
-      {fields.map(({ name, label, type, required }) => (
+      {fields.map(({ name, type, required }) => (
         <div key={name}>
-          <label className="block text-sm font-medium mb-1">{label}</label>
+          <label className="block text-sm font-medium mb-1">{t(`wholesaleInquiry.${name}`)}</label>
           <input
             type={type || 'text'}
             required={required}
@@ -52,7 +54,7 @@ export default function WholesaleInquiryForm() {
         </div>
       ))}
       <div className="md:col-span-2">
-        <label className="block text-sm font-medium mb-1">Message</label>
+        <label className="block text-sm font-medium mb-1">{t('wholesaleInquiry.message')}</label>
         <textarea
           rows={4}
           value={form.message}
@@ -62,7 +64,7 @@ export default function WholesaleInquiryForm() {
       </div>
       <div className="md:col-span-2">
         <button type="submit" disabled={loading} className="bg-gold hover:bg-gold-dark text-white px-8 py-3 rounded-full text-sm font-medium tracking-wider transition-colors disabled:opacity-50">
-          {loading ? 'Submitting...' : 'REQUEST WHOLESALE PRICING'}
+          {loading ? t('common.submitting') : t('wholesaleInquiry.submit')}
         </button>
       </div>
     </form>

@@ -8,10 +8,10 @@ import SafeImage from './SafeImage';
 import { useTranslation } from '../hooks/useTranslation';
 
 export default function HeroBanner({ title, subtitle, image, primaryLink = '/shop', secondaryLink = '/wholesale', compact = false }) {
-  const { t } = useTranslation();
+  const { t, tf } = useTranslation();
   return (
     <section className={`relative overflow-hidden ${compact ? 'h-[40vh]' : 'h-[70vh] min-h-[500px]'}`}>
-      <img src={image} alt={`${title} — Modern Gold Jewelry editorial collection`} className="absolute inset-0 w-full h-full object-cover" />
+      <img src={image} alt={tf('alts.editorial', { title })} className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-r from-pearl/90 via-cream/75 to-transparent" />
       <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center">
         <div className="max-w-xl text-charcoal animate-fade-in">
@@ -66,14 +66,14 @@ export function ProductCarousel({ products, title }) {
 }
 
 export function CategoryCard({ name, slug, image }) {
-  const { t } = useTranslation();
+  const { t, tf } = useTranslation();
   const src = image || categoryImages[slug] || categoryImages.chains;
   const displayName = t(`categories.${slug}`) || name;
   return (
     <Link to={`/shop/${slug}`} className="group/card editorial-image-card relative rounded-xl overflow-hidden border border-border bg-white hover:border-border transition-colors duration-[350ms]">
       <SafeImage
         src={src}
-        alt={`${displayName} — luxury gold jewelry editorial by Modern Gold Jewelry`}
+        alt={tf('alts.categoryEditorial', { title: displayName })}
         category={slug}
         className="w-full h-full object-cover"
         loading="lazy"
