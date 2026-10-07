@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const blogLocaleSchema = new mongoose.Schema(
+  {
+    title: String,
+    excerpt: String,
+    content: String,
+    seoTitle: String,
+    seoDescription: String,
+  },
+  { _id: false }
+);
+
 const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
@@ -24,6 +35,13 @@ const blogSchema = new mongoose.Schema(
     isPublished: { type: Boolean, default: true },
     seoTitle: String,
     seoDescription: String,
+    translations: {
+      en: blogLocaleSchema,
+      ru: blogLocaleSchema,
+      uz: blogLocaleSchema,
+      ar: blogLocaleSchema,
+      tr: blogLocaleSchema,
+    },
   },
   { timestamps: true }
 );

@@ -368,7 +368,7 @@ export const translations = {
     form: {
       companyName: 'Название компании',
       contactPerson: 'Контактное лицо',
-      email: 'Email',
+      email: 'Эл. почта',
       phone: 'Телефон',
       password: 'Пароль',
       country: 'Страна',
@@ -626,7 +626,7 @@ export const translations = {
     form: {
       companyName: 'Kompaniya nomi',
       contactPerson: 'Aloqa shaxsi',
-      email: 'Email',
+      email: 'Elektron pochta',
       phone: 'Telefon',
       password: 'Parol',
       country: 'Mamlakat',

@@ -214,7 +214,13 @@ export default {
     cta: 'Kolleksiyangizni muhokama qiling',
     seoSuffix: '{company}, O\'zbekiston.',
   },
-  blog: { seoTitle: 'Blog', seoDesc: 'Zargarlik bo\'yicha qo\'llanmalar, xarid maslahatlari va moda tendensiyalari.', title: 'Zargarlik jurnali' },
+  blog: {
+    seoTitle: 'Blog', seoDesc: 'Zargarlik bo\'yicha qo\'llanmalar, xarid maslahatlari va moda tendensiyalari.', title: 'Zargarlik jurnali',
+    categories: {
+      jewelleryGuide: 'Zargarlik qo\'llanmasi', buyingGuide: 'Xaridor qo\'llanmasi', goldJewellery: 'Oltin taqinchoqlar', diamondJewellery: 'Olmosli taqinchoqlar',
+      weddingJewellery: 'To\'y taqinchoqlari', giftIdeas: 'Sovg\'a g\'oyalari', jewelleryCare: 'Taqinchoqlarni parvarish qilish', fashionTrends: 'Moda tendensiyalari',
+    },
+  },
   wholesaleShop: { seoTitle: 'Ulgurji do\'kon', title: 'Ulgurji kolleksiya', registerNote: 'Ro\'yxatdan o\'ting va tasdiqlang', registerNoteSuffix: '— shunda ulgurji narxlarni ko\'rasiz', bulkCart: 'Ulgurji savat' },
   common: { shop: 'Do\'kon', free: 'Bepul', loading: 'Yuklanmoqda...', viewAll: 'Barcha mahsulotlarni ko\'rish' },
   ui: {
@@ -234,7 +240,7 @@ export default {
   },
   wholesaleInquiry: {
     success: 'So\'rov yuborildi! Tez orada siz bilan bog\'lanamiz.', failed: 'So\'rovni yuborib bo\'lmadi',
-    businessName: 'Kompaniya nomi', contactPerson: 'Mas\'ul shaxs', email: 'Email', phone: 'Telefon', city: 'Shahar', state: 'Viloyat',
+    businessName: 'Kompaniya nomi', contactPerson: 'Mas\'ul shaxs', email: 'Elektron pochta', phone: 'Telefon', city: 'Shahar', state: 'Viloyat',
     businessType: 'Biznes turi', gstNumber: 'Soliq raqami (GST)', categoryInterested: 'Qiziqtirgan toifa',
     expectedMonthlyQuantity: 'Oylik kutilayotgan hajm', message: 'Xabar', submit: 'ULGURJI NARXLARNI SO\'RASH',
   },

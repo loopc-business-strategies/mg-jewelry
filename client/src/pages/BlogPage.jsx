@@ -4,14 +4,15 @@ import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import SafeImage from '../components/SafeImage';
 import { useTranslation } from '../hooks/useTranslation';
+import { blogCategoryText } from '../utils/displayText';
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     api.get('/blog').then(({ data }) => setBlogs(data)).catch(() => {});
-  }, []);
+  }, [lang]);
 
   return (
     <>
@@ -24,7 +25,7 @@ export default function BlogPage() {
               <div className="aspect-[16/10] rounded-xl overflow-hidden bg-cream mb-4">
                 {blog.image && <SafeImage src={blog.image} alt={blog.title} category="rings" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />}
               </div>
-              <span className="text-xs text-gold uppercase tracking-wider">{blog.category}</span>
+              <span className="text-xs text-gold uppercase tracking-wider">{blogCategoryText(t, blog.category)}</span>
               <h2 className="font-semibold text-charcoal text-xl mt-1 group-hover:text-gold transition-colors">{blog.title}</h2>
               <p className="text-sm text-muted mt-2 line-clamp-2">{blog.excerpt}</p>
             </Link>

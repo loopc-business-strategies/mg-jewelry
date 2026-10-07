@@ -9,7 +9,7 @@ const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const { user } = useAuth();
-  const { t } = useMarket();
+  const { t, language } = useMarket();
   const [wishlist, setWishlist] = useState({ products: [] });
 
   const fetchWishlist = useCallback(async () => {
@@ -20,7 +20,7 @@ export const WishlistProvider = ({ children }) => {
     } catch {
       setWishlist({ products: [] });
     }
-  }, [user]);
+  }, [user, language]);
 
   useEffect(() => { fetchWishlist(); }, [fetchWishlist]);
 

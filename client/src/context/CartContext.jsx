@@ -9,7 +9,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
-  const { t } = useMarket();
+  const { t, language } = useMarket();
   const [cart, setCart] = useState({ items: [] });
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +28,7 @@ export const CartProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, language]);
 
   useEffect(() => { fetchCart(); }, [fetchCart]);
 

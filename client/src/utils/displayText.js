@@ -31,5 +31,19 @@ const LEGACY_CATEGORY_TEXT = {
 export const categoryIntroText = (t, slug, value) =>
   value && hasTranslation(`categoryIntro.${slug}`) ? seededText(t, `categoryIntro.${slug}`, value, LEGACY_CATEGORY_TEXT[slug]) : value;
 
+const BLOG_CATEGORY_KEYS = {
+  'Jewellery Guide': 'jewelleryGuide',
+  'Buying Guide': 'buyingGuide',
+  'Gold Jewellery': 'goldJewellery',
+  'Diamond Jewellery': 'diamondJewellery',
+  'Wedding Jewellery': 'weddingJewellery',
+  'Gift Ideas': 'giftIdeas',
+  'Jewellery Care': 'jewelleryCare',
+  'Fashion Trends': 'fashionTrends',
+};
+
+export const blogCategoryText = (t, category) =>
+  BLOG_CATEGORY_KEYS[category] ? t(`blog.categories.${BLOG_CATEGORY_KEYS[category]}`, category) : category;
+
 export const subcategoryText = (t, sub) =>
   sub?.slug && hasTranslation(`subcategories.${sub.slug}`) ? seededText(t, `subcategories.${sub.slug}`, sub.name) : sub?.name;

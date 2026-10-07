@@ -214,7 +214,13 @@ export default {
     cta: 'Koleksiyonunuzu Görüşelim',
     seoSuffix: '{company}, Özbekistan.',
   },
-  blog: { seoTitle: 'Blog', seoDesc: 'Mücevher rehberleri, satın alma ipuçları ve moda trendleri.', title: 'Mücevher Dergisi' },
+  blog: {
+    seoTitle: 'Blog', seoDesc: 'Mücevher rehberleri, satın alma ipuçları ve moda trendleri.', title: 'Mücevher Dergisi',
+    categories: {
+      jewelleryGuide: 'Mücevher Rehberi', buyingGuide: 'Satın Alma Rehberi', goldJewellery: 'Altın Mücevher', diamondJewellery: 'Pırlanta Mücevher',
+      weddingJewellery: 'Düğün Mücevherleri', giftIdeas: 'Hediye Fikirleri', jewelleryCare: 'Mücevher Bakımı', fashionTrends: 'Moda Trendleri',
+    },
+  },
   wholesaleShop: { seoTitle: 'Toptan Mağaza', title: 'Toptan Koleksiyon', registerNote: 'Kayıt olun ve onay alın', registerNoteSuffix: '— toptan fiyatları görebilirsiniz', bulkCart: 'Toptan Sepet' },
   common: { shop: 'Mağaza', free: 'Ücretsiz', loading: 'Yükleniyor...', viewAll: 'Tüm Ürünleri Gör' },
   ui: {

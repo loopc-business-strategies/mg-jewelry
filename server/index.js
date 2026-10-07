@@ -77,6 +77,14 @@ connectDB().then(async () => {
     console.log('Legacy category images detected — migrating to editorial photography...');
     await fixCategoryEditorialImages();
   }
+
+  try {
+    const { migrateCatalogTranslations } = require('./services/translateCatalog');
+    const { products, blogs } = await migrateCatalogTranslations();
+    console.log(`Catalog translations: filled ${products} products, ${blogs} blog posts`);
+  } catch (err) {
+    console.error('Catalog translation migration failed:', err.message);
+  }
 });
 
 const app = express();

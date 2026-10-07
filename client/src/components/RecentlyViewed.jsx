@@ -5,7 +5,7 @@ import LoadingSkeleton from './LoadingSkeleton';
 import { useTranslation } from '../hooks/useTranslation';
 
 export default function RecentlyViewed({ excludeId }) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function RecentlyViewed({ excludeId }) {
 
     Promise.all(ids.map((id) => api.get(`/products/${id}`).then(({ data }) => data).catch(() => null)))
       .then((results) => setProducts(results.filter(Boolean)));
-  }, [excludeId]);
+  }, [excludeId, lang]);
 
   if (!products.length) return null;
 

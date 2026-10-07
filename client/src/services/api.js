@@ -25,9 +25,10 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
 
-  const lang = getStoredLanguage();
+  const onAdmin = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
+  const lang = onAdmin ? 'en' : getStoredLanguage();
   const url = config.url || '';
-  if (url.includes('/products') || url.includes('/search')) {
+  if (/\/(products|search|blog|cart|wishlist)\b/.test(url)) {
     config.params = { ...config.params, lang };
   }
 

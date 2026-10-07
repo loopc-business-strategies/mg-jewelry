@@ -220,7 +220,13 @@ export const siteTranslations = {
       cta: 'Discuss Your Collection',
       seoSuffix: '{company} in Uzbekistan.',
     },
-    blog: { seoTitle: 'Blog', seoDesc: 'Jewellery guides, buying tips, and fashion trends.', title: 'Jewellery Journal' },
+    blog: {
+      seoTitle: 'Blog', seoDesc: 'Jewellery guides, buying tips, and fashion trends.', title: 'Jewellery Journal',
+      categories: {
+        jewelleryGuide: 'Jewellery Guide', buyingGuide: 'Buying Guide', goldJewellery: 'Gold Jewellery', diamondJewellery: 'Diamond Jewellery',
+        weddingJewellery: 'Wedding Jewellery', giftIdeas: 'Gift Ideas', jewelleryCare: 'Jewellery Care', fashionTrends: 'Fashion Trends',
+      },
+    },
     wholesaleShop: { seoTitle: 'Wholesale Shop', title: 'Wholesale Collection', registerNote: 'Register & get approved', registerNoteSuffix: 'to view wholesale pricing', bulkCart: 'Bulk Cart' },
     common: { shop: 'Shop', free: 'Free', loading: 'Loading...', viewAll: 'View All Products' },
     ui: {

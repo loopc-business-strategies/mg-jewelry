@@ -1,12 +1,13 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const { resolveLang, localizeItemProducts } = require('../utils/localizeProduct');
 
 const getCart = async (req, res) => {
   let cart = await Cart.findOne({ userId: req.user._id }).populate('items.productId');
   if (!cart) {
     cart = await Cart.create({ userId: req.user._id, items: [] });
   }
-  res.json(cart);
+  res.json(localizeItemProducts(cart, resolveLang(req)));
 };
 
 const addToCart = async (req, res) => {
@@ -29,7 +30,7 @@ const addToCart = async (req, res) => {
 
   await cart.save();
   cart = await Cart.findById(cart._id).populate('items.productId');
-  res.json(cart);
+  res.json(localizeItemProducts(cart, resolveLang(req)));
 };
 
 const updateCartItem = async (req, res) => {
@@ -47,7 +48,7 @@ const updateCartItem = async (req, res) => {
 
   await cart.save();
   const updated = await Cart.findById(cart._id).populate('items.productId');
-  res.json(updated);
+  res.json(localizeItemProducts(updated, resolveLang(req)));
 };
 
 const removeFromCart = async (req, res) => {
@@ -57,7 +58,7 @@ const removeFromCart = async (req, res) => {
   cart.items = cart.items.filter((item) => item._id.toString() !== req.params.id);
   await cart.save();
   const updated = await Cart.findById(cart._id).populate('items.productId');
-  res.json(updated);
+  res.json(localizeItemProducts(updated, resolveLang(req)));
 };
 
 const clearCart = async (req, res) => {

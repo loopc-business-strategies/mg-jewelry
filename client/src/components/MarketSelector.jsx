@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { X, Globe } from 'lucide-react';
 import { useMarket } from '../context/MarketContext';
 import { languages, markets, currencies } from '../utils/marketConfig';
+import MarketFlag from './MarketFlag';
 
 function RadioOption({ name, value, checked, onChange, label, flag }) {
   return (
@@ -15,7 +16,7 @@ function RadioOption({ name, value, checked, onChange, label, flag }) {
         onChange={onChange}
         className="accent-gold w-4 h-4 shrink-0"
       />
-      {flag && <span className="text-lg shrink-0">{flag}</span>}
+      {flag}
       <span className="text-sm text-charcoal">{label}</span>
     </label>
   );
@@ -62,7 +63,7 @@ export default function MarketSelector({ compact = false }) {
       <Globe size={14} className="text-gold" />
       <span className="hidden sm:inline">{language.short}</span>
       <span className="text-muted hidden sm:inline">|</span>
-      <span>{market.flag}</span>
+      <MarketFlag country={market.country} small />
       <span className="hidden md:inline max-w-[100px] truncate">{marketLabel}</span>
     </button>
   ) : (
@@ -72,7 +73,9 @@ export default function MarketSelector({ compact = false }) {
       className="w-full flex items-center gap-2 px-4 py-3 text-sm text-start border border-border bg-white rounded-md hover:border-gold transition-colors"
     >
       <Globe size={16} className="text-gold shrink-0" />
-      <span>{language.short} | {market.flag} {marketLabel}</span>
+      <span>{language.short} |</span>
+      <MarketFlag country={market.country} />
+      <span>{marketLabel}</span>
     </button>
   );
 
@@ -120,7 +123,7 @@ export default function MarketSelector({ compact = false }) {
                   checked={draft.market === m.id}
                   onChange={() => setDraft((d) => ({ ...d, market: m.id, currency: m.currency }))}
                   label={t(`markets.${m.id}`, m.label)}
-                  flag={m.flag}
+                  flag={<MarketFlag country={m.country} />}
                 />
               ))}
             </div>

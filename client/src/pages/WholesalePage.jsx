@@ -22,12 +22,15 @@ const bulkTiers = [
 const asArray = (value) => (Array.isArray(value) ? value : []);
 
 export default function WholesalePage() {
-  const { t, tf } = useTranslation();
+  const { t, tf, lang } = useTranslation();
   const [products, setProducts] = useState([]);
   const [tiers, setTiers] = useState(bulkTiers);
 
   useEffect(() => {
     api.get('/wholesale/products?limit=8').then(({ data }) => setProducts(data.products?.slice(0, 8) || [])).catch(() => {});
+  }, [lang]);
+
+  useEffect(() => {
     api.get('/wholesale/bulk-pricing').then(({ data }) => {
       if (Array.isArray(data) && data.length) setTiers(data);
     }).catch(() => {});

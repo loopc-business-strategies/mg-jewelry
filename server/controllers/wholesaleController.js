@@ -7,6 +7,7 @@ const WholesaleInquiry = require('../models/WholesaleInquiry');
 const { wholesalePriceVisibility } = require('../config/env');
 const { getBulkPricingTiers, calculateCartTotals } = require('../services/bulkPricing');
 const generateToken = require('../utils/generateToken');
+const { resolveLang, localizeProduct, localizeItemProducts } = require('../utils/localizeProduct');
 
 const registerWholesale = async (req, res) => {
   const {
@@ -80,8 +81,9 @@ const getWholesaleProducts = async (req, res) => {
     .limit(limit)
     .sort({ createdAt: -1 });
 
+  const lang = resolveLang(req);
   const mapped = products.map((p) => ({
-    ...p.toObject(),
+    ...localizeProduct(p, lang),
     wholesalePriceVisible: showPrices,
     displayWholesalePrice: showPrices ? p.wholesalePrice : null,
   }));
@@ -97,7 +99,7 @@ const getWholesaleCart = async (req, res) => {
   }
   const tiers = await getBulkPricingTiers();
   const totals = calculateCartTotals(cart.items, tiers);
-  res.json({ ...cart.toObject(), ...totals });
+  res.json(localizeItemProducts({ ...cart.toObject(), ...totals }, resolveLang(req)));
 };
 
 const addToWholesaleCart = async (req, res) => {
@@ -131,7 +133,7 @@ const addToWholesaleCart = async (req, res) => {
   await cart.save();
   cart = await WholesaleCart.findById(cart._id).populate('items.productId');
   const totals = calculateCartTotals(cart.items, tiers);
-  res.json({ ...cart.toObject(), ...totals });
+  res.json(localizeItemProducts({ ...cart.toObject(), ...totals }, resolveLang(req)));
 };
 
 const createWholesaleOrder = async (req, res) => {

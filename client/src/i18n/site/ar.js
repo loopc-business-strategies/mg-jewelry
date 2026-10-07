@@ -214,7 +214,13 @@ export default {
     cta: 'ناقش مجموعتك',
     seoSuffix: '{company} في أوزبكستان.',
   },
-  blog: { seoTitle: 'المدونة', seoDesc: 'أدلة المجوهرات ونصائح الشراء وصيحات الموضة.', title: 'مجلة المجوهرات' },
+  blog: {
+    seoTitle: 'المدونة', seoDesc: 'أدلة المجوهرات ونصائح الشراء وصيحات الموضة.', title: 'مجلة المجوهرات',
+    categories: {
+      jewelleryGuide: 'دليل المجوهرات', buyingGuide: 'دليل الشراء', goldJewellery: 'مجوهرات ذهبية', diamondJewellery: 'مجوهرات الألماس',
+      weddingJewellery: 'مجوهرات الزفاف', giftIdeas: 'أفكار الهدايا', jewelleryCare: 'العناية بالمجوهرات', fashionTrends: 'صيحات الموضة',
+    },
+  },
   wholesaleShop: { seoTitle: 'متجر الجملة', title: 'مجموعة الجملة', registerNote: 'سجّل واحصل على الموافقة', registerNoteSuffix: 'لعرض أسعار الجملة', bulkCart: 'سلة الجملة' },
   common: { shop: 'المتجر', free: 'مجاني', loading: 'جارٍ التحميل...', viewAll: 'عرض جميع المنتجات' },
   ui: {

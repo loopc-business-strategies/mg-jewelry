@@ -7,15 +7,15 @@ export const languages = [
 ];
 
 export const markets = [
-  { id: 'uzbekistan', label: 'Uzbekistan', flag: '🇺🇿', currency: 'UZS', locale: 'uz-UZ' },
-  { id: 'central-asia', label: 'Central Asia', flag: '🌏', currency: 'USD', locale: 'en' },
-  { id: 'russia', label: 'Russia', flag: '🇷🇺', currency: 'RUB', locale: 'ru-RU' },
-  { id: 'united-kingdom', label: 'United Kingdom', flag: '🇬🇧', currency: 'GBP', locale: 'en-GB' },
-  { id: 'singapore', label: 'Singapore', flag: '🇸🇬', currency: 'SGD', locale: 'en-SG' },
-  { id: 'malaysia', label: 'Malaysia', flag: '🇲🇾', currency: 'MYR', locale: 'ms-MY' },
-  { id: 'hong-kong', label: 'Hong Kong', flag: '🇭🇰', currency: 'HKD', locale: 'zh-HK' },
-  { id: 'united-states', label: 'United States', flag: '🇺🇸', currency: 'USD', locale: 'en-US' },
-  { id: 'dubai-uae', label: 'Dubai / UAE', flag: '🇦🇪', currency: 'AED', locale: 'ar-AE' },
+  { id: 'uzbekistan', label: 'Uzbekistan', country: 'UZ', currency: 'UZS', locale: 'uz-UZ' },
+  { id: 'central-asia', label: 'Central Asia', country: null, currency: 'USD', locale: 'en' },
+  { id: 'russia', label: 'Russia', country: 'RU', currency: 'RUB', locale: 'ru-RU' },
+  { id: 'united-kingdom', label: 'United Kingdom', country: 'GB', currency: 'GBP', locale: 'en-GB' },
+  { id: 'singapore', label: 'Singapore', country: 'SG', currency: 'SGD', locale: 'en-SG' },
+  { id: 'malaysia', label: 'Malaysia', country: 'MY', currency: 'MYR', locale: 'ms-MY' },
+  { id: 'hong-kong', label: 'Hong Kong', country: 'HK', currency: 'HKD', locale: 'zh-HK' },
+  { id: 'united-states', label: 'United States', country: 'US', currency: 'USD', locale: 'en-US' },
+  { id: 'dubai-uae', label: 'Dubai / UAE', country: 'AE', currency: 'AED', locale: 'ar-AE' },
 ];
 
 export const currencies = [

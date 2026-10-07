@@ -214,7 +214,13 @@ export default {
     cta: 'Обсудить коллекцию',
     seoSuffix: '{company}, Узбекистан.',
   },
-  blog: { seoTitle: 'Блог', seoDesc: 'Гиды по украшениям, советы по покупке и модные тренды.', title: 'Ювелирный журнал' },
+  blog: {
+    seoTitle: 'Блог', seoDesc: 'Гиды по украшениям, советы по покупке и модные тренды.', title: 'Ювелирный журнал',
+    categories: {
+      jewelleryGuide: 'Гид по украшениям', buyingGuide: 'Гид покупателя', goldJewellery: 'Золотые украшения', diamondJewellery: 'Украшения с бриллиантами',
+      weddingJewellery: 'Свадебные украшения', giftIdeas: 'Идеи подарков', jewelleryCare: 'Уход за украшениями', fashionTrends: 'Модные тренды',
+    },
+  },
   wholesaleShop: { seoTitle: 'Оптовый магазин', title: 'Оптовая коллекция', registerNote: 'Зарегистрируйтесь и получите одобрение', registerNoteSuffix: '— так вы увидите оптовые цены', bulkCart: 'Оптовая корзина' },
   common: { shop: 'Магазин', free: 'Бесплатно', loading: 'Загрузка...', viewAll: 'Смотреть все товары' },
   ui: {
@@ -234,7 +240,7 @@ export default {
   },
   wholesaleInquiry: {
     success: 'Запрос отправлен! Мы скоро свяжемся с вами.', failed: 'Не удалось отправить запрос',
-    businessName: 'Название компании', contactPerson: 'Контактное лицо', email: 'Email', phone: 'Телефон', city: 'Город', state: 'Регион',
+    businessName: 'Название компании', contactPerson: 'Контактное лицо', email: 'Эл. почта', phone: 'Телефон', city: 'Город', state: 'Регион',
     businessType: 'Тип бизнеса', gstNumber: 'Налоговый номер (GST)', categoryInterested: 'Интересующая категория',
     expectedMonthlyQuantity: 'Ожидаемый объём в месяц', message: 'Сообщение', submit: 'ЗАПРОСИТЬ ОПТОВЫЕ ЦЕНЫ',
   },

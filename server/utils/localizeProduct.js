@@ -44,6 +44,31 @@ function localizeProducts(products, lang = 'en') {
   return products.map((p) => localizeProduct(p, lang));
 }
 
+function localizeItemProducts(container, lang = 'en', field = 'productId') {
+  if (!container) return container;
+  const doc = container.toObject ? container.toObject() : { ...container };
+  return {
+    ...doc,
+    items: (doc.items || []).map((item) => (
+      item[field] && typeof item[field] === 'object' && item[field].name
+        ? { ...item, [field]: localizeProduct(item[field], lang) }
+        : item
+    )),
+  };
+}
+
+const BLOG_TEXT_FIELDS = ['title', 'excerpt', 'content', 'seoTitle', 'seoDescription'];
+
+function localizeBlog(blog, lang = 'en') {
+  if (!blog) return blog;
+  const doc = blog.toObject ? blog.toObject() : { ...blog };
+  const localized = getTranslationsMap(doc)[lang] || {};
+  const { translations, ...rest } = doc;
+  const text = {};
+  for (const field of BLOG_TEXT_FIELDS) text[field] = localized[field] || doc[field];
+  return { ...rest, ...text };
+}
+
 function buildTranslationsFromBody(body) {
   const translations = body.translations || {};
   const en = translations.en || {};
@@ -65,6 +90,8 @@ module.exports = {
   resolveLang,
   localizeProduct,
   localizeProducts,
+  localizeItemProducts,
+  localizeBlog,
   pickTranslation,
   buildTranslationsFromBody,
 };

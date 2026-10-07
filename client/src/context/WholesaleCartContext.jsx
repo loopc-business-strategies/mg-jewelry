@@ -9,7 +9,7 @@ const WholesaleCartContext = createContext();
 
 export const WholesaleCartProvider = ({ children }) => {
   const { user, isWholesaleApproved } = useAuth();
-  const { t } = useMarket();
+  const { t, language } = useMarket();
   const [cart, setCart] = useState({ items: [], subtotal: 0, total: 0 });
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +24,7 @@ export const WholesaleCartProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, [user, isWholesaleApproved]);
+  }, [user, isWholesaleApproved, language]);
 
   useEffect(() => { fetchCart(); }, [fetchCart]);
 

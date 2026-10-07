@@ -1,15 +1,17 @@
 const Blog = require('../models/Blog');
+const { resolveLang, localizeBlog } = require('../utils/localizeProduct');
 
 const getBlogs = async (req, res) => {
   const filter = { isPublished: true };
   if (req.query.category) filter.category = req.query.category;
   const blogs = await Blog.find(filter).sort({ createdAt: -1 });
-  res.json(blogs);
+  const lang = resolveLang(req);
+  res.json(blogs.map((blog) => localizeBlog(blog, lang)));
 };
 
 const getBlogBySlug = async (req, res) => {
   const blog = await Blog.findOne({ slug: req.params.slug, isPublished: true });
-  if (blog) res.json(blog);
+  if (blog) res.json(localizeBlog(blog, resolveLang(req)));
   else res.status(404).json({ message: 'Blog not found' });
 };
 
