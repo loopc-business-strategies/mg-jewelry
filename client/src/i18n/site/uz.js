@@ -294,7 +294,7 @@ export default {
     failed: 'Muvaffaqiyatsiz', approved: 'Tasdiqlangan', rejected: 'Rad etilgan', suspended: 'To\'xtatilgan',
   },
   presenceCards: {
-    showroom: { title: 'SHOURUM VA OFIS', description: 'Mijozlar, hamkorlar va xalqaro biznes mehmonlarini kutib olish uchun professional maskan.', alt: 'Shourum va biznes ofisi — namunaviy surat' },
+    showroom: { title: 'SHOURUM VA OFIS', description: 'Mijozlar, hamkorlar va xalqaro biznes mehmonlarini kutib olish uchun professional maskan.', alt: 'Modern Gold shourumi va qabulxonasi' },
     manufacturing: { title: 'ISHLAB CHIQARISH', description: 'Oltin zargarlik faoliyatimizni qo\'llab-quvvatlovchi mohir hunarmandchilik va ishlab chiqarish jarayonlari.', alt: 'Oltin zargarlik ustaxonasi — namunaviy surat' },
     team: { title: 'JAMOAMIZ', description: 'Ishlab chiqarish, sifat, biznesni rivojlantirish va mijozlar bilan ishlash sohalaridagi tajribali mutaxassislar.', alt: 'Uchrashuvdagi professional jamoa — namunaviy surat' },
     quality: { title: 'SIFAT VA OPERATSIYALAR', description: 'Oltin bilan bog\'liq barcha jarayonlarda puxta tekshiruv, tortish va sifatga yo\'naltirilgan ish.', alt: 'Oltin sifatini tekshirish va tortish — namunaviy surat' },
@@ -305,6 +305,7 @@ export default {
     sellGoldPath: 'Sayqallangan oltin zanjirlarni ushlab turgan qo\'llar — oltiningizni Modern Gold\'ga soting',
     buyerPath: 'Biznes qo\'l siqishi — Modern Gold\'ning ulgurji xaridoriga aylaning',
     aboutHero: 'Nafis oltin taqinchoqlar taqqan ayol — Modern Gold Jewelry',
+    aboutBanner: 'Modern Gold shourumi va qabulxonasi',
     customHero: 'Hashamatli oltin to\'plam taqqan ayol — buyurtma zargarlik',
     collectionPromo: 'Premium oltin taqinchoqlar taqqan ayol — Modern Glamour kolleksiyasi',
     ourMgSell: 'Modern Gold orqali oltin sotish',

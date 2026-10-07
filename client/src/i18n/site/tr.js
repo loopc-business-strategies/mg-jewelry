@@ -294,7 +294,7 @@ export default {
     failed: 'Başarısız', approved: 'Onaylandı', rejected: 'Reddedildi', suspended: 'Askıya alındı',
   },
   presenceCards: {
-    showroom: { title: 'SHOWROOM VE OFİS', description: 'Müşterileri, ortakları ve uluslararası iş ziyaretçilerini ağırlamak için profesyonel bir alan.', alt: 'Showroom ve iş ofisi — örnek kurumsal fotoğraf' },
+    showroom: { title: 'SHOWROOM VE OFİS', description: 'Müşterileri, ortakları ve uluslararası iş ziyaretçilerini ağırlamak için profesyonel bir alan.', alt: 'Modern Gold showroom ve resepsiyonu' },
     manufacturing: { title: 'ÜRETİM', description: 'Altın mücevher faaliyetlerimizi destekleyen usta işçilik ve üretim süreçleri.', alt: 'Altın mücevher üretim atölyesi — örnek fotoğraf' },
     team: { title: 'EKİBİMİZ', description: 'Üretim, kalite, iş geliştirme ve müşteri ilişkileri alanlarında deneyimli profesyoneller.', alt: 'Toplantıdaki profesyonel ekip — örnek kurumsal fotoğraf' },
     quality: { title: 'KALİTE VE OPERASYONLAR', description: 'Tüm altın operasyonlarımızda titiz inceleme, tartım ve kalite odaklı süreçler.', alt: 'Altın kalite kontrolü ve tartımı — örnek fotoğraf' },
@@ -305,6 +305,7 @@ export default {
     sellGoldPath: 'Parlatılmış altın zincirler tutan eller — altınınızı Modern Gold\'a satın',
     buyerPath: 'İş tokalaşması — Modern Gold\'un toptan alıcısı olun',
     aboutHero: 'Süslü altın mücevherler takan kadın — Modern Gold Jewelry',
+    aboutBanner: 'Modern Gold showroom ve resepsiyonu',
     customHero: 'Lüks altın mücevher seti takan kadın — özel mücevher',
     collectionPromo: 'Premium altın mücevherler takan kadın — Modern Glamour Koleksiyonu',
     ourMgSell: 'Modern Gold aracılığıyla altın satışı',

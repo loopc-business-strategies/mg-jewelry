@@ -300,7 +300,7 @@ export const siteTranslations = {
       failed: 'Failed', approved: 'Approved', rejected: 'Rejected', suspended: 'Suspended',
     },
     presenceCards: {
-      showroom: { title: 'SHOWROOM & OFFICE', description: 'A professional space for welcoming customers, partners and international business visitors.', alt: 'Showroom and business office — demo corporate photography' },
+      showroom: { title: 'SHOWROOM & OFFICE', description: 'A professional space for welcoming customers, partners and international business visitors.', alt: 'Modern Gold showroom and reception' },
       manufacturing: { title: 'MANUFACTURING', description: 'Skilled craftsmanship and production processes supporting our gold jewellery operations.', alt: 'Gold jewellery manufacturing workshop — demo photography' },
       team: { title: 'OUR PEOPLE', description: 'Experienced professionals working across production, quality, business development and customer relationships.', alt: 'Professional business team in meeting — demo corporate photography' },
       quality: { title: 'QUALITY & OPERATIONS', description: 'Careful inspection, weighing and quality-focused processes across our gold operations.', alt: 'Gold quality inspection and weighing — demo photography' },
@@ -311,6 +311,7 @@ export const siteTranslations = {
       sellGoldPath: 'Hands holding polished gold chains — sell your gold at Modern Gold',
       buyerPath: 'Business handshake — become a wholesale buyer with Modern Gold',
       aboutHero: 'Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial',
+      aboutBanner: 'Modern Gold showroom and reception',
       customHero: 'Woman wearing luxury gold jewelry set — custom jewelry editorial',
       collectionPromo: 'Woman wearing premium gold jewelry — Modern Glamour Collection editorial',
       ourMgSell: 'Sell gold through Modern Gold',

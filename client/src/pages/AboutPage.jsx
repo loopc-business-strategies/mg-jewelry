@@ -2,7 +2,7 @@ import SEOHead from '../components/SEOHead';
 import OurManufacturingSection from '../components/sections/OurManufacturingSection';
 import OurPresenceSection from '../components/sections/OurPresenceSection';
 import { brand, trustIndicators } from '../utils/brandConfig';
-import { aboutHero } from '../utils/imageConfig';
+import { aboutBanner } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 import SafeImage from '../components/SafeImage';
 import { useTranslation } from '../hooks/useTranslation';
@@ -34,7 +34,7 @@ export default function AboutPage() {
       <SEOHead title={t('seo.aboutTitle')} description={t('seo.aboutDesc')} path="/about" schema={schema} />
 
       <div className="relative h-64 md:h-80 overflow-hidden bg-white">
-        <SafeImage src={aboutHero} alt={t('alts.aboutHero')} className="w-full h-full object-cover" />
+        <SafeImage src={aboutBanner} alt={t('alts.aboutBanner')} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-pearl/85 to-cream/50 flex items-center justify-center px-4">
           <h1 className="headline-editorial text-center">{t('about.hero')}</h1>
         </div>

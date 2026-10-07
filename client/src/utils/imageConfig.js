@@ -127,6 +127,7 @@ export function getCategorySvgFallback(category, subcategory) {
 export const heroImage = '/images/demo/hero-refinery.jpg';
 export const premiumBanner = jewelryStock('1599643478518-a784e5dc4c8f', 1200);
 export const aboutHero = jewelryStock('1516638918792-21578567a634', 1200);
+export const aboutBanner = '/images/modern-gold/reception.jpg';
 export const wholesaleHero = jewelryStock('1611085583191-a6cfe1657e70', 1200);
 export const customHero = jewelryStock('1506630448388-459e089110ec', 1200);
 
@@ -151,10 +152,10 @@ export const presenceImages = [
     id: 'showroom',
     title: 'SHOWROOM & OFFICE',
     description: 'A professional space for welcoming customers, partners and international business visitors.',
-    image: '/images/demo/showroom.jpg',
-    alt: 'Showroom and business office — demo corporate photography',
-    demoLabel: 'Showroom & Office — Demo Image',
-    isDemo: true,
+    image: '/images/modern-gold/reception.jpg',
+    alt: 'Modern Gold showroom and reception',
+    demoLabel: 'Modern Gold showroom and reception',
+    isDemo: false,
     featured: true,
   },
   {
