@@ -185,6 +185,7 @@ export default {
     savedAddresses: 'Saqlangan manzillar', noAddresses: 'Saqlangan manzillar yo\'q', profileDetails: 'Profil ma\'lumotlari',
   },
   footer: {
+    viewOnMap: 'Google Xaritada ko\'rish',
     newsletterDesc: 'Yangi kolleksiyalar va maxsus takliflar haqida xabar oling.', emailPlaceholder: 'Emailingiz',
     subscribeSuccess: 'Obuna bo\'lganingiz uchun rahmat!', subscribeFailed: 'Obuna bo\'lib bo\'lmadi',
     links: {
@@ -301,6 +302,7 @@ export default {
   },
   ourMgScreens: { home: 'Our MG', products: 'Mahsulotlar', orders: 'Buyurtmalar', profile: 'Profil', bookings: 'Bronlar' },
   alts: {
+    contactHero: 'Modern Gold biznes jamoasi uchrashuvda',
     hero: 'Oltin affinaj zavodi — Modern Gold\'da eritilgan oltin quyilmoqda',
     sellGoldPath: 'Sayqallangan oltin zanjirlarni ushlab turgan qo\'llar — oltiningizni Modern Gold\'ga soting',
     buyerPath: 'Biznes qo\'l siqishi — Modern Gold\'ning ulgurji xaridoriga aylaning',

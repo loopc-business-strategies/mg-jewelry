@@ -185,6 +185,7 @@ export default {
     savedAddresses: 'Kayıtlı Adresler', noAddresses: 'Kayıtlı adres yok', profileDetails: 'Profil Bilgileri',
   },
   footer: {
+    viewOnMap: 'Google Haritalar\'da görüntüle',
     newsletterDesc: 'Yeni koleksiyonlar ve özel teklifler hakkında güncellemeler alın.', emailPlaceholder: 'E-postanız',
     subscribeSuccess: 'Abone olduğunuz için teşekkürler!', subscribeFailed: 'Abonelik başarısız',
     links: {
@@ -301,6 +302,7 @@ export default {
   },
   ourMgScreens: { home: 'Our MG', products: 'Ürünler', orders: 'Siparişler', profile: 'Profil', bookings: 'Rezervasyonlar' },
   alts: {
+    contactHero: 'Toplantıdaki Modern Gold iş ekibi',
     hero: 'Altın rafineri operasyonları — Modern Gold\'da erimiş altın dökümü',
     sellGoldPath: 'Parlatılmış altın zincirler tutan eller — altınınızı Modern Gold\'a satın',
     buyerPath: 'İş tokalaşması — Modern Gold\'un toptan alıcısı olun',

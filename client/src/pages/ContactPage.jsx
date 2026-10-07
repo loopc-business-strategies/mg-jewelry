@@ -3,6 +3,8 @@ import { useSearchParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import { brand } from '../utils/brandConfig';
+import { contactHero } from '../utils/imageConfig';
+import SafeImage from '../components/SafeImage';
 import { MapPin } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
@@ -67,12 +69,24 @@ export default function ContactPage() {
         path="/contact"
       />
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <p className="section-eyebrow text-center">{t('contact.eyebrow')}</p>
-        <h1 className="text-center mb-2">{activeLabel}</h1>
-        <p className="text-center type-section-desc prose-section mx-auto mb-8">
-          {t('contact.desc')}
-        </p>
+      <section className="contact-hero relative h-64 md:h-80 overflow-hidden">
+        <SafeImage
+          src={contactHero}
+          alt={t('alts.contactHero')}
+          disableFallback
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/20 rtl:bg-gradient-to-l" />
+        <div className="relative h-full max-w-7xl mx-auto px-4 flex flex-col justify-center items-center text-center">
+          <p className="section-eyebrow">{t('contact.eyebrow')}</p>
+          <h1 className="mb-3">{activeLabel}</h1>
+          <p className="type-section-desc prose-section max-w-2xl">
+            {t('contact.desc')}
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
 
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {inquiryTypeIds.map((id) => (
@@ -117,14 +131,23 @@ export default function ContactPage() {
           <div className="space-y-6">
             <div className="bg-white rounded-2xl p-8 border border-border">
               <h2 className="type-section-title mb-4">{brand.legalName}</h2>
-              <div className="flex gap-4">
+              <a
+                href={brand.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex gap-4"
+                aria-label={`${brand.address} — ${t('footer.viewOnMap')}`}
+              >
                 <MapPin size={20} className="text-gold shrink-0 mt-1" />
-                <address className="type-body-sm not-italic leading-relaxed">
+                <address className="type-body-sm not-italic leading-relaxed group-hover:text-gold transition-colors">
                   {brand.addressLines.map((line) => (
                     <span key={line} className="block">{line}</span>
                   ))}
+                  <span className="block mt-2 text-xs font-medium text-gold-dark group-hover:underline">
+                    {t('footer.viewOnMap')} ↗
+                  </span>
                 </address>
-              </div>
+              </a>
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-border">

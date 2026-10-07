@@ -6,11 +6,14 @@ import { aboutBanner } from '../utils/imageConfig';
 import { Link } from 'react-router-dom';
 import SafeImage from '../components/SafeImage';
 import { useTranslation } from '../hooks/useTranslation';
+import { ShieldCheck, Building2, Factory, Globe2 } from 'lucide-react';
+
+const TRUST_ICONS = [ShieldCheck, Building2, Factory, Globe2];
 
 export default function AboutPage() {
   const { t } = useTranslation();
   const offers = t('about.offers') || [];
-  const trustPoints = t('credibility.points') || trustIndicators.slice(0, 3);
+  const trustPoints = t('credibility.points') || trustIndicators.slice(0, 4);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -92,23 +95,35 @@ export default function AboutPage() {
 
       <OurPresenceSection />
 
-      <div className="max-w-3xl mx-auto px-4 pb-16 space-y-12 prose-content">
-        <section>
-          <h2 className="mb-6">{t('about.trustTitle')}</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {Array.isArray(trustPoints) && trustPoints.slice(0, 3).map(({ title, desc }) => (
-              <div key={title} className="text-center p-6 bg-cream rounded-xl border border-border">
-                <h3 className="type-card-title mb-2">{title}</h3>
-                <p className="type-body-sm">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+      <section className="trust-section py-16 md:py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <header className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+            <p className="section-eyebrow">{t('credibility.eyebrow')}</p>
+            <h2 className="type-section-title">{t('about.trustTitle')}</h2>
+            <div className="presence-gradient-accent w-14 h-1 rounded-full mx-auto mt-4" />
+          </header>
 
-        <div className="text-center">
-          <Link to="/custom-jewelry" className="type-body-sm font-medium text-charcoal hover:text-gold transition-colors">{t('about.customLink')}</Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {Array.isArray(trustPoints) && trustPoints.slice(0, 4).map(({ title, desc }, i) => {
+              const Icon = TRUST_ICONS[i % TRUST_ICONS.length];
+              return (
+                <article key={title} className="trust-card group">
+                  <span className="trust-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="trust-card-icon">
+                    <Icon size={24} strokeWidth={1.75} />
+                  </div>
+                  <h3 className="type-card-title mb-2">{title}</h3>
+                  <p className="type-body-sm">{desc}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to="/custom-jewelry" className="type-body-sm font-medium text-charcoal hover:text-gold transition-colors">{t('about.customLink')}</Link>
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

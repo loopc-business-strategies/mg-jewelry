@@ -191,6 +191,7 @@ export const siteTranslations = {
       savedAddresses: 'Saved Addresses', noAddresses: 'No saved addresses', profileDetails: 'Profile Details',
     },
     footer: {
+      viewOnMap: 'View on Google Maps',
       newsletterDesc: 'Receive updates on new collections and exclusive offers.', emailPlaceholder: 'Your email',
       subscribeSuccess: 'Thank you for subscribing!', subscribeFailed: 'Subscription failed',
       links: {
@@ -307,6 +308,7 @@ export const siteTranslations = {
     },
     ourMgScreens: { home: 'Our MG', products: 'Products', orders: 'Orders', profile: 'Profile', bookings: 'Bookings' },
     alts: {
+      contactHero: 'Modern Gold business team in a meeting',
       hero: 'Gold refinery operations — molten gold pour at Modern Gold',
       sellGoldPath: 'Hands holding polished gold chains — sell your gold at Modern Gold',
       buyerPath: 'Business handshake — become a wholesale buyer with Modern Gold',

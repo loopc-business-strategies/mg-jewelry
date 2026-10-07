@@ -185,6 +185,7 @@ export default {
     savedAddresses: 'Сохранённые адреса', noAddresses: 'Нет сохранённых адресов', profileDetails: 'Данные профиля',
   },
   footer: {
+    viewOnMap: 'Открыть в Google Картах',
     newsletterDesc: 'Получайте новости о коллекциях и эксклюзивных предложениях.', emailPlaceholder: 'Ваш email',
     subscribeSuccess: 'Спасибо за подписку!', subscribeFailed: 'Не удалось оформить подписку',
     links: {
@@ -301,6 +302,7 @@ export default {
   },
   ourMgScreens: { home: 'Our MG', products: 'Товары', orders: 'Заказы', profile: 'Профиль', bookings: 'Бронирования' },
   alts: {
+    contactHero: 'Деловая команда Modern Gold на встрече',
     hero: 'Аффинажное производство — разливка расплавленного золота в Modern Gold',
     sellGoldPath: 'Руки держат полированные золотые цепи — продайте золото в Modern Gold',
     buyerPath: 'Деловое рукопожатие — станьте оптовым покупателем Modern Gold',

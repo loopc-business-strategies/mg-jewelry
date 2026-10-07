@@ -185,6 +185,7 @@ export default {
     savedAddresses: 'العناوين المحفوظة', noAddresses: 'لا توجد عناوين محفوظة', profileDetails: 'تفاصيل الملف الشخصي',
   },
   footer: {
+    viewOnMap: 'عرض على خرائط Google',
     newsletterDesc: 'احصل على تحديثات حول المجموعات الجديدة والعروض الحصرية.', emailPlaceholder: 'بريدك الإلكتروني',
     subscribeSuccess: 'شكراً لاشتراكك!', subscribeFailed: 'تعذّر الاشتراك',
     links: {
@@ -301,6 +302,7 @@ export default {
   },
   ourMgScreens: { home: 'Our MG', products: 'المنتجات', orders: 'الطلبات', profile: 'الملف الشخصي', bookings: 'الحجوزات' },
   alts: {
+    contactHero: 'فريق أعمال Modern Gold في اجتماع',
     hero: 'عمليات تكرير الذهب — صب الذهب المنصهر في Modern Gold',
     sellGoldPath: 'أيدٍ تحمل سلاسل ذهبية مصقولة — بِع ذهبك لدى Modern Gold',
     buyerPath: 'مصافحة عمل — كن مشترياً بالجملة لدى Modern Gold',

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { MapPin } from 'lucide-react';
 import api from '../services/api';
 import { brand, footerColumns, socialLinks } from '../utils/brandConfig';
 import BrandLogo from './BrandLogo';
@@ -31,11 +32,23 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <BrandLogo variant="footer" />
             <p className="type-body-sm font-medium text-charcoal mb-1">{brand.legalName}</p>
-            <address className="type-body-sm leading-relaxed mb-4 not-italic">
-              {brand.addressLines.map((line) => (
-                <span key={line} className="block">{line}</span>
-              ))}
-            </address>
+            <a
+              href={brand.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex gap-2 mb-4 max-w-xs"
+              aria-label={`${brand.address} — ${t('footer.viewOnMap')}`}
+            >
+              <MapPin size={16} className="text-gold shrink-0 mt-0.5" />
+              <address className="type-body-sm leading-relaxed not-italic group-hover:text-gold transition-colors">
+                {brand.addressLines.map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
+                <span className="block mt-1 text-xs font-medium text-gold-dark group-hover:underline">
+                  {t('footer.viewOnMap')} ↗
+                </span>
+              </address>
+            </a>
             <p className="type-body-sm leading-relaxed mb-4 max-w-xs">
               {t('brand.tagline')}
             </p>

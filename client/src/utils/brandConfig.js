@@ -15,6 +15,7 @@ export const brand = {
     'Namangan Davlatabad',
     'Namangan – Uzbekistan',
   ],
+  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('242 Girvonbulok Street, Namangan Davlatabad, Namangan, Uzbekistan')}`,
   siteUrl: 'https://mg-jewelry.vercel.app',
   location: 'Namangan, Uzbekistan',
 };
