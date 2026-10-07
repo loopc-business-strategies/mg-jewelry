@@ -42,6 +42,13 @@ const newsletterRules = [
   body('email').isEmail().withMessage('Valid email required'),
 ];
 
+const wholesaleRegisterRules = [
+  body('businessName').isString().trim().notEmpty().withMessage('Business name is required'),
+  body('ownerName').isString().trim().notEmpty().withMessage('Contact person is required'),
+  body('email').isString().isEmail().withMessage('Valid email required'),
+  body('password').optional({ values: 'falsy' }).isString().isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+];
+
 const mongoIdParam = [
   param('id').isMongoId().withMessage('Invalid ID'),
 ];
@@ -63,6 +70,7 @@ module.exports = {
   reviewRules,
   couponRules,
   newsletterRules,
+  wholesaleRegisterRules,
   mongoIdParam,
   enquiryRules,
 };

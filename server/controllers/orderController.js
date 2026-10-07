@@ -3,7 +3,7 @@ const Cart = require('../models/Cart');
 const Coupon = require('../models/Coupon');
 const { buildItemsFromCart, buildOrderItems, calculateTotals } = require('../services/orderService');
 const { reserveStock, confirmStock, releaseStock } = require('../services/inventoryService');
-const { createPaymentIntent } = require('../services/stripeService');
+const { createPaymentIntent, retrievePaymentIntent } = require('../services/stripeService');
 const { sendOrderConfirmation } = require('../services/emailService');
 const { logAction } = require('../services/auditService');
 const { isAdminRole } = require('../middleware/permissions');
@@ -151,6 +151,19 @@ const confirmPayment = async (req, res, next) => {
     if (!order) throw new ApiError('Order not found', 404, 'NOT_FOUND');
     if (order.userId?.toString() !== req.user._id.toString()) throw new ApiError('Not authorized', 403, 'FORBIDDEN');
     if (order.paymentStatus === 'paid') return res.json({ success: true, data: order });
+
+    if (!order.stripePaymentIntentId) {
+      throw new ApiError('Payment could not be verified', 400, 'PAYMENT_NOT_VERIFIED');
+    }
+    let paymentIntent;
+    try {
+      paymentIntent = await retrievePaymentIntent(order.stripePaymentIntentId);
+    } catch {
+      throw new ApiError('Payment could not be verified', 400, 'PAYMENT_NOT_VERIFIED');
+    }
+    if (paymentIntent.status !== 'succeeded' || paymentIntent.amount !== Math.round(order.total * 100)) {
+      throw new ApiError('Payment could not be verified', 400, 'PAYMENT_NOT_VERIFIED');
+    }
 
     addStatusHistory(order, 'paid', req.user._id, 'Payment confirmed');
     order.paymentStatus = 'paid';

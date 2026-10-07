@@ -20,6 +20,12 @@ const createPaymentIntent = async ({ amount, currency = 'inr', metadata = {} }) 
   });
 };
 
+const retrievePaymentIntent = async (id) => {
+  const s = getStripe();
+  if (!s) throw new Error('Stripe is not configured');
+  return s.paymentIntents.retrieve(id);
+};
+
 const constructWebhookEvent = (payload, signature) => {
   const s = getStripe();
   if (!s) throw new Error('Stripe is not configured');
@@ -27,4 +33,4 @@ const constructWebhookEvent = (payload, signature) => {
   return s.webhooks.constructEvent(payload, signature, stripeWebhookSecret);
 };
 
-module.exports = { getStripe, createPaymentIntent, constructWebhookEvent };
+module.exports = { getStripe, createPaymentIntent, retrievePaymentIntent, constructWebhookEvent };

@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Product = require('../models/Product');
 const User = require('../models/User');
 const WholesaleCustomer = require('../models/WholesaleCustomer');
@@ -16,23 +17,37 @@ const registerWholesale = async (req, res) => {
     website, expectedMonthlyPurchase, categoriesInterested, country,
   } = req.body;
 
-  let user = await User.findOne({ email });
-  if (!user) {
+  let user;
+  let isNewUser = false;
+  if (req.user) {
+    user = req.user;
+  } else {
+    const exists = await User.findOne({ email: String(email) });
+    if (exists) {
+      return res.status(400).json({
+        success: false,
+        message: 'An account with this email already exists. Please log in to apply.',
+        code: 'USER_EXISTS',
+      });
+    }
     user = await User.create({
       name: ownerName || businessName,
       email,
       phone,
-      password: password || `ws_${Date.now()}`,
+      password: password || crypto.randomBytes(24).toString('hex'),
       role: 'wholesale_pending',
     });
-  } else {
-    user.role = 'wholesale_pending';
-    await user.save();
+    isNewUser = true;
   }
 
   const existing = await WholesaleCustomer.findOne({ userId: user._id });
   if (existing) {
     return res.status(400).json({ message: 'Wholesale application already submitted' });
+  }
+
+  // Only plain customers move to pending; admin/staff roles must never be downgraded here.
+  if (!isNewUser && user.role === 'customer') {
+    await User.updateOne({ _id: user._id }, { role: 'wholesale_pending' });
   }
 
   const wholesale = await WholesaleCustomer.create({
@@ -57,7 +72,7 @@ const registerWholesale = async (req, res) => {
   res.status(201).json({
     message: 'Wholesale application submitted. Pending approval.',
     wholesale,
-    token: generateToken(user._id),
+    ...(isNewUser ? { token: generateToken(user._id) } : {}),
   });
 };
 

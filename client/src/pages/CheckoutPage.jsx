@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js/pure';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -12,7 +12,13 @@ import { Check } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { apiErrorMessage } from '../utils/apiError';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
+const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+let stripePromise;
+const getStripePromise = () => {
+  if (!stripeKey) return null;
+  if (!stripePromise) stripePromise = loadStripe(stripeKey);
+  return stripePromise;
+};
 
 function StripeForm({ order, onSuccess }) {
   const stripe = useStripe();
@@ -73,7 +79,7 @@ export default function CheckoutPage() {
   const total = subtotal + shipping + tax;
 
   const paymentMethods = [
-    { id: 'stripe', label: t('checkout.stripe') },
+    ...(stripeKey ? [{ id: 'stripe', label: t('checkout.stripe') }] : []),
     { id: 'cod', label: t('checkout.cod') },
   ];
 
@@ -186,7 +192,7 @@ export default function CheckoutPage() {
         {step === 3.5 && clientSecret && order && (
           <div className="space-y-4">
             <p className="text-sm text-muted">{t('checkout.stripeNote')}</p>
-            <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <Elements stripe={getStripePromise()} options={{ clientSecret }}>
               <StripeForm order={order} onSuccess={onPaymentSuccess} />
             </Elements>
           </div>

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AdminLayout from '../layouts/AdminLayout';
@@ -7,7 +8,6 @@ import ShopPage from '../pages/ShopPage';
 import CategoryPage from '../pages/CategoryPage';
 import ProductPage from '../pages/ProductPage';
 import CartPage from '../pages/CartPage';
-import CheckoutPage from '../pages/CheckoutPage';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
@@ -39,6 +39,8 @@ import AdminCustomers from '../pages/admin/AdminCustomers';
 import AdminSettings from '../pages/admin/AdminSettings';
 import AdminBlog from '../pages/admin/AdminBlog';
 
+const CheckoutPage = lazy(() => import('../pages/CheckoutPage'));
+
 export default function AppRouter() {
   return (
     <Routes>
@@ -48,7 +50,14 @@ export default function AppRouter() {
         <Route path="shop/:slug" element={<CategoryPage />} />
         <Route path="product/:id" element={<ProductPage />} />
         <Route path="cart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
+        <Route
+          path="checkout"
+          element={(
+            <Suspense fallback={<div className="min-h-[60vh]" />}>
+              <CheckoutPage />
+            </Suspense>
+          )}
+        />
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignupPage />} />
         <Route path="forgot-password" element={<ForgotPasswordPage />} />

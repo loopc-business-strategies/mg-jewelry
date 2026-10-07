@@ -5,10 +5,12 @@ const {
   submitInquiry, getWholesaleOrders, getBulkPricingPublic,
 } = require('../controllers/wholesaleController');
 const { protect, optionalAuth, wholesaleApproved } = require('../middleware/auth');
+const validate = require('../middleware/validate');
+const { wholesaleRegisterRules } = require('../validators');
 
 const router = express.Router();
 
-router.post('/register', registerWholesale);
+router.post('/register', optionalAuth, wholesaleRegisterRules, validate, registerWholesale);
 router.post('/inquiry', submitInquiry);
 router.get('/bulk-pricing', getBulkPricingPublic);
 router.get('/products', optionalAuth, getWholesaleProducts);

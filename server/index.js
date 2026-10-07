@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/db');
 const { corsOrigins, port } = require('./config/env');
 const errorHandler = require('./middleware/errorHandler');
+const { sanitizeInput } = require('./middleware/sanitizeInput');
 
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -89,11 +90,13 @@ connectDB().then(async () => {
 
 const app = express();
 
+const VERCEL_PROJECT_ORIGIN = /^https:\/\/mg-jewelry(-[a-z0-9-]+)?\.vercel\.app$/;
+
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
-    if (corsOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+    if (corsOrigins.includes(origin) || VERCEL_PROJECT_ORIGIN.test(origin)) {
       return callback(null, true);
     }
     return callback(null, false);
@@ -105,6 +108,7 @@ app.use('/api/webhooks', webhookRoutes);
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(sanitizeInput);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const globalLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 500 });
