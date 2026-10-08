@@ -172,7 +172,7 @@ export default {
     success: 'تم إرسال الرسالة بنجاح! سنرد عليك قريباً.', failed: 'تعذّر إرسال الرسالة. يرجى المحاولة مرة أخرى.',
   },
   auth: {
-    signedInAs: 'تم تسجيل الدخول باسم', wholesaleDashboard: 'لوحة الجملة', adminPanel: 'لوحة الإدارة',
+    signedInAs: 'تم تسجيل الدخول باسم', wholesaleDashboard: 'لوحة الجملة',
     communityNote: 'منتدى مجتمعنا قادم قريباً.',
     account: 'الحساب', welcomeBack: 'مرحباً بعودتك', signIn: 'تسجيل الدخول', signingIn: 'جارٍ تسجيل الدخول...',
     forgotPassword: 'نسيت كلمة المرور؟', noAccount: 'ليس لديك حساب؟', signUp: 'إنشاء حساب',

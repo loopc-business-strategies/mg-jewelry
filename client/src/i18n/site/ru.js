@@ -172,7 +172,7 @@ export default {
     success: 'Сообщение отправлено! Мы скоро ответим.', failed: 'Не удалось отправить сообщение. Попробуйте ещё раз.',
   },
   auth: {
-    signedInAs: 'Вы вошли как', wholesaleDashboard: 'Оптовый кабинет', adminPanel: 'Панель администратора',
+    signedInAs: 'Вы вошли как', wholesaleDashboard: 'Оптовый кабинет',
     communityNote: 'Скоро откроется наш форум сообщества.',
     account: 'Аккаунт', welcomeBack: 'С возвращением', signIn: 'ВОЙТИ', signingIn: 'Вход...',
     forgotPassword: 'Забыли пароль?', noAccount: 'Нет аккаунта?', signUp: 'Зарегистрироваться',

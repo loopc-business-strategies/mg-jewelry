@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
-import AdminLayout from '../layouts/AdminLayout';
 import LoginRedirect from '../components/LoginRedirect';
 
 import HomePage from '../pages/HomePage';
@@ -25,14 +24,6 @@ import {
   PrivacyPage, TermsPage, RefundPage, ShippingPolicyPage,
   FAQPage, ShippingPage, ReturnsPage, TrackOrderPage,
 } from '../pages/LegalPages';
-
-import AdminDashboard from '../pages/admin/AdminDashboard';
-import AdminProducts from '../pages/admin/AdminProducts';
-import AdminOrders from '../pages/admin/AdminOrders';
-import AdminWholesale from '../pages/admin/AdminWholesale';
-import AdminCustomers from '../pages/admin/AdminCustomers';
-import AdminSettings from '../pages/admin/AdminSettings';
-import AdminBlog from '../pages/admin/AdminBlog';
 
 export default function AppRouter() {
   return (
@@ -73,15 +64,7 @@ export default function AppRouter() {
         <Route path="track-order" element={<TrackOrderPage />} />
       </Route>
 
-      <Route path="admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="products" element={<AdminProducts />} />
-        <Route path="orders" element={<AdminOrders />} />
-        <Route path="wholesale" element={<AdminWholesale />} />
-        <Route path="customers" element={<AdminCustomers />} />
-        <Route path="settings" element={<AdminSettings />} />
-        <Route path="blog" element={<AdminBlog />} />
-      </Route>
+      <Route path="admin/*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

@@ -25,8 +25,7 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
 
-  const onAdmin = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
-  const lang = onAdmin ? 'en' : getStoredLanguage();
+  const lang = getStoredLanguage();
   const url = config.url || '';
   if (/\/(products|search|blog|cart|wishlist)\b/.test(url)) {
     config.params = { ...config.params, lang };
@@ -45,7 +44,7 @@ api.interceptors.response.use(
   (err) => {
     if (err.response?.status === 401) {
       const path = window.location.pathname;
-      if (!path.includes('/login') && !path.includes('/admin')) {
+      if (!path.includes('/login')) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
       }

@@ -172,7 +172,7 @@ export default {
     success: 'Xabar yuborildi! Tez orada javob beramiz.', failed: 'Xabarni yuborib bo\'lmadi. Qaytadan urinib ko\'ring.',
   },
   auth: {
-    signedInAs: 'Kirgan foydalanuvchi', wholesaleDashboard: 'Ulgurji kabinet', adminPanel: 'Administrator paneli',
+    signedInAs: 'Kirgan foydalanuvchi', wholesaleDashboard: 'Ulgurji kabinet',
     communityNote: 'Hamjamiyat forumimiz tez orada ishga tushadi.',
     account: 'Hisob', welcomeBack: 'Xush kelibsiz', signIn: 'KIRISH', signingIn: 'Kirilmoqda...',
     forgotPassword: 'Parolni unutdingizmi?', noAccount: 'Hisobingiz yo\'qmi?', signUp: 'Ro\'yxatdan o\'tish',

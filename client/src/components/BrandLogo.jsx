@@ -38,12 +38,6 @@ export default function BrandLogo({ variant = 'header', className = '', linkTo =
         <LogoMark className="h-10 w-auto" />
       </div>
     ),
-    admin: (
-      <div className={className}>
-        <p className="font-display text-xl text-gradient-gold">{brand.name}</p>
-        <p className="text-xs text-muted mt-1">Admin Panel</p>
-      </div>
-    ),
     iconOnly: (
       <span className={`font-display text-xl text-charcoal tracking-wide shrink-0 ${className}`}>
         {brand.name}
@@ -55,7 +49,7 @@ export default function BrandLogo({ variant = 'header', className = '', linkTo =
     if (!brand.logo) return null;
   }
 
-  if (linkTo && variant !== 'admin') {
+  if (linkTo) {
     return <Link to={linkTo}>{content}</Link>;
   }
 

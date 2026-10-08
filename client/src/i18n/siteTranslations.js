@@ -178,7 +178,7 @@ export const siteTranslations = {
       success: 'Message sent successfully! We will respond shortly.', failed: 'Failed to send message. Please try again.',
     },
     auth: {
-      signedInAs: 'Signed in as', wholesaleDashboard: 'Wholesale dashboard', adminPanel: 'Admin panel',
+      signedInAs: 'Signed in as', wholesaleDashboard: 'Wholesale dashboard',
       communityNote: 'Our community forum is coming soon.',
       account: 'Account', welcomeBack: 'Welcome Back', signIn: 'SIGN IN', signingIn: 'Signing in...',
       forgotPassword: 'Forgot password?', noAccount: "Don't have an account?", signUp: 'Sign up',

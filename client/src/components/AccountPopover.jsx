@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { User, LogOut, LayoutDashboard, Store, MessagesSquare } from 'lucide-react';
+import { User, LogOut, Store, MessagesSquare } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
@@ -10,7 +10,7 @@ const EMPTY_FORM = { name: '', email: '', password: '' };
 
 export default function AccountPopover() {
   const {
-    user, login, register, logout, isAdmin, loginPrompt, openLogin, closeLogin,
+    user, login, register, logout, loginPrompt, openLogin, closeLogin,
   } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -106,11 +106,6 @@ export default function AccountPopover() {
                 {hasWholesale && (
                   <Link to="/wholesale/dashboard" onClick={closeLogin} className="account-popover-link">
                     <Store size={16} className="text-gold shrink-0" /> {t('auth.wholesaleDashboard')}
-                  </Link>
-                )}
-                {isAdmin && (
-                  <Link to="/admin" onClick={closeLogin} className="account-popover-link">
-                    <LayoutDashboard size={16} className="text-gold shrink-0" /> {t('auth.adminPanel')}
                   </Link>
                 )}
                 <p className="account-popover-note">

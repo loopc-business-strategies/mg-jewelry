@@ -7,8 +7,7 @@ import { useTranslation } from '../../hooks/useTranslation';
 
 const iconMap = { HardHat, Gem, Factory, Globe2 };
 const MOTIONS = ['zoom-in', 'pan-left', 'zoom-out', 'pan-right'];
-
-const slideNumber = (i) => String(i + 1).padStart(2, '0');
+const SLIDE_MS = 5000;
 
 export default function HeroSection() {
   const { t } = useTranslation();
@@ -23,12 +22,14 @@ export default function HeroSection() {
     return () => document.removeEventListener('visibilitychange', onVisibility);
   }, []);
 
-  const showNext = () => {
-    setPrevious(active);
-    setActive((active + 1) % heroSlides.length);
-  };
-
-  const activeSlide = heroSlides[active];
+  useEffect(() => {
+    if (tabHidden) return undefined;
+    const id = setTimeout(() => {
+      setPrevious(active);
+      setActive((active + 1) % heroSlides.length);
+    }, SLIDE_MS);
+    return () => clearTimeout(id);
+  }, [active, tabHidden]);
 
   return (
     <section
@@ -53,7 +54,7 @@ export default function HeroSection() {
         <div className="hero-banner-overlay" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-14 pb-24 md:pt-20 md:pb-36">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-14 pb-16 md:pt-20 md:pb-24">
         <div className="max-w-xl animate-reveal">
           <p className="section-eyebrow">{t('home.hero.eyebrow')}</p>
           <h1 className="type-hero-title mb-5">
@@ -94,21 +95,6 @@ export default function HeroSection() {
               </div>
             );
           })}
-        </div>
-      </div>
-
-      <div className="absolute inset-x-0 bottom-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pb-5 md:pb-8 flex justify-end">
-          <div className="hero-counter" aria-hidden="true">
-            <p className="hero-counter-index">
-              <span className="hero-counter-current">{slideNumber(active)}</span>
-              <span className="hero-counter-total">/ {slideNumber(heroSlides.length - 1)}</span>
-            </p>
-            <p key={active} className="hero-counter-label">{t(`home.hero.slides.${activeSlide.id}`)}</p>
-            <span className="hero-counter-line">
-              <span key={active} className="hero-counter-fill" onAnimationEnd={showNext} />
-            </span>
-          </div>
         </div>
       </div>
     </section>

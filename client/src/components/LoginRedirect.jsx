@@ -8,7 +8,7 @@ function safeNext(value) {
 
 /** Legacy /login and /signup URLs: open the header account popover instead of a full page. */
 export default function LoginRedirect({ mode = 'signin' }) {
-  const { user, loading, isAdmin, openLogin } = useAuth();
+  const { user, loading, openLogin } = useAuth();
   const [params] = useSearchParams();
   const next = safeNext(params.get('next'));
 
@@ -17,6 +17,6 @@ export default function LoginRedirect({ mode = 'signin' }) {
   }, [loading, user, openLogin, next, mode]);
 
   if (loading) return null;
-  const canFollowNext = user && next && (isAdmin || !next.startsWith('/admin'));
+  const canFollowNext = user && next && !next.startsWith('/admin');
   return <Navigate to={canFollowNext ? next : '/'} replace />;
 }

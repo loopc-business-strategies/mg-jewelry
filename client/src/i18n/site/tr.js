@@ -172,7 +172,7 @@ export default {
     success: 'Mesaj başarıyla gönderildi! En kısa sürede yanıt vereceğiz.', failed: 'Mesaj gönderilemedi. Lütfen tekrar deneyin.',
   },
   auth: {
-    signedInAs: 'Giriş yapan', wholesaleDashboard: 'Toptan satış paneli', adminPanel: 'Yönetim paneli',
+    signedInAs: 'Giriş yapan', wholesaleDashboard: 'Toptan satış paneli',
     communityNote: 'Topluluk forumumuz çok yakında.',
     account: 'Hesap', welcomeBack: 'Tekrar Hoş Geldiniz', signIn: 'GİRİŞ YAP', signingIn: 'Giriş yapılıyor...',
     forgotPassword: 'Şifrenizi mi unuttunuz?', noAccount: 'Hesabınız yok mu?', signUp: 'Kayıt ol',

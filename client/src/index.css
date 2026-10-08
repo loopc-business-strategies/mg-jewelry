@@ -736,91 +736,8 @@ h5, h6 {
   to { transform: scale(1.1) translateX(2.5%); }
 }
 
-@keyframes heroProgress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-@keyframes heroLabelIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-counter {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.375rem;
-  text-align: end;
-  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.85);
-}
-
-.hero-counter-index {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  line-height: 1;
-}
-
-.hero-counter-current {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--color-gold);
-}
-
-.hero-counter-total {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  color: var(--type-muted);
-}
-
-.hero-counter-label {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--type-charcoal);
-  animation: heroLabelIn 0.6s ease-out both;
-}
-
-.hero-counter-line {
-  position: relative;
-  display: block;
-  width: 9rem;
-  height: 2px;
-  margin-top: 0.25rem;
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgba(51, 51, 51, 0.14);
-}
-
-.hero-counter-fill {
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-brand);
-  transform: scaleX(0);
-  transform-origin: left center;
-  animation: heroProgress 5s linear forwards;
-}
-
-[dir='rtl'] .hero-counter-fill {
-  transform-origin: right center;
-}
-
-.hero-banner.is-paused .hero-slide img,
-.hero-banner.is-paused .hero-counter-fill {
+.hero-banner.is-paused .hero-slide img {
   animation-play-state: paused;
-}
-
-@media (min-width: 768px) {
-  .hero-counter-current {
-    font-size: 2.5rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -829,8 +746,7 @@ h5, h6 {
   }
 
   .hero-slide.is-active img,
-  .hero-slide.is-leaving img,
-  .hero-counter-label {
+  .hero-slide.is-leaving img {
     animation: none;
   }
 }
@@ -1191,9 +1107,6 @@ h5, h6 {
   }
 }
 
-
-.admin-table-header { background: var(--color-cream); }
-.admin-table-row:hover { background: var(--color-cream); }
 
 /* Our MG — phone mockups & screenshot placeholders */
 .phone-mockup {
