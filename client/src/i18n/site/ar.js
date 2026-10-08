@@ -121,7 +121,7 @@ export default {
   product: {
     notFound: 'المنتج غير موجود', productCode: 'رمز المنتج', emiFrom: 'تقسيط من {amount}/شهرياً · بدون فوائد',
     metal: 'المعدن', purity: 'العيار', weight: 'الوزن', carat: 'القيراط', clarity: 'النقاء', color: 'اللون', cut: 'القطع',
-    size: 'المقاس', quantity: 'الكمية', addToCart: 'أضف إلى السلة', buyNow: 'اشترِ الآن',
+    size: 'المقاس', quantity: 'الكمية', addToCart: 'أضف إلى السلة', buyNow: 'اشترِ الآن', enquire: 'استفسر عن هذا المنتج',
     checkDelivery: 'تحقق من موعد التوصيل', enterPincode: 'أدخل الرمز البريدي', check: 'تحقق',
     deliveryIn: 'التوصيل خلال {date}', freeShipping: 'شحن مجاني للطلبات فوق ₹5,000', easyReturns: 'إرجاع سهل خلال 15 يوماً',
     securePayments: 'مدفوعات آمنة', certified: 'مجوهرات معتمدة',
@@ -171,6 +171,8 @@ export default {
     success: 'تم إرسال الرسالة بنجاح! سنرد عليك قريباً.', failed: 'تعذّر إرسال الرسالة. يرجى المحاولة مرة أخرى.',
   },
   auth: {
+    signedInAs: 'تم تسجيل الدخول باسم', wholesaleDashboard: 'لوحة الجملة', adminPanel: 'لوحة الإدارة',
+    communityNote: 'منتدى مجتمعنا قادم قريباً.',
     account: 'الحساب', welcomeBack: 'مرحباً بعودتك', signIn: 'تسجيل الدخول', signingIn: 'جارٍ تسجيل الدخول...',
     forgotPassword: 'نسيت كلمة المرور؟', noAccount: 'ليس لديك حساب؟', signUp: 'إنشاء حساب',
     createAccount: 'إنشاء حساب', creating: 'جارٍ الإنشاء...', hasAccount: 'لديك حساب بالفعل؟', signInLink: 'تسجيل الدخول',
@@ -296,7 +298,7 @@ export default {
   },
   presenceCards: {
     showroom: { title: 'صالة العرض والمكتب', description: 'مساحة احترافية لاستقبال العملاء والشركاء وزوار الأعمال الدوليين.', alt: 'صالة عرض واستقبال Modern Gold' },
-    manufacturing: { title: 'التصنيع', description: 'حرفية ماهرة وعمليات إنتاج تدعم أعمالنا في المجوهرات الذهبية.', alt: 'ورشة تصنيع مجوهرات ذهبية — صورة توضيحية' },
+    manufacturing: { title: 'التصنيع', description: 'حرفية ماهرة وعمليات إنتاج تدعم أعمالنا في المجوهرات الذهبية.', alt: 'فريق دولي من الحرفيين يصنع سلاسل وأساور ذهبية' },
     team: { title: 'فريقنا', description: 'متخصصون ذوو خبرة في الإنتاج والجودة وتطوير الأعمال وعلاقات العملاء.', alt: 'فريق عمل محترف في اجتماع — صورة توضيحية' },
     quality: { title: 'الجودة والعمليات', description: 'فحص دقيق ووزن وعمليات تركز على الجودة في جميع أعمالنا المتعلقة بالذهب.', alt: 'فحص جودة الذهب ووزنه — صورة توضيحية' },
   },

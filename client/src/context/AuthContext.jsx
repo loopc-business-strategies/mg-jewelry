@@ -59,11 +59,22 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
+  const [loginPrompt, setLoginPrompt] = useState(null);
+
+  const openLogin = useCallback(({ redirectTo = null, mode = 'signin' } = {}) => {
+    setLoginPrompt({ redirectTo, mode });
+  }, []);
+
+  const closeLogin = useCallback(() => setLoginPrompt(null), []);
+
   const isAdmin = ['admin', 'super_admin', 'catalog_manager', 'order_manager', 'sales_manager', 'wholesale_manager', 'content_manager'].includes(user?.role);
   const isWholesaleApproved = user?.wholesaleStatus === 'approved' || user?.role === 'wholesale_customer';
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, updateProfile, isAdmin, isWholesaleApproved }}>
+    <AuthContext.Provider value={{
+      user, loading, login, register, logout, updateProfile, isAdmin, isWholesaleApproved,
+      loginPrompt, openLogin, closeLogin,
+    }}>
       {children}
     </AuthContext.Provider>
   );

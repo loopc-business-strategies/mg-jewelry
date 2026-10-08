@@ -1,24 +1,15 @@
-import { BASE_CURRENCY, exchangeRates } from './marketConfig';
-
-export function convertPrice(price, targetCurrency) {
-  if (!price && price !== 0) return 0;
-  if (targetCurrency === BASE_CURRENCY) return price;
-  const rate = exchangeRates[targetCurrency];
-  if (rate) return price * rate;
-  return price;
-}
+/** Currency of stored product prices. */
+export const BASE_CURRENCY = 'INR';
 
 export const formatPrice = (price, options = {}) => {
   if (!price && price !== 0) return '';
-  const currency = options.currency || BASE_CURRENCY;
   const locale = options.locale || 'en-IN';
-  const converted = convertPrice(price, currency);
 
   return new Intl.NumberFormat(locale, {
     style: 'currency',
-    currency,
-    maximumFractionDigits: currency === 'UZS' || currency === 'INR' ? 0 : 2,
-  }).format(converted);
+    currency: BASE_CURRENCY,
+    maximumFractionDigits: 0,
+  }).format(price);
 };
 
 export const calcEmi = (price, months = 12) => Math.round(price / months);

@@ -66,8 +66,6 @@ export const retailNavLinks = [
     label: slugToLabel(slug),
     path: `/shop/${slug}`,
   })),
-  { label: 'Wishlist', path: '/wishlist' },
-  { label: 'Cart', path: '/cart' },
 ];
 
 export const wholesaleNavLinks = [
@@ -83,10 +81,7 @@ export const wholesaleNavLinks = [
 export function isRetailRoute(pathname) {
   return (
     pathname.startsWith('/product/') ||
-    pathname === '/cart' ||
-    pathname === '/checkout' ||
-    pathname === '/search' ||
-    pathname === '/wishlist'
+    pathname === '/search'
   );
 }
 

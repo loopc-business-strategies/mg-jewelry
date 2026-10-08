@@ -2,16 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { useWholesaleCart } from '../context/WholesaleCartContext';
 import SEOHead from '../components/SEOHead';
 import WholesaleProductCard from '../components/WholesaleProductCard';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import { formatPrice } from '../utils/formatPrice';
 import { useTranslation } from '../hooks/useTranslation';
 
 export default function WholesaleShopPage() {
-  const { user, isWholesaleApproved } = useAuth();
-  const { addToWholesaleCart, cart } = useWholesaleCart();
+  const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [showPrices, setShowPrices] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -37,11 +34,6 @@ export default function WholesaleShopPage() {
               </p>
             )}
           </div>
-          {isWholesaleApproved && (
-            <Link to="/wholesale/dashboard" className="text-sm btn-primary-gold text-xs px-4 py-2">
-              {t('wholesaleShop.bulkCart')} ({cart.items?.length || 0}) · {formatPrice(cart.total || 0)}
-            </Link>
-          )}
         </div>
         {loading ? <LoadingSkeleton /> : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -50,7 +42,6 @@ export default function WholesaleShopPage() {
                 key={p._id}
                 product={p}
                 showPrices={showPrices}
-                onAdd={isWholesaleApproved ? addToWholesaleCart : null}
               />
             ))}
           </div>

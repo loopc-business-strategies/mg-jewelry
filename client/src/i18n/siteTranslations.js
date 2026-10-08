@@ -127,7 +127,7 @@ export const siteTranslations = {
     product: {
       notFound: 'Product not found', productCode: 'Product Code', emiFrom: 'EMI from {amount}/month · No Cost EMI available',
       metal: 'Metal', purity: 'Purity', weight: 'Weight', carat: 'Carat', clarity: 'Clarity', color: 'Color', cut: 'Cut',
-      size: 'Size', quantity: 'Quantity', addToCart: 'Add to Cart', buyNow: 'Buy Now',
+      size: 'Size', quantity: 'Quantity', addToCart: 'Add to Cart', buyNow: 'Buy Now', enquire: 'Enquire about this product',
       checkDelivery: 'Check Delivery Date', enterPincode: 'Enter pincode', check: 'Check',
       deliveryIn: 'Delivery in {date}', freeShipping: 'Free shipping above ₹5,000', easyReturns: '15-day easy returns',
       securePayments: 'Secure payments', certified: 'Certified jewellery',
@@ -177,6 +177,8 @@ export const siteTranslations = {
       success: 'Message sent successfully! We will respond shortly.', failed: 'Failed to send message. Please try again.',
     },
     auth: {
+      signedInAs: 'Signed in as', wholesaleDashboard: 'Wholesale dashboard', adminPanel: 'Admin panel',
+      communityNote: 'Our community forum is coming soon.',
       account: 'Account', welcomeBack: 'Welcome Back', signIn: 'SIGN IN', signingIn: 'Signing in...',
       forgotPassword: 'Forgot password?', noAccount: "Don't have an account?", signUp: 'Sign up',
       createAccount: 'Create Account', creating: 'Creating...', hasAccount: 'Already have an account?', signInLink: 'Sign in',
@@ -302,7 +304,7 @@ export const siteTranslations = {
     },
     presenceCards: {
       showroom: { title: 'SHOWROOM & OFFICE', description: 'A professional space for welcoming customers, partners and international business visitors.', alt: 'Modern Gold showroom and reception' },
-      manufacturing: { title: 'MANUFACTURING', description: 'Skilled craftsmanship and production processes supporting our gold jewellery operations.', alt: 'Gold jewellery manufacturing workshop — demo photography' },
+      manufacturing: { title: 'MANUFACTURING', description: 'Skilled craftsmanship and production processes supporting our gold jewellery operations.', alt: 'International team of craftspeople making gold chains and bangles' },
       team: { title: 'OUR PEOPLE', description: 'Experienced professionals working across production, quality, business development and customer relationships.', alt: 'Professional business team in meeting — demo corporate photography' },
       quality: { title: 'QUALITY & OPERATIONS', description: 'Careful inspection, weighing and quality-focused processes across our gold operations.', alt: 'Gold quality inspection and weighing — demo photography' },
     },

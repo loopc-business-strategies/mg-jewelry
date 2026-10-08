@@ -2,17 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { useWholesaleCart } from '../context/WholesaleCartContext';
 import SEOHead from '../components/SEOHead';
 import { formatPrice } from '../utils/formatPrice';
-import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
-import { apiErrorMessage } from '../utils/apiError';
 
 export default function WholesaleDashboardPage() {
   const { user } = useAuth();
   const { t, tf } = useTranslation();
-  const { cart, fetchCart } = useWholesaleCart();
   const [profile, setProfile] = useState(null);
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('overview');
@@ -24,17 +20,7 @@ export default function WholesaleDashboardPage() {
     }
   }, [user]);
 
-  const placeOrder = async () => {
-    try {
-      await api.post('/wholesale/orders', { shippingAddress: { businessName: profile?.businessName } });
-      toast.success(t('wholesaleDashboard.placed'));
-      fetchCart();
-    } catch (err) {
-      toast.error(apiErrorMessage(err, t, 'wholesaleDashboard.failed'));
-    }
-  };
-
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/login?next=/wholesale/dashboard" replace />;
 
   const statusColors = {
     pending: 'bg-yellow-100 text-yellow-800',
@@ -63,7 +49,7 @@ export default function WholesaleDashboardPage() {
 
         <div className="grid md:grid-cols-4 gap-8">
           <nav className="space-y-1">
-            {['overview', 'orders', 'bulk-cart', 'support'].map((key) => (
+            {['overview', 'orders', 'support'].map((key) => (
               <button key={key} onClick={() => setTab(key)} className={`w-full text-start px-4 py-2 rounded-lg text-sm capitalize ${tab === key ? 'bg-gold text-white' : 'hover:bg-cream'}`}>
                 {t(`wholesaleDashboard.tabs.${key}`, key.replace('-', ' '))}
               </button>
@@ -91,30 +77,6 @@ export default function WholesaleDashboardPage() {
                     <p className="text-sm text-muted">{tf('ui.itemsCount', { n: o.items?.length ?? 0 })} · {formatPrice(o.total)}</p>
                   </div>
                 )) : <p className="text-muted">{t('wholesaleDashboard.noOrders')}</p>}
-              </div>
-            )}
-
-            {tab === 'bulk-cart' && (
-              <div>
-                {cart.items?.length ? (
-                  <>
-                    {cart.items.map((item) => (
-                      <div key={item._id} className="flex justify-between border-b py-3 text-sm">
-                        <span>{item.productId?.name} × {item.quantity}</span>
-                        <span>{formatPrice(item.appliedTierPrice * item.quantity)}</span>
-                      </div>
-                    ))}
-                    <div className="flex justify-between font-semibold mt-4">
-                      <span>{t('wholesaleDashboard.total')}</span>
-                      <span>{formatPrice(cart.total)}</span>
-                    </div>
-                    {profile?.status === 'approved' && (
-                      <button onClick={placeOrder} className="mt-4 btn-primary-gold text-xs">{t('wholesaleDashboard.placeOrder')}</button>
-                    )}
-                  </>
-                ) : (
-                  <p className="text-muted">{t('wholesaleDashboard.cartEmpty')} <Link to="/wholesale/shop" className="text-gold-dark hover:underline">{t('wholesaleDashboard.browse')}</Link></p>
-                )}
               </div>
             )}
 

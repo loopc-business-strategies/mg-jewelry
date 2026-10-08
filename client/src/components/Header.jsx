@@ -1,29 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import {
   navLinks,
   sellGoldCta,
   isNavLinkActive,
 } from '../utils/brandConfig';
-import { useCart } from '../context/CartContext';
-import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
 import MegaMenu from './MegaMenu';
 import MarketSelector from './MarketSelector';
 import BrandLogo from './BrandLogo';
-import SearchBar from './SearchBar';
+import AccountPopover from './AccountPopover';
 
 export default function Header() {
   const [sticky, setSticky] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
   const { pathname } = useLocation();
-  const { cartCount } = useCart();
-  const { wishlistCount } = useWishlist();
-  const { user } = useAuth();
+  const { user, openLogin } = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -50,6 +45,11 @@ export default function Header() {
   };
 
   const directMobileLinks = navLinks.filter((link) => !link.menu);
+
+  const openAccountFromMenu = () => {
+    setMobileOpen(false);
+    openLogin();
+  };
 
   return (
     <header className={`sticky top-0 z-50 bg-white transition-all duration-300 border-b border-border ${sticky ? 'shadow-[var(--shadow-soft)]' : ''}`}>
@@ -89,36 +89,9 @@ export default function Header() {
             <div className="hidden md:block">
               <MarketSelector compact />
             </div>
-            <button onClick={() => setSearchOpen(!searchOpen)} className="p-2.5 text-charcoal hover:text-gold transition-colors" aria-label={t('ui.search')}>
-              <Search size={18} strokeWidth={1.5} />
-            </button>
-            <Link to="/wishlist" className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label={t('ui.wishlist')}>
-              <Heart size={18} strokeWidth={1.5} />
-              {wishlistCount > 0 && (
-                <span className="absolute top-1 end-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                  {wishlistCount}
-                </span>
-              )}
-            </Link>
-            <Link to={user ? '/profile' : '/login'} className="hidden sm:block p-2.5 text-charcoal hover:text-gold transition-colors" aria-label={t('ui.account')}>
-              <User size={18} strokeWidth={1.5} />
-            </Link>
-            <Link to="/cart" className="p-2.5 text-charcoal hover:text-gold transition-colors relative" aria-label={t('ui.cart')}>
-              <ShoppingBag size={18} strokeWidth={1.5} />
-              {cartCount > 0 && (
-                <span className="absolute top-1 end-1 bg-gold text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+            <AccountPopover />
           </div>
         </div>
-
-        {searchOpen && (
-          <div className="pb-4 animate-fade-in border-t border-border pt-4">
-            <SearchBar onClose={() => setSearchOpen(false)} />
-          </div>
-        )}
       </div>
 
       {mobileOpen && (
@@ -140,10 +113,9 @@ export default function Header() {
             <Link to="/shop" className="type-body-sm py-3 border-b border-border" onClick={() => setMobileOpen(false)}>
               {t('nav.collections')}
             </Link>
-            <Link to="/wishlist" className="type-body-sm py-3 border-t border-border mt-2" onClick={() => setMobileOpen(false)}>{t('ui.wishlist')}</Link>
-            <Link to={user ? '/profile' : '/login'} className="type-body-sm py-3" onClick={() => setMobileOpen(false)}>
+            <button type="button" onClick={openAccountFromMenu} className="type-body-sm py-3 text-start">
               {user ? t('ui.myAccount') : t('ui.login')}
-            </Link>
+            </button>
             <Link
               to={sellGoldCta.path}
               className="btn-primary-gold-sm w-full justify-center py-2.5 mt-4"

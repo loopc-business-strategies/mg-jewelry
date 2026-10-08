@@ -19,7 +19,7 @@ const links = [
 export default function AdminLayout() {
   const { user, isAdmin, logout } = useAuth();
 
-  if (!user || !isAdmin) return <Navigate to="/login" replace />;
+  if (!user || !isAdmin) return <Navigate to="/login?next=/admin" replace />;
 
   return (
     <div className="min-h-screen flex bg-white" dir="ltr" lang="en">

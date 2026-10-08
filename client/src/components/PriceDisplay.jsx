@@ -3,13 +3,9 @@ import { useMarket } from '../context/MarketContext';
 import { useTranslation } from '../hooks/useTranslation';
 
 export function useFormatPrice() {
-  const { prefs, locale } = useMarket();
+  const { locale } = useMarket();
 
-  return (price) =>
-    formatPriceBase(price, {
-      currency: prefs.currency,
-      locale: locale || 'en',
-    });
+  return (price) => formatPriceBase(price, { locale: locale || 'en' });
 }
 
 export default function PriceDisplay({ price, mrp, size = 'md', showEmi = false }) {

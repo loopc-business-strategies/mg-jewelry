@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -7,12 +7,10 @@ import ProductGallery from '../components/ProductGallery';
 import PriceDisplay from '../components/PriceDisplay';
 import ProductGrid from '../components/ProductGrid';
 import RecentlyViewed from '../components/RecentlyViewed';
-import WishlistButton from '../components/WishlistButton';
-import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { formatPrice, calcEmi } from '../utils/formatPrice';
 import StarRating from '../components/ui/StarRating';
-import { Truck, Shield, RotateCcw, Award } from 'lucide-react';
+import { Award, MessageCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../hooks/useTranslation';
 import { metalText, sizeText } from '../utils/displayText';
@@ -28,17 +26,12 @@ const TAB_KEYS = {
 
 export default function ProductPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
-  const { user } = useAuth();
+  const { user, openLogin } = useAuth();
   const { t, tf, lang, locale } = useTranslation();
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState('');
-  const [pincode, setPincode] = useState('');
-  const [delivery, setDelivery] = useState(null);
   const [tab, setTab] = useState('details');
   const [loading, setLoading] = useState(true);
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
@@ -68,22 +61,11 @@ export default function ProductPage() {
     }
   }, [product, lang]);
 
-  const checkDelivery = () => {
-    if (pincode.length === 6) {
-      setDelivery({ available: true });
-    } else {
-      toast.error(t('product.invalidPincode'));
-    }
-  };
-
-  const handleAddToCart = () => addToCart(product._id, quantity, size);
-  const handleBuyNow = () => { addToCart(product._id, quantity, size); navigate('/checkout'); };
-
   const submitReview = async (e) => {
     e.preventDefault();
     if (!user) {
       toast.error(t('product.loginToReview'));
-      navigate('/login');
+      openLogin();
       return;
     }
     setSubmittingReview(true);
@@ -116,12 +98,10 @@ export default function ProductPage() {
     offers: { '@type': 'Offer', price: product.price, priceCurrency: 'INR', availability: product.stock > 0 ? 'InStock' : 'OutOfStock' },
   };
 
-  const perks = [
-    { icon: Truck, text: t('product.freeShipping') },
-    { icon: RotateCcw, text: t('product.easyReturns') },
-    { icon: Shield, text: t('product.securePayments') },
-    { icon: Award, text: t('product.certified') },
-  ];
+  const enquiryParams = new URLSearchParams({
+    type: 'quote',
+    product: size && size !== 'Standard' ? `${product.name} (${sizeText(t, size)})` : product.name,
+  });
 
   return (
     <>
@@ -172,36 +152,15 @@ export default function ProductPage() {
               </div>
             )}
 
-            <div className="mb-6">
-              <label className="type-form-label">{t('product.quantity')}</label>
-              <div className="flex items-center border rounded-lg w-fit">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 hover:bg-cream">−</button>
-                <span className="px-4">{quantity}</span>
-                <button onClick={() => setQuantity(quantity + 1)} className="px-4 py-2 hover:bg-cream">+</button>
-              </div>
-            </div>
+            <Link
+              to={`/contact?${enquiryParams.toString()}`}
+              className="w-full btn-primary-ink justify-center text-xs mt-2 mb-6 gap-2"
+            >
+              <MessageCircle size={16} /> {t('product.enquire')}
+            </Link>
 
-            <div className="flex gap-3 mb-6">
-              <button onClick={handleAddToCart} className="flex-1 btn-primary-ink justify-center text-xs">{t('product.addToCart')}</button>
-              <button onClick={handleBuyNow} className="flex-1 btn-outline-elegant justify-center text-xs">{t('product.buyNow')}</button>
-              <WishlistButton productId={product._id} className="!static" />
-            </div>
-
-            <div className="border rounded-xl p-4 mb-6">
-              <label className="type-form-label">{t('product.checkDelivery')}</label>
-              <div className="flex gap-2">
-                <input type="text" placeholder={t('product.enterPincode')} maxLength={6} value={pincode} onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))} className="flex-1 input-elegant" />
-                <button onClick={checkDelivery} className="bg-gold text-white px-4 py-2 rounded-lg text-sm">{t('product.check')}</button>
-              </div>
-              {delivery && <p className="text-sm text-green-600 mt-2">✓ {tf('product.deliveryIn', { date: t('ui.deliveryDays') })}</p>}
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              {perks.map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-2 text-muted">
-                  <Icon size={16} className="text-gold shrink-0" /> {text}
-                </div>
-              ))}
+            <div className="flex items-center gap-2 text-sm text-muted">
+              <Award size={16} className="text-gold shrink-0" /> {t('product.certified')}
             </div>
           </div>
         </div>

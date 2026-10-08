@@ -7,7 +7,6 @@ import ProductFilter from '../components/ProductFilter';
 import ProductSort from '../components/ProductSort';
 import ProductGrid from '../components/ProductGrid';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import QuickViewModal from '../components/QuickViewModal';
 import Pagination from '../components/Pagination';
 import SafeImage from '../components/SafeImage';
 import { SlidersHorizontal } from 'lucide-react';
@@ -23,7 +22,6 @@ export default function CategoryPage() {
   const [meta, setMeta] = useState({});
   const [loading, setLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(false);
-  const [quickView, setQuickView] = useState(null);
   const { t, tf, lang } = useTranslation();
 
   const sort = searchParams.get('sort') || 'featured';
@@ -122,7 +120,7 @@ export default function CategoryPage() {
 
             {loading ? <LoadingSkeleton /> : (
               <>
-                <ProductGrid products={products} onQuickView={setQuickView} />
+                <ProductGrid products={products} />
                 <Pagination
                   page={Number(page)}
                   pages={meta.pages}
@@ -152,7 +150,6 @@ export default function CategoryPage() {
         }} mobile onClose={() => setFilterOpen(false)} />
       )}
 
-      {quickView && <QuickViewModal product={quickView} onClose={() => setQuickView(null)} />}
     </>
   );
 }

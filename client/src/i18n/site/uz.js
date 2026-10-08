@@ -121,7 +121,7 @@ export default {
   product: {
     notFound: 'Mahsulot topilmadi', productCode: 'Mahsulot kodi', emiFrom: 'Muddatli to\'lov: oyiga {amount} dan · ustamasiz',
     metal: 'Metall', purity: 'Proba', weight: 'Og\'irlik', carat: 'Karat', clarity: 'Tozalik', color: 'Rang', cut: 'Kesim',
-    size: 'O\'lcham', quantity: 'Miqdor', addToCart: 'Savatga qo\'shish', buyNow: 'Hozir sotib olish',
+    size: 'O\'lcham', quantity: 'Miqdor', addToCart: 'Savatga qo\'shish', buyNow: 'Hozir sotib olish', enquire: 'Ushbu mahsulot haqida so\'rov yuborish',
     checkDelivery: 'Yetkazib berish sanasini tekshirish', enterPincode: 'Pochta indeksini kiriting', check: 'Tekshirish',
     deliveryIn: 'Yetkazib berish: {date}', freeShipping: '₹5,000 dan yuqori buyurtmalarga bepul yetkazib berish', easyReturns: '15 kunlik oson qaytarish',
     securePayments: 'Xavfsiz to\'lovlar', certified: 'Sertifikatlangan zargarlik',
@@ -171,6 +171,8 @@ export default {
     success: 'Xabar yuborildi! Tez orada javob beramiz.', failed: 'Xabarni yuborib bo\'lmadi. Qaytadan urinib ko\'ring.',
   },
   auth: {
+    signedInAs: 'Kirgan foydalanuvchi', wholesaleDashboard: 'Ulgurji kabinet', adminPanel: 'Administrator paneli',
+    communityNote: 'Hamjamiyat forumimiz tez orada ishga tushadi.',
     account: 'Hisob', welcomeBack: 'Xush kelibsiz', signIn: 'KIRISH', signingIn: 'Kirilmoqda...',
     forgotPassword: 'Parolni unutdingizmi?', noAccount: 'Hisobingiz yo\'qmi?', signUp: 'Ro\'yxatdan o\'tish',
     createAccount: 'Hisob yaratish', creating: 'Yaratilmoqda...', hasAccount: 'Hisobingiz bormi?', signInLink: 'Kirish',
@@ -296,7 +298,7 @@ export default {
   },
   presenceCards: {
     showroom: { title: 'SHOURUM VA OFIS', description: 'Mijozlar, hamkorlar va xalqaro biznes mehmonlarini kutib olish uchun professional maskan.', alt: 'Modern Gold shourumi va qabulxonasi' },
-    manufacturing: { title: 'ISHLAB CHIQARISH', description: 'Oltin zargarlik faoliyatimizni qo\'llab-quvvatlovchi mohir hunarmandchilik va ishlab chiqarish jarayonlari.', alt: 'Oltin zargarlik ustaxonasi — namunaviy surat' },
+    manufacturing: { title: 'ISHLAB CHIQARISH', description: 'Oltin zargarlik faoliyatimizni qo\'llab-quvvatlovchi mohir hunarmandchilik va ishlab chiqarish jarayonlari.', alt: 'Oltin zanjir va bilaguzuklar yasayotgan xalqaro hunarmandlar jamoasi' },
     team: { title: 'JAMOAMIZ', description: 'Ishlab chiqarish, sifat, biznesni rivojlantirish va mijozlar bilan ishlash sohalaridagi tajribali mutaxassislar.', alt: 'Uchrashuvdagi professional jamoa — namunaviy surat' },
     quality: { title: 'SIFAT VA OPERATSIYALAR', description: 'Oltin bilan bog\'liq barcha jarayonlarda puxta tekshiruv, tortish va sifatga yo\'naltirilgan ish.', alt: 'Oltin sifatini tekshirish va tortish — namunaviy surat' },
   },

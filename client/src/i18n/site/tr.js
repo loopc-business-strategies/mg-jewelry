@@ -121,7 +121,7 @@ export default {
   product: {
     notFound: 'Ürün bulunamadı', productCode: 'Ürün Kodu', emiFrom: 'Aylık {amount} taksitle · faizsiz taksit seçeneği',
     metal: 'Metal', purity: 'Ayar', weight: 'Ağırlık', carat: 'Karat', clarity: 'Berraklık', color: 'Renk', cut: 'Kesim',
-    size: 'Beden', quantity: 'Adet', addToCart: 'Sepete Ekle', buyNow: 'Hemen Al',
+    size: 'Beden', quantity: 'Adet', addToCart: 'Sepete Ekle', buyNow: 'Hemen Al', enquire: 'Bu ürün hakkında bilgi alın',
     checkDelivery: 'Teslimat Tarihini Kontrol Et', enterPincode: 'Posta kodunu girin', check: 'Kontrol Et',
     deliveryIn: 'Teslimat: {date}', freeShipping: '₹5,000 üzeri ücretsiz kargo', easyReturns: '15 gün içinde kolay iade',
     securePayments: 'Güvenli ödeme', certified: 'Sertifikalı mücevher',
@@ -171,6 +171,8 @@ export default {
     success: 'Mesaj başarıyla gönderildi! En kısa sürede yanıt vereceğiz.', failed: 'Mesaj gönderilemedi. Lütfen tekrar deneyin.',
   },
   auth: {
+    signedInAs: 'Giriş yapan', wholesaleDashboard: 'Toptan satış paneli', adminPanel: 'Yönetim paneli',
+    communityNote: 'Topluluk forumumuz çok yakında.',
     account: 'Hesap', welcomeBack: 'Tekrar Hoş Geldiniz', signIn: 'GİRİŞ YAP', signingIn: 'Giriş yapılıyor...',
     forgotPassword: 'Şifrenizi mi unuttunuz?', noAccount: 'Hesabınız yok mu?', signUp: 'Kayıt ol',
     createAccount: 'Hesap Oluştur', creating: 'Oluşturuluyor...', hasAccount: 'Zaten hesabınız var mı?', signInLink: 'Giriş yap',
@@ -296,7 +298,7 @@ export default {
   },
   presenceCards: {
     showroom: { title: 'SHOWROOM VE OFİS', description: 'Müşterileri, ortakları ve uluslararası iş ziyaretçilerini ağırlamak için profesyonel bir alan.', alt: 'Modern Gold showroom ve resepsiyonu' },
-    manufacturing: { title: 'ÜRETİM', description: 'Altın mücevher faaliyetlerimizi destekleyen usta işçilik ve üretim süreçleri.', alt: 'Altın mücevher üretim atölyesi — örnek fotoğraf' },
+    manufacturing: { title: 'ÜRETİM', description: 'Altın mücevher faaliyetlerimizi destekleyen usta işçilik ve üretim süreçleri.', alt: 'Altın zincir ve bilezik üreten uluslararası zanaatkâr ekibi' },
     team: { title: 'EKİBİMİZ', description: 'Üretim, kalite, iş geliştirme ve müşteri ilişkileri alanlarında deneyimli profesyoneller.', alt: 'Toplantıdaki profesyonel ekip — örnek kurumsal fotoğraf' },
     quality: { title: 'KALİTE VE OPERASYONLAR', description: 'Tüm altın operasyonlarımızda titiz inceleme, tartım ve kalite odaklı süreçler.', alt: 'Altın kalite kontrolü ve tartımı — örnek fotoğraf' },
   },

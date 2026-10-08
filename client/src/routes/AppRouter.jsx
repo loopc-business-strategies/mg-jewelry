@@ -1,19 +1,14 @@
-import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AdminLayout from '../layouts/AdminLayout';
+import LoginRedirect from '../components/LoginRedirect';
 
 import HomePage from '../pages/HomePage';
 import ShopPage from '../pages/ShopPage';
 import CategoryPage from '../pages/CategoryPage';
 import ProductPage from '../pages/ProductPage';
-import CartPage from '../pages/CartPage';
-import LoginPage from '../pages/LoginPage';
-import SignupPage from '../pages/SignupPage';
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
-import ProfilePage from '../pages/ProfilePage';
-import WishlistPage from '../pages/WishlistPage';
 import SearchPage from '../pages/SearchPage';
 import GoldBuyingPage from '../pages/GoldBuyingPage';
 import CustomJewelryPage from '../pages/CustomJewelryPage';
@@ -39,8 +34,6 @@ import AdminCustomers from '../pages/admin/AdminCustomers';
 import AdminSettings from '../pages/admin/AdminSettings';
 import AdminBlog from '../pages/admin/AdminBlog';
 
-const CheckoutPage = lazy(() => import('../pages/CheckoutPage'));
-
 export default function AppRouter() {
   return (
     <Routes>
@@ -49,21 +42,14 @@ export default function AppRouter() {
         <Route path="shop" element={<ShopPage />} />
         <Route path="shop/:slug" element={<CategoryPage />} />
         <Route path="product/:id" element={<ProductPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route
-          path="checkout"
-          element={(
-            <Suspense fallback={<div className="min-h-[60vh]" />}>
-              <CheckoutPage />
-            </Suspense>
-          )}
-        />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="signup" element={<SignupPage />} />
+        <Route path="cart" element={<Navigate to="/shop" replace />} />
+        <Route path="checkout" element={<Navigate to="/shop" replace />} />
+        <Route path="wishlist" element={<Navigate to="/shop" replace />} />
+        <Route path="login" element={<LoginRedirect />} />
+        <Route path="signup" element={<LoginRedirect mode="signup" />} />
         <Route path="forgot-password" element={<ForgotPasswordPage />} />
         <Route path="reset-password" element={<ResetPasswordPage />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="wishlist" element={<WishlistPage />} />
+        <Route path="profile" element={<Navigate to="/" replace />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="gold-buying" element={<GoldBuyingPage />} />

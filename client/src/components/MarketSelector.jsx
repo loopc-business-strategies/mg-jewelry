@@ -2,80 +2,49 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Globe } from 'lucide-react';
 import { useMarket } from '../context/MarketContext';
-import { languages, markets, currencies } from '../utils/marketConfig';
-import MarketFlag from './MarketFlag';
-
-function RadioOption({ name, value, checked, onChange, label, flag }) {
-  return (
-    <label className="flex items-center gap-3 px-3 py-2.5 rounded-md cursor-pointer hover:bg-cream transition-colors border border-transparent has-[:checked]:border-border has-[:checked]:bg-cream">
-      <input
-        type="radio"
-        name={name}
-        value={value}
-        checked={checked}
-        onChange={onChange}
-        className="accent-gold w-4 h-4 shrink-0"
-      />
-      {flag}
-      <span className="text-sm text-charcoal">{label}</span>
-    </label>
-  );
-}
+import { languages } from '../utils/marketConfig';
 
 export default function MarketSelector({ compact = false }) {
-  const { prefs, market, language, updatePrefs, t } = useMarket();
+  const { prefs, language, updatePrefs, t } = useMarket();
   const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState(prefs);
-
-  const openSelector = () => {
-    setDraft(prefs);
-    setOpen(true);
-  };
 
   useEffect(() => {
     if (!open) return undefined;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', onKeyDown);
     };
   }, [open]);
 
-  const marketLabel = t(`markets.${market.id}`, market.label);
-
   const handleLanguage = (code) => {
-    setDraft((d) => ({ ...d, language: code }));
     updatePrefs({ language: code });
-  };
-
-  const handleContinue = () => {
-    updatePrefs({ market: draft.market, currency: draft.currency });
     setOpen(false);
   };
 
   const trigger = compact ? (
     <button
       type="button"
-      onClick={openSelector}
-      className="flex items-center gap-1.5 text-xs text-charcoal hover:text-gold transition-colors px-2 py-1 border border-border rounded-full bg-white"
-      aria-label={t('ui.selectMarketLanguage')}
+      onClick={() => setOpen(true)}
+      className="flex items-center gap-1.5 text-xs text-charcoal hover:text-gold transition-colors px-2.5 py-1 border border-border rounded-full bg-white"
+      aria-label={t('selector.selectLanguage')}
     >
       <Globe size={14} className="text-gold" />
-      <span className="hidden sm:inline">{language.short}</span>
-      <span className="text-muted hidden sm:inline">|</span>
-      <MarketFlag country={market.country} small />
-      <span className="hidden md:inline max-w-[100px] truncate">{marketLabel}</span>
+      <span>{language.short}</span>
     </button>
   ) : (
     <button
       type="button"
-      onClick={openSelector}
+      onClick={() => setOpen(true)}
       className="w-full flex items-center gap-2 px-4 py-3 text-sm text-start border border-border bg-white rounded-md hover:border-gold transition-colors"
     >
       <Globe size={16} className="text-gold shrink-0" />
-      <span>{language.short} |</span>
-      <MarketFlag country={market.country} />
-      <span>{marketLabel}</span>
+      <span>{language.label}</span>
     </button>
   );
 
@@ -83,73 +52,35 @@ export default function MarketSelector({ compact = false }) {
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="absolute inset-0 modal-backdrop" onClick={() => setOpen(false)} aria-hidden="true" />
       <div
-        className="relative w-full sm:max-w-md bg-white border border-border shadow-xl sm:rounded-lg max-h-[90vh] overflow-y-auto overscroll-contain animate-fade-in"
+        className="relative w-full sm:max-w-sm bg-white border border-border shadow-xl sm:rounded-lg max-h-[90vh] overflow-y-auto overscroll-contain animate-fade-in"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="market-selector-title"
+        aria-labelledby="language-selector-title"
       >
         <div className="sticky top-0 bg-white border-b border-border px-5 py-4 flex items-center justify-between">
-          <h2 id="market-selector-title" className="text-xl font-semibold text-charcoal">{t('selector.title')}</h2>
+          <h2 id="language-selector-title" className="text-xl font-semibold text-charcoal">{t('selector.selectLanguage')}</h2>
           <button type="button" onClick={() => setOpen(false)} className="p-1 text-muted hover:text-charcoal" aria-label={t('selector.close')}>
             <X size={20} />
           </button>
         </div>
 
-        <div className="p-5 space-y-6">
-          <div>
-            <p className="section-eyebrow mb-3">{t('selector.selectLanguage')}</p>
-            <div className="space-y-1">
-              {languages.map((lang) => (
-                <RadioOption
-                  key={lang.code}
-                  name="language"
-                  value={lang.code}
-                  checked={draft.language === lang.code}
-                  onChange={() => handleLanguage(lang.code)}
-                  label={lang.label}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="section-eyebrow mb-3">{t('selector.selectMarket')}</p>
-            <div className="space-y-1 max-h-48 overflow-y-auto">
-              {markets.map((m) => (
-                <RadioOption
-                  key={m.id}
-                  name="market"
-                  value={m.id}
-                  checked={draft.market === m.id}
-                  onChange={() => setDraft((d) => ({ ...d, market: m.id, currency: m.currency }))}
-                  label={t(`markets.${m.id}`, m.label)}
-                  flag={<MarketFlag country={m.country} />}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="section-eyebrow mb-3">{t('selector.selectCurrency')}</p>
-            <div className="space-y-1 max-h-40 overflow-y-auto">
-              {currencies.map((c) => (
-                <RadioOption
-                  key={c.code}
-                  name="currency"
-                  value={c.code}
-                  checked={draft.currency === c.code}
-                  onChange={() => setDraft((d) => ({ ...d, currency: c.code }))}
-                  label={t(`currencies.${c.code}`, c.label)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <p className="text-[11px] text-muted leading-relaxed">{t('selector.priceNote')}</p>
-
-          <button type="button" onClick={handleContinue} className="w-full btn-primary-gold justify-center text-xs">
-            {t('selector.continue')}
-          </button>
+        <div className="p-5 space-y-1">
+          {languages.map((lang) => (
+            <label
+              key={lang.code}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-md cursor-pointer hover:bg-cream transition-colors border border-transparent has-[:checked]:border-border has-[:checked]:bg-cream"
+            >
+              <input
+                type="radio"
+                name="language"
+                value={lang.code}
+                checked={prefs.language === lang.code}
+                onChange={() => handleLanguage(lang.code)}
+                className="accent-gold w-4 h-4 shrink-0"
+              />
+              <span className="text-sm text-charcoal">{lang.label}</span>
+            </label>
+          ))}
         </div>
       </div>
     </div>

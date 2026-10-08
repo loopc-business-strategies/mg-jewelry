@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import ProductImage from './ProductImage';
-import WishlistButton from './WishlistButton';
 import { useTranslation } from '../hooks/useTranslation';
 
 function slugToLabel(slug) {
@@ -29,9 +28,6 @@ export default function ProductCard({ product }) {
         <Link to={`/product/${product._id}`} className="block w-full h-full">
           <ProductImage product={product} containerClassName="w-full h-full bg-white" />
         </Link>
-        <div className="absolute top-3 end-3 z-10">
-          <WishlistButton productId={product._id} />
-        </div>
       </div>
 
       <div className="product-card-info p-4 md:p-5 flex flex-col flex-1">

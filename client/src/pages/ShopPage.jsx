@@ -8,7 +8,6 @@ import ProductSort from '../components/ProductSort';
 import ProductGrid from '../components/ProductGrid';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import EmptyState from '../components/EmptyState';
-import QuickViewModal from '../components/QuickViewModal';
 import Pagination from '../components/Pagination';
 import { SlidersHorizontal } from 'lucide-react';
 import { categoryShowcase } from '../utils/brandConfig';
@@ -22,7 +21,6 @@ export default function ShopPage() {
   const [meta, setMeta] = useState({});
   const [loading, setLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(false);
-  const [quickView, setQuickView] = useState(null);
   const { t, tf, lang } = useTranslation();
 
   const sort = searchParams.get('sort') || 'featured';
@@ -116,7 +114,7 @@ export default function ShopPage() {
               <LoadingSkeleton />
             ) : products.length ? (
               <>
-                <ProductGrid products={products} onQuickView={setQuickView} />
+                <ProductGrid products={products} />
                 <Pagination
                   page={Number(page)}
                   pages={meta.pages}
@@ -142,7 +140,6 @@ export default function ShopPage() {
         <ProductFilter filters={filters} onChange={updateFilters} mobile onClose={() => setFilterOpen(false)} />
       )}
 
-      {quickView && <QuickViewModal product={quickView} onClose={() => setQuickView(null)} />}
     </>
   );
 }
