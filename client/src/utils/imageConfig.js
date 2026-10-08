@@ -131,11 +131,11 @@ export const heroSlides = [
   { id: 'jewellery', image: '/images/demo/hero-gold-jewellery.jpg' },
 ];
 export const premiumBanner = jewelryStock('1599643478518-a784e5dc4c8f', 1200);
-export const aboutHero = jewelryStock('1516638918792-21578567a634', 1200);
+export const aboutHero = '/images/demo/home-about.jpg';
 export const aboutBanner = '/images/modern-gold/reception.jpg';
 export const contactHero = '/images/demo/team.jpg';
 export const wholesaleHero = jewelryStock('1611085583191-a6cfe1657e70', 1200);
-export const customHero = jewelryStock('1506630448388-459e089110ec', 1200);
+export const customHero = '/images/demo/home-custom.jpg';
 
 export const categoryImages = {
   chains: CHAIN_CATALOG[0],
