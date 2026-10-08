@@ -15,7 +15,6 @@ export default function HeroSection() {
   const features = t('home.hero.features') || heroBanner.features;
   const [active, setActive] = useState(0);
   const [previous, setPrevious] = useState(null);
-  const [hovered, setHovered] = useState(false);
   const [tabHidden, setTabHidden] = useState(() => typeof document !== 'undefined' && document.hidden);
 
   useEffect(() => {
@@ -24,21 +23,16 @@ export default function HeroSection() {
     return () => document.removeEventListener('visibilitychange', onVisibility);
   }, []);
 
-  const goTo = (index) => {
-    if (index === active) return;
+  const showNext = () => {
     setPrevious(active);
-    setActive(index);
+    setActive((active + 1) % heroSlides.length);
   };
 
-  const showNext = () => goTo((active + 1) % heroSlides.length);
-  const paused = hovered || tabHidden;
   const activeSlide = heroSlides[active];
 
   return (
     <section
-      className={`hero-banner relative min-h-[520px] md:min-h-[600px] overflow-hidden bg-white ${paused ? 'is-paused' : ''}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className={`hero-banner relative min-h-[520px] md:min-h-[600px] overflow-hidden bg-white ${tabHidden ? 'is-paused' : ''}`}
     >
       <div className="absolute inset-0" aria-hidden="true">
         {heroSlides.map((slide, i) => {
@@ -105,34 +99,15 @@ export default function HeroSection() {
 
       <div className="absolute inset-x-0 bottom-0 z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-8 pb-5 md:pb-8 flex justify-end">
-          <div className="hero-progress">
-            <p className="hero-progress-caption" aria-live="polite">
-              <span className="hero-progress-num">{slideNumber(active)}</span>
-              {t(`home.hero.slides.${activeSlide.id}`)}
+          <div className="hero-counter" aria-hidden="true">
+            <p className="hero-counter-index">
+              <span className="hero-counter-current">{slideNumber(active)}</span>
+              <span className="hero-counter-total">/ {slideNumber(heroSlides.length - 1)}</span>
             </p>
-            <div className="hero-progress-items">
-              {heroSlides.map((slide, i) => (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  className={`hero-progress-item ${i === active ? 'is-active' : ''}`}
-                  aria-label={t(`home.hero.slides.${slide.id}`)}
-                  aria-current={i === active ? 'true' : undefined}
-                >
-                  <span className="hero-progress-track">
-                    <span
-                      className="hero-progress-fill"
-                      onAnimationEnd={i === active ? showNext : undefined}
-                    />
-                  </span>
-                  <span className="hero-progress-label">
-                    <span className="hero-progress-num">{slideNumber(i)}</span>
-                    {t(`home.hero.slides.${slide.id}`)}
-                  </span>
-                </button>
-              ))}
-            </div>
+            <p key={active} className="hero-counter-label">{t(`home.hero.slides.${activeSlide.id}`)}</p>
+            <span className="hero-counter-line">
+              <span key={active} className="hero-counter-fill" onAnimationEnd={showNext} />
+            </span>
           </div>
         </div>
       </div>
