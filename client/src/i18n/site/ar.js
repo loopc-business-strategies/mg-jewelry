@@ -21,6 +21,7 @@ export default {
       description: 'Modern Gold شركة ذهب رائدة في آسيا الوسطى، متخصصة في تعدين الذهب وعمليات التكرير وتصنيع المجوهرات والتجارة الدولية.',
       primaryCta: 'بيع الذهب',
       secondaryCta: 'كن مشترياً',
+      slides: { mining: 'التعدين', refining: 'التكرير', making: 'صناعة المجوهرات', jewellery: 'مجوهرات جاهزة' },
       features: [
         { title: 'موثوقون لدى الشركاء الدوليين', desc: 'شراكات طويلة الأمد في آسيا الوسطى والأسواق العالمية.' },
         { title: 'جودة ذهب فاخرة', desc: 'مكرر ومعالج وفق المعايير الدولية.' },
@@ -305,7 +306,12 @@ export default {
   ourMgScreens: { home: 'Our MG', products: 'المنتجات', orders: 'الطلبات', profile: 'الملف الشخصي', bookings: 'الحجوزات' },
   alts: {
     contactHero: 'فريق أعمال Modern Gold في اجتماع',
-    hero: 'عمليات تكرير الذهب — صب الذهب المنصهر في Modern Gold',
+    heroSlides: {
+      mining: 'عمال مناجم بجانب شاحنة نقل في منجم ذهب مفتوح',
+      refining: 'عمليات تكرير الذهب — صب الذهب المنصهر في Modern Gold',
+      making: 'يدا صائغ تصنعان سلسلة ذهبية دقيقة على طاولة العمل',
+      jewellery: 'سلاسل وأساور ذهبية جاهزة على مخمل داكن',
+    },
     sellGoldPath: 'أيدٍ تحمل سلاسل ذهبية مصقولة — بِع ذهبك لدى Modern Gold',
     buyerPath: 'مصافحة عمل — كن مشترياً بالجملة لدى Modern Gold',
     aboutHero: 'امرأة ترتدي مجوهرات ذهبية مزخرفة — Modern Gold Jewelry',

@@ -21,6 +21,7 @@ export default {
       description: 'Modern Gold — Markaziy Osiyodagi yetakchi oltin kompaniyasi bo\'lib, oltin qazib olish, qayta ishlash, zargarlik buyumlari ishlab chiqarish va xalqaro savdoga ixtisoslashgan.',
       primaryCta: 'Oltin sotish',
       secondaryCta: 'Xaridor bo\'lish',
+      slides: { mining: 'Qazib olish', refining: 'Affinaj', making: 'Zargarlik ishlab chiqarish', jewellery: 'Tayyor zargarlik buyumlari' },
       features: [
         { title: 'Xalqaro hamkorlar ishonchi', desc: 'Markaziy Osiyo va global bozorlarda uzoq muddatli hamkorlik.' },
         { title: 'Premium oltin sifati', desc: 'Xalqaro standartlar asosida tozalangan va qayta ishlangan.' },
@@ -305,7 +306,12 @@ export default {
   ourMgScreens: { home: 'Our MG', products: 'Mahsulotlar', orders: 'Buyurtmalar', profile: 'Profil', bookings: 'Bronlar' },
   alts: {
     contactHero: 'Modern Gold biznes jamoasi uchrashuvda',
-    hero: 'Oltin affinaj zavodi — Modern Gold\'da eritilgan oltin quyilmoqda',
+    heroSlides: {
+      mining: 'Ochiq oltin konida yuk mashinasi yonidagi konchilar',
+      refining: 'Oltin affinaj zavodi — Modern Gold\'da eritilgan oltin quyilmoqda',
+      making: 'Zargar qo\'llari dastgohda nozik oltin zanjir yasamoqda',
+      jewellery: 'To\'q baxmal ustidagi tayyor oltin zanjir va bilaguzuklar',
+    },
     sellGoldPath: 'Sayqallangan oltin zanjirlarni ushlab turgan qo\'llar — oltiningizni Modern Gold\'ga soting',
     buyerPath: 'Biznes qo\'l siqishi — Modern Gold\'ning ulgurji xaridoriga aylaning',
     aboutHero: 'Nafis oltin taqinchoqlar taqqan ayol — Modern Gold Jewelry',

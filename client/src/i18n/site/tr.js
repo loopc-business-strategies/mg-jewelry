@@ -21,6 +21,7 @@ export default {
       description: 'Modern Gold, altın madenciliği, rafineri operasyonları, mücevher üretimi ve uluslararası ticarette uzmanlaşmış, Orta Asya\'nın önde gelen altın şirketidir.',
       primaryCta: 'Altın Sat',
       secondaryCta: 'Alıcı Ol',
+      slides: { mining: 'Madencilik', refining: 'Rafinaj', making: 'Mücevher Üretimi', jewellery: 'Bitmiş Mücevherler' },
       features: [
         { title: 'Uluslararası Ortakların Güveni', desc: 'Orta Asya ve küresel pazarlarda köklü ortaklıklar.' },
         { title: 'Premium Altın Kalitesi', desc: 'Uluslararası standartlarda arıtılmış ve işlenmiş.' },
@@ -305,7 +306,12 @@ export default {
   ourMgScreens: { home: 'Our MG', products: 'Ürünler', orders: 'Siparişler', profile: 'Profil', bookings: 'Rezervasyonlar' },
   alts: {
     contactHero: 'Toplantıdaki Modern Gold iş ekibi',
-    hero: 'Altın rafineri operasyonları — Modern Gold\'da erimiş altın dökümü',
+    heroSlides: {
+      mining: 'Açık ocak altın madeninde kamyon yanında madenciler',
+      refining: 'Altın rafineri operasyonları — Modern Gold\'da erimiş altın dökümü',
+      making: 'Tezgâhta ince altın zincir işleyen kuyumcu elleri',
+      jewellery: 'Koyu kadife üzerinde bitmiş altın zincirler ve bilezikler',
+    },
     sellGoldPath: 'Parlatılmış altın zincirler tutan eller — altınınızı Modern Gold\'a satın',
     buyerPath: 'İş tokalaşması — Modern Gold\'un toptan alıcısı olun',
     aboutHero: 'Süslü altın mücevherler takan kadın — Modern Gold Jewelry',

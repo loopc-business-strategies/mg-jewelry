@@ -27,6 +27,7 @@ export const siteTranslations = {
         description: 'Modern Gold is a leading gold company in Central Asia, specializing in gold mining, refinery operations, jewelry manufacturing and international trade.',
         primaryCta: 'Sell Gold',
         secondaryCta: 'Become a Buyer',
+        slides: { mining: 'Mining', refining: 'Refining', making: 'Jewellery Making', jewellery: 'Finished Jewellery' },
         features: [
           { title: 'Trusted by International Partners', desc: 'Long-standing partnerships across Central Asia and global markets.' },
           { title: 'Premium Gold Quality', desc: 'Refined and processed to international standards.' },
@@ -311,7 +312,12 @@ export const siteTranslations = {
     ourMgScreens: { home: 'Our MG', products: 'Products', orders: 'Orders', profile: 'Profile', bookings: 'Bookings' },
     alts: {
       contactHero: 'Modern Gold business team in a meeting',
-      hero: 'Gold refinery operations — molten gold pour at Modern Gold',
+      heroSlides: {
+        mining: 'Miners beside a haul truck at an open-pit gold mine',
+        refining: 'Gold refinery operations — molten gold pour at Modern Gold',
+        making: 'Goldsmith hands crafting a fine gold chain at a workbench',
+        jewellery: 'Finished gold chains and bangles on dark velvet',
+      },
       sellGoldPath: 'Hands holding polished gold chains — sell your gold at Modern Gold',
       buyerPath: 'Business handshake — become a wholesale buyer with Modern Gold',
       aboutHero: 'Woman wearing ornate gold jewelry — Modern Gold Jewelry editorial',
