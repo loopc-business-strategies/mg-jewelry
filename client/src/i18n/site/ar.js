@@ -118,7 +118,7 @@ export default {
       wedding: 'زفاف', 'daily wear': 'استخدام يومي', festive: 'احتفالات', engagement: 'خطوبة',
     },
   },
-  sort: { featured: 'مميز', newest: 'الأحدث', price_asc: 'السعر: من الأقل إلى الأعلى', price_desc: 'السعر: من الأعلى إلى الأقل', best_selling: 'الأكثر مبيعاً' },
+  sort: { featured: 'مميز', newest: 'الأحدث', best_selling: 'الأكثر مبيعاً' },
   product: {
     notFound: 'المنتج غير موجود', productCode: 'رمز المنتج', emiFrom: 'تقسيط من {amount}/شهرياً · بدون فوائد',
     metal: 'المعدن', purity: 'العيار', weight: 'الوزن', carat: 'القيراط', clarity: 'النقاء', color: 'اللون', cut: 'القطع',

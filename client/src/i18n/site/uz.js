@@ -118,7 +118,7 @@ export default {
       wedding: 'to\'y', 'daily wear': 'kundalik', festive: 'bayram', engagement: 'unashtiruv',
     },
   },
-  sort: { featured: 'Tavsiya etilgan', newest: 'Eng yangi', price_asc: 'Narx: arzondan qimmatga', price_desc: 'Narx: qimmatdan arzonga', best_selling: 'Eng ko\'p sotilgan' },
+  sort: { featured: 'Tavsiya etilgan', newest: 'Eng yangi', best_selling: 'Eng ko\'p sotilgan' },
   product: {
     notFound: 'Mahsulot topilmadi', productCode: 'Mahsulot kodi', emiFrom: 'Muddatli to\'lov: oyiga {amount} dan · ustamasiz',
     metal: 'Metall', purity: 'Proba', weight: 'Og\'irlik', carat: 'Karat', clarity: 'Tozalik', color: 'Rang', cut: 'Kesim',

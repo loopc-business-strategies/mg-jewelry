@@ -7,19 +7,6 @@ function slugToLabel(slug) {
   return slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
-function ProductCardActions({ productId }) {
-  const { t } = useTranslation();
-  return (
-    <div className="product-card-actions-inner overlay-cream px-2 py-2">
-      <div className="product-card-actions">
-        <Link to={`/product/${productId}`} className="btn-card-view">
-          {t('ui.viewProduct')}
-        </Link>
-      </div>
-    </div>
-  );
-}
-
 export default function ProductCard({ product }) {
   const { t } = useTranslation();
   return (
@@ -40,8 +27,6 @@ export default function ProductCard({ product }) {
           </h3>
         </Link>
       </div>
-
-      <ProductCardActions productId={product._id} />
     </div>
   );
 }

@@ -124,7 +124,7 @@ export const siteTranslations = {
         wedding: 'wedding', 'daily wear': 'daily wear', festive: 'festive', engagement: 'engagement',
       },
     },
-    sort: { featured: 'Featured', newest: 'Newest', price_asc: 'Price: Low to High', price_desc: 'Price: High to Low', best_selling: 'Best Selling' },
+    sort: { featured: 'Featured', newest: 'Newest', best_selling: 'Best Selling' },
     product: {
       notFound: 'Product not found', productCode: 'Product Code', emiFrom: 'EMI from {amount}/month · No Cost EMI available',
       metal: 'Metal', purity: 'Purity', weight: 'Weight', carat: 'Carat', clarity: 'Clarity', color: 'Color', cut: 'Cut',

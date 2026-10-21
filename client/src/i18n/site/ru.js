@@ -118,7 +118,7 @@ export default {
       wedding: 'свадьба', 'daily wear': 'на каждый день', festive: 'праздник', engagement: 'помолвка',
     },
   },
-  sort: { featured: 'Рекомендуемые', newest: 'Новинки', price_asc: 'Цена: по возрастанию', price_desc: 'Цена: по убыванию', best_selling: 'Хиты продаж' },
+  sort: { featured: 'Рекомендуемые', newest: 'Новинки', best_selling: 'Хиты продаж' },
   product: {
     notFound: 'Товар не найден', productCode: 'Код товара', emiFrom: 'Рассрочка от {amount}/мес · без переплаты',
     metal: 'Металл', purity: 'Проба', weight: 'Вес', carat: 'Карат', clarity: 'Чистота', color: 'Цвет', cut: 'Огранка',

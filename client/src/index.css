@@ -344,62 +344,9 @@ h5, h6 {
   border-color: var(--color-gold);
 }
 
-.btn-card-view {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  font-family: var(--font-body);
-  padding: 0.25rem 0.5rem;
-  min-height: 1.625rem;
-  font-size: var(--text-btn-xs);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--type-charcoal);
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-}
-
-.btn-card-view:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
-}
-
-.btn-card-cart {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  font-family: var(--font-body);
-  padding: 0.25rem 0.5rem;
-  min-height: 1.625rem;
-  font-size: var(--text-btn-xs);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: #FFFFFF;
-  background: var(--gradient-cta);
-  border: none;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-}
-
-.btn-card-cart:hover {
-  filter: brightness(0.95);
-}
-
-.product-card-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  width: 100%;
-}
-
 .product-card-grid {
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto;
   grid-template-columns: 1fr;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -417,37 +364,6 @@ h5, h6 {
 .product-card-info {
   grid-row: 2;
   grid-column: 1;
-}
-
-.product-card-actions-inner {
-  grid-row: 3;
-  grid-column: 1;
-  padding: 0 1rem 0.75rem;
-}
-
-@media (min-width: 768px) {
-  .product-card-grid {
-    grid-template-rows: auto auto;
-    overflow: hidden;
-  }
-
-  .product-card-actions-inner {
-    grid-row: 1;
-    grid-column: 1;
-    align-self: end;
-    z-index: 10;
-    padding: 0;
-    transform: translateY(100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.35s ease, opacity 0.35s ease;
-  }
-
-  .product-card-grid:hover .product-card-actions-inner {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
 }
 
 .btn-accent-emerald,

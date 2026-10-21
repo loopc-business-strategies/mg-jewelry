@@ -118,7 +118,7 @@ export default {
       wedding: 'düğün', 'daily wear': 'günlük', festive: 'özel gün', engagement: 'nişan',
     },
   },
-  sort: { featured: 'Öne Çıkanlar', newest: 'En Yeniler', price_asc: 'Fiyat: Düşükten Yükseğe', price_desc: 'Fiyat: Yüksekten Düşüğe', best_selling: 'Çok Satanlar' },
+  sort: { featured: 'Öne Çıkanlar', newest: 'En Yeniler', best_selling: 'Çok Satanlar' },
   product: {
     notFound: 'Ürün bulunamadı', productCode: 'Ürün Kodu', emiFrom: 'Aylık {amount} taksitle · faizsiz taksit seçeneği',
     metal: 'Metal', purity: 'Ayar', weight: 'Ağırlık', carat: 'Karat', clarity: 'Berraklık', color: 'Renk', cut: 'Kesim',

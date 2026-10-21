@@ -4,11 +4,9 @@ import api from '../services/api';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ProductGallery from '../components/ProductGallery';
-import PriceDisplay from '../components/PriceDisplay';
 import ProductGrid from '../components/ProductGrid';
 import RecentlyViewed from '../components/RecentlyViewed';
 import { useAuth } from '../context/AuthContext';
-import { formatPrice, calcEmi } from '../utils/formatPrice';
 import StarRating from '../components/ui/StarRating';
 import { Award, MessageCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -27,7 +25,7 @@ const TAB_KEYS = {
 export default function ProductPage() {
   const { id } = useParams();
   const { user, openLogin } = useAuth();
-  const { t, tf, lang, locale } = useTranslation();
+  const { t, tf, lang } = useTranslation();
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -95,7 +93,7 @@ export default function ProductPage() {
     description: product.description,
     sku: product.sku,
     image: product.images,
-    offers: { '@type': 'Offer', price: product.price, priceCurrency: 'INR', availability: product.stock > 0 ? 'InStock' : 'OutOfStock' },
+    offers: { '@type': 'Offer', availability: product.stock > 0 ? 'InStock' : 'OutOfStock' },
   };
 
   const enquiryParams = new URLSearchParams({
@@ -123,9 +121,6 @@ export default function ProductPage() {
               <StarRating rating={product.rating} reviewCount={product.reviewCount} />
             </div>
             <p className="type-micro normal-case text-muted mb-4">{t('product.productCode')}: {product.sku}</p>
-
-            <PriceDisplay price={product.price} mrp={product.mrp} size="lg" showEmi />
-            <p className="type-body-sm mt-2">{tf('product.emiFrom', { amount: formatPrice(calcEmi(product.price)) })}</p>
 
             <div className="grid grid-cols-2 gap-4 my-6 p-5 card-elegant type-body-sm">
               <div><span className="text-muted">{t('product.metal')}:</span> <strong className="text-charcoal font-medium">{metalText(t, product.metal)}</strong></div>

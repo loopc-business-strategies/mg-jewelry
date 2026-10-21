@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import api from '../services/api';
-import { formatPrice } from '../utils/formatPrice';
 import SafeImage from './SafeImage';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -55,7 +54,7 @@ export default function SearchBar({ onClose }) {
               {s.image && <SafeImage src={s.image} alt="" category={s.category} className="w-10 h-10 rounded object-cover" />}
               <div>
                 <p className="text-sm font-medium">{s.name}</p>
-                <p className="text-xs text-muted">{t(`categories.${s.category}`, s.category)} · {formatPrice(s.price)}</p>
+                <p className="text-xs text-muted">{t(`categories.${s.category}`, s.category)}</p>
               </div>
             </button>
           ))}
