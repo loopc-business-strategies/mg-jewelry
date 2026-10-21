@@ -22,11 +22,6 @@ export default function CredibilitySection() {
             </div>
           ))}
         </div>
-        <address className="mt-8 text-center type-body-sm not-italic">
-          {brand.addressLines.map((line) => (
-            <span key={line} className="block">{line}</span>
-          ))}
-        </address>
       </div>
     </section>
   );
